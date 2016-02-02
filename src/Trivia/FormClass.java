@@ -243,7 +243,7 @@ public class FormClass extends JFrame implements ActionListener {
                             }
                           }
                     } 
-                    else if(question.isOpenQues()==true){
+                    else if(question.isOpenQues()==true){/*Cheek if Open questio*/
                         if(ansField.getText().equalsIgnoreCase(openAnser)){
                             System.out.println(openAnser);//problem with test the ans because Question ans is int 
                                 correct=true;
