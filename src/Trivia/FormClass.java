@@ -223,7 +223,7 @@ public class FormClass extends JFrame implements ActionListener {
                         }
 
                      }
-                else if(question.getEnswer().length==4){ /* test comment */
+                else if(question.getEnswer().length==4){ /* Boyn The king */
 
                         if (option1Button.isSelected()) {
                             selectedAnswer = option1Button.getText();
