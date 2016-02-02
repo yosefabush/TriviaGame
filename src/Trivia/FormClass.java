@@ -1,5 +1,7 @@
 package Trivia;
 
+
+// test irit
 import static Trivia.PlaySounds.correctSound;
 import static Trivia.PlaySounds.worngSound;
 import java.awt.BorderLayout;
@@ -220,7 +222,8 @@ public class FormClass extends JFrame implements ActionListener {
                         }
 
                      }
-                else if(question.getEnswer().length==4){/*Cheek if 4 opation questio*/
+                else if(question.getEnswer().length==4){ /* test comment */
+
                         if (option1Button.isSelected()) {
                             selectedAnswer = option1Button.getText();
                             if (question.getRightAns() == 1) {
