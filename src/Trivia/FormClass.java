@@ -206,7 +206,7 @@ public class FormClass extends JFrame implements ActionListener {
         if (ae.getSource() == okButton) {  
                 String selectedAnswer;
                
-                if(question.isTrueFalseQues()){
+                if(question.isTrueFalseQues()){  /*Cheek if true false questio*/
                         if (option1Button.isSelected()) {
                             selectedAnswer = option1Button.getText();
                             if (question.getRightAns() == 1) {
@@ -220,7 +220,7 @@ public class FormClass extends JFrame implements ActionListener {
                         }
 
                      }
-                else if(question.getEnswer().length==4){
+                else if(question.getEnswer().length==4){/*Cheek if 4 opation questio*/
                         if (option1Button.isSelected()) {
                             selectedAnswer = option1Button.getText();
                             if (question.getRightAns() == 1) {
@@ -244,7 +244,7 @@ public class FormClass extends JFrame implements ActionListener {
                           }
                     } 
                     else if(question.isOpenQues()==true){
-                        if(ansField.getText().equals(openAnser)){
+                        if(ansField.getText().equalsIgnoreCase(openAnser)){
                             System.out.println(openAnser);//problem with test the ans because Question ans is int 
                                 correct=true;
                         }
@@ -295,7 +295,7 @@ public class FormClass extends JFrame implements ActionListener {
             newGameDialog();
         } else if (ae.getSource() == aboutMenuItem) {
             aboutDialog();
-        }else if (ae.getSource()==changeLang){
+        } else if (ae.getSource() == changeLang){
             
         }
 
