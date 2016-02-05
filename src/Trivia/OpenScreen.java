@@ -22,13 +22,14 @@ public class OpenScreen extends javax.swing.JFrame {
      */
     public OpenScreen(User currentUser) {
         initComponents();
-       this.setForeground(Color.red);
+        this.setSize(650,350);
        int biuldComboBox=TestQuery.getInstance().countQues();
        for(int i=0;i<biuldComboBox;i++)
        this.cmbQuesNum.addItem(i+1); //set the real number of question from db
+       
         setLocationRelativeTo(null);
         this.current=currentUser;
-       OpenTitelWitName.setText("Welcom to trivia Game "+current.getUserName()); //לא הצלחתי לאתחל את שם השחקן הנוכחי
+       OpenTitelWitName.setText("Welcom to trivia Game "+current.getUserName());
        currebtPlayerHighScore.setText("Your best score was: "+current.getHighstScore(current)+" Points");
     }
 
@@ -47,10 +48,13 @@ public class OpenScreen extends javax.swing.JFrame {
         btnShowHighScoreTble = new javax.swing.JButton();
         OpenTitelWitName = new javax.swing.JLabel();
         currebtPlayerHighScore = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Welcome To Trivia Game");
         setForeground(java.awt.Color.white);
         setIconImages(null);
+        getContentPane().setLayout(null);
 
         btnStartGame.setText("Ok");
         btnStartGame.addActionListener(new java.awt.event.ActionListener() {
@@ -58,9 +62,13 @@ public class OpenScreen extends javax.swing.JFrame {
                 btnStartGameActionPerformed(evt);
             }
         });
+        getContentPane().add(btnStartGame);
+        btnStartGame.setBounds(280, 230, 96, 23);
 
-        title2.setFont(new java.awt.Font("Trajan Pro 3", 2, 14)); // NOI18N
+        title2.setFont(new java.awt.Font("Trajan Pro 3", 1, 14)); // NOI18N
         title2.setText("Please chose how much ques you want");
+        getContentPane().add(title2);
+        title2.setBounds(145, 110, 370, 40);
 
         cmbQuesNum.setModel(cmbQuesNum.getModel());
         cmbQuesNum.setToolTipText("");
@@ -69,6 +77,8 @@ public class OpenScreen extends javax.swing.JFrame {
                 cmbQuesNumActionPerformed(evt);
             }
         });
+        getContentPane().add(cmbQuesNum);
+        cmbQuesNum.setBounds(300, 170, 45, 20);
 
         btnShowHighScoreTble.setText("Table of records");
         btnShowHighScoreTble.addActionListener(new java.awt.event.ActionListener() {
@@ -76,54 +86,20 @@ public class OpenScreen extends javax.swing.JFrame {
                 btnShowHighScoreTbleActionPerformed(evt);
             }
         });
+        getContentPane().add(btnShowHighScoreTble);
+        btnShowHighScoreTble.setBounds(260, 270, 142, 30);
 
         OpenTitelWitName.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        getContentPane().add(OpenTitelWitName);
+        OpenTitelWitName.setBounds(180, 20, 273, 40);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(213, 213, 213)
-                                .addComponent(btnStartGame, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(193, 193, 193)
-                                .addComponent(btnShowHighScoreTble, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(237, 237, 237)
-                                .addComponent(cmbQuesNum, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(162, 162, 162)
-                                .addComponent(currebtPlayerHighScore, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(10, 10, 10))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(title2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(OpenTitelWitName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(132, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
-                .addComponent(OpenTitelWitName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(currebtPlayerHighScore, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(title2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbQuesNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(btnStartGame)
-                .addGap(18, 18, 18)
-                .addComponent(btnShowHighScoreTble, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        currebtPlayerHighScore.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        getContentPane().add(currebtPlayerHighScore);
+        currebtPlayerHighScore.setBounds(220, 70, 239, 24);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon.jpg"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 650, 320);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -149,6 +125,7 @@ public class OpenScreen extends javax.swing.JFrame {
     private void btnShowHighScoreTbleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowHighScoreTbleActionPerformed
        
         HighstRecords highScore=new HighstRecords();
+        
         highScore.setVisible(true);        
         
     }//GEN-LAST:event_btnShowHighScoreTbleActionPerformed
@@ -196,6 +173,7 @@ public class OpenScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnStartGame;
     public static javax.swing.JComboBox cmbQuesNum;
     private javax.swing.JLabel currebtPlayerHighScore;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel title2;
     // End of variables declaration//GEN-END:variables
 }

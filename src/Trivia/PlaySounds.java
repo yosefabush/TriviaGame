@@ -6,7 +6,6 @@
 package Trivia;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;

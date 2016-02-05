@@ -5,8 +5,6 @@
  */
 package Trivia;
 
-import java.util.Arrays;
-
 /**
  *
  * @author Yosef

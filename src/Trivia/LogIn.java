@@ -25,6 +25,7 @@ public class LogIn extends javax.swing.JFrame {
     public LogIn() {
         initComponents();
         userNameField.requestFocusInWindow();
+        this.setSize(416,360);
         setLocationRelativeTo(null);
     }
 
@@ -40,16 +41,23 @@ public class LogIn extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         userNameField = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         signUpBtn = new javax.swing.JButton();
         btnLogIn = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Log In");
+        setIconImages(null);
+        getContentPane().setLayout(null);
 
         jLabel1.setText("User Name");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(29, 103, 80, 14);
 
         jLabel2.setText("Password");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(29, 162, 80, 14);
 
         userNameField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -61,8 +69,8 @@ public class LogIn extends javax.swing.JFrame {
                 userNameFieldActionPerformed(evt);
             }
         });
-
-        jLabel3.setText("     Welcome To Trivia Game");
+        getContentPane().add(userNameField);
+        userNameField.setBounds(142, 100, 112, 20);
 
         signUpBtn.setText("SignUp");
         signUpBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +78,8 @@ public class LogIn extends javax.swing.JFrame {
                 signUpBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(signUpBtn);
+        signUpBtn.setBounds(275, 50, 90, 23);
 
         btnLogIn.setText("LogIn");
         btnLogIn.addActionListener(new java.awt.event.ActionListener() {
@@ -77,56 +87,14 @@ public class LogIn extends javax.swing.JFrame {
                 btnLogInActionPerformed(evt);
             }
         });
+        getContentPane().add(btnLogIn);
+        btnLogIn.setBounds(150, 240, 100, 23);
+        getContentPane().add(jPasswordField1);
+        jPasswordField1.setBounds(142, 159, 112, 20);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(117, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(signUpBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(164, 164, 164)
-                                .addComponent(btnLogIn))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(61, 61, 61)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(userNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-                                    .addComponent(jPasswordField1))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(signUpBtn)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addComponent(btnLogIn)
-                .addGap(43, 43, 43))
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Login.png"))); // NOI18N
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(0, 0, 420, 340);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -252,7 +220,7 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JButton btnLogIn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JButton signUpBtn;
     private javax.swing.JTextField userNameField;

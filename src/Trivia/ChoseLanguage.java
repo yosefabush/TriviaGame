@@ -5,6 +5,8 @@
  */
 package Trivia;
 
+import resources.LocalizationUtil;
+
 /**
  *
  * @author Yosef
@@ -14,8 +16,13 @@ public class ChoseLanguage extends javax.swing.JFrame {
     /**
      * Creates new form ChoseLanguage
      */
+    private static String lan;
     public ChoseLanguage() {
         initComponents();
+        this.setSize(400,300);
+        SelectWantLan.setText(LocalizationUtil.localizedResourceBundle.getString("SelectWantdLan"));
+        btnHeb.setText(LocalizationUtil.localizedResourceBundle.getString("heb"));
+        btnEnglish.setText(LocalizationUtil.localizedResourceBundle.getString("en"));
         setLocationRelativeTo(null);
     }
 
@@ -28,50 +35,58 @@ public class ChoseLanguage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        btnHeb = new javax.swing.JButton();
+        btnEnglish = new javax.swing.JButton();
+        SelectWantLan = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(200, 300));
+        getContentPane().setLayout(null);
 
-        jButton1.setText("Hebrew");
+        btnHeb.setText("Hebrew");
+        btnHeb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHebActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnHeb);
+        btnHeb.setBounds(212, 131, 143, 67);
 
-        jButton2.setText("English");
+        btnEnglish.setText("English");
+        btnEnglish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnglishActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEnglish);
+        btnEnglish.setBounds(51, 131, 143, 67);
 
-        jLabel1.setFont(new java.awt.Font("Maiandra GD", 1, 14)); // NOI18N
-        jLabel1.setText("          Select Wanted Language");
+        SelectWantLan.setFont(new java.awt.Font("Maiandra GD", 1, 14)); // NOI18N
+        SelectWantLan.setText("          Select Wanted Language");
+        getContentPane().add(SelectWantLan);
+        SelectWantLan.setBounds(67, 29, 274, 72);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31))
-        );
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(20, 10, 370, 100);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnEnglishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnglishActionPerformed
+       this.lan="en";
+       this.dispose();
+    }//GEN-LAST:event_btnEnglishActionPerformed
+
+    private void btnHebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHebActionPerformed
+        this.lan="iw";
+        this.dispose();
+    }//GEN-LAST:event_btnHebActionPerformed
+
+    public String getLanguche(){
+        return lan;
+    }
     /**
      * @param args the command line arguments
      */
@@ -108,8 +123,9 @@ public class ChoseLanguage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel SelectWantLan;
+    private javax.swing.JButton btnEnglish;
+    private javax.swing.JButton btnHeb;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

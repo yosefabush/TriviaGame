@@ -5,8 +5,6 @@
  */
 package Trivia;
 
-import static Trivia.PlaySounds.worngSound;
-
 public class Main {
     static int qusNum;
      public static void main(String[] args) {
