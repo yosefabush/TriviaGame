@@ -5,10 +5,6 @@
  */
 package Trivia;
 
-import java.awt.Color;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author Yosef
@@ -23,7 +19,7 @@ public class OpenScreen extends javax.swing.JFrame {
     public OpenScreen(User currentUser) {
         initComponents();
         this.setSize(650,350);
-       int biuldComboBox=TestQuery.getInstance().countQues();
+       int biuldComboBox=DataBaseMange.getInstance().countQues();
        for(int i=0;i<biuldComboBox;i++)
        this.cmbQuesNum.addItem(i+1); //set the real number of question from db
        
@@ -91,7 +87,7 @@ public class OpenScreen extends javax.swing.JFrame {
 
         OpenTitelWitName.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
         getContentPane().add(OpenTitelWitName);
-        OpenTitelWitName.setBounds(180, 20, 273, 40);
+        OpenTitelWitName.setBounds(130, 20, 420, 40);
 
         currebtPlayerHighScore.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         getContentPane().add(currebtPlayerHighScore);

@@ -5,6 +5,8 @@
  */
 package Trivia;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
 import resources.LocalizationUtil;
 
 /**
@@ -16,13 +18,16 @@ public class ChoseLanguage extends javax.swing.JFrame {
     /**
      * Creates new form ChoseLanguage
      */
-    private static String lan;
+    private static String lan = "en";
+
     public ChoseLanguage() {
         initComponents();
-        this.setSize(400,300);
         SelectWantLan.setText(LocalizationUtil.localizedResourceBundle.getString("SelectWantdLan"));
         btnHeb.setText(LocalizationUtil.localizedResourceBundle.getString("heb"));
         btnEnglish.setText(LocalizationUtil.localizedResourceBundle.getString("en"));
+
+        this.setSize(400, 300);
+
         setLocationRelativeTo(null);
     }
 
@@ -75,18 +80,20 @@ public class ChoseLanguage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnglishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnglishActionPerformed
-       this.lan="en";
-       this.dispose();
+        this.lan = "en";
+        //updateCaptions();
+        this.dispose();
     }//GEN-LAST:event_btnEnglishActionPerformed
 
     private void btnHebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHebActionPerformed
-        this.lan="iw";
+        this.lan = "iw";
         this.dispose();
     }//GEN-LAST:event_btnHebActionPerformed
 
-    public String getLanguche(){
+    public String getLanguche() {
         return lan;
     }
+
     /**
      * @param args the command line arguments
      */

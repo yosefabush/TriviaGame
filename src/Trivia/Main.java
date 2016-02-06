@@ -6,12 +6,12 @@
 package Trivia;
 
 public class Main {
-    static int qusNum;
-     public static void main(String[] args) {
+    
+    public static void main(String[] args) {
 
-         LogIn logIn=new LogIn();
-         logIn.setVisible(true);
-         
-         }
-     
+        LogIn logIn = new LogIn();
+        logIn.setVisible(true);
+
     }
+
+}

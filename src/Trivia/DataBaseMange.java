@@ -16,19 +16,18 @@ import java.util.ArrayList;
  *
  * @author Yosef
  */
-public class TestQuery {
-    
-     private static TestQuery instance=null;
-     private static Question question;
-     ArrayList<Question> allQuesFromDB=new <Question>ArrayList();
-     
-    public  TestQuery() {
-         
-       
+public class DataBaseMange {
+
+    private static DataBaseMange instance = null;
+    private static Question question;
+    ArrayList<Question> allQuesFromDB = new <Question>ArrayList();
+
+    public DataBaseMange() {
+
     }
     
-    public ArrayList getQuestion(){
-    
+    public ArrayList getQuestion() {
+
         try {
 
             Class.forName(DbUtilitis.dbDriver); //load the rigt server
@@ -43,74 +42,64 @@ public class TestQuery {
             ResultSet resultSet = statement.executeQuery(allCustomersQuery);
 
             while (resultSet.next()) {
-                
-                String ques=resultSet.getString("Question");
-                question=new Question();
+
+                String ques = resultSet.getString("Question");
+                question = new Question();
                 question.setQuestion(ques);
-                 int countOfPosibalans=resultSet.getInt("PosibleAns");
-                  String[]posibaleAns=new String[countOfPosibalans];
-                  if(countOfPosibalans==1)
-                  {
-                   String ens=resultSet.getString("Answer1");
-                   posibaleAns[0]=ens;
-                   question.setOpenQues(true);
-                  }
-                 if(countOfPosibalans==4){
-                    question.setTrueFalseQues(false);
-                    String ens1=resultSet.getString("Answer1");
-                    String ens2=resultSet.getString("Answer2");
-                    String ens3=resultSet.getString("Answer3");
-                    String ens4=resultSet.getString("Answer4");
-                    posibaleAns[0]=ens1;
-                    posibaleAns[1]=ens2;
-                    posibaleAns[2]=ens3;   
-                    posibaleAns[3]=ens4;
-                 }
-                 else if(countOfPosibalans==2){
-                     question.setTrueFalseQues(true);
-                     String ens1=resultSet.getString("Answer1");
-                     String ens2=resultSet.getString("Answer2");
-                     posibaleAns[0]=ens1;
-                     posibaleAns[1]=ens2;
-                     
-                 }
-                question.setEnswer(posibaleAns);
-                
-                if(countOfPosibalans!=1){
-                    int rightAns=resultSet.getInt("RightAnswer");
-                    question.setRightAns(rightAns);
+                int countOfPosibalans = resultSet.getInt("PosibleAns");
+                String[] posibaleAns = new String[countOfPosibalans];
+                if (countOfPosibalans == 1) {
+                    String ens = resultSet.getString("Answer1");
+                    posibaleAns[0] = ens;
+                    question.setOpenQues(true);
                 }
-                else{
-                  String stringAns=Integer.toString(resultSet.getInt("RightAnswer"));
-                   question.setOpenAnser(stringAns);
-                }   
-                int point=resultSet.getInt("Point");
+                if (countOfPosibalans == 4) {
+                    question.setTrueFalseQues(false);
+                    String ens1 = resultSet.getString("Answer1");
+                    String ens2 = resultSet.getString("Answer2");
+                    String ens3 = resultSet.getString("Answer3");
+                    String ens4 = resultSet.getString("Answer4");
+                    posibaleAns[0] = ens1;
+                    posibaleAns[1] = ens2;
+                    posibaleAns[2] = ens3;
+                    posibaleAns[3] = ens4;
+                } else if (countOfPosibalans == 2) {
+                    question.setTrueFalseQues(true);
+                    String ens1 = resultSet.getString("Answer1");
+                    String ens2 = resultSet.getString("Answer2");
+                    posibaleAns[0] = ens1;
+                    posibaleAns[1] = ens2;
+
+                }
+                question.setEnswer(posibaleAns);
+
+                if (countOfPosibalans != 1) {
+                    int rightAns = resultSet.getInt("RightAnswer");
+                    question.setRightAns(rightAns);
+                } else {
+                    String stringAns = Integer.toString(resultSet.getInt("RightAnswer"));
+                    question.setOpenAnser(stringAns);
+                }
+                int point = resultSet.getInt("Point");
                 question.setPoint(point);
-                
-                int level=resultSet.getInt("Level");
+
+                int level = resultSet.getInt("Level");
                 question.setLevel(level);
-                
-                int statusQues=resultSet.getInt("QuesStatusAskOrNot");
+
+                int statusQues = resultSet.getInt("QuesStatusAskOrNot");
                 boolean statusQuestion;
-                if(statusQues==0)
-                    statusQuestion=false;
-                else
-                    statusQuestion=true;
+                if (statusQues == 0) {
+                    statusQuestion = false;
+                } else {
+                    statusQuestion = true;
+                }
                 question.setCheekIfQuesWasAsked(statusQuestion);
-                
-               allQuesFromDB.add(question);
-                //resultSet.next();
-                
-                //full object of Question set to arry list 
-            }
-             
-//            for(Question q:allQuesFromDB) {
-//                  System.out.println(q.getQuestion());
-//                  System.out.println(q.getEnswer()[0].toString());
-//            }           
+                allQuesFromDB.add(question);
+               
+            }  
             resultSet.close();		// close resultSet
             statement.close();		// close statement and resultSet
-            connection.close();	
+            connection.close();
             return allQuesFromDB;       // close connection, statement and resultSet 	
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -118,14 +107,13 @@ public class TestQuery {
             return null;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-           return null;
+            return null;
         }
-        
-           
+
     }
-    
-    public int countQues(){
-          int quesNum=0;
+
+    public int countQues() {
+        int quesNum = 0;
         try {
 
             Class.forName(DbUtilitis.dbDriver); //load the rigt server
@@ -138,34 +126,34 @@ public class TestQuery {
 
             String allCustomersQuery = "SELECT * FROM tblquestion;";
             ResultSet resultSet = statement.executeQuery(allCustomersQuery);
-           
+
             while (resultSet.next()) {
                 quesNum++;
             }
-            
+
             resultSet.close();		// close resultSet
             statement.close();		// close statement and resultSet
             connection.close();		// close connection, statement and resultSet 	
-          return quesNum;
-          
+            return quesNum;
+
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             System.out.println("Vendor Error: " + sqle.getErrorCode());
-            
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             //return quesNum;
         }
-         return 0;
-           
+        return 0;
+
     }
-    
-     public static TestQuery getInstance(){
-         
-        if(instance == null)
-            instance=new TestQuery();
+
+    public static DataBaseMange getInstance() {
+
+        if (instance == null) {
+            instance = new DataBaseMange();
+        }
         return instance;
     }
-    
 
 }

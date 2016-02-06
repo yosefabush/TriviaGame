@@ -22,9 +22,10 @@ public class TotalSummry extends javax.swing.JFrame {
          setLocationRelativeTo(null);
          this.scoreFiled.setText(Integer.toString(currentPlayer.getPoints()));
          this.WrongFiled1.setText(Integer.toString(currentPlayer.getWrongAnsCnt()));
+         this.NewHighScore.setText("You can do betrr.. ");
         
     }
-    public TotalSummry (User current,int newHighScore){
+    public TotalSummry (User current,int newHighScore){ //if user get highr score the he was in DB  
          initComponents();
         this.currentPlayer=current;
          setLocationRelativeTo(null);
@@ -154,7 +155,7 @@ public class TotalSummry extends javax.swing.JFrame {
 
         currentPlayer.setPoints(0);
         currentPlayer.setWrongAnsCnt(0);
-        
+        currentPlayer.setLevel(0);
         cntLevel=0;
         OpenScreen newGame =new OpenScreen(currentPlayer);
         newGame.setVisible(true);
@@ -164,7 +165,7 @@ public class TotalSummry extends javax.swing.JFrame {
     }//GEN-LAST:event_newGameBtn
 
     private void exitBtn(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtn
-        
+
          System.exit(0);
     }//GEN-LAST:event_exitBtn
 
