@@ -200,11 +200,6 @@ public class FormClass extends JFrame implements ActionListener {
                 JOptionPane.QUESTION_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
             this.setVisible(false);
-//            current.setZeroPoints(0);
-//            current.setZeroWrongAnsCnt(0);
-//            current.setZeroCorrectAnsCnt(0);
-//            current.setZeroLevel(0);
-//            cntLevel = 0;
             OpenScreen newGame = new OpenScreen(current);
             newGame.setVisible(true);
         }
