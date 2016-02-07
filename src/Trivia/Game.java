@@ -11,17 +11,14 @@ public class Game {
 
     static User current;
     static ArrayList<Question> allQuesFromDB = new <Question>ArrayList();
-    static int n = 0;
+   
 
     public Game(int num, User current, boolean newGame) throws Exception {
-        if (newGame == true) {
-            n = 0;
-        }
-        if (n == 0) {
+
+        if (newGame == true) { //if is new game need to clear thee arreyList and full it from DB
             this.allQuesFromDB.clear();
             this.allQuesFromDB = DataBaseMange.getInstance().getQuestion();
         }
-        n++;
         this.current = current;
         Play(num);
 
@@ -49,7 +46,8 @@ public class Game {
         } else {
             current.setPoints(FormClass.point);  //סכימה של הניקוד של המשתמש הנוכחי בסוף המשחק
             FormClass.point = 0;    //zero if it will be new game
-            FormClass.currentLevel=0;    
+            FormClass.currentLevel=0; 
+            current.setLevel(0);
             if (updateFinalScore(current)) {  
                 System.out.println("New High Score!");
                 finisGame = new TotalSummry(current, current.getPoints());

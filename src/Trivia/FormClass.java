@@ -45,7 +45,7 @@ public class FormClass extends JFrame implements ActionListener {
     private JRadioButton option3Button = new JRadioButton();
     private JRadioButton option4Button = new JRadioButton();
     private JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    private JPanel optionsPanel = new JPanel(new GridLayout(4, 1));
+    private JPanel optionsPanel = new JPanel(new GridLayout(4,2));
     private JPanel okExitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     private JPanel liveResultPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     private ButtonGroup answersGroup = new ButtonGroup();
@@ -145,7 +145,7 @@ public class FormClass extends JFrame implements ActionListener {
         this.addWindowListener(new MyWindowListener());
         exitMenuItem.addActionListener(this);
 
-    } //button listner not workin
+    } 
 
     public void buildMenu() {
         fileMenu = new JMenu(LocalizationUtil.localizedResourceBundle.getString("FileKey"));
@@ -202,6 +202,7 @@ public class FormClass extends JFrame implements ActionListener {
             this.setVisible(false);
             current.setPoints(0);
             current.setWrongAnsCnt(0);
+            current.setLevel(0);
             cntLevel = 0;
             OpenScreen newGame = new OpenScreen(current);
             newGame.setVisible(true);
@@ -261,16 +262,15 @@ public class FormClass extends JFrame implements ActionListener {
                     showNonSelctedDialog();
                     return;
                 }
-            } else if (question.isOpenQues() == true) {/*Cheek if is Open question*/
+            } else if (question.isOpenQues()) {/*Cheek if is Open question*/
 
                 if (ansField.getText().equals("")) {
                     showNonSelctedDialog();
                     return;
                 }
-                if (ansField.getText().equalsIgnoreCase(openAnser)) {
-                    System.out.println(openAnser);
+                if (ansField.getText().equalsIgnoreCase(openAnser)) 
                     correct = true;
-                }
+                
             }
 
             if (correct) //if the answer correct sum the value of point of this question
@@ -295,10 +295,10 @@ public class FormClass extends JFrame implements ActionListener {
                     UpLevel();
                 }
 
-            } else {//sum the incorrect answer
+            } else {
 
                 PlaySounds h = new PlaySounds(worngSound);
-                current.setWrongAnsCnt(1);
+                current.setWrongAnsCnt(1);//sum the incorrect answer
             }
             //in any case correct or not open the game with less quse (n-1)
             try {
@@ -320,7 +320,6 @@ public class FormClass extends JFrame implements ActionListener {
             showExitDialog();
         } else if (ae.getSource() == newMenuItem) {
             newGameDialog();
-
         } else if (ae.getSource() == aboutMenuItem) {
             aboutDialog();
         }

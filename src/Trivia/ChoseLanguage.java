@@ -43,7 +43,6 @@ public class ChoseLanguage extends javax.swing.JFrame {
         btnHeb = new javax.swing.JButton();
         btnEnglish = new javax.swing.JButton();
         SelectWantLan = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(200, 300));
@@ -68,13 +67,8 @@ public class ChoseLanguage extends javax.swing.JFrame {
         btnEnglish.setBounds(51, 131, 143, 67);
 
         SelectWantLan.setFont(new java.awt.Font("Maiandra GD", 1, 14)); // NOI18N
-        SelectWantLan.setText("          Select Wanted Language");
         getContentPane().add(SelectWantLan);
         SelectWantLan.setBounds(67, 29, 274, 72);
-
-        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(20, 10, 370, 100);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -133,6 +127,5 @@ public class ChoseLanguage extends javax.swing.JFrame {
     private javax.swing.JLabel SelectWantLan;
     private javax.swing.JButton btnEnglish;
     private javax.swing.JButton btnHeb;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
