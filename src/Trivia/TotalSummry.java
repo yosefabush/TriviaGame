@@ -6,6 +6,7 @@
 package Trivia;
 
 import static Trivia.FormClass.cntLevel;
+import resources.LocalizationUtil;
 /**
  *
  * @author Yosef
@@ -19,22 +20,31 @@ public class TotalSummry extends javax.swing.JFrame {
     public TotalSummry(User current) {
         initComponents();
         this.currentPlayer=current;
-         setLocationRelativeTo(null);
-         this.scoreFiled.setText(Integer.toString(currentPlayer.getPoints()));
-         this.WrongFiled1.setText(Integer.toString(currentPlayer.getWrongAnsCnt()));
-         this.correctCnt.setText(Integer.toString(currentPlayer.getCorrectAnsCnt()));
-         this.NewHighScore.setText("You can do betrr.. ");
-        
+        updateLang();
+        this.NewHighScore.setText(LocalizationUtil.localizedResourceBundle.getString("YouCanBetrr"));
     }
     public TotalSummry (User current,int newHighScore){ //if user get highr score the he was in DB  
          initComponents();
-        this.currentPlayer=current;
-         setLocationRelativeTo(null);
+         this.currentPlayer=current;
+         updateLang();
+         this.NewHighScore.setText(LocalizationUtil.localizedResourceBundle.getString("NewHigScor"));
+        
+    }
+    public void updateLang() {
+        
+        NewGameBtn.setText(LocalizationUtil.localizedResourceBundle.getString("NewGameKey"));
+        ExitBtn.setText(LocalizationUtil.localizedResourceBundle.getString("ExitKey"));     
+        GameOverTitle.setText(LocalizationUtil.localizedResourceBundle.getString("GameOver"));
+        wrongCnt.setText(LocalizationUtil.localizedResourceBundle.getString("wrongCntMesg"));
+        CorrectCnt.setText(LocalizationUtil.localizedResourceBundle.getString("CorrectCntMesg"));
+        TotalScoreJl.setText(LocalizationUtil.localizedResourceBundle.getString("TotalScoreMseg"));
+        timesJl.setText(LocalizationUtil.localizedResourceBundle.getString("timesKey"));
+        timesJl2.setText(LocalizationUtil.localizedResourceBundle.getString("timesKey"));
+        jlPoint.setText(LocalizationUtil.localizedResourceBundle.getString("PointsKey"));
+        setLocationRelativeTo(null);
          this.scoreFiled.setText(Integer.toString(currentPlayer.getPoints()));
          this.WrongFiled1.setText(Integer.toString(currentPlayer.getWrongAnsCnt()));
-         this.correctCnt.setText(Integer.toString(currentPlayer.getCorrectAnsCnt()));
-          this.NewHighScore.setText(" New High Score! ");
-        
+         this.correctCnt.setText(Integer.toString(currentPlayer.getCorrectAnsCnt()));        
     }
 
     /**
@@ -47,56 +57,56 @@ public class TotalSummry extends javax.swing.JFrame {
     private void initComponents() {
 
         scoreFiled = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        welcomeTitle = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        ExitBtn = new javax.swing.JButton();
+        NewGameBtn = new javax.swing.JButton();
+        GameOverTitle = new javax.swing.JLabel();
+        TotalScoreJl = new javax.swing.JLabel();
         wrongCnt = new javax.swing.JLabel();
         WrongFiled1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        timesJl = new javax.swing.JLabel();
+        jlPoint = new javax.swing.JLabel();
         NewHighScore = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        CorrectCnt = new javax.swing.JLabel();
         correctCnt = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        timesJl2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Exit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ExitBtn.setText("Exit");
+        ExitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitBtn(evt);
             }
         });
 
-        jButton2.setText("New Game");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        NewGameBtn.setText("New Game");
+        NewGameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newGameBtn(evt);
             }
         });
 
-        welcomeTitle.setBackground(new java.awt.Color(153, 255, 153));
-        welcomeTitle.setFont(new java.awt.Font("Tekton Pro Ext", 2, 24)); // NOI18N
-        welcomeTitle.setText("Game Over!");
-        welcomeTitle.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        GameOverTitle.setBackground(new java.awt.Color(153, 255, 153));
+        GameOverTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        GameOverTitle.setText("     Game Over!");
+        GameOverTitle.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jLabel1.setFont(new java.awt.Font("Trajan Pro 3", 1, 12)); // NOI18N
-        jLabel1.setText("Your Total Score is :");
+        TotalScoreJl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        TotalScoreJl.setText("Your Total Score is :");
 
-        wrongCnt.setFont(new java.awt.Font("Trajan Pro 3", 1, 12)); // NOI18N
+        wrongCnt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         wrongCnt.setText("You anser wrong  :");
 
-        jLabel2.setText("Times");
+        timesJl.setText("Times");
 
-        jLabel3.setText("Points");
+        jlPoint.setText("Points");
 
         NewHighScore.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Trajan Pro 3", 1, 12)); // NOI18N
-        jLabel4.setText("You answer correct:");
+        CorrectCnt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        CorrectCnt.setText("You answer correct:");
 
-        jLabel5.setText("Times");
+        timesJl2.setText("Times");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,15 +114,15 @@ public class TotalSummry extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(129, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(NewGameBtn)
                 .addGap(86, 86, 86)
-                .addComponent(jButton1)
+                .addComponent(ExitBtn)
                 .addGap(135, 135, 135))
             .addGroup(layout.createSequentialGroup()
                 .addGap(147, 147, 147)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(NewHighScore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(welcomeTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(GameOverTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(78, 78, 78))
             .addGroup(layout.createSequentialGroup()
                 .addGap(67, 67, 67)
@@ -122,8 +132,8 @@ public class TotalSummry extends javax.swing.JFrame {
                         .addGap(40, 40, 40))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1))
+                            .addComponent(CorrectCnt)
+                            .addComponent(TotalScoreJl))
                         .addGap(36, 36, 36)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(scoreFiled, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
@@ -131,36 +141,37 @@ public class TotalSummry extends javax.swing.JFrame {
                     .addComponent(WrongFiled1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3)))
+                    .addComponent(timesJl)
+                    .addComponent(timesJl2)
+                    .addComponent(jlPoint)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(welcomeTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(GameOverTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(NewHighScore, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(wrongCnt)
                     .addComponent(WrongFiled1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(timesJl))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(CorrectCnt)
                     .addComponent(correctCnt, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(timesJl2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(scoreFiled, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlPoint)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TotalScoreJl)
+                        .addComponent(scoreFiled, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(NewGameBtn)
+                    .addComponent(ExitBtn))
                 .addGap(37, 37, 37))
         );
 
@@ -222,18 +233,18 @@ public class TotalSummry extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel CorrectCnt;
+    private javax.swing.JButton ExitBtn;
+    private javax.swing.JLabel GameOverTitle;
+    private javax.swing.JButton NewGameBtn;
     private javax.swing.JLabel NewHighScore;
+    private javax.swing.JLabel TotalScoreJl;
     private javax.swing.JLabel WrongFiled1;
     private javax.swing.JLabel correctCnt;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jlPoint;
     private javax.swing.JLabel scoreFiled;
-    private javax.swing.JLabel welcomeTitle;
+    private javax.swing.JLabel timesJl;
+    private javax.swing.JLabel timesJl2;
     private javax.swing.JLabel wrongCnt;
     // End of variables declaration//GEN-END:variables
 }

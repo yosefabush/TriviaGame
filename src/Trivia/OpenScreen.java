@@ -5,6 +5,8 @@
  */
 package Trivia;
 
+import resources.LocalizationUtil;
+
 /**
  *
  * @author Yosef
@@ -22,10 +24,15 @@ public class OpenScreen extends javax.swing.JFrame {
        int biuldComboBox=DataBaseMange.getInstance().countQues();
        for(int i=0;i<biuldComboBox;i++)
        this.cmbQuesNum.addItem(i+1); //set the real number of question from db
+       LogOutBtn.setText(LocalizationUtil.localizedResourceBundle.getString("LogOutKey"));
+       PleaseChoseCntQues.setText(LocalizationUtil.localizedResourceBundle.getString("PleaseChoseCntQues"));
+       btnStartGame.setText(LocalizationUtil.localizedResourceBundle.getString("StartGameKey"));
+       btnShowHighScoreTble.setText(LocalizationUtil.localizedResourceBundle.getString("HighScoreTble"));     
+       
         setLocationRelativeTo(null);
         this.current=currentUser;
-       OpenTitelWitName.setText("Welcom to trivia Game "+current.getUserName());
-       currebtPlayerHighScore.setText("Your best score was: "+current.getHighstScore(current)+" Points");
+      OpenTitelWitName.setText(LocalizationUtil.localizedResourceBundle.getString("WelcomGame")+" "+current.getUserName());
+      currebtPlayerHighScore.setText((LocalizationUtil.localizedResourceBundle.getString("BestScore"))+" "+current.getHighstScore(current));
     }
 
     /**
@@ -38,11 +45,12 @@ public class OpenScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         btnStartGame = new javax.swing.JButton();
-        title2 = new javax.swing.JLabel();
+        PleaseChoseCntQues = new javax.swing.JLabel();
         cmbQuesNum = new javax.swing.JComboBox();
         btnShowHighScoreTble = new javax.swing.JButton();
         OpenTitelWitName = new javax.swing.JLabel();
         currebtPlayerHighScore = new javax.swing.JLabel();
+        LogOutBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,12 +66,12 @@ public class OpenScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnStartGame);
-        btnStartGame.setBounds(280, 230, 96, 23);
+        btnStartGame.setBounds(250, 220, 150, 30);
 
-        title2.setFont(new java.awt.Font("Trajan Pro 3", 1, 14)); // NOI18N
-        title2.setText("Please chose how much ques you want");
-        getContentPane().add(title2);
-        title2.setBounds(145, 110, 370, 40);
+        PleaseChoseCntQues.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
+        PleaseChoseCntQues.setText("Please chose how much ques you want");
+        getContentPane().add(PleaseChoseCntQues);
+        PleaseChoseCntQues.setBounds(165, 110, 350, 40);
 
         cmbQuesNum.setModel(cmbQuesNum.getModel());
         cmbQuesNum.setToolTipText("");
@@ -82,15 +90,24 @@ public class OpenScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnShowHighScoreTble);
-        btnShowHighScoreTble.setBounds(260, 270, 142, 30);
+        btnShowHighScoreTble.setBounds(260, 270, 130, 30);
 
-        OpenTitelWitName.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        OpenTitelWitName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         getContentPane().add(OpenTitelWitName);
-        OpenTitelWitName.setBounds(170, 20, 380, 40);
+        OpenTitelWitName.setBounds(160, 20, 360, 40);
 
-        currebtPlayerHighScore.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        currebtPlayerHighScore.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         getContentPane().add(currebtPlayerHighScore);
-        currebtPlayerHighScore.setBounds(220, 70, 239, 24);
+        currebtPlayerHighScore.setBounds(149, 70, 360, 30);
+
+        LogOutBtn.setText("Log Out");
+        LogOutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogOutBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(LogOutBtn);
+        LogOutBtn.setBounds(531, 10, 100, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon.jpg"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -127,6 +144,13 @@ public class OpenScreen extends javax.swing.JFrame {
         highScore.setVisible(true);        
         
     }//GEN-LAST:event_btnShowHighScoreTbleActionPerformed
+
+    private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
+        this.dispose();
+        LogIn loGin=new LogIn();
+        loGin.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LogOutBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,12 +190,13 @@ public class OpenScreen extends javax.swing.JFrame {
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LogOutBtn;
     public javax.swing.JLabel OpenTitelWitName;
+    private javax.swing.JLabel PleaseChoseCntQues;
     private javax.swing.JButton btnShowHighScoreTble;
     private javax.swing.JButton btnStartGame;
     public static javax.swing.JComboBox cmbQuesNum;
     private javax.swing.JLabel currebtPlayerHighScore;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel title2;
     // End of variables declaration//GEN-END:variables
 }

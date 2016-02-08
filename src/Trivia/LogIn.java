@@ -10,7 +10,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
+import resources.LocalizationUtil;
 
 /**
  *
@@ -25,6 +28,11 @@ public class LogIn extends javax.swing.JFrame {
     public LogIn() {
         initComponents();
         userNameField.requestFocusInWindow();
+        signUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
+        btnLogIn.setText(LocalizationUtil.localizedResourceBundle.getString("LogInKey"));
+        userNamejl.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
+        jLabel2.setText(LocalizationUtil.localizedResourceBundle.getString("PasswordKEY"));
+        ChangeLangBtn.setText(LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey"));
         this.setSize(416,360);
         setLocationRelativeTo(null);
     }
@@ -38,12 +46,13 @@ public class LogIn extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        userNamejl = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         userNameField = new javax.swing.JTextField();
         signUpBtn = new javax.swing.JButton();
         btnLogIn = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
+        ChangeLangBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,9 +60,9 @@ public class LogIn extends javax.swing.JFrame {
         setIconImages(null);
         getContentPane().setLayout(null);
 
-        jLabel1.setText("User Name");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(29, 103, 80, 14);
+        userNamejl.setText("User Name");
+        getContentPane().add(userNamejl);
+        userNamejl.setBounds(29, 103, 80, 14);
 
         jLabel2.setText("Password");
         getContentPane().add(jLabel2);
@@ -91,6 +100,16 @@ public class LogIn extends javax.swing.JFrame {
         btnLogIn.setBounds(150, 240, 100, 23);
         getContentPane().add(jPasswordField1);
         jPasswordField1.setBounds(142, 159, 112, 20);
+
+        ChangeLangBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/languch.jpg"))); // NOI18N
+        ChangeLangBtn.setText("Change Languch");
+        ChangeLangBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChangeLangBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ChangeLangBtn);
+        ChangeLangBtn.setBounds(290, 230, 70, 40);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Login.png"))); // NOI18N
         getContentPane().add(jLabel4);
@@ -180,6 +199,34 @@ public class LogIn extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_userNameFieldFocusGained
 
+    private void ChangeLangBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeLangBtnActionPerformed
+// TODO add your handling code here:
+        String []buttonsName={"English","Hebrew"};
+             String selectedLanguage;
+            int res=JOptionPane.showOptionDialog(this,
+                    (LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")),
+                    (LocalizationUtil.localizedResourceBundle.getString("TitleChangeLang")),
+                    JOptionPane.WARNING_MESSAGE,0,null,buttonsName,buttonsName[0]);
+            if(res==0)
+             selectedLanguage="en";
+            else if(res==1)
+             selectedLanguage="iw";
+            else
+                return;
+            LocalizationUtil.localizedResourceBundle = ResourceBundle.getBundle("resources.uimessages", new Locale(selectedLanguage));
+            updateCaptions();
+        
+    }//GEN-LAST:event_ChangeLangBtnActionPerformed
+
+    public void updateCaptions(){
+        signUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
+        btnLogIn.setText(LocalizationUtil.localizedResourceBundle.getString("LogInKey"));
+        userNamejl.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
+        ChangeLangBtn.setText(LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey"));
+        jLabel2.setText(LocalizationUtil.localizedResourceBundle.getString("PasswordKEY"));
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -217,12 +264,13 @@ public class LogIn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ChangeLangBtn;
     private javax.swing.JButton btnLogIn;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JButton signUpBtn;
     private javax.swing.JTextField userNameField;
+    private javax.swing.JLabel userNamejl;
     // End of variables declaration//GEN-END:variables
 }

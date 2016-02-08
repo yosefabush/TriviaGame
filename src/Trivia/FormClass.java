@@ -32,7 +32,7 @@ public class FormClass extends JFrame implements ActionListener {
     private JButton languageButton;
     private JLabel liveResult;
     private JLabel showQues = new JLabel();
-    private JTextField ansField = new JTextField(20);
+    private JTextField ansField = new JTextField(5);
     private JMenuBar myMenuBar = new JMenuBar();
     private JMenu fileMenu = new JMenu();
     private JMenu helpMenu = new JMenu();
@@ -305,10 +305,19 @@ public class FormClass extends JFrame implements ActionListener {
                 ex.printStackTrace();
             }
 
-        } else if (ae.getSource() == languageButton || ae.getSource() == changeLang) { //מצריך לחיצה כפןלה על השפה לתקן
-            ChoseLanguage choseLan = new ChoseLanguage();
-            choseLan.setVisible(true);
-            String selectedLanguage = choseLan.getLanguche();
+        } else if (ae.getSource() == languageButton || ae.getSource() == changeLang) {
+            String []buttonsName={"English","Hebrew"};
+             String selectedLanguage;
+            int res=JOptionPane.showOptionDialog(this,
+                    (LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")),
+                    (LocalizationUtil.localizedResourceBundle.getString("TitleChangeLang")),
+                    JOptionPane.WARNING_MESSAGE,0,null,buttonsName,buttonsName[0]);
+            if(res==0)
+             selectedLanguage="en";
+            else if(res==1)
+             selectedLanguage="iw";
+            else
+                return;
             LocalizationUtil.localizedResourceBundle = ResourceBundle.getBundle("resources.uimessages", new Locale(selectedLanguage));
             updateCaptions();
         } else if (ae.getSource() == exitMenuItem) {

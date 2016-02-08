@@ -25,16 +25,16 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="129" max="32767" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+              <Component id="NewGameBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="ExitBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="NewHighScore" alignment="0" max="32767" attributes="0"/>
-                  <Component id="welcomeTitle" min="-2" pref="161" max="-2" attributes="0"/>
+                  <Component id="GameOverTitle" min="-2" pref="161" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
           </Group>
@@ -47,8 +47,8 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="CorrectCnt" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="TotalScoreJl" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
@@ -60,9 +60,9 @@
               </Group>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="timesJl" min="-2" max="-2" attributes="0"/>
+                  <Component id="timesJl2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlPoint" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -71,31 +71,33 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="welcomeTitle" min="-2" pref="50" max="-2" attributes="0"/>
+              <Component id="GameOverTitle" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="NewHighScore" min="-2" pref="24" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="wrongCnt" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="WrongFiled1" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="timesJl" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="13" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="CorrectCnt" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="correctCnt" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="timesJl2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="scoreFiled" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jlPoint" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="TotalScoreJl" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="scoreFiled" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="NewGameBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ExitBtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
           </Group>
@@ -105,7 +107,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="scoreFiled">
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="ExitBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Exit"/>
       </Properties>
@@ -113,7 +115,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitBtn"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="NewGameBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="New Game"/>
       </Properties>
@@ -121,24 +123,24 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newGameBtn"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="welcomeTitle">
+    <Component class="javax.swing.JLabel" name="GameOverTitle">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="ff" red="99" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tekton Pro Ext" size="24" style="2"/>
+          <Font name="Tahoma" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Game Over!"/>
+        <Property name="text" type="java.lang.String" value="     Game Over!"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Default Cursor"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="TotalScoreJl">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Trajan Pro 3" size="12" style="1"/>
+          <Font name="Tahoma" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Your Total Score is :"/>
       </Properties>
@@ -146,19 +148,19 @@
     <Component class="javax.swing.JLabel" name="wrongCnt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Trajan Pro 3" size="12" style="1"/>
+          <Font name="Tahoma" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="You anser wrong  :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="WrongFiled1">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="timesJl">
       <Properties>
         <Property name="text" type="java.lang.String" value="Times"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="jlPoint">
       <Properties>
         <Property name="text" type="java.lang.String" value="Points"/>
       </Properties>
@@ -170,17 +172,17 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
+    <Component class="javax.swing.JLabel" name="CorrectCnt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Trajan Pro 3" size="12" style="1"/>
+          <Font name="Tahoma" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="You answer correct:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="correctCnt">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
+    <Component class="javax.swing.JLabel" name="timesJl2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Times"/>
       </Properties>

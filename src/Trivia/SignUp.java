@@ -13,8 +13,11 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
+import java.util.ResourceBundle;
 //import java.util.Date;
 import javax.swing.JOptionPane;
+import resources.LocalizationUtil;
 
 /**
  *
@@ -28,7 +31,8 @@ public class SignUp extends javax.swing.JFrame {
     int defultPoint=0;
     java.util.Date newDate=Calendar.getInstance().getTime();
      private Date date=new Date(newDate.getTime()); 
-        
+     String messageDailog="ValidInput";
+       
        
 //      
       
@@ -37,7 +41,13 @@ public class SignUp extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         userNameField.requestFocusInWindow();
-        JOptionPane.showMessageDialog(this, "please insert in Password & ID - Integer ");
+        userIDLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserIdKey"));
+        PasswordLab.setText(LocalizationUtil.localizedResourceBundle.getString("PasswordKEY"));
+        userNameLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
+        SignUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
+        Backbtn.setText((LocalizationUtil.localizedResourceBundle.getString("BackbKey")));
+        changeLang.setText((LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")));
+        JOptionPane.showMessageDialog(this,LocalizationUtil.localizedResourceBundle.getString("ValidInput"));
     }
 
     /**
@@ -49,21 +59,22 @@ public class SignUp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jpassword = new javax.swing.JLabel();
+        userNameLab = new javax.swing.JLabel();
+        PasswordLab = new javax.swing.JLabel();
         userNameField = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         SignUpBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         UserIDFild = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        Back = new javax.swing.JButton();
+        userIDLab = new javax.swing.JLabel();
+        Backbtn = new javax.swing.JButton();
+        changeLang = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("User Name");
+        userNameLab.setText("User Name");
 
-        jpassword.setText("Password");
+        PasswordLab.setText("Password");
 
         SignUpBtn.setText("SignUp");
         SignUpBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -74,12 +85,19 @@ public class SignUp extends javax.swing.JFrame {
 
         jLabel2.setText("            Sign Up ");
 
-        jLabel3.setText("UserID");
+        userIDLab.setText("UserID");
 
-        Back.setText("Back");
-        Back.addActionListener(new java.awt.event.ActionListener() {
+        Backbtn.setText("Back");
+        Backbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackActionPerformed(evt);
+                BackbtnActionPerformed(evt);
+            }
+        });
+
+        changeLang.setText("Change Languch");
+        changeLang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeLangActionPerformed(evt);
             }
         });
 
@@ -90,19 +108,20 @@ public class SignUp extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(142, 142, 142)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(changeLang))
             .addGroup(layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(userIDLab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(userNameLab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PasswordLab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(SignUpBtn)
                         .addGap(33, 33, 33)
-                        .addComponent(Back)
+                        .addComponent(Backbtn)
                         .addContainerGap(81, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -114,24 +133,29 @@ public class SignUp extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(changeLang)))
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(userNameLab)
                     .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PasswordLab, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(UserIDFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(userIDLab))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SignUpBtn)
-                    .addComponent(Back))
+                    .addComponent(Backbtn))
                 .addGap(43, 43, 43))
         );
 
@@ -183,11 +207,38 @@ public class SignUp extends javax.swing.JFrame {
         
     }//GEN-LAST:event_SignUpBtnActionPerformed
 
-    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+    private void BackbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackbtnActionPerformed
         this.dispose();
 
-    }//GEN-LAST:event_BackActionPerformed
+    }//GEN-LAST:event_BackbtnActionPerformed
 
+    private void changeLangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeLangActionPerformed
+String []buttonsName={"English","Hebrew"};
+             String selectedLanguage;
+            int res=JOptionPane.showOptionDialog(this,
+                    (LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")),
+                    (LocalizationUtil.localizedResourceBundle.getString("TitleChangeLang")),
+                    JOptionPane.WARNING_MESSAGE,0,null,buttonsName,buttonsName[0]);
+            if(res==0)
+             selectedLanguage="en";
+            else if(res==1)
+             selectedLanguage="iw";
+            else
+                return;
+            LocalizationUtil.localizedResourceBundle = ResourceBundle.getBundle("resources.uimessages", new Locale(selectedLanguage));
+            updateCaptions();
+      // TODO add your handling code here:
+    }//GEN-LAST:event_changeLangActionPerformed
+
+    public void updateCaptions(){
+        
+         userIDLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserIdKey"));
+        PasswordLab.setText(LocalizationUtil.localizedResourceBundle.getString("PasswordKEY"));
+        userNameLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
+        SignUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
+        Backbtn.setText((LocalizationUtil.localizedResourceBundle.getString("BackbKey")));
+        changeLang.setText((LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")));
+    }
     /**
      * @param args the command line arguments
      */
@@ -225,14 +276,15 @@ public class SignUp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Back;
+    private javax.swing.JButton Backbtn;
+    private javax.swing.JLabel PasswordLab;
     private javax.swing.JButton SignUpBtn;
     private javax.swing.JTextField UserIDFild;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton changeLang;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JLabel jpassword;
+    private javax.swing.JLabel userIDLab;
     private javax.swing.JTextField userNameField;
+    private javax.swing.JLabel userNameLab;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,21 +26,22 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" pref="112" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="changeLang" min="-2" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel3" max="32767" attributes="0"/>
-                  <Component id="jLabel1" max="32767" attributes="0"/>
-                  <Component id="jpassword" max="32767" attributes="0"/>
+                  <Component id="userIDLab" max="32767" attributes="0"/>
+                  <Component id="userNameLab" max="32767" attributes="0"/>
+                  <Component id="PasswordLab" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="61" pref="61" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="SignUpBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="Back" min="-2" max="-2" attributes="0"/>
+                      <Component id="Backbtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="81" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -58,27 +59,35 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" pref="42" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" pref="42" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="changeLang" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="userNameLab" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="userNameField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPasswordField1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jpassword" min="-2" pref="17" max="-2" attributes="0"/>
+                  <Component id="PasswordLab" min="-2" pref="17" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="UserIDFild" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="userIDLab" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="38" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="SignUpBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Back" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Backbtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
           </Group>
@@ -86,12 +95,12 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="userNameLab">
       <Properties>
         <Property name="text" type="java.lang.String" value="User Name"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jpassword">
+    <Component class="javax.swing.JLabel" name="PasswordLab">
       <Properties>
         <Property name="text" type="java.lang.String" value="Password"/>
       </Properties>
@@ -115,17 +124,25 @@
     </Component>
     <Component class="javax.swing.JTextField" name="UserIDFild">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="userIDLab">
       <Properties>
         <Property name="text" type="java.lang.String" value="UserID"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="Back">
+    <Component class="javax.swing.JButton" name="Backbtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BackActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BackbtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="changeLang">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Change Languch"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="changeLangActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
