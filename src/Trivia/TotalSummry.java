@@ -6,6 +6,7 @@
 package Trivia;
 
 import static Trivia.FormClass.cntLevel;
+import javax.swing.SwingConstants;
 import resources.LocalizationUtil;
 /**
  *
@@ -21,13 +22,17 @@ public class TotalSummry extends javax.swing.JFrame {
         initComponents();
         this.currentPlayer=current;
         updateLang();
+        this.setTitle(LocalizationUtil.localizedResourceBundle.getString("Summry"));
         this.NewHighScore.setText(LocalizationUtil.localizedResourceBundle.getString("YouCanBetrr"));
+        NewHighScore.setHorizontalAlignment(SwingConstants.CENTER);
+        
     }
     public TotalSummry (User current,int newHighScore){ //if user get highr score the he was in DB  
          initComponents();
          this.currentPlayer=current;
          updateLang();
          this.NewHighScore.setText(LocalizationUtil.localizedResourceBundle.getString("NewHigScor"));
+         NewHighScore.setHorizontalAlignment(SwingConstants.CENTER);
         
     }
     public void updateLang() {
@@ -35,6 +40,7 @@ public class TotalSummry extends javax.swing.JFrame {
         NewGameBtn.setText(LocalizationUtil.localizedResourceBundle.getString("NewGameKey"));
         ExitBtn.setText(LocalizationUtil.localizedResourceBundle.getString("ExitKey"));     
         GameOverTitle.setText(LocalizationUtil.localizedResourceBundle.getString("GameOver"));
+        GameOverTitle.setHorizontalAlignment(SwingConstants.CENTER);
         wrongCnt.setText(LocalizationUtil.localizedResourceBundle.getString("wrongCntMesg"));
         CorrectCnt.setText(LocalizationUtil.localizedResourceBundle.getString("CorrectCntMesg"));
         TotalScoreJl.setText(LocalizationUtil.localizedResourceBundle.getString("TotalScoreMseg"));
@@ -112,47 +118,52 @@ public class TotalSummry extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(129, Short.MAX_VALUE)
-                .addComponent(NewGameBtn)
-                .addGap(86, 86, 86)
-                .addComponent(ExitBtn)
-                .addGap(135, 135, 135))
             .addGroup(layout.createSequentialGroup()
-                .addGap(147, 147, 147)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(NewHighScore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(GameOverTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(78, 78, 78))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(147, 147, 147)
+                        .addComponent(GameOverTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(wrongCnt)
+                                .addGap(40, 40, 40))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CorrectCnt)
+                                    .addComponent(TotalScoreJl))
+                                .addGap(36, 36, 36)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(scoreFiled, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                            .addComponent(correctCnt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(WrongFiled1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(timesJl)
+                            .addComponent(timesJl2)
+                            .addComponent(jlPoint))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(94, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(wrongCnt)
-                        .addGap(40, 40, 40))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CorrectCnt)
-                            .addComponent(TotalScoreJl))
-                        .addGap(36, 36, 36)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(scoreFiled, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                    .addComponent(correctCnt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(WrongFiled1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(timesJl)
-                    .addComponent(timesJl2)
-                    .addComponent(jlPoint)))
+                        .addComponent(NewGameBtn)
+                        .addGap(86, 86, 86)
+                        .addComponent(ExitBtn)
+                        .addGap(135, 135, 135))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(NewHighScore, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(156, 156, 156))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(GameOverTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(NewHighScore, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(wrongCnt)
                     .addComponent(WrongFiled1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)

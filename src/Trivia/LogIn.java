@@ -5,6 +5,7 @@
  */
 package Trivia;
 
+import com.sun.glass.events.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -91,6 +92,14 @@ public class LogIn extends javax.swing.JFrame {
         signUpBtn.setBounds(275, 50, 90, 23);
 
         btnLogIn.setText("LogIn");
+        btnLogIn.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnLogInFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                btnLogInFocusLost(evt);
+            }
+        });
         btnLogIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogInActionPerformed(evt);
@@ -98,6 +107,12 @@ public class LogIn extends javax.swing.JFrame {
         });
         getContentPane().add(btnLogIn);
         btnLogIn.setBounds(150, 240, 100, 23);
+
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyPressed(evt);
+            }
+        });
         getContentPane().add(jPasswordField1);
         jPasswordField1.setBounds(142, 159, 112, 20);
 
@@ -145,31 +160,14 @@ public class LogIn extends javax.swing.JFrame {
              resultSet = pstatment.executeQuery();
                 
              while(resultSet.next()){
-//                 System.out.println(resultSet.getInt("UserID"));
-//                 System.out.println(resultSet.getString("UserName"));
-//                 System.out.println(resultSet.getString("Password"));
-                 //resultSet.next();
                  this.currentPlayer=new User(resultSet.getString("UserName"),resultSet.getString("Password"),resultSet.getInt("UserID"));
+                 this.dispose();
                  OpenScreen newGame=new OpenScreen(currentPlayer);
                  newGame.setVisible(true);
                  this.dispose();
                  return;
              }
            JOptionPane.showMessageDialog(this, "User name or password inncorrect please try agian");
-             
-                 
-            
-//                if(resultSet.next()){
-//                  this.currentPlayer.setUserName(resultSet.getString("UserName"));
-//                  this.currentPlayer.setPassword(resultSet.getString("Password"));
-//                  JOptionPane.showMessageDialog(this, "login succsed");
-//                   OpenScreen newGame=new OpenScreen(currentPlayer);
-//                   newGame.setVisible(true);
-//                }
-//                else
-//                     JOptionPane.showMessageDialog(this, "User name or password inncorrect please try agian");
-//            
-            
               
             resultSet.close();		// close resultSet
             pstatment.close();		// close statement and resultSet
@@ -179,15 +177,7 @@ public class LogIn extends javax.swing.JFrame {
             System.out.println("Vendor Error: " + sqle.getErrorCode());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }  
-        
-//        if(TestQuery.insertToDB(userName,password)){
-//           JOptionPane.showConfirmDialog(this, "login succsed");
-//           this.dispose();
-//        }
-//        else
-//            JOptionPane.showConfirmDialog(this, "login faild");
-        
+        }
         
     }//GEN-LAST:event_btnLogInActionPerformed
 
@@ -217,6 +207,53 @@ public class LogIn extends javax.swing.JFrame {
             updateCaptions();
         
     }//GEN-LAST:event_ChangeLangBtnActionPerformed
+
+    private void btnLogInFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnLogInFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLogInFocusGained
+
+    private void btnLogInFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnLogInFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLogInFocusLost
+
+    private void jPasswordField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            String userName=userNameField.getText();
+            String password=jPasswordField1.getText();
+        
+        PreparedStatement statement;
+        String sql="select UserName,Password,UserId from tblusers as a where a.`UserName`='"+userName+"'and a.`Password`='"+password+"'";
+        try {
+            Class.forName(DbUtilitis.dbDriver); //load the rigt server
+            Connection connection
+                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
+                            DbUtilitis.jdbcUser,
+                            DbUtilitis.jdbcPassword);
+            PreparedStatement pstatment=connection.prepareStatement(sql);
+            ResultSet resultSet = pstatment.executeQuery();
+             resultSet = pstatment.executeQuery();
+             while(resultSet.next()){
+                 this.currentPlayer=new User(resultSet.getString("UserName"),resultSet.getString("Password"),resultSet.getInt("UserID"));
+                 this.dispose();
+                 OpenScreen newGame=new OpenScreen(currentPlayer);
+                 newGame.setVisible(true);
+                 this.dispose();
+                 return;
+             }
+           JOptionPane.showMessageDialog(this, "User name or password inncorrect please try agian");
+            resultSet.close();		// close resultSet
+            pstatment.close();		// close statement and resultSet
+            connection.close();		// close connection, statement and resultSet 	
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            System.out.println("Vendor Error: " + sqle.getErrorCode());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }  
+            
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1KeyPressed
 
     public void updateCaptions(){
         signUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));

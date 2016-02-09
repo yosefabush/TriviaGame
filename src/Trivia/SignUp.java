@@ -5,6 +5,7 @@
  */
 package Trivia;
 
+import com.sun.glass.events.KeyEvent;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -41,6 +42,8 @@ public class SignUp extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         userNameField.requestFocusInWindow();
+        this.setTitle(LocalizationUtil.localizedResourceBundle.getString("signUpMainTitle"));
+        signUpTitle.setText(LocalizationUtil.localizedResourceBundle.getString("signUpTitle"));
         userIDLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserIdKey"));
         PasswordLab.setText(LocalizationUtil.localizedResourceBundle.getString("PasswordKEY"));
         userNameLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
@@ -64,7 +67,7 @@ public class SignUp extends javax.swing.JFrame {
         userNameField = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         SignUpBtn = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        signUpTitle = new javax.swing.JLabel();
         UserIDFild = new javax.swing.JTextField();
         userIDLab = new javax.swing.JLabel();
         Backbtn = new javax.swing.JButton();
@@ -83,7 +86,13 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("            Sign Up ");
+        signUpTitle.setText("            Sign Up ");
+
+        UserIDFild.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                UserIDFildKeyPressed(evt);
+            }
+        });
 
         userIDLab.setText("UserID");
 
@@ -107,7 +116,7 @@ public class SignUp extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(142, 142, 142)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(signUpTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(changeLang))
             .addGroup(layout.createSequentialGroup()
@@ -136,7 +145,7 @@ public class SignUp extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(signUpTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(changeLang)))
@@ -230,9 +239,58 @@ String []buttonsName={"English","Hebrew"};
       // TODO add your handling code here:
     }//GEN-LAST:event_changeLangActionPerformed
 
+    private void UserIDFildKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UserIDFildKeyPressed
+      if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+           String userName=this.userNameField.getText();
+            String password=this.jPasswordField1.getText();
+            int realUserId=Integer.parseInt(this.UserIDFild.getText());
+        try {
+            Class.forName(DbUtilitis.dbDriver); //load the rigt server
+            Connection connection
+                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
+                            DbUtilitis.jdbcUser,
+                            DbUtilitis.jdbcPassword);
+            PreparedStatement ps = connection.prepareStatement("insert into tblusers (userId, userName, password) values (?, ?, ?)");
+            ps.setInt(1, realUserId);
+            ps.setString(2, userName);
+            ps.setString(3, password);
+            
+                int res=ps.executeUpdate();
+               if(res>0){
+                 JOptionPane.showMessageDialog(this, "User added succssefuly!\nPlease log in");
+                  ps = connection.prepareStatement("insert into tblrecords (userId, Score, Date) values (?, ?, ?)");
+                   ps.setInt(1, realUserId);
+                   ps.setInt(2, defultPoint);
+                   ps.setDate(3,date);
+                   int res2=ps.executeUpdate();
+                   if(res<0)
+                       JOptionPane.showMessageDialog(this, "Ther was proble to add to record tbale");
+                 LogIn logIn=new LogIn();
+                 logIn.setVisible(true);
+                 this.dispose();
+                 
+           }
+           else{
+                JOptionPane.showMessageDialog(this, "User alerdy exisit or invaild input");
+           }
+                ps.close();
+            
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            System.out.println("Vendor Error: " + sqle.getErrorCode());
+            JOptionPane.showMessageDialog(this, "User alerdy exisit");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+      }
+      
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserIDFildKeyPressed
+
     public void updateCaptions(){
-        
-         userIDLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserIdKey"));
+        this.setTitle(LocalizationUtil.localizedResourceBundle.getString("signUpMainTitle"));
+        signUpTitle.setText(LocalizationUtil.localizedResourceBundle.getString("signUpTitle"));
+        userIDLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserIdKey"));
         PasswordLab.setText(LocalizationUtil.localizedResourceBundle.getString("PasswordKEY"));
         userNameLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
         SignUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
@@ -281,8 +339,8 @@ String []buttonsName={"English","Hebrew"};
     private javax.swing.JButton SignUpBtn;
     private javax.swing.JTextField UserIDFild;
     private javax.swing.JButton changeLang;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JLabel signUpTitle;
     private javax.swing.JLabel userIDLab;
     private javax.swing.JTextField userNameField;
     private javax.swing.JLabel userNameLab;

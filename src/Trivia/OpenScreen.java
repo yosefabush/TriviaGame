@@ -5,6 +5,7 @@
  */
 package Trivia;
 
+import javax.swing.SwingConstants;
 import resources.LocalizationUtil;
 
 /**
@@ -26,13 +27,16 @@ public class OpenScreen extends javax.swing.JFrame {
        this.cmbQuesNum.addItem(i+1); //set the real number of question from db
        LogOutBtn.setText(LocalizationUtil.localizedResourceBundle.getString("LogOutKey"));
        PleaseChoseCntQues.setText(LocalizationUtil.localizedResourceBundle.getString("PleaseChoseCntQues"));
+       PleaseChoseCntQues.setHorizontalAlignment(SwingConstants.CENTER);
        btnStartGame.setText(LocalizationUtil.localizedResourceBundle.getString("StartGameKey"));
        btnShowHighScoreTble.setText(LocalizationUtil.localizedResourceBundle.getString("HighScoreTble"));     
        
         setLocationRelativeTo(null);
         this.current=currentUser;
       OpenTitelWitName.setText(LocalizationUtil.localizedResourceBundle.getString("WelcomGame")+" "+current.getUserName());
+      OpenTitelWitName.setHorizontalAlignment(SwingConstants.CENTER);
       currebtPlayerHighScore.setText((LocalizationUtil.localizedResourceBundle.getString("BestScore"))+" "+current.getHighstScore(current));
+      currebtPlayerHighScore.setHorizontalAlignment(SwingConstants.CENTER);
     }
 
     /**
@@ -71,7 +75,7 @@ public class OpenScreen extends javax.swing.JFrame {
         PleaseChoseCntQues.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         PleaseChoseCntQues.setText("Please chose how much ques you want");
         getContentPane().add(PleaseChoseCntQues);
-        PleaseChoseCntQues.setBounds(165, 110, 350, 40);
+        PleaseChoseCntQues.setBounds(150, 110, 350, 40);
 
         cmbQuesNum.setModel(cmbQuesNum.getModel());
         cmbQuesNum.setToolTipText("");
@@ -94,11 +98,11 @@ public class OpenScreen extends javax.swing.JFrame {
 
         OpenTitelWitName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         getContentPane().add(OpenTitelWitName);
-        OpenTitelWitName.setBounds(160, 20, 360, 40);
+        OpenTitelWitName.setBounds(140, 20, 360, 40);
 
         currebtPlayerHighScore.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         getContentPane().add(currebtPlayerHighScore);
-        currebtPlayerHighScore.setBounds(149, 70, 360, 30);
+        currebtPlayerHighScore.setBounds(130, 70, 360, 30);
 
         LogOutBtn.setText("Log Out");
         LogOutBtn.addActionListener(new java.awt.event.ActionListener() {

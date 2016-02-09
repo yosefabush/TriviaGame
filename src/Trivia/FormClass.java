@@ -60,7 +60,7 @@ public class FormClass extends JFrame implements ActionListener {
     private int rightAns;
 
     public FormClass(Question question, int remainedQuestios, User currentPlayer) {
-
+        this.setTitle((LocalizationUtil.localizedResourceBundle.getString("GameTitle")));
         this.current = currentPlayer;
         this.question = question;
         this.remainedQuestios = remainedQuestios;
@@ -340,7 +340,7 @@ public class FormClass extends JFrame implements ActionListener {
                 + " " + current.getPoints()
                 + " " + (LocalizationUtil.localizedResourceBundle.getString("YourLevelKey"))
                 + " " + current.getLevel());
-
+        this.setTitle((LocalizationUtil.localizedResourceBundle.getString("GameTitle")));
         fileMenu.setText(LocalizationUtil.localizedResourceBundle.getString("FileKey"));
         newMenuItem.setText(LocalizationUtil.localizedResourceBundle.getString("NewGameKey"));
         exitMenuItem.setText(LocalizationUtil.localizedResourceBundle.getString("ExitKey"));

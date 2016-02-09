@@ -30,6 +30,7 @@ public class HighstRecords extends javax.swing.JFrame {
         initComponents();
         updateTableScore();
         TitleTop5.setText(LocalizationUtil.localizedResourceBundle.getString("TitleTop5Key"));
+        TitleTop5.setHorizontalAlignment(SwingConstants.CENTER);
         btnBackToMainScreen.setText(LocalizationUtil.localizedResourceBundle.getString("BackKey"));
         setLocationRelativeTo(null);
       
@@ -77,6 +78,7 @@ public class HighstRecords extends javax.swing.JFrame {
         jTableGridViewHighScore = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Summry");
 
         TitleTop5.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         TitleTop5.setText("     Top 5 Score :");
@@ -120,7 +122,7 @@ public class HighstRecords extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(54, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -128,10 +130,11 @@ public class HighstRecords extends javax.swing.JFrame {
                         .addGap(134, 134, 134))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(TitleTop5, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(91, 91, 91))))
+                        .addGap(28, 28, 28))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TitleTop5, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
