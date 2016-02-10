@@ -29,6 +29,7 @@ public class LogIn extends javax.swing.JFrame {
     public LogIn() {
         initComponents();
         userNameField.requestFocusInWindow();
+        this.setTitle(LocalizationUtil.localizedResourceBundle.getString("GameTitle"));
         signUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
         btnLogIn.setText(LocalizationUtil.localizedResourceBundle.getString("LogInKey"));
         userNamejl.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
@@ -54,6 +55,7 @@ public class LogIn extends javax.swing.JFrame {
         btnLogIn = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
         ChangeLangBtn = new javax.swing.JButton();
+        TriviaLogo = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,13 +63,15 @@ public class LogIn extends javax.swing.JFrame {
         setIconImages(null);
         getContentPane().setLayout(null);
 
+        userNamejl.setForeground(new java.awt.Color(255, 255, 255));
         userNamejl.setText("User Name");
         getContentPane().add(userNamejl);
-        userNamejl.setBounds(29, 103, 80, 14);
+        userNamejl.setBounds(60, 100, 80, 14);
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Password");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(29, 162, 80, 14);
+        jLabel2.setBounds(60, 160, 80, 14);
 
         userNameField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -89,7 +93,7 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
         getContentPane().add(signUpBtn);
-        signUpBtn.setBounds(275, 50, 90, 23);
+        signUpBtn.setBounds(30, 240, 90, 23);
 
         btnLogIn.setText("LogIn");
         btnLogIn.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -106,7 +110,7 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLogIn);
-        btnLogIn.setBounds(150, 240, 100, 23);
+        btnLogIn.setBounds(150, 220, 100, 23);
 
         jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -125,6 +129,10 @@ public class LogIn extends javax.swing.JFrame {
         });
         getContentPane().add(ChangeLangBtn);
         ChangeLangBtn.setBounds(290, 230, 70, 40);
+
+        TriviaLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/logo.jpg"))); // NOI18N
+        getContentPane().add(TriviaLogo);
+        TriviaLogo.setBounds(120, 40, 160, 40);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Login.png"))); // NOI18N
         getContentPane().add(jLabel4);
@@ -256,6 +264,8 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1KeyPressed
 
     public void updateCaptions(){
+        
+        this.setTitle(LocalizationUtil.localizedResourceBundle.getString("GameTitle"));
         signUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
         btnLogIn.setText(LocalizationUtil.localizedResourceBundle.getString("LogInKey"));
         userNamejl.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
@@ -302,6 +312,7 @@ public class LogIn extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ChangeLangBtn;
+    private javax.swing.JLabel TriviaLogo;
     private javax.swing.JButton btnLogIn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

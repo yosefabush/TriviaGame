@@ -83,7 +83,6 @@ public class FormClass extends JFrame implements ActionListener {
         okButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("okKey"));
         exitButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("ExitKey"));
         languageButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("languageKey"));
-
         liveResult = new JLabel(" " + (LocalizationUtil.localizedResourceBundle.getString("PointsKey"))
                 + " " + current.getPoints()
                 + " " + (LocalizationUtil.localizedResourceBundle.getString("YourLevelKey"))

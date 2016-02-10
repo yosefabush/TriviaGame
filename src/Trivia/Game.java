@@ -32,9 +32,7 @@ public class Game {
         int random = 0;
         while (remainingQues > 0) {
             random = rand.nextInt(allQuesFromDB.size());
-            //System.out.println("All ques in db "+numQues);
             if (allQuesFromDB.get(random).getCheekIfQuesWasAsked() == false) {
-                //System.out.println("Chosen Rand num " + random);
                 allQuesFromDB.get(random).setCheekIfQuesWasAsked(true); 
                 break;
             }
@@ -46,8 +44,8 @@ public class Game {
         } else {
             current.setPoints(FormClass.point);  //סכימה של הניקוד של המשתמש הנוכחי בסוף המשחק
             FormClass.point = 0;
-            FormClass.currentLevel=0; 
-            current.setLevel(0);
+//            FormClass.currentLevel=0; 
+//            current.setLevel(0);
             if (updateFinalScore(current)) {  
                 System.out.println("New High Score!");
                 finisGame = new TotalSummry(current, current.getPoints());

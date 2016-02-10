@@ -29,6 +29,7 @@ public class HighstRecords extends javax.swing.JFrame {
         
         initComponents();
         updateTableScore();
+        this.setTitle(LocalizationUtil.localizedResourceBundle.getString("TitleTop5Key"));
         TitleTop5.setText(LocalizationUtil.localizedResourceBundle.getString("TitleTop5Key"));
         TitleTop5.setHorizontalAlignment(SwingConstants.CENTER);
         btnBackToMainScreen.setText(LocalizationUtil.localizedResourceBundle.getString("BackKey"));
@@ -76,12 +77,19 @@ public class HighstRecords extends javax.swing.JFrame {
         btnBackToMainScreen = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableGridViewHighScore = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Summry");
+        getContentPane().setLayout(null);
 
         TitleTop5.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         TitleTop5.setText("     Top 5 Score :");
+        getContentPane().add(TitleTop5);
+        TitleTop5.setBounds(113, 25, 255, 29);
 
         btnBackToMainScreen.setText("Back");
         btnBackToMainScreen.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +97,8 @@ public class HighstRecords extends javax.swing.JFrame {
                 btnBackToMainScreenActionPerformed(evt);
             }
         });
+        getContentPane().add(btnBackToMainScreen);
+        btnBackToMainScreen.setBounds(243, 318, 94, 35);
 
         jTableGridViewHighScore.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,35 +128,24 @@ public class HighstRecords extends javax.swing.JFrame {
         }
         jTableGridViewHighScore.getAccessibleContext().setAccessibleDescription("");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnBackToMainScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(134, 134, 134))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(TitleTop5, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(TitleTop5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100)
-                .addComponent(btnBackToMainScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(102, 72, 291, 191);
+
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(50, 120, 34, 14);
+
+        jLabel2.setText("jLabel1");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(50, 100, 34, 10);
+
+        jLabel3.setText("jLabel1");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(50, 140, 34, 14);
+
+        jLabel4.setText("jLabel1");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(50, 160, 34, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -200,6 +199,10 @@ public class HighstRecords extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TitleTop5;
     private javax.swing.JButton btnBackToMainScreen;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableGridViewHighScore;
     // End of variables declaration//GEN-END:variables

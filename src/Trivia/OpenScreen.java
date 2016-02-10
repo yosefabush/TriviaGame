@@ -5,6 +5,8 @@
  */
 package Trivia;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import resources.LocalizationUtil;
 
@@ -22,17 +24,28 @@ public class OpenScreen extends javax.swing.JFrame {
     public OpenScreen(User currentUser) {
         initComponents();
         this.setSize(650,350);
+        this.current=currentUser;
        int biuldComboBox=DataBaseMange.getInstance().countQues();
        for(int i=0;i<biuldComboBox;i++)
        this.cmbQuesNum.addItem(i+1); //set the real number of question from db
+       this.setTitle(LocalizationUtil.localizedResourceBundle.getString("WelcomGame"));
        LogOutBtn.setText(LocalizationUtil.localizedResourceBundle.getString("LogOutKey"));
        PleaseChoseCntQues.setText(LocalizationUtil.localizedResourceBundle.getString("PleaseChoseCntQues"));
        PleaseChoseCntQues.setHorizontalAlignment(SwingConstants.CENTER);
        btnStartGame.setText(LocalizationUtil.localizedResourceBundle.getString("StartGameKey"));
-       btnShowHighScoreTble.setText(LocalizationUtil.localizedResourceBundle.getString("HighScoreTble"));     
-       
+       btnShowHighScoreTble.setText(LocalizationUtil.localizedResourceBundle.getString("HighScoreTble"));
+      
+       if(Integer.parseInt(current.getHighstScore(current))> 20){
+           ShowCrownIcon();
+       }
+       else if(Integer.parseInt(current.getHighstScore(current))> 15){
+           ShowKnightIcon();
+       }
+       else if(Integer.parseInt(current.getHighstScore(current))> 10){
+           ShowDragonIcon();
+       }
+       setBackGround();
         setLocationRelativeTo(null);
-        this.current=currentUser;
       OpenTitelWitName.setText(LocalizationUtil.localizedResourceBundle.getString("WelcomGame")+" "+current.getUserName());
       OpenTitelWitName.setHorizontalAlignment(SwingConstants.CENTER);
       currebtPlayerHighScore.setText((LocalizationUtil.localizedResourceBundle.getString("BestScore"))+" "+current.getHighstScore(current));
@@ -55,7 +68,8 @@ public class OpenScreen extends javax.swing.JFrame {
         OpenTitelWitName = new javax.swing.JLabel();
         currebtPlayerHighScore = new javax.swing.JLabel();
         LogOutBtn = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        CrownImg = new javax.swing.JLabel();
+        BackgroudTrivia = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Welcome To Trivia Game");
@@ -112,10 +126,10 @@ public class OpenScreen extends javax.swing.JFrame {
         });
         getContentPane().add(LogOutBtn);
         LogOutBtn.setBounds(531, 10, 100, 30);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon.jpg"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 650, 320);
+        getContentPane().add(CrownImg);
+        CrownImg.setBounds(20, 10, 0, 90);
+        getContentPane().add(BackgroudTrivia);
+        BackgroudTrivia.setBounds(0, 0, 650, 320);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -136,6 +150,36 @@ public class OpenScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnStartGameActionPerformed
 
+ public void setBackGround(){
+       BackgroudTrivia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon.jpg"))); 
+       getContentPane().add(BackgroudTrivia);
+       BackgroudTrivia.setBounds(0, 0, 650, 320);
+ }
+    public void  ShowCrownIcon(){
+//        JLabel CrownImage1=new JLabel(new ImageIcon("/Trivia/Images/Crown.png"));
+//        this.getContentPane().add(CrownImage1);
+//        CrownImage1.setBounds(20, 10, 90, 90);
+        CrownImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Crown.png")));
+        getContentPane().add(CrownImg);
+        CrownImg.setBounds(20, 10, 90, 90);       
+      }
+    public void  ShowDragonIcon(){
+//        JLabel CrownImage1=new JLabel(new ImageIcon("/Trivia/Images/Crown.png"));
+//        this.getContentPane().add(CrownImage1);
+//        CrownImage1.setBounds(20, 10, 90, 90);
+        CrownImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Dragon.png")));
+        getContentPane().add(CrownImg);
+        CrownImg.setBounds(20, 10, 90, 90);       
+      }
+    public void  ShowKnightIcon(){
+//        JLabel CrownImage1=new JLabel(new ImageIcon("/Trivia/Images/Crown.png"));
+//        this.getContentPane().add(CrownImage1);
+//        CrownImage1.setBounds(20, 10, 90, 90);
+        CrownImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Knight.png")));
+        getContentPane().add(CrownImg);
+        CrownImg.setBounds(20, 10, 90, 90);       
+      }
+    
     private void cmbQuesNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbQuesNumActionPerformed
 
    
@@ -194,6 +238,8 @@ public class OpenScreen extends javax.swing.JFrame {
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BackgroudTrivia;
+    private javax.swing.JLabel CrownImg;
     private javax.swing.JButton LogOutBtn;
     public javax.swing.JLabel OpenTitelWitName;
     private javax.swing.JLabel PleaseChoseCntQues;
@@ -201,6 +247,5 @@ public class OpenScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnStartGame;
     public static javax.swing.JComboBox cmbQuesNum;
     private javax.swing.JLabel currebtPlayerHighScore;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

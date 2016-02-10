@@ -32,7 +32,6 @@ public class SignUp extends javax.swing.JFrame {
     int defultPoint=0;
     java.util.Date newDate=Calendar.getInstance().getTime();
      private Date date=new Date(newDate.getTime()); 
-     String messageDailog="ValidInput";
        
        
 //      
@@ -85,8 +84,6 @@ public class SignUp extends javax.swing.JFrame {
                 SignUpBtnActionPerformed(evt);
             }
         });
-
-        signUpTitle.setText("            Sign Up ");
 
         UserIDFild.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

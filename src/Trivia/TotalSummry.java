@@ -37,6 +37,7 @@ public class TotalSummry extends javax.swing.JFrame {
     }
     public void updateLang() {
         
+        this.setTitle(LocalizationUtil.localizedResourceBundle.getString("Summry"));
         NewGameBtn.setText(LocalizationUtil.localizedResourceBundle.getString("NewGameKey"));
         ExitBtn.setText(LocalizationUtil.localizedResourceBundle.getString("ExitKey"));     
         GameOverTitle.setText(LocalizationUtil.localizedResourceBundle.getString("GameOver"));
