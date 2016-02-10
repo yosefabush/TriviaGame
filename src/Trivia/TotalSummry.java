@@ -22,6 +22,9 @@ public class TotalSummry extends javax.swing.JFrame {
         initComponents();
         this.currentPlayer=current;
         updateLang();
+        this.setSize(530,360);
+        setBackGround();
+        this.setLocationRelativeTo(null);
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("Summry"));
         this.NewHighScore.setText(LocalizationUtil.localizedResourceBundle.getString("YouCanBetrr"));
         NewHighScore.setHorizontalAlignment(SwingConstants.CENTER);
@@ -35,6 +38,12 @@ public class TotalSummry extends javax.swing.JFrame {
          NewHighScore.setHorizontalAlignment(SwingConstants.CENTER);
         
     }
+    
+        public void setBackGround(){
+       background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/gameOver.jpg"))); 
+       getContentPane().add(background);
+       background.setBounds(0, 0, 530,360);
+ }
     public void updateLang() {
         
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("Summry"));
@@ -76,116 +85,90 @@ public class TotalSummry extends javax.swing.JFrame {
         CorrectCnt = new javax.swing.JLabel();
         correctCnt = new javax.swing.JLabel();
         timesJl2 = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
+        scoreFiled.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(scoreFiled);
+        scoreFiled.setBounds(270, 220, 76, 24);
+
+        ExitBtn.setForeground(new java.awt.Color(51, 51, 51));
         ExitBtn.setText("Exit");
         ExitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitBtn(evt);
             }
         });
+        getContentPane().add(ExitBtn);
+        ExitBtn.setBounds(300, 270, 90, 23);
 
+        NewGameBtn.setForeground(new java.awt.Color(51, 51, 51));
         NewGameBtn.setText("New Game");
         NewGameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newGameBtn(evt);
             }
         });
+        getContentPane().add(NewGameBtn);
+        NewGameBtn.setBounds(130, 270, 100, 23);
 
         GameOverTitle.setBackground(new java.awt.Color(153, 255, 153));
         GameOverTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        GameOverTitle.setForeground(new java.awt.Color(255, 255, 255));
         GameOverTitle.setText("     Game Over!");
         GameOverTitle.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(GameOverTitle);
+        GameOverTitle.setBounds(180, 50, 161, 50);
 
         TotalScoreJl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        TotalScoreJl.setForeground(new java.awt.Color(255, 255, 255));
         TotalScoreJl.setText("Your Total Score is :");
+        getContentPane().add(TotalScoreJl);
+        TotalScoreJl.setBounds(80, 220, 190, 22);
 
         wrongCnt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        wrongCnt.setForeground(new java.awt.Color(255, 255, 255));
         wrongCnt.setText("You anser wrong  :");
+        getContentPane().add(wrongCnt);
+        wrongCnt.setBounds(90, 150, 170, 22);
 
+        WrongFiled1.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(WrongFiled1);
+        WrongFiled1.setBounds(270, 150, 76, 22);
+
+        timesJl.setForeground(new java.awt.Color(255, 255, 255));
         timesJl.setText("Times");
+        getContentPane().add(timesJl);
+        timesJl.setBounds(370, 160, 40, 14);
 
+        jlPoint.setForeground(new java.awt.Color(255, 255, 255));
         jlPoint.setText("Points");
+        getContentPane().add(jlPoint);
+        jlPoint.setBounds(370, 220, 40, 14);
 
         NewHighScore.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        NewHighScore.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(NewHighScore);
+        NewHighScore.setBounds(140, 100, 234, 24);
 
         CorrectCnt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        CorrectCnt.setForeground(new java.awt.Color(255, 255, 255));
         CorrectCnt.setText("You answer correct:");
+        getContentPane().add(CorrectCnt);
+        CorrectCnt.setBounds(80, 180, 180, 22);
 
+        correctCnt.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(correctCnt);
+        correctCnt.setBounds(270, 190, 76, 24);
+
+        timesJl2.setForeground(new java.awt.Color(255, 255, 255));
         timesJl2.setText("Times");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(GameOverTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(wrongCnt)
-                                .addGap(40, 40, 40))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CorrectCnt)
-                                    .addComponent(TotalScoreJl))
-                                .addGap(36, 36, 36)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(scoreFiled, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                            .addComponent(correctCnt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(WrongFiled1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(timesJl)
-                            .addComponent(timesJl2)
-                            .addComponent(jlPoint))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(NewGameBtn)
-                        .addGap(86, 86, 86)
-                        .addComponent(ExitBtn)
-                        .addGap(135, 135, 135))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(NewHighScore, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(156, 156, 156))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(GameOverTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(NewHighScore, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(wrongCnt)
-                    .addComponent(WrongFiled1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(timesJl))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CorrectCnt)
-                    .addComponent(correctCnt, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(timesJl2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlPoint)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TotalScoreJl)
-                        .addComponent(scoreFiled, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NewGameBtn)
-                    .addComponent(ExitBtn))
-                .addGap(37, 37, 37))
-        );
+        getContentPane().add(timesJl2);
+        timesJl2.setBounds(370, 190, 40, 14);
+        getContentPane().add(background);
+        background.setBounds(0, 0, 530, 360);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -252,6 +235,7 @@ public class TotalSummry extends javax.swing.JFrame {
     private javax.swing.JLabel NewHighScore;
     private javax.swing.JLabel TotalScoreJl;
     private javax.swing.JLabel WrongFiled1;
+    private javax.swing.JLabel background;
     private javax.swing.JLabel correctCnt;
     private javax.swing.JLabel jlPoint;
     private javax.swing.JLabel scoreFiled;

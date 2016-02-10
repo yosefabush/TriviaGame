@@ -35,14 +35,14 @@ public class OpenScreen extends javax.swing.JFrame {
        btnStartGame.setText(LocalizationUtil.localizedResourceBundle.getString("StartGameKey"));
        btnShowHighScoreTble.setText(LocalizationUtil.localizedResourceBundle.getString("HighScoreTble"));
       
-       if(Integer.parseInt(current.getHighstScore(current))> 20){
+       if(Integer.parseInt(current.getHighstScore(current))> 200){
            ShowCrownIcon();
        }
-       else if(Integer.parseInt(current.getHighstScore(current))> 15){
-           ShowKnightIcon();
+       else if(Integer.parseInt(current.getHighstScore(current))> 150){
+            ShowDragonIcon();
        }
-       else if(Integer.parseInt(current.getHighstScore(current))> 10){
-           ShowDragonIcon();
+       else if(Integer.parseInt(current.getHighstScore(current))> 100){
+            ShowKnightIcon();
        }
        setBackGround();
         setLocationRelativeTo(null);

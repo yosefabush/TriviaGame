@@ -25,16 +25,23 @@ public class HighstRecords extends javax.swing.JFrame {
     /**
      * Creates new form HighstRecords
      */
+    private int[] highScore5 = new int[5];
+    int i=0;
     public HighstRecords() {
         
         initComponents();
         updateTableScore();
+        getAllTop5Score();
+        updatePictureLevel();
+        setBackGround();
+        this.setSize(520, 500);
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("TitleTop5Key"));
         TitleTop5.setText(LocalizationUtil.localizedResourceBundle.getString("TitleTop5Key"));
         TitleTop5.setHorizontalAlignment(SwingConstants.CENTER);
         btnBackToMainScreen.setText(LocalizationUtil.localizedResourceBundle.getString("BackKey"));
         setLocationRelativeTo(null);
-      
+        for(int i=0;i<5;i++)
+        System.out.println(highScore5[i]);        
        
 
     }
@@ -63,6 +70,44 @@ public class HighstRecords extends javax.swing.JFrame {
         }  
         
     }
+    public void setBackGround(){
+       Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/woodBackground.png"))); 
+       getContentPane().add(Background);
+       Background.setBounds(0, 0, 520, 500);
+ }
+    
+     private void getAllTop5Score(){
+         try {
+
+            Class.forName(DbUtilitis.dbDriver); //load the rigt server
+            Connection connection
+                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
+                            DbUtilitis.jdbcUser,
+                            DbUtilitis.jdbcPassword);
+
+            Statement statement = connection.createStatement();
+
+            String allCustomersQuery = "select UserName,Score,date from tblusers as a,tblrecords as b where a.`UserId`=b.`UserID` order by Score desc  LIMIT 5";
+            ResultSet resultSet = statement.executeQuery(allCustomersQuery);
+            
+            while (resultSet.next()){
+                        this.highScore5[i]=Integer.parseInt(resultSet.getString("Score"));
+                           i++;
+                       }
+            resultSet.close();		// close resultSet
+            statement.close();		// close statement and resultSet
+            connection.close();
+                 // close connection, statement and resultSet 	
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            System.out.println("Vendor Error: " + sqle.getErrorCode());
+           
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+           
+        }
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,10 +122,12 @@ public class HighstRecords extends javax.swing.JFrame {
         btnBackToMainScreen = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableGridViewHighScore = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        picLev5 = new javax.swing.JLabel();
+        picLev2 = new javax.swing.JLabel();
+        picLev3 = new javax.swing.JLabel();
+        picLev4 = new javax.swing.JLabel();
+        picLev1 = new javax.swing.JLabel();
+        Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Summry");
@@ -98,7 +145,7 @@ public class HighstRecords extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnBackToMainScreen);
-        btnBackToMainScreen.setBounds(243, 318, 94, 35);
+        btnBackToMainScreen.setBounds(210, 420, 94, 35);
 
         jTableGridViewHighScore.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,6 +167,8 @@ public class HighstRecords extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        jTableGridViewHighScore.setPreferredSize(new java.awt.Dimension(225, 275));
+        jTableGridViewHighScore.setRowHeight(55);
         jScrollPane1.setViewportView(jTableGridViewHighScore);
         if (jTableGridViewHighScore.getColumnModel().getColumnCount() > 0) {
             jTableGridViewHighScore.getColumnModel().getColumn(0).setHeaderValue("User Name");
@@ -129,23 +178,19 @@ public class HighstRecords extends javax.swing.JFrame {
         jTableGridViewHighScore.getAccessibleContext().setAccessibleDescription("");
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(102, 72, 291, 191);
-
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(50, 120, 34, 14);
-
-        jLabel2.setText("jLabel1");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(50, 100, 34, 10);
-
-        jLabel3.setText("jLabel1");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(50, 140, 34, 14);
-
-        jLabel4.setText("jLabel1");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(50, 160, 34, 14);
+        jScrollPane1.setBounds(102, 72, 310, 310);
+        getContentPane().add(picLev5);
+        picLev5.setBounds(50, 320, 50, 50);
+        getContentPane().add(picLev2);
+        picLev2.setBounds(50, 150, 50, 50);
+        getContentPane().add(picLev3);
+        picLev3.setBounds(50, 200, 50, 50);
+        getContentPane().add(picLev4);
+        picLev4.setBounds(50, 260, 50, 50);
+        getContentPane().add(picLev1);
+        picLev1.setBounds(50, 100, 50, 50);
+        getContentPane().add(Background);
+        Background.setBounds(0, 0, 520, 460);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -154,6 +199,69 @@ public class HighstRecords extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnBackToMainScreenActionPerformed
 
+    public void setCrown(JLabel a){
+        
+        a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/SmallCrown.png"))); 
+        getContentPane().add(a);
+        
+    } 
+    public void setDragon (JLabel a){
+        
+        a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/SmallDragon.png"))); 
+        getContentPane().add(a);
+        
+    } 
+     public void setKnight (JLabel a){
+        
+        a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/SmallKnight.png"))); 
+        getContentPane().add(a);
+        
+    } 
+    
+    
+     public void updatePictureLevel(){
+         
+        if(highScore5[0]>200)
+            setCrown(picLev1);
+        else if(highScore5[0]>150)
+            setDragon(picLev1);
+        else if(highScore5[0]>100)
+            setKnight(picLev1);
+        picLev1.setBounds(50, 100, 50, 50);
+        
+      if(highScore5[1]>200)
+            setCrown(picLev2);
+        else if(highScore5[1]>150)
+            setDragon(picLev2);
+        else if(highScore5[1]>100)
+            setKnight(picLev2);
+        picLev2.setBounds(50, 150, 50, 50);
+        
+      if(highScore5[2]>200)
+            setCrown(picLev3);
+        else if(highScore5[2]>150)
+            setDragon(picLev3);
+        else if(highScore5[2]>100)
+            setKnight(picLev3);
+        picLev3.setBounds(50, 200, 50, 50);
+
+        if(highScore5[3]>200)
+            setCrown(picLev4);
+        else if(highScore5[3]>150)
+            setDragon(picLev4);
+        else if(highScore5[3]>100)
+            setKnight(picLev4);
+        picLev4.setBounds(50, 260, 50, 50);
+        
+         if(highScore5[4]>200)
+            setCrown(picLev5);
+        else if(highScore5[4]>150)
+            setDragon(picLev5);
+        else if(highScore5[4]>100)
+            setKnight(picLev5);
+        picLev5.setBounds(50, 320, 50, 50);
+       
+            }
     /**
      * @param args the command line arguments
      */
@@ -197,13 +305,15 @@ public class HighstRecords extends javax.swing.JFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Background;
     private javax.swing.JLabel TitleTop5;
     private javax.swing.JButton btnBackToMainScreen;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableGridViewHighScore;
+    private javax.swing.JLabel picLev1;
+    private javax.swing.JLabel picLev2;
+    private javax.swing.JLabel picLev3;
+    private javax.swing.JLabel picLev4;
+    private javax.swing.JLabel picLev5;
     // End of variables declaration//GEN-END:variables
 }
