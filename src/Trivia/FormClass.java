@@ -3,8 +3,10 @@ package Trivia;
 import static Trivia.PlaySounds.correctSound;
 import static Trivia.PlaySounds.worngSound;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -12,6 +14,7 @@ import java.awt.event.WindowEvent;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -58,6 +61,7 @@ public class FormClass extends JFrame implements ActionListener {
     static User current;
     private String openAnser;
     private int rightAns;
+    private JLabel backgroundImage=new JLabel();
 
     public FormClass(Question question, int remainedQuestios, User currentPlayer) {
         this.setTitle((LocalizationUtil.localizedResourceBundle.getString("GameTitle")));
@@ -65,21 +69,27 @@ public class FormClass extends JFrame implements ActionListener {
         this.question = question;
         this.remainedQuestios = remainedQuestios;
         this.rightAns = question.getRightAns();
+        this.setSize(500, 400);
+        setBackruond();
         initComponents();
         buildMenu();
         addListeners();
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        this.setSize(500, 400);
         this.setVisible(true);
         setLocationRelativeTo(null);
 
     }
-
-    /**
-     *
-     */
-    public void initComponents() {
-
+    
+   public void setBackruond(){
+        
+        backgroundImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/game-background.jpg"))); 
+        add(backgroundImage);
+        backgroundImage.setLayout(new BorderLayout());
+    
+    }
+   
+   public void initComponents() {
+        //this.setComponentZOrder(this.backgroundImage,10);
         okButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("okKey"));
         exitButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("ExitKey"));
         languageButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("languageKey"));
@@ -90,7 +100,7 @@ public class FormClass extends JFrame implements ActionListener {
         okExitPanel.add(okButton, BorderLayout.CENTER);
         okExitPanel.add(exitButton, BorderLayout.CENTER);
         okExitPanel.add(languageButton, BorderLayout.NORTH);
-        this.add(okExitPanel, BorderLayout.SOUTH);
+        backgroundImage.add(okExitPanel, BorderLayout.SOUTH);
 
         showQues.setText(question.getQuestion());
 
@@ -127,13 +137,14 @@ public class FormClass extends JFrame implements ActionListener {
         topPanel.add(showQues);
         liveResultPanel.add(liveResult);
 
-        this.add(topPanel, BorderLayout.NORTH);
-        this.add(optionsPanel, BorderLayout.CENTER);
-        this.add(liveResultPanel, BorderLayout.EAST);
+        backgroundImage.add(topPanel, BorderLayout.NORTH);
+        backgroundImage.add(optionsPanel, BorderLayout.WEST);
+        backgroundImage.add(liveResultPanel, BorderLayout.EAST);
+  
 
     }
-
-    public void addListeners() {
+   
+   public void addListeners() {
 
         okButton.addActionListener(this);
         exitButton.addActionListener(this);
@@ -146,7 +157,7 @@ public class FormClass extends JFrame implements ActionListener {
 
     } 
 
-    public void buildMenu() {
+   public void buildMenu() {
         fileMenu = new JMenu(LocalizationUtil.localizedResourceBundle.getString("FileKey"));
         helpMenu = new JMenu(LocalizationUtil.localizedResourceBundle.getString("HelpKey"));
         changeLang = new JMenuItem(LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey"));
@@ -163,7 +174,7 @@ public class FormClass extends JFrame implements ActionListener {
         this.setJMenuBar(myMenuBar);
     }
 
-    class MyWindowListener extends WindowAdapter {
+   class MyWindowListener extends WindowAdapter {
 
         @Override
         public void windowClosing(WindowEvent we
@@ -172,13 +183,13 @@ public class FormClass extends JFrame implements ActionListener {
         }
     }
 
-    public void showNonSelctedDialog() {
+   public void showNonSelctedDialog() {
 
         JOptionPane.showConfirmDialog(FormClass.this, (LocalizationUtil.localizedResourceBundle.getString("didntChoseAnswer")), (LocalizationUtil.localizedResourceBundle.getString("titleWorning")), JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
 
     }
 
-    public void showExitDialog() {
+   public void showExitDialog() {
         int result = JOptionPane.showConfirmDialog(FormClass.this, // parent component
                 (LocalizationUtil.localizedResourceBundle.getString("areYouSureKey")), // message
                 (LocalizationUtil.localizedResourceBundle.getString("titlrExitDialog")), // title of the dialog box
@@ -191,7 +202,7 @@ public class FormClass extends JFrame implements ActionListener {
 
     }
 
-    public void newGameDialog() {
+   public void newGameDialog() {
 
         int result = JOptionPane.showConfirmDialog(this, (LocalizationUtil.localizedResourceBundle.getString("AreYouSureYouStartNewGame")),
                 (LocalizationUtil.localizedResourceBundle.getString("NewGameDialog")),
@@ -203,13 +214,13 @@ public class FormClass extends JFrame implements ActionListener {
             newGame.setVisible(true);
         }
     }
-
-    public void aboutDialog() {
+   
+   public void aboutDialog() {
         JOptionPane.showMessageDialog(this, (LocalizationUtil.localizedResourceBundle.getString("AllReservd")));
     }
 
-    @Override
-    public void actionPerformed(ActionEvent ae) {
+   @Override
+   public void actionPerformed(ActionEvent ae) {
         boolean correct = false;
         String sound;
         if (ae.getSource() == okButton) {
@@ -330,7 +341,7 @@ public class FormClass extends JFrame implements ActionListener {
         }
     }
 
-    public void updateCaptions() {
+   public void updateCaptions() {
         okButton.setText(LocalizationUtil.localizedResourceBundle.getString("okKey"));
         exitButton.setText(LocalizationUtil.localizedResourceBundle.getString("ExitKey"));
         languageButton.setText(LocalizationUtil.localizedResourceBundle.getString("languageKey"));
@@ -349,7 +360,7 @@ public class FormClass extends JFrame implements ActionListener {
 
     }
 
-    public void UpLevel() {
+   public void UpLevel() {
         currentLevel = ++cntLevel;
         current.setLevel(cntLevel);
         JOptionPane.showConfirmDialog(FormClass.this, "you passe to Levevl: " + cntLevel + " ", "Congratlition!", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);

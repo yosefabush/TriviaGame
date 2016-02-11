@@ -35,13 +35,13 @@ public class OpenScreen extends javax.swing.JFrame {
        btnStartGame.setText(LocalizationUtil.localizedResourceBundle.getString("StartGameKey"));
        btnShowHighScoreTble.setText(LocalizationUtil.localizedResourceBundle.getString("HighScoreTble"));
       
-       if(Integer.parseInt(current.getHighstScore(current))> 200){
+       if(Integer.parseInt(current.getHighstScore(current))> 40){
            ShowCrownIcon();
        }
-       else if(Integer.parseInt(current.getHighstScore(current))> 150){
+       else if(Integer.parseInt(current.getHighstScore(current))> 25){
             ShowDragonIcon();
        }
-       else if(Integer.parseInt(current.getHighstScore(current))> 100){
+       else if(Integer.parseInt(current.getHighstScore(current))> 10){
             ShowKnightIcon();
        }
        setBackGround();
@@ -140,7 +140,6 @@ public class OpenScreen extends javax.swing.JFrame {
        current.setLevel(0);
        current.setPoints(0);
        current.setWrongAnsCnt(0);
-        System.out.println("selecetd numofques "+numQues);
         try {
             Game newGame=new Game(numQues,current,true); 
         } catch (Exception ex) {

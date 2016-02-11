@@ -11,7 +11,7 @@ public class Main {
 
         LogIn logIn = new LogIn();
         logIn.setVisible(true);
-        /*chek fhfhfghgjgh TOSIK*/
+     
         /*לסדר את הכותרות של החלנות מסך כניסה ומסף פתיחה לשפה המקומית*/
         /*לקבוע כיצד להתייחס לרמה לעדכן בהתאם טבלת שיאים*/
     }

@@ -90,9 +90,10 @@ public class TotalSummry extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        scoreFiled.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         scoreFiled.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(scoreFiled);
-        scoreFiled.setBounds(270, 220, 76, 24);
+        scoreFiled.setBounds(270, 160, 76, 24);
 
         ExitBtn.setForeground(new java.awt.Color(51, 51, 51));
         ExitBtn.setText("Exit");
@@ -102,7 +103,7 @@ public class TotalSummry extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ExitBtn);
-        ExitBtn.setBounds(300, 270, 90, 23);
+        ExitBtn.setBounds(310, 260, 90, 23);
 
         NewGameBtn.setForeground(new java.awt.Color(51, 51, 51));
         NewGameBtn.setText("New Game");
@@ -112,61 +113,66 @@ public class TotalSummry extends javax.swing.JFrame {
             }
         });
         getContentPane().add(NewGameBtn);
-        NewGameBtn.setBounds(130, 270, 100, 23);
+        NewGameBtn.setBounds(140, 260, 100, 23);
 
         GameOverTitle.setBackground(new java.awt.Color(153, 255, 153));
-        GameOverTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        GameOverTitle.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         GameOverTitle.setForeground(new java.awt.Color(255, 255, 255));
         GameOverTitle.setText("     Game Over!");
         GameOverTitle.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(GameOverTitle);
-        GameOverTitle.setBounds(180, 50, 161, 50);
+        GameOverTitle.setBounds(180, 20, 161, 50);
 
         TotalScoreJl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         TotalScoreJl.setForeground(new java.awt.Color(255, 255, 255));
         TotalScoreJl.setText("Your Total Score is :");
         getContentPane().add(TotalScoreJl);
-        TotalScoreJl.setBounds(80, 220, 190, 22);
+        TotalScoreJl.setBounds(90, 160, 190, 22);
 
         wrongCnt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         wrongCnt.setForeground(new java.awt.Color(255, 255, 255));
         wrongCnt.setText("You anser wrong  :");
         getContentPane().add(wrongCnt);
-        wrongCnt.setBounds(90, 150, 170, 22);
+        wrongCnt.setBounds(90, 90, 170, 22);
 
+        WrongFiled1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         WrongFiled1.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(WrongFiled1);
-        WrongFiled1.setBounds(270, 150, 76, 22);
+        WrongFiled1.setBounds(270, 90, 76, 22);
 
+        timesJl.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         timesJl.setForeground(new java.awt.Color(255, 255, 255));
         timesJl.setText("Times");
         getContentPane().add(timesJl);
-        timesJl.setBounds(370, 160, 40, 14);
+        timesJl.setBounds(330, 100, 40, 16);
 
+        jlPoint.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jlPoint.setForeground(new java.awt.Color(255, 255, 255));
         jlPoint.setText("Points");
         getContentPane().add(jlPoint);
-        jlPoint.setBounds(370, 220, 40, 14);
+        jlPoint.setBounds(330, 160, 40, 16);
 
-        NewHighScore.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        NewHighScore.setFont(new java.awt.Font("Times New Roman", 2, 19)); // NOI18N
         NewHighScore.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(NewHighScore);
-        NewHighScore.setBounds(140, 100, 234, 24);
+        NewHighScore.setBounds(140, 60, 234, 24);
 
         CorrectCnt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         CorrectCnt.setForeground(new java.awt.Color(255, 255, 255));
         CorrectCnt.setText("You answer correct:");
         getContentPane().add(CorrectCnt);
-        CorrectCnt.setBounds(80, 180, 180, 22);
+        CorrectCnt.setBounds(90, 120, 180, 22);
 
+        correctCnt.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         correctCnt.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(correctCnt);
-        correctCnt.setBounds(270, 190, 76, 24);
+        correctCnt.setBounds(270, 120, 76, 24);
 
+        timesJl2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         timesJl2.setForeground(new java.awt.Color(255, 255, 255));
         timesJl2.setText("Times");
         getContentPane().add(timesJl2);
-        timesJl2.setBounds(370, 190, 40, 14);
+        timesJl2.setBounds(330, 130, 40, 16);
         getContentPane().add(background);
         background.setBounds(0, 0, 530, 360);
 

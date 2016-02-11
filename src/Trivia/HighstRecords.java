@@ -40,10 +40,6 @@ public class HighstRecords extends javax.swing.JFrame {
         TitleTop5.setHorizontalAlignment(SwingConstants.CENTER);
         btnBackToMainScreen.setText(LocalizationUtil.localizedResourceBundle.getString("BackKey"));
         setLocationRelativeTo(null);
-        for(int i=0;i<5;i++)
-        System.out.println(highScore5[i]);        
-       
-
     }
     private void updateTableScore(){
        PreparedStatement statement;
@@ -221,43 +217,43 @@ public class HighstRecords extends javax.swing.JFrame {
     
      public void updatePictureLevel(){
          
-        if(highScore5[0]>200)
+        if(highScore5[0]>40)
             setCrown(picLev1);
-        else if(highScore5[0]>150)
+        else if(highScore5[0]>25)
             setDragon(picLev1);
-        else if(highScore5[0]>100)
+        else if(highScore5[0]>10)
             setKnight(picLev1);
         picLev1.setBounds(50, 100, 50, 50);
         
-      if(highScore5[1]>200)
+      if(highScore5[1]>40)
             setCrown(picLev2);
-        else if(highScore5[1]>150)
+        else if(highScore5[1]>25)
             setDragon(picLev2);
-        else if(highScore5[1]>100)
+        else if(highScore5[1]>10)
             setKnight(picLev2);
         picLev2.setBounds(50, 150, 50, 50);
         
-      if(highScore5[2]>200)
+      if(highScore5[2]>40)
             setCrown(picLev3);
-        else if(highScore5[2]>150)
+        else if(highScore5[2]>25)
             setDragon(picLev3);
-        else if(highScore5[2]>100)
+        else if(highScore5[2]>10)
             setKnight(picLev3);
         picLev3.setBounds(50, 200, 50, 50);
 
-        if(highScore5[3]>200)
+        if(highScore5[3]>40)
             setCrown(picLev4);
-        else if(highScore5[3]>150)
+        else if(highScore5[3]>25)
             setDragon(picLev4);
-        else if(highScore5[3]>100)
+        else if(highScore5[3]>10)
             setKnight(picLev4);
         picLev4.setBounds(50, 260, 50, 50);
         
-         if(highScore5[4]>200)
+         if(highScore5[4]>40)
             setCrown(picLev5);
-        else if(highScore5[4]>150)
+        else if(highScore5[4]>25)
             setDragon(picLev5);
-        else if(highScore5[4]>100)
+        else if(highScore5[4]>10)
             setKnight(picLev5);
         picLev5.setBounds(50, 320, 50, 50);
        
