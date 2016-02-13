@@ -67,16 +67,16 @@ public class FormClass extends JFrame implements ActionListener {
         this.setTitle((LocalizationUtil.localizedResourceBundle.getString("GameTitle")));
         this.current = currentPlayer;
         this.question = question;
-        this.remainedQuestios = remainedQuestios;
+        this.remainedQuestios = remainedQuestios;//keep remined question
         this.rightAns = question.getRightAns();
         this.setSize(500, 400);
         setBackruond();
         initComponents();
         buildMenu();
         addListeners();
-        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); //preess on exit will not close the window but wee override method thate will show  relvane promp
         this.setVisible(true);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); //sett the postin of the screen in the center
 
     }
     
@@ -94,7 +94,7 @@ public class FormClass extends JFrame implements ActionListener {
         exitButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("ExitKey"));
         languageButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("languageKey"));
         liveResult = new JLabel(" " + (LocalizationUtil.localizedResourceBundle.getString("PointsKey"))
-                + " " + current.getPoints()
+                + " " + point
                 + " " + (LocalizationUtil.localizedResourceBundle.getString("YourLevelKey"))
                 + " " + cntLevel);
         okExitPanel.add(okButton, BorderLayout.CENTER);
@@ -104,7 +104,7 @@ public class FormClass extends JFrame implements ActionListener {
 
         showQues.setText(question.getQuestion());
 
-        if (question.isOpenQues() == true) {   //if is open question need to get strinng  
+        if (question.isOpenQues() == true) {   //if is open question need to get strinng answer 
             openAnser = question.getEnswer()[0];
             optionsPanel.add(ansField);
 
@@ -117,7 +117,7 @@ public class FormClass extends JFrame implements ActionListener {
             optionsPanel.add(option1Button);
             optionsPanel.add(option2Button);
 
-        } else {                              //add 4 radio button
+        } else {                              //if is amrican question add 4 radio button
             option1Button.setText(question.getEnswer()[0]);
             option2Button.setText(question.getEnswer()[0 + 1]);
             option3Button.setText(question.getEnswer()[0 + 2]);
@@ -145,7 +145,7 @@ public class FormClass extends JFrame implements ActionListener {
     }
    
    public void addListeners() {
-
+       /*add action listener to all button */
         okButton.addActionListener(this);
         exitButton.addActionListener(this);
         newMenuItem.addActionListener(this);
@@ -158,6 +158,7 @@ public class FormClass extends JFrame implements ActionListener {
     } 
 
    public void buildMenu() {
+       /*build the menu acording the curent languche*/
         fileMenu = new JMenu(LocalizationUtil.localizedResourceBundle.getString("FileKey"));
         helpMenu = new JMenu(LocalizationUtil.localizedResourceBundle.getString("HelpKey"));
         changeLang = new JMenuItem(LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey"));
@@ -175,7 +176,7 @@ public class FormClass extends JFrame implements ActionListener {
     }
 
    class MyWindowListener extends WindowAdapter {
-
+       /*add are "you shure exit?" promp */
         @Override
         public void windowClosing(WindowEvent we
         ) {
@@ -184,12 +185,13 @@ public class FormClass extends JFrame implements ActionListener {
     }
 
    public void showNonSelctedDialog() {
-
+       /*Non Selcted Dialog acording the current languche*/
         JOptionPane.showConfirmDialog(FormClass.this, (LocalizationUtil.localizedResourceBundle.getString("didntChoseAnswer")), (LocalizationUtil.localizedResourceBundle.getString("titleWorning")), JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
 
     }
 
    public void showExitDialog() {
+       /*"you shure exit?" promp acorrding curent languche*/
         int result = JOptionPane.showConfirmDialog(FormClass.this, // parent component
                 (LocalizationUtil.localizedResourceBundle.getString("areYouSureKey")), // message
                 (LocalizationUtil.localizedResourceBundle.getString("titlrExitDialog")), // title of the dialog box
@@ -203,7 +205,7 @@ public class FormClass extends JFrame implements ActionListener {
     }
 
    public void newGameDialog() {
-
+       /*"you shure new game?" promp acorrding curent languche*/
         int result = JOptionPane.showConfirmDialog(this, (LocalizationUtil.localizedResourceBundle.getString("AreYouSureYouStartNewGame")),
                 (LocalizationUtil.localizedResourceBundle.getString("NewGameDialog")),
                 JOptionPane.YES_NO_OPTION,
@@ -216,10 +218,12 @@ public class FormClass extends JFrame implements ActionListener {
     }
    
    public void aboutDialog() {
+       /*about promp acorrding curent languche*/
         JOptionPane.showMessageDialog(this, (LocalizationUtil.localizedResourceBundle.getString("AllReservd")));
     }
 
    @Override
+   /*action whan any button was pressed*/
    public void actionPerformed(ActionEvent ae) {
         boolean correct = false;
         String sound;
@@ -279,14 +283,13 @@ public class FormClass extends JFrame implements ActionListener {
                 
             }
 
-            if (correct) //if the answer correct sum the value of point of this question
+            if (correct) //if the answer correct
             {
-                PlaySounds h = new PlaySounds(correctSound);
+                PlaySounds h = new PlaySounds(correctSound);//play corect sound
                 System.out.println("this ques point " + question.getPoint());
-                current.setCorrectAnsCnt(1);
-                point += question.getPoint();
-                current.setPoints(point);
-                correct = false;
+                current.setCorrectAnsCnt(1); //count the time of the right ansewr
+                point += question.getPoint(); //sum the value of point of this question 
+                correct = false; //return the static var to false
 
                 if (point> 5 && UpLevel1 == false) {
                     UpLevel1 = true;
@@ -304,10 +307,10 @@ public class FormClass extends JFrame implements ActionListener {
 
             } else {
 
-                PlaySounds h = new PlaySounds(worngSound);
+                PlaySounds h = new PlaySounds(worngSound);//play incorect sound
                 current.setWrongAnsCnt(1);//sum the incorrect answer
             }
-            //in any case correct or not open the game with less quse (n-1)
+            //in any case correct or not open the game with less quse (n-1) with the same current
             try {
                 Game game = new Game(--remainedQuestios, current, false);//false mining the is not new game keep use the same ArrayList
                 this.dispose();
@@ -315,7 +318,7 @@ public class FormClass extends JFrame implements ActionListener {
                 ex.printStackTrace();
             }
 
-        } else if (ae.getSource() == languageButton || ae.getSource() == changeLang) {
+        } else if (ae.getSource() == languageButton || ae.getSource() == changeLang) { //if change languche button pressed
             String []buttonsName={"English","Hebrew"};
              String selectedLanguage;
             int res=JOptionPane.showOptionDialog(this,
@@ -330,18 +333,18 @@ public class FormClass extends JFrame implements ActionListener {
                 return;
             LocalizationUtil.localizedResourceBundle = ResourceBundle.getBundle("resources.uimessages", new Locale(selectedLanguage));
             updateCaptions();
-        } else if (ae.getSource() == exitMenuItem) {
+        } else if (ae.getSource() == exitMenuItem) { //if exit button pressed
             showExitDialog();
-        } else if (ae.getSource() == exitButton) {
+        } else if (ae.getSource() == exitButton) {   //if exit button pressed
             showExitDialog();
-        } else if (ae.getSource() == newMenuItem) {
+        } else if (ae.getSource() == newMenuItem) {  //if new game button pressed
             newGameDialog();
-        } else if (ae.getSource() == aboutMenuItem) {
+        } else if (ae.getSource() == aboutMenuItem) {   //if about button pressed
             aboutDialog();
         }
     }
 
-   public void updateCaptions() {
+   public void updateCaptions() { //method that refresh all the label+button languche
         okButton.setText(LocalizationUtil.localizedResourceBundle.getString("okKey"));
         exitButton.setText(LocalizationUtil.localizedResourceBundle.getString("ExitKey"));
         languageButton.setText(LocalizationUtil.localizedResourceBundle.getString("languageKey"));
@@ -357,10 +360,9 @@ public class FormClass extends JFrame implements ActionListener {
         aboutMenuItem.setText(LocalizationUtil.localizedResourceBundle.getString("AboutKey"));
         helpMenu.setText(LocalizationUtil.localizedResourceBundle.getString("HelpKey"));
         changeLang.setText(LocalizationUtil.localizedResourceBundle.getString("languageKey"));
-
     }
 
-   public void UpLevel() {
+   public void UpLevel() { //
         currentLevel = ++cntLevel;
         current.setLevel(cntLevel);
         JOptionPane.showConfirmDialog(FormClass.this, "you passe to Levevl: " + cntLevel + " ", "Congratlition!", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);

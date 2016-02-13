@@ -13,14 +13,14 @@ public class Game {
     static ArrayList<Question> allQuesFromDB = new <Question>ArrayList();
    
 
-    public Game(int num, User current, boolean newGame) throws Exception {
+    public Game(int wantedQuestion, User current, boolean newGame) throws Exception {
 
         if (newGame == true) { //if is new game need to clear thee arreyList and full it from DB
             this.allQuesFromDB.clear();
             this.allQuesFromDB = DataBaseMange.getInstance().getQuestion();
         }
         this.current = current;
-        Play(num);
+        Play(wantedQuestion);
 
     }
 
@@ -42,13 +42,13 @@ public class Game {
         if (remainingQues > 0) {
             f1 = new FormClass(allQuesFromDB.get(random), remainingQues, current);
         } else {
-            current.setPoints(FormClass.point);  //סכימה של הניקוד של המשתמש הנוכחי בסוף המשחק
-            FormClass.point = 0;
-//            FormClass.currentLevel=0; 
-//            current.setLevel(0);
-            if (updateFinalScore(current)) {  
+            current.setPoints(FormClass.point);  //set the point to the current player just when game over
+            FormClass.point = 0; //set the static varibale to zero 
+            FormClass.cntLevel=0;   //set the static varibale to zero 
+            
+            if (updateFinalScore(current)) {//cheek if the point of current player get new high score and update in DB  
                 System.out.println("New High Score!");
-                finisGame = new TotalSummry(current, current.getPoints());
+                finisGame = new TotalSummry(current, current.getPoints()); //open summery screen
                 finisGame.setVisible(true);
             } else {
                 System.out.println("Update score Faild mybe your have highr score ...");

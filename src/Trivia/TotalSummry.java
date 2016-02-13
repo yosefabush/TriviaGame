@@ -127,13 +127,13 @@ public class TotalSummry extends javax.swing.JFrame {
         TotalScoreJl.setForeground(new java.awt.Color(255, 255, 255));
         TotalScoreJl.setText("Your Total Score is :");
         getContentPane().add(TotalScoreJl);
-        TotalScoreJl.setBounds(90, 160, 190, 22);
+        TotalScoreJl.setBounds(40, 160, 230, 22);
 
         wrongCnt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         wrongCnt.setForeground(new java.awt.Color(255, 255, 255));
         wrongCnt.setText("You anser wrong  :");
         getContentPane().add(wrongCnt);
-        wrongCnt.setBounds(90, 90, 170, 22);
+        wrongCnt.setBounds(40, 90, 210, 22);
 
         WrongFiled1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         WrongFiled1.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,13 +144,13 @@ public class TotalSummry extends javax.swing.JFrame {
         timesJl.setForeground(new java.awt.Color(255, 255, 255));
         timesJl.setText("Times");
         getContentPane().add(timesJl);
-        timesJl.setBounds(330, 100, 40, 16);
+        timesJl.setBounds(330, 100, 60, 16);
 
         jlPoint.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jlPoint.setForeground(new java.awt.Color(255, 255, 255));
         jlPoint.setText("Points");
         getContentPane().add(jlPoint);
-        jlPoint.setBounds(330, 160, 40, 16);
+        jlPoint.setBounds(330, 160, 60, 16);
 
         NewHighScore.setFont(new java.awt.Font("Times New Roman", 2, 19)); // NOI18N
         NewHighScore.setForeground(new java.awt.Color(255, 255, 255));
@@ -161,7 +161,7 @@ public class TotalSummry extends javax.swing.JFrame {
         CorrectCnt.setForeground(new java.awt.Color(255, 255, 255));
         CorrectCnt.setText("You answer correct:");
         getContentPane().add(CorrectCnt);
-        CorrectCnt.setBounds(90, 120, 180, 22);
+        CorrectCnt.setBounds(40, 120, 220, 22);
 
         correctCnt.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         correctCnt.setForeground(new java.awt.Color(255, 255, 255));
@@ -172,7 +172,7 @@ public class TotalSummry extends javax.swing.JFrame {
         timesJl2.setForeground(new java.awt.Color(255, 255, 255));
         timesJl2.setText("Times");
         getContentPane().add(timesJl2);
-        timesJl2.setBounds(330, 130, 40, 16);
+        timesJl2.setBounds(330, 130, 60, 16);
         getContentPane().add(background);
         background.setBounds(0, 0, 530, 360);
 
@@ -185,7 +185,6 @@ public class TotalSummry extends javax.swing.JFrame {
         currentPlayer.setZeroWrongAnsCnt(0);
         currentPlayer.setZeroLevel(0);
         currentPlayer.setZeroCorrectAnsCnt(0);
-        cntLevel=0;
         OpenScreen newGame =new OpenScreen(currentPlayer);
         newGame.setVisible(true);
         this.dispose();

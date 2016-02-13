@@ -120,15 +120,17 @@ public class LogIn extends javax.swing.JFrame {
         getContentPane().add(jPasswordField1);
         jPasswordField1.setBounds(142, 159, 112, 20);
 
+        ChangeLangBtn.setBackground(new java.awt.Color(102, 153, 255));
         ChangeLangBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/languch.jpg"))); // NOI18N
         ChangeLangBtn.setText("Change Languch");
+        ChangeLangBtn.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         ChangeLangBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChangeLangBtnActionPerformed(evt);
             }
         });
         getContentPane().add(ChangeLangBtn);
-        ChangeLangBtn.setBounds(290, 230, 70, 40);
+        ChangeLangBtn.setBounds(290, 230, 55, 40);
 
         TriviaLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/logo.jpg"))); // NOI18N
         getContentPane().add(TriviaLogo);

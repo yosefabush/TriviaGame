@@ -39,6 +39,7 @@ public class SignUp extends javax.swing.JFrame {
     public SignUp() {
   
         initComponents();
+        this.setSize(446,336);
         setLocationRelativeTo(null);
         userNameField.requestFocusInWindow();
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("signUpMainTitle"));
@@ -71,12 +72,22 @@ public class SignUp extends javax.swing.JFrame {
         userIDLab = new javax.swing.JLabel();
         Backbtn = new javax.swing.JButton();
         changeLang = new javax.swing.JButton();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         userNameLab.setText("User Name");
+        getContentPane().add(userNameLab);
+        userNameLab.setBounds(120, 100, 70, 14);
 
         PasswordLab.setText("Password");
+        getContentPane().add(PasswordLab);
+        PasswordLab.setBounds(120, 140, 70, 17);
+        getContentPane().add(userNameField);
+        userNameField.setBounds(210, 100, 133, 20);
+        getContentPane().add(jPasswordField1);
+        jPasswordField1.setBounds(210, 140, 133, 20);
 
         SignUpBtn.setText("SignUp");
         SignUpBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -84,14 +95,25 @@ public class SignUp extends javax.swing.JFrame {
                 SignUpBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(SignUpBtn);
+        SignUpBtn.setBounds(150, 260, 80, 23);
+
+        signUpTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        signUpTitle.setForeground(new java.awt.Color(204, 255, 255));
+        getContentPane().add(signUpTitle);
+        signUpTitle.setBounds(160, 40, 230, 42);
 
         UserIDFild.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 UserIDFildKeyPressed(evt);
             }
         });
+        getContentPane().add(UserIDFild);
+        UserIDFild.setBounds(210, 180, 133, 20);
 
         userIDLab.setText("UserID");
+        getContentPane().add(userIDLab);
+        userIDLab.setBounds(120, 180, 70, 14);
 
         Backbtn.setText("Back");
         Backbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +121,8 @@ public class SignUp extends javax.swing.JFrame {
                 BackbtnActionPerformed(evt);
             }
         });
+        getContentPane().add(Backbtn);
+        Backbtn.setBounds(260, 260, 70, 23);
 
         changeLang.setText("Change Languch");
         changeLang.addActionListener(new java.awt.event.ActionListener() {
@@ -106,64 +130,12 @@ public class SignUp extends javax.swing.JFrame {
                 changeLangActionPerformed(evt);
             }
         });
+        getContentPane().add(changeLang);
+        changeLang.setBounds(10, 10, 130, 23);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(142, 142, 142)
-                .addComponent(signUpTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(changeLang))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(userIDLab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(userNameLab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PasswordLab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(SignUpBtn)
-                        .addGap(33, 33, 33)
-                        .addComponent(Backbtn)
-                        .addContainerGap(81, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(userNameField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(UserIDFild, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(101, 101, 101))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(signUpTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(changeLang)))
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(userNameLab)
-                    .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PasswordLab, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(UserIDFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(userIDLab))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SignUpBtn)
-                    .addComponent(Backbtn))
-                .addGap(43, 43, 43))
-        );
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/SignUp background.png"))); // NOI18N
+        getContentPane().add(background);
+        background.setBounds(0, 0, 450, 330);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -335,6 +307,7 @@ String []buttonsName={"English","Hebrew"};
     private javax.swing.JLabel PasswordLab;
     private javax.swing.JButton SignUpBtn;
     private javax.swing.JTextField UserIDFild;
+    private javax.swing.JLabel background;
     private javax.swing.JButton changeLang;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel signUpTitle;

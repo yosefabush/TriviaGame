@@ -10,7 +10,7 @@ package Trivia;
  * @author Yosef
  */
 public class DbUtilitis {
-/*working on local DataBse*/
+    /*working on local DataBse*/
 //    public static final String dbDriver="com.mysql.jdbc.Driver";
 //    public static final String jdbcUrl="jdbc:mysql://localhost:3306/triviyadb?zeroDateTimeBehavior=convertToNull";  
 //    public static final String jdbcUser="root";
@@ -29,6 +29,5 @@ public class DbUtilitis {
     public static final String jdbcPassword="hN3!wW6*";
     
     
-//   
     
 }
