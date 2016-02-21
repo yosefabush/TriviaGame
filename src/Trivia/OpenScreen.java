@@ -130,18 +130,18 @@ public class OpenScreen extends javax.swing.JFrame {
         getContentPane().add(CrownImg);
         CrownImg.setBounds(20, 10, 0, 90);
 
-        cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-1", "1", "2", "3" }));
+        cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Random", "1", "2", "3" }));
         cmbLevel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbLevelActionPerformed(evt);
             }
         });
         getContentPane().add(cmbLevel);
-        cmbLevel.setBounds(540, 280, 70, 20);
+        cmbLevel.setBounds(520, 280, 90, 20);
 
         jLabelLevel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         getContentPane().add(jLabelLevel);
-        jLabelLevel.setBounds(540, 240, 90, 30);
+        jLabelLevel.setBounds(520, 240, 110, 30);
         getContentPane().add(BackgroudTrivia);
         BackgroudTrivia.setBounds(0, 0, 650, 320);
 
@@ -150,11 +150,13 @@ public class OpenScreen extends javax.swing.JFrame {
 
     private void btnStartGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartGameActionPerformed
         int numQues=1;  //choose the real number of wanted ques
-       numQues+=cmbCountOfQUes.getSelectedIndex();
+        int level=0;
+        numQues+=cmbCountOfQUes.getSelectedIndex();
        current.setLevel(0);
        current.setPoints(0);
        current.setWrongAnsCnt(0);
-       int level=cmbLevel.getSelectedIndex()+1;
+       if(cmbLevel.getSelectedItem()=="Random")
+            level=0;
         try {
             Game newGame=new Game(numQues,current,true,level); 
         } catch (Exception ex) {
@@ -210,8 +212,8 @@ public class OpenScreen extends javax.swing.JFrame {
     private void cmbLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLevelActionPerformed
         cmbCountOfQUes.removeAllItems();
         int biuldComboBox;
-      
-        if(cmbLevel.getSelectedItem()!="-1")
+                                                                        
+        if(cmbLevel.getSelectedItem()!="Random")
          biuldComboBox=DataBaseMange.getInstance().countQues(Integer.parseInt(cmbLevel.getSelectedItem().toString()));
         else
          biuldComboBox=DataBaseMange.getInstance().countQues();

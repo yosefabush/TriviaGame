@@ -35,8 +35,6 @@ public class Game {
         Play(wantedQuestion);
 
     }
-
-
     public void Play(int remainingQues) throws Exception {
 
         Random rand = new Random();
@@ -45,11 +43,19 @@ public class Game {
         int random = 0;
         while (remainingQues > 0) {
             random = rand.nextInt(allQuesFromDB.size());
-            
-            if (allQuesFromDB.get(random).getCheekIfQuesWasAsked() == false&&allQuesFromDB.get(random).getLevel()==level) {
-                System.out.println(random);
-                allQuesFromDB.get(random).setCheekIfQuesWasAsked(true); 
-                break;
+            if(level!=0){
+                if (allQuesFromDB.get(random).getCheekIfQuesWasAsked() == false&&allQuesFromDB.get(random).getLevel()==level) {
+                    System.out.println("Level "+allQuesFromDB.get(random).getLevel());
+                    allQuesFromDB.get(random).setCheekIfQuesWasAsked(true); 
+                    break;
+                }
+            }
+            else{
+                if (allQuesFromDB.get(random).getCheekIfQuesWasAsked() == false) {
+                    System.out.println(random);
+                    allQuesFromDB.get(random).setCheekIfQuesWasAsked(true); 
+                    break;
+                }
             }
         }
         FormClass f1;
@@ -72,7 +78,6 @@ public class Game {
             }
         }
     }
-
     public boolean updateFinalScore(User player) {
 
         try {
