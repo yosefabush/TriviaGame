@@ -53,7 +53,6 @@ public class FormClass extends JFrame implements ActionListener {
     private JPanel liveResultPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     private ButtonGroup answersGroup = new ButtonGroup();
     private Question question = new Question();
-    private static boolean UpLevel1, UpLevel2, UpLevel3 = false;
     static int remainedQuestios;
     static int point = 0;
     static int currentLevel = 0;
@@ -290,21 +289,6 @@ public class FormClass extends JFrame implements ActionListener {
                 current.setCorrectAnsCnt(1); //count the time of the right ansewr
                 point += question.getPoint(); //sum the value of point of this question 
                 correct = false; //return the static var to false
-
-                if (point> 5 && UpLevel1 == false) {
-                    UpLevel1 = true;
-                    UpLevel();
-
-                }
-//                if (point > 8 && UpLevel2 == false) {
-//                    UpLevel2 = true;
-//                    UpLevel();
-//                }
-//                if (point > 10 && UpLevel3 == false) {
-//                    UpLevel3 = true;
-//                    UpLevel();
-//                }
-
             } else {
 
                 PlaySounds h = new PlaySounds(worngSound);//play incorect sound
@@ -362,9 +346,4 @@ public class FormClass extends JFrame implements ActionListener {
         changeLang.setText(LocalizationUtil.localizedResourceBundle.getString("languageKey"));
     }
 
-   public void UpLevel() { //
-        currentLevel = ++cntLevel;
-        current.setLevel(cntLevel);
-        JOptionPane.showConfirmDialog(FormClass.this, "you passe to Levevl: " + cntLevel + " ", "Congratlition!", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
-    }
 }

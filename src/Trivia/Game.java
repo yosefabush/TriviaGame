@@ -9,10 +9,22 @@ import java.util.Random;
 
 public class Game {
 
-    static User current;
-    static ArrayList<Question> allQuesFromDB = new <Question>ArrayList();
+    private static User current;
+    private static ArrayList<Question> allQuesFromDB = new <Question>ArrayList();
+    private static int level;
    
 
+    public Game(int wantedQuestion, User current, boolean newGame,int level) throws Exception {
+
+        if (newGame == true) { //if is new game need to clear thee arreyList and full it from DB
+            this.level=level;
+            this.allQuesFromDB.clear();
+            this.allQuesFromDB = DataBaseMange.getInstance().getQuestion();
+        }
+        this.current = current;
+        Play(wantedQuestion);
+
+    }
     public Game(int wantedQuestion, User current, boolean newGame) throws Exception {
 
         if (newGame == true) { //if is new game need to clear thee arreyList and full it from DB
@@ -24,6 +36,7 @@ public class Game {
 
     }
 
+
     public void Play(int remainingQues) throws Exception {
 
         Random rand = new Random();
@@ -32,7 +45,9 @@ public class Game {
         int random = 0;
         while (remainingQues > 0) {
             random = rand.nextInt(allQuesFromDB.size());
-            if (allQuesFromDB.get(random).getCheekIfQuesWasAsked() == false) {
+            
+            if (allQuesFromDB.get(random).getCheekIfQuesWasAsked() == false&&allQuesFromDB.get(random).getLevel()==level) {
+                System.out.println(random);
                 allQuesFromDB.get(random).setCheekIfQuesWasAsked(true); 
                 break;
             }

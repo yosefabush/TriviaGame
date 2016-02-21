@@ -147,6 +147,43 @@ public class DataBaseMange {
         return 0;
 
     }
+    
+    public int countQues(int level) {
+        int quesNum = 0;
+        try {
+
+            Class.forName(DbUtilitis.dbDriver); //load the rigt server
+            Connection connection
+                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
+                            DbUtilitis.jdbcUser,
+                            DbUtilitis.jdbcPassword);
+
+            Statement statement = connection.createStatement();
+
+            String allCustomersQuery = "SELECT * FROM tblquestion where level='"+level+"';";
+            ResultSet resultSet = statement.executeQuery(allCustomersQuery);
+
+            while (resultSet.next()) {
+                quesNum++;
+            }
+
+            resultSet.close();		// close resultSet
+            statement.close();		// close statement and resultSet
+            connection.close();		// close connection, statement and resultSet 	
+            return quesNum;
+
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            System.out.println("Vendor Error: " + sqle.getErrorCode());
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            //return quesNum;
+        }
+        return 0;
+
+    }
+
 
     public static DataBaseMange getInstance() {
 
@@ -155,5 +192,6 @@ public class DataBaseMange {
         }
         return instance;
     }
+
 
 }

@@ -25,10 +25,9 @@ public class OpenScreen extends javax.swing.JFrame {
         initComponents();
         this.setSize(650,350);
         this.current=currentUser;
-       int biuldComboBox=DataBaseMange.getInstance().countQues();
-       for(int i=0;i<biuldComboBox;i++)
-       this.cmbQuesNum.addItem(i+1); //set the real number of question from db
+       
        this.setTitle(LocalizationUtil.localizedResourceBundle.getString("WelcomGame"));
+       jLabelLevel.setText(LocalizationUtil.localizedResourceBundle.getString("ChoseLevel"));
        LogOutBtn.setText(LocalizationUtil.localizedResourceBundle.getString("LogOutKey"));
        PleaseChoseCntQues.setText(LocalizationUtil.localizedResourceBundle.getString("PleaseChoseCntQues"));
        PleaseChoseCntQues.setHorizontalAlignment(SwingConstants.CENTER);
@@ -63,12 +62,14 @@ public class OpenScreen extends javax.swing.JFrame {
 
         btnStartGame = new javax.swing.JButton();
         PleaseChoseCntQues = new javax.swing.JLabel();
-        cmbQuesNum = new javax.swing.JComboBox();
+        cmbCountOfQUes = new javax.swing.JComboBox();
         btnShowHighScoreTble = new javax.swing.JButton();
         OpenTitelWitName = new javax.swing.JLabel();
         currebtPlayerHighScore = new javax.swing.JLabel();
         LogOutBtn = new javax.swing.JButton();
         CrownImg = new javax.swing.JLabel();
+        cmbLevel = new javax.swing.JComboBox();
+        jLabelLevel = new javax.swing.JLabel();
         BackgroudTrivia = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -91,15 +92,15 @@ public class OpenScreen extends javax.swing.JFrame {
         getContentPane().add(PleaseChoseCntQues);
         PleaseChoseCntQues.setBounds(150, 110, 350, 40);
 
-        cmbQuesNum.setModel(cmbQuesNum.getModel());
-        cmbQuesNum.setToolTipText("");
-        cmbQuesNum.addActionListener(new java.awt.event.ActionListener() {
+        cmbCountOfQUes.setModel(cmbCountOfQUes.getModel());
+        cmbCountOfQUes.setToolTipText("");
+        cmbCountOfQUes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbQuesNumActionPerformed(evt);
+                cmbCountOfQUesActionPerformed(evt);
             }
         });
-        getContentPane().add(cmbQuesNum);
-        cmbQuesNum.setBounds(300, 170, 45, 20);
+        getContentPane().add(cmbCountOfQUes);
+        cmbCountOfQUes.setBounds(300, 170, 45, 20);
 
         btnShowHighScoreTble.setText("Table of records");
         btnShowHighScoreTble.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +129,19 @@ public class OpenScreen extends javax.swing.JFrame {
         LogOutBtn.setBounds(531, 10, 100, 30);
         getContentPane().add(CrownImg);
         CrownImg.setBounds(20, 10, 0, 90);
+
+        cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-1", "1", "2", "3" }));
+        cmbLevel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbLevelActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmbLevel);
+        cmbLevel.setBounds(540, 280, 70, 20);
+
+        jLabelLevel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        getContentPane().add(jLabelLevel);
+        jLabelLevel.setBounds(540, 240, 90, 30);
         getContentPane().add(BackgroudTrivia);
         BackgroudTrivia.setBounds(0, 0, 650, 320);
 
@@ -136,12 +150,13 @@ public class OpenScreen extends javax.swing.JFrame {
 
     private void btnStartGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartGameActionPerformed
         int numQues=1;  //choose the real number of wanted ques
-       numQues+=cmbQuesNum.getSelectedIndex();
+       numQues+=cmbCountOfQUes.getSelectedIndex();
        current.setLevel(0);
        current.setPoints(0);
        current.setWrongAnsCnt(0);
+       int level=cmbLevel.getSelectedIndex()+1;
         try {
-            Game newGame=new Game(numQues,current,true); 
+            Game newGame=new Game(numQues,current,true,level); 
         } catch (Exception ex) {
             ex.printStackTrace(); //print all the hisory
         }
@@ -155,35 +170,24 @@ public class OpenScreen extends javax.swing.JFrame {
        BackgroudTrivia.setBounds(0, 0, 650, 320);
  }
     public void  ShowCrownIcon(){
-//        JLabel CrownImage1=new JLabel(new ImageIcon("/Trivia/Images/Crown.png"));
-//        this.getContentPane().add(CrownImage1);
-//        CrownImage1.setBounds(20, 10, 90, 90);
+
         CrownImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Crown.png")));
         getContentPane().add(CrownImg);
         CrownImg.setBounds(20, 10, 90, 90);       
       }
     public void  ShowDragonIcon(){
-//        JLabel CrownImage1=new JLabel(new ImageIcon("/Trivia/Images/Crown.png"));
-//        this.getContentPane().add(CrownImage1);
-//        CrownImage1.setBounds(20, 10, 90, 90);
+
         CrownImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Dragon.png")));
         getContentPane().add(CrownImg);
         CrownImg.setBounds(20, 10, 90, 90);       
       }
     public void  ShowKnightIcon(){
-//        JLabel CrownImage1=new JLabel(new ImageIcon("/Trivia/Images/Crown.png"));
-//        this.getContentPane().add(CrownImage1);
-//        CrownImage1.setBounds(20, 10, 90, 90);
+
         CrownImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Knight.png")));
         getContentPane().add(CrownImg);
         CrownImg.setBounds(20, 10, 90, 90);       
       }
     
-    private void cmbQuesNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbQuesNumActionPerformed
-
-   
-    }//GEN-LAST:event_cmbQuesNumActionPerformed
-
     private void btnShowHighScoreTbleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowHighScoreTbleActionPerformed
        
         HighstRecords highScore=new HighstRecords();
@@ -198,6 +202,22 @@ public class OpenScreen extends javax.swing.JFrame {
         loGin.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_LogOutBtnActionPerformed
+
+    private void cmbCountOfQUesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCountOfQUesActionPerformed
+
+    }//GEN-LAST:event_cmbCountOfQUesActionPerformed
+
+    private void cmbLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLevelActionPerformed
+        cmbCountOfQUes.removeAllItems();
+        int biuldComboBox;
+        if(cmbLevel.getItemAt(0)!=new Integer(-1))
+         biuldComboBox=DataBaseMange.getInstance().countQues(cmbLevel.getSelectedIndex()+1);
+        else
+         biuldComboBox=DataBaseMange.getInstance().countQues();
+        for(int i=0;i<biuldComboBox;i++)
+         this.cmbCountOfQUes.addItem(i+1);//for loop to set the real number of question from db
+
+    }//GEN-LAST:event_cmbLevelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,7 +264,9 @@ public class OpenScreen extends javax.swing.JFrame {
     private javax.swing.JLabel PleaseChoseCntQues;
     private javax.swing.JButton btnShowHighScoreTble;
     private javax.swing.JButton btnStartGame;
-    public static javax.swing.JComboBox cmbQuesNum;
+    private javax.swing.JComboBox cmbCountOfQUes;
+    private javax.swing.JComboBox cmbLevel;
     private javax.swing.JLabel currebtPlayerHighScore;
+    private javax.swing.JLabel jLabelLevel;
     // End of variables declaration//GEN-END:variables
 }
