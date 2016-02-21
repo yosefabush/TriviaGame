@@ -210,8 +210,9 @@ public class OpenScreen extends javax.swing.JFrame {
     private void cmbLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLevelActionPerformed
         cmbCountOfQUes.removeAllItems();
         int biuldComboBox;
-        if(cmbLevel.getItemAt(0)!=new Integer(-1))
-         biuldComboBox=DataBaseMange.getInstance().countQues(cmbLevel.getSelectedIndex()+1);
+      
+        if(cmbLevel.getSelectedItem()!="-1")
+         biuldComboBox=DataBaseMange.getInstance().countQues(Integer.parseInt(cmbLevel.getSelectedItem().toString()));
         else
          biuldComboBox=DataBaseMange.getInstance().countQues();
         for(int i=0;i<biuldComboBox;i++)
