@@ -207,7 +207,7 @@ public class HighstRecords extends javax.swing.JFrame {
         getContentPane().add(a);
         
     } 
-     public void setKnight (JLabel a){
+    public void setKnight (JLabel a){
         
         a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/SmallKnight.png"))); 
         getContentPane().add(a);
@@ -219,41 +219,41 @@ public class HighstRecords extends javax.swing.JFrame {
          
         if(highScore5[0]>40)
             setCrown(picLev1);
-        else if(highScore5[0]>25)
+        else if(highScore5[0]>30)
             setDragon(picLev1);
-        else if(highScore5[0]>10)
+        else if(highScore5[0]>20)
             setKnight(picLev1);
         picLev1.setBounds(50, 100, 50, 50);
         
       if(highScore5[1]>40)
             setCrown(picLev2);
-        else if(highScore5[1]>25)
+        else if(highScore5[1]>30)
             setDragon(picLev2);
-        else if(highScore5[1]>10)
+        else if(highScore5[1]>20)
             setKnight(picLev2);
         picLev2.setBounds(50, 150, 50, 50);
         
       if(highScore5[2]>40)
             setCrown(picLev3);
-        else if(highScore5[2]>25)
+        else if(highScore5[2]>30)
             setDragon(picLev3);
-        else if(highScore5[2]>10)
+        else if(highScore5[2]>20)
             setKnight(picLev3);
         picLev3.setBounds(50, 200, 50, 50);
 
         if(highScore5[3]>40)
             setCrown(picLev4);
-        else if(highScore5[3]>25)
+        else if(highScore5[3]>30)
             setDragon(picLev4);
-        else if(highScore5[3]>10)
+        else if(highScore5[3]>20)
             setKnight(picLev4);
         picLev4.setBounds(50, 260, 50, 50);
         
          if(highScore5[4]>40)
             setCrown(picLev5);
-        else if(highScore5[4]>25)
+        else if(highScore5[4]>30)
             setDragon(picLev5);
-        else if(highScore5[4]>10)
+        else if(highScore5[4]>20)
             setKnight(picLev5);
         picLev5.setBounds(50, 320, 50, 50);
        

@@ -12,7 +12,6 @@ public class Main {
         LogIn logIn = new LogIn();
         logIn.setVisible(true);
         
-        /*לקבוע כיצד להתייחס לרמה לעדכן בהתאם טבלת שיאים*/
     }
 
 }

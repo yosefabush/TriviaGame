@@ -52,7 +52,7 @@ public class Game {
             }
             else{
                 if (allQuesFromDB.get(random).getCheekIfQuesWasAsked() == false) {
-                    System.out.println(random);
+                    System.out.println("Rand Level "+allQuesFromDB.get(random).getLevel());
                     allQuesFromDB.get(random).setCheekIfQuesWasAsked(true); 
                     break;
                 }

@@ -40,7 +40,7 @@ public class TotalSummry extends javax.swing.JFrame {
     }
     
         public void setBackGround(){
-       background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/gameOver.jpg"))); 
+       background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/SummeryImage.png"))); 
        getContentPane().add(background);
        background.setBounds(0, 0, 530,360);
  }
@@ -93,7 +93,7 @@ public class TotalSummry extends javax.swing.JFrame {
         scoreFiled.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         scoreFiled.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(scoreFiled);
-        scoreFiled.setBounds(270, 160, 76, 24);
+        scoreFiled.setBounds(320, 200, 76, 24);
 
         ExitBtn.setForeground(new java.awt.Color(51, 51, 51));
         ExitBtn.setText("Exit");
@@ -121,58 +121,58 @@ public class TotalSummry extends javax.swing.JFrame {
         GameOverTitle.setText("     Game Over!");
         GameOverTitle.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(GameOverTitle);
-        GameOverTitle.setBounds(180, 20, 161, 50);
+        GameOverTitle.setBounds(190, 30, 161, 50);
 
         TotalScoreJl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         TotalScoreJl.setForeground(new java.awt.Color(255, 255, 255));
         TotalScoreJl.setText("Your Total Score is :");
         getContentPane().add(TotalScoreJl);
-        TotalScoreJl.setBounds(40, 160, 230, 22);
+        TotalScoreJl.setBounds(90, 200, 230, 22);
 
         wrongCnt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         wrongCnt.setForeground(new java.awt.Color(255, 255, 255));
         wrongCnt.setText("You anser wrong  :");
         getContentPane().add(wrongCnt);
-        wrongCnt.setBounds(40, 90, 210, 22);
+        wrongCnt.setBounds(90, 130, 210, 22);
 
         WrongFiled1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         WrongFiled1.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(WrongFiled1);
-        WrongFiled1.setBounds(270, 90, 76, 22);
+        WrongFiled1.setBounds(320, 130, 76, 22);
 
         timesJl.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         timesJl.setForeground(new java.awt.Color(255, 255, 255));
         timesJl.setText("Times");
         getContentPane().add(timesJl);
-        timesJl.setBounds(330, 100, 60, 16);
+        timesJl.setBounds(380, 140, 60, 16);
 
         jlPoint.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jlPoint.setForeground(new java.awt.Color(255, 255, 255));
         jlPoint.setText("Points");
         getContentPane().add(jlPoint);
-        jlPoint.setBounds(330, 160, 60, 16);
+        jlPoint.setBounds(380, 200, 60, 16);
 
         NewHighScore.setFont(new java.awt.Font("Times New Roman", 2, 19)); // NOI18N
         NewHighScore.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(NewHighScore);
-        NewHighScore.setBounds(140, 60, 234, 24);
+        NewHighScore.setBounds(150, 90, 234, 24);
 
         CorrectCnt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         CorrectCnt.setForeground(new java.awt.Color(255, 255, 255));
         CorrectCnt.setText("You answer correct:");
         getContentPane().add(CorrectCnt);
-        CorrectCnt.setBounds(40, 120, 220, 22);
+        CorrectCnt.setBounds(90, 160, 220, 22);
 
         correctCnt.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         correctCnt.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(correctCnt);
-        correctCnt.setBounds(270, 120, 76, 24);
+        correctCnt.setBounds(320, 160, 76, 24);
 
         timesJl2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         timesJl2.setForeground(new java.awt.Color(255, 255, 255));
         timesJl2.setText("Times");
         getContentPane().add(timesJl2);
-        timesJl2.setBounds(330, 130, 60, 16);
+        timesJl2.setBounds(380, 170, 60, 16);
         getContentPane().add(background);
         background.setBounds(0, 0, 530, 360);
 

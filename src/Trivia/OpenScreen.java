@@ -7,6 +7,7 @@ package Trivia;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import resources.LocalizationUtil;
 
@@ -37,10 +38,10 @@ public class OpenScreen extends javax.swing.JFrame {
        if(Integer.parseInt(current.getHighstScore(current))> 40){
            ShowCrownIcon();
        }
-       else if(Integer.parseInt(current.getHighstScore(current))> 25){
+       else if(Integer.parseInt(current.getHighstScore(current))> 30){
             ShowDragonIcon();
        }
-       else if(Integer.parseInt(current.getHighstScore(current))> 10){
+       else if(Integer.parseInt(current.getHighstScore(current))> 20){
             ShowKnightIcon();
        }
        setBackGround();
@@ -149,14 +150,20 @@ public class OpenScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartGameActionPerformed
+        if(cmbCountOfQUes.getSelectedItem()==null){
+            JOptionPane.showMessageDialog(this,LocalizationUtil.localizedResourceBundle.getString("LeveDidntChoose"));
+            return;
+        }
         int numQues=1;  //choose the real number of wanted ques
         int level=0;
         numQues+=cmbCountOfQUes.getSelectedIndex();
-       current.setLevel(0);
-       current.setPoints(0);
-       current.setWrongAnsCnt(0);
+        current.setLevel(0);
+        current.setPoints(0);
+        current.setWrongAnsCnt(0);
        if(cmbLevel.getSelectedItem()=="Random")
             level=0;
+       else
+           level=cmbLevel.getSelectedIndex();
         try {
             Game newGame=new Game(numQues,current,true,level); 
         } catch (Exception ex) {
@@ -217,6 +224,7 @@ public class OpenScreen extends javax.swing.JFrame {
          biuldComboBox=DataBaseMange.getInstance().countQues(Integer.parseInt(cmbLevel.getSelectedItem().toString()));
         else
          biuldComboBox=DataBaseMange.getInstance().countQues();
+        
         for(int i=0;i<biuldComboBox;i++)
          this.cmbCountOfQUes.addItem(i+1);//for loop to set the real number of question from db
 
