@@ -11,6 +11,7 @@ public class Main {
 
         LogIn logIn = new LogIn();
         logIn.setVisible(true);
+     
         
     }
 

@@ -1,10 +1,10 @@
 package Trivia;
 
 import static Trivia.PlaySounds.correctSound;
-import static Trivia.PlaySounds.worngSound;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -32,10 +32,9 @@ public class FormClass extends JFrame implements ActionListener {
 
     private JButton okButton;
     private JButton exitButton;
-    private JButton languageButton;
     private JLabel liveResult;
     private JLabel showQues = new JLabel();
-    private JTextField ansField = new JTextField(5);
+    private JTextField ansField = new JTextField();
     private JMenuBar myMenuBar = new JMenuBar();
     private JMenu fileMenu = new JMenu();
     private JMenu helpMenu = new JMenu();
@@ -48,31 +47,33 @@ public class FormClass extends JFrame implements ActionListener {
     private JRadioButton option3Button = new JRadioButton();
     private JRadioButton option4Button = new JRadioButton();
     private JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    private JPanel optionsPanel = new JPanel(new GridLayout(4,2));
+    private JPanel optionsPanel = new JPanel(new GridLayout(5,1));
     private JPanel okExitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     private JPanel liveResultPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    JPanel fullScreenPanel = new JPanel(new BorderLayout());
     private ButtonGroup answersGroup = new ButtonGroup();
-    private Question question = new Question();
+    private Question question ;
     static int remainedQuestios;
     static int point = 0;
-    static int currentLevel = 0;
-    static int cntLevel = 0;
+    static int currentLevel;
     static User current;
-    private String openAnser;
     private int rightAns;
     private JLabel backgroundImage=new JLabel();
 
-    public FormClass(Question question, int remainedQuestios, User currentPlayer) {
+    public FormClass(Question question, int remainedQuestios, User currentPlayer,int chosenLevel) {
         this.setTitle((LocalizationUtil.localizedResourceBundle.getString("GameTitle")));
+        this.currentLevel=chosenLevel;
         this.current = currentPlayer;
         this.question = question;
         this.remainedQuestios = remainedQuestios;//keep remined question
         this.rightAns = question.getRightAns();
-        this.setSize(500, 400);
+        this.setSize(700,500);
+        
         setBackruond();
         initComponents();
         buildMenu();
         addListeners();
+      
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); //preess on exit will not close the window but wee override method thate will show  relvane promp
         this.setVisible(true);
         setLocationRelativeTo(null); //sett the postin of the screen in the center
@@ -81,7 +82,7 @@ public class FormClass extends JFrame implements ActionListener {
     
    public void setBackruond(){
         
-        backgroundImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/game-background.jpg"))); 
+        backgroundImage.setIcon(new ImageIcon(getClass().getResource("/Trivia/Images/GameBackGround.jpg"))); 
         add(backgroundImage);
         backgroundImage.setLayout(new BorderLayout());
     
@@ -91,36 +92,56 @@ public class FormClass extends JFrame implements ActionListener {
         //this.setComponentZOrder(this.backgroundImage,10);
         okButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("okKey"));
         exitButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("ExitKey"));
-        languageButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("languageKey"));
-        liveResult = new JLabel(" " + (LocalizationUtil.localizedResourceBundle.getString("PointsKey"))
-                + " " + point
-                + " " + (LocalizationUtil.localizedResourceBundle.getString("YourLevelKey"))
-                + " " + cntLevel);
+        //languageButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("languageKey"));
+        okButton.setSize(12,12);
         okExitPanel.add(okButton, BorderLayout.CENTER);
         okExitPanel.add(exitButton, BorderLayout.CENTER);
-        okExitPanel.add(languageButton, BorderLayout.NORTH);
-        backgroundImage.add(okExitPanel, BorderLayout.SOUTH);
+        //okExitPanel.add(languageButton, BorderLayout.NORTH);
+        fullScreenPanel.add(okExitPanel, BorderLayout.SOUTH);
+        
+        if(currentLevel!=0){
+        liveResult = new JLabel(" " + (LocalizationUtil.localizedResourceBundle.getString("PointsKey"))
+                + ": " + point
+                + " " + (LocalizationUtil.localizedResourceBundle.getString("YourLevelKey"))
+                + ": " + currentLevel);
+        }
+        else{
+             liveResult = new JLabel(" " + (LocalizationUtil.localizedResourceBundle.getString("PointsKey"))
+                + ": " + point
+                + " " + (LocalizationUtil.localizedResourceBundle.getString("YourLevelKey"))
+                + ": " + (LocalizationUtil.localizedResourceBundle.getString("Rand")));
+        }
 
         showQues.setText(question.getQuestion());
-
-        if (question.isOpenQues() == true) {   //if is open question need to get strinng answer 
-            openAnser = question.getEnswer()[0];
+        showQues.setFont(new Font("Serif",Font.BOLD,20));
+        
+        if (question instanceof OpenQuestion) { //if is open question need to get strinng answer
+            ansField.setSize(100, 10); 
             optionsPanel.add(ansField);
 
-        } else if (question.isTrueFalseQues() == true) {  //if true false ques it will add 2 radio button  
-            option1Button.setText(question.getEnswer()[0]);
-            option2Button.setText(question.getEnswer()[0 + 1]);
+        } else if (question instanceof TrueFalseQuestion) {  //if true false ques it will add 2 radio button  
+            option1Button.setText(question.getAnswer()[0]);
+            option2Button.setText(question.getAnswer()[0 + 1]);
             answersGroup.add(option1Button);
             answersGroup.add(option2Button);
+            
+            option1Button.setFont(new Font("Calibri",Font.BOLD,17));
+            option2Button.setFont(new Font("Calibri",Font.BOLD,17));
 
             optionsPanel.add(option1Button);
             optionsPanel.add(option2Button);
 
-        } else {                              //if is amrican question add 4 radio button
-            option1Button.setText(question.getEnswer()[0]);
-            option2Button.setText(question.getEnswer()[0 + 1]);
-            option3Button.setText(question.getEnswer()[0 + 2]);
-            option4Button.setText(question.getEnswer()[0 + 3]);
+        } else if(question instanceof AmricanQuestion) {  //if is amrican question add 4 radio button
+            option1Button.setText(question.getAnswer()[0]);
+            option2Button.setText(question.getAnswer()[0 + 1]);
+            option3Button.setText(question.getAnswer()[0 + 2]);
+            option4Button.setText(question.getAnswer()[0 + 3]);
+            
+            option1Button.setFont(new Font("Calibri",Font.BOLD,17));
+            option2Button.setFont(new Font("Calibri",Font.BOLD,17));
+            option3Button.setFont(new Font("Calibri",Font.BOLD,17));
+            option4Button.setFont(new Font("Calibri",Font.BOLD,17));
+            
 
             answersGroup.add(option1Button);
             answersGroup.add(option2Button);
@@ -132,14 +153,30 @@ public class FormClass extends JFrame implements ActionListener {
             optionsPanel.add(option3Button);
             optionsPanel.add(option4Button);
         }
-
+       
+        
         topPanel.add(showQues);
         liveResultPanel.add(liveResult);
+        
+        fullScreenPanel.add(topPanel, BorderLayout.NORTH);
+        fullScreenPanel.add(optionsPanel, BorderLayout.CENTER);
+        fullScreenPanel.add(liveResultPanel, BorderLayout.EAST);
+        fullScreenPanel.add(okExitPanel,BorderLayout.SOUTH);
+        
+        
+        okButton.setOpaque(false);
+        exitButton.setOpaque(false);
+        okExitPanel.setOpaque(false);
+        option1Button.setOpaque(false);
+        option2Button.setOpaque(false);
+        option3Button.setOpaque(false);
+        option4Button.setOpaque(false);
+        topPanel.setOpaque(false);
+        optionsPanel.setOpaque(false);
+        liveResultPanel.setOpaque(false);
+        fullScreenPanel.setOpaque(false);
 
-        backgroundImage.add(topPanel, BorderLayout.NORTH);
-        backgroundImage.add(optionsPanel, BorderLayout.WEST);
-        backgroundImage.add(liveResultPanel, BorderLayout.EAST);
-  
+        backgroundImage.add(fullScreenPanel, BorderLayout.CENTER);
 
     }
    
@@ -150,7 +187,7 @@ public class FormClass extends JFrame implements ActionListener {
         newMenuItem.addActionListener(this);
         aboutMenuItem.addActionListener(this);
         changeLang.addActionListener(this);
-        languageButton.addActionListener(this);
+       // languageButton.addActionListener(this);
         this.addWindowListener(new MyWindowListener());
         exitMenuItem.addActionListener(this);
 
@@ -226,10 +263,9 @@ public class FormClass extends JFrame implements ActionListener {
    public void actionPerformed(ActionEvent ae) {
         boolean correct = false;
         String sound;
+        String selectedAnswer;
         if (ae.getSource() == okButton) {
-            String selectedAnswer;
-
-            if (question.isTrueFalseQues()) {  /*Cheek if true false question*/
+            if (question instanceof TrueFalseQuestion) {  /*Cheek if true false question*/
 
                 if (option1Button.isSelected()) {
                     selectedAnswer = option1Button.getText();
@@ -245,7 +281,7 @@ public class FormClass extends JFrame implements ActionListener {
                     showNonSelctedDialog();
                     return;
                 }
-            } else if (question.getEnswer().length == 4) { /* Cheek if 4 opation question */
+            } else if (question instanceof AmricanQuestion) { /* Cheek if 4 opation question */
 
                 if (option1Button.isSelected()) {
                     selectedAnswer = option1Button.getText();
@@ -271,13 +307,14 @@ public class FormClass extends JFrame implements ActionListener {
                     showNonSelctedDialog();
                     return;
                 }
-            } else if (question.isOpenQues()) {/*Cheek if is Open question*/
+            } else if (question instanceof OpenQuestion) {/*Cheek if is Open question*/
 
                 if (ansField.getText().equals("")) {
                     showNonSelctedDialog();
                     return;
                 }
-                if (ansField.getText().equalsIgnoreCase(openAnser)) 
+                
+                if(ansField.getText().equalsIgnoreCase(question.getAnswer()[0]))
                     correct = true;
                 
             }
@@ -290,8 +327,7 @@ public class FormClass extends JFrame implements ActionListener {
                 point += question.getPoint(); //sum the value of point of this question 
                 correct = false; //return the static var to false
             } else {
-
-                PlaySounds h = new PlaySounds(worngSound);//play incorect sound
+                
                 current.setWrongAnsCnt(1);//sum the incorrect answer
             }
             //in any case correct or not open the game with less quse (n-1) with the same current
@@ -302,7 +338,7 @@ public class FormClass extends JFrame implements ActionListener {
                 ex.printStackTrace();
             }
 
-        } else if (ae.getSource() == languageButton || ae.getSource() == changeLang) { //if change languche button pressed
+        } else if (ae.getSource() == changeLang) { //if change languche button pressed
             String []buttonsName={"English","Hebrew"};
              String selectedLanguage;
             int res=JOptionPane.showOptionDialog(this,
@@ -331,12 +367,20 @@ public class FormClass extends JFrame implements ActionListener {
    public void updateCaptions() { //method that refresh all the label+button languche
         okButton.setText(LocalizationUtil.localizedResourceBundle.getString("okKey"));
         exitButton.setText(LocalizationUtil.localizedResourceBundle.getString("ExitKey"));
-        languageButton.setText(LocalizationUtil.localizedResourceBundle.getString("languageKey"));
-
+        
+        if(currentLevel!=0){
         liveResult.setText(" " + (LocalizationUtil.localizedResourceBundle.getString("PointsKey"))
-                + " " + current.getPoints()
+                + ": " + current.getPoints()
                 + " " + (LocalizationUtil.localizedResourceBundle.getString("YourLevelKey"))
-                + " " + current.getLevel());
+                + ": " + current.getLevel());
+        }
+        else{
+             liveResult.setText(" " + (LocalizationUtil.localizedResourceBundle.getString("PointsKey"))
+                + ": " + current.getPoints()
+                + " " + (LocalizationUtil.localizedResourceBundle.getString("YourLevelKey"))
+                + ": " + (LocalizationUtil.localizedResourceBundle.getString("Rand")));
+        }
+        
         this.setTitle((LocalizationUtil.localizedResourceBundle.getString("GameTitle")));
         fileMenu.setText(LocalizationUtil.localizedResourceBundle.getString("FileKey"));
         newMenuItem.setText(LocalizationUtil.localizedResourceBundle.getString("NewGameKey"));

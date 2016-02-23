@@ -42,19 +42,19 @@ public class DataBaseMange {
             ResultSet resultSet = statement.executeQuery(allCustomersQuery);
 
             while (resultSet.next()) {
-
+                int point = resultSet.getInt("Point");
+                int level = resultSet.getInt("Level");
                 String ques = resultSet.getString("Question");
-                question = new Question();
-                question.setQuestion(ques);
                 int countOfPosibalans = resultSet.getInt("PosibleAns");
                 String[] posibaleAns = new String[countOfPosibalans];
+                
                 if (countOfPosibalans == 1) {
                     String ens = resultSet.getString("Answer1");
-                    posibaleAns[0] = ens;
-                    question.setOpenQues(true);
+                    String stringAns = Integer.toString(resultSet.getInt("RightAnswer"));
+                    question=new OpenQuestion(ens,stringAns,ques,point,level);
+                  
                 }
                 if (countOfPosibalans == 4) {
-                    question.setTrueFalseQues(false);
                     String ens1 = resultSet.getString("Answer1");
                     String ens2 = resultSet.getString("Answer2");
                     String ens3 = resultSet.getString("Answer3");
@@ -63,39 +63,22 @@ public class DataBaseMange {
                     posibaleAns[1] = ens2;
                     posibaleAns[2] = ens3;
                     posibaleAns[3] = ens4;
+                    int rightAns = resultSet.getInt("RightAnswer");
+                    question=new AmricanQuestion(posibaleAns,rightAns,ques,point,level);
+                    
                 } else if (countOfPosibalans == 2) {
-                    question.setTrueFalseQues(true);
                     String ens1 = resultSet.getString("Answer1");
                     String ens2 = resultSet.getString("Answer2");
                     posibaleAns[0] = ens1;
                     posibaleAns[1] = ens2;
-
-                }
-                question.setEnswer(posibaleAns);
-
-                if (countOfPosibalans != 1) {
                     int rightAns = resultSet.getInt("RightAnswer");
-                    question.setRightAns(rightAns);
-                } else {
-                    String stringAns = Integer.toString(resultSet.getInt("RightAnswer"));
-                    question.setOpenAnser(stringAns);
+                    question=new TrueFalseQuestion(posibaleAns,rightAns,ques,point,level);
+                    
                 }
-                int point = resultSet.getInt("Point");
-                question.setPoint(point);
-
-                int level = resultSet.getInt("Level");
-                question.setLevel(level);
-
-                int statusQues = resultSet.getInt("QuesStatusAskOrNot");
-                boolean statusQuestion;
-                if (statusQues == 0) {
-                    statusQuestion = false;
-                } else {
-                    statusQuestion = true;
-                }
-                question.setCheekIfQuesWasAsked(statusQuestion);
-                allQuesFromDB.add(question);
-               
+                
+                 question.setCheekIfQuesWasAsked(false);
+                 allQuesFromDB.add(question);
+         
             }  
             resultSet.close();		// close resultSet
             statement.close();		// close statement and resultSet

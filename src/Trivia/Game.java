@@ -21,6 +21,7 @@ public class Game {
             this.allQuesFromDB.clear();
             this.allQuesFromDB = DataBaseMange.getInstance().getQuestion();
         }
+       
         this.current = current;
         Play(wantedQuestion);
 
@@ -61,11 +62,11 @@ public class Game {
         FormClass f1;
         TotalSummry finisGame;
         if (remainingQues > 0) {
-            f1 = new FormClass(allQuesFromDB.get(random), remainingQues, current);
+            f1 = new FormClass(allQuesFromDB.get(random), remainingQues, current,level);
         } else {
             current.setPoints(FormClass.point);  //set the point to the current player just when game over
             FormClass.point = 0; //set the static varibale to zero 
-            FormClass.cntLevel=0;   //set the static varibale to zero 
+            FormClass.currentLevel=0;   //set the static varibale to zero 
             
             if (updateFinalScore(current)) {//cheek if the point of current player get new high score and update in DB  
                 System.out.println("New High Score!");
@@ -78,6 +79,7 @@ public class Game {
             }
         }
     }
+    
     public boolean updateFinalScore(User player) {
 
         try {

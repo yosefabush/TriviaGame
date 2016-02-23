@@ -34,7 +34,6 @@ public class PlaySounds extends Thread{
  private static SourceDataLine sourceLine;
  private String file;
  public static String correctSound="C:\\Users\\יוסף\\Documents\\NetBeansProjects\\Irit\\Question\\src\\Trivia\\Sounds\\CorrectSound.wav";
- public static String worngSound="C:\\Users\\יוסף\\Documents\\NetBeansProjects\\Irit\\Question\\src\\Trivia\\Sounds\\Wrong Buzzer.wav";
  
 // /**
 //  * Plays the sound of the sent file name

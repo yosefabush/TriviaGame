@@ -24,10 +24,13 @@ public class OpenScreen extends javax.swing.JFrame {
      */
     public OpenScreen(User currentUser) {
         initComponents();
+        comboInit();
         this.setSize(650,350);
         this.current=currentUser;
        
        this.setTitle(LocalizationUtil.localizedResourceBundle.getString("WelcomGame"));
+//       cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { LocalizationUtil.localizedResourceBundle.getString("Rand"), "1", "2", "3" }));
+//       cmbLevel.addActionListener(new java.awt.event.ActionListener());
        jLabelLevel.setText(LocalizationUtil.localizedResourceBundle.getString("ChoseLevel"));
        LogOutBtn.setText(LocalizationUtil.localizedResourceBundle.getString("LogOutKey"));
        PleaseChoseCntQues.setText(LocalizationUtil.localizedResourceBundle.getString("PleaseChoseCntQues"));
@@ -50,6 +53,17 @@ public class OpenScreen extends javax.swing.JFrame {
       OpenTitelWitName.setHorizontalAlignment(SwingConstants.CENTER);
       currebtPlayerHighScore.setText((LocalizationUtil.localizedResourceBundle.getString("BestScore"))+" "+current.getHighstScore(current));
       currebtPlayerHighScore.setHorizontalAlignment(SwingConstants.CENTER);
+    }
+    
+    public void comboInit(){
+        cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { (LocalizationUtil.localizedResourceBundle.getString("Rand")), "1", "2", "3" }));
+        cmbLevel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbLevelActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmbLevel);
+        cmbLevel.setBounds(520, 280, 90, 20);
     }
 
     /**
@@ -131,7 +145,7 @@ public class OpenScreen extends javax.swing.JFrame {
         getContentPane().add(CrownImg);
         CrownImg.setBounds(20, 10, 0, 90);
 
-        cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Random", "1", "2", "3" }));
+        cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
         cmbLevel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbLevelActionPerformed(evt);
@@ -160,7 +174,7 @@ public class OpenScreen extends javax.swing.JFrame {
         current.setLevel(0);
         current.setPoints(0);
         current.setWrongAnsCnt(0);
-       if(cmbLevel.getSelectedItem()=="Random")
+       if(cmbLevel.getSelectedItem()=="Rand")
             level=0;
        else
            level=cmbLevel.getSelectedIndex();
@@ -220,10 +234,11 @@ public class OpenScreen extends javax.swing.JFrame {
         cmbCountOfQUes.removeAllItems();
         int biuldComboBox;
                                                                         
-        if(cmbLevel.getSelectedItem()!="Random")
-         biuldComboBox=DataBaseMange.getInstance().countQues(Integer.parseInt(cmbLevel.getSelectedItem().toString()));
-        else
+         if(cmbLevel.getSelectedItem().equals(LocalizationUtil.localizedResourceBundle.getString("Rand")))
          biuldComboBox=DataBaseMange.getInstance().countQues();
+         else
+         biuldComboBox=DataBaseMange.getInstance().countQues(Integer.parseInt(cmbLevel.getSelectedItem().toString()));
+       
         
         for(int i=0;i<biuldComboBox;i++)
          this.cmbCountOfQUes.addItem(i+1);//for loop to set the real number of question from db
@@ -275,7 +290,7 @@ public class OpenScreen extends javax.swing.JFrame {
     private javax.swing.JLabel PleaseChoseCntQues;
     private javax.swing.JButton btnShowHighScoreTble;
     private javax.swing.JButton btnStartGame;
-    private javax.swing.JComboBox cmbCountOfQUes;
+    public static javax.swing.JComboBox cmbCountOfQUes;
     private javax.swing.JComboBox cmbLevel;
     private javax.swing.JLabel currebtPlayerHighScore;
     private javax.swing.JLabel jLabelLevel;
