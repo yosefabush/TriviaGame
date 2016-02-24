@@ -34,6 +34,7 @@ public class FormClass extends JFrame implements ActionListener {
     private JButton exitButton;
     private JLabel liveResult;
     private JLabel showQues = new JLabel();
+    private JLabel backgroundImage=new JLabel();
     private JTextField ansField = new JTextField();
     private JMenuBar myMenuBar = new JMenuBar();
     private JMenu fileMenu = new JMenu();
@@ -50,15 +51,15 @@ public class FormClass extends JFrame implements ActionListener {
     private JPanel optionsPanel = new JPanel(new GridLayout(5,1));
     private JPanel okExitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     private JPanel liveResultPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    JPanel fullScreenPanel = new JPanel(new BorderLayout());
+    private JPanel fullScreenPanel = new JPanel(new BorderLayout());
     private ButtonGroup answersGroup = new ButtonGroup();
     private Question question ;
+    private int rightAns;
+    private static User current;
     static int remainedQuestios;
     static int point = 0;
     static int currentLevel;
-    static User current;
-    private int rightAns;
-    private JLabel backgroundImage=new JLabel();
+    
 
     public FormClass(Question question, int remainedQuestios, User currentPlayer,int chosenLevel) {
         this.setTitle((LocalizationUtil.localizedResourceBundle.getString("GameTitle")));
@@ -332,7 +333,7 @@ public class FormClass extends JFrame implements ActionListener {
             }
             //in any case correct or not open the game with less quse (n-1) with the same current
             try {
-                Game game = new Game(--remainedQuestios, current, false);//false mining the is not new game keep use the same ArrayList
+                Game game = new Game(--remainedQuestios, current, false,currentLevel);//false mining the is not new game keep use the same ArrayList
                 this.dispose();
             } catch (Exception ex) {
                 ex.printStackTrace();

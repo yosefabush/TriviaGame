@@ -26,16 +26,6 @@ public class Game {
         Play(wantedQuestion);
 
     }
-    public Game(int wantedQuestion, User current, boolean newGame) throws Exception {
-
-        if (newGame == true) { //if is new game need to clear thee arreyList and full it from DB
-            this.allQuesFromDB.clear();
-            this.allQuesFromDB = DataBaseMange.getInstance().getQuestion();
-        }
-        this.current = current;
-        Play(wantedQuestion);
-
-    }
     public void Play(int remainingQues) throws Exception {
 
         Random rand = new Random();
@@ -78,7 +68,6 @@ public class Game {
             }
         }
     }
-    
     public boolean updateFinalScore(User player) {
 
         try {

@@ -5,14 +5,10 @@
  */
 package Trivia;
 
-import static Trivia.FormClass.current;
-import static Trivia.FormClass.currentLevel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;

@@ -5,7 +5,6 @@
  */
 package Trivia;
 
-import static Trivia.FormClass.currentLevel;
 import javax.swing.SwingConstants;
 import resources.LocalizationUtil;
 /**

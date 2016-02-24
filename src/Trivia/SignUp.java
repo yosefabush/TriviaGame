@@ -10,7 +10,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,26 +31,25 @@ public class SignUp extends javax.swing.JFrame {
     /**
      * Creates new form SignIn
      */
-    int defultPoint=0;
-    java.util.Date newDate=Calendar.getInstance().getTime();
-     private Date date=new Date(newDate.getTime());
-   
-      
+    int defultPoint = 0;
+    java.util.Date newDate = Calendar.getInstance().getTime();
+    private Date date = new Date(newDate.getTime());
+
     public SignUp() {
-  
+
         initComponents();
-        this.setSize(446,336);
+        this.setSize(446, 336);
         setLocationRelativeTo(null);
         userNameField.requestFocusInWindow();
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("signUpMainTitle"));
         signUpTitle.setText(LocalizationUtil.localizedResourceBundle.getString("signUpTitle"));
-        userIDLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserIdKey"));
+        //   userIDLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserIdKey"));
         PasswordLab.setText(LocalizationUtil.localizedResourceBundle.getString("PasswordKEY"));
         userNameLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
         SignUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
         Backbtn.setText((LocalizationUtil.localizedResourceBundle.getString("BackbKey")));
         changeLang.setText((LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")));
-        JOptionPane.showMessageDialog(this,LocalizationUtil.localizedResourceBundle.getString("ValidInput"));
+        JOptionPane.showMessageDialog(this, LocalizationUtil.localizedResourceBundle.getString("ValidInput"));
     }
 
     /**
@@ -66,8 +67,6 @@ public class SignUp extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         SignUpBtn = new javax.swing.JButton();
         signUpTitle = new javax.swing.JLabel();
-        UserIDFild = new javax.swing.JTextField();
-        userIDLab = new javax.swing.JLabel();
         Backbtn = new javax.swing.JButton();
         changeLang = new javax.swing.JButton();
         background = new javax.swing.JLabel();
@@ -94,24 +93,12 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
         getContentPane().add(SignUpBtn);
-        SignUpBtn.setBounds(150, 260, 80, 23);
+        SignUpBtn.setBounds(170, 210, 80, 23);
 
         signUpTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         signUpTitle.setForeground(new java.awt.Color(204, 255, 255));
         getContentPane().add(signUpTitle);
         signUpTitle.setBounds(160, 40, 230, 42);
-
-        UserIDFild.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                UserIDFildKeyPressed(evt);
-            }
-        });
-        getContentPane().add(UserIDFild);
-        UserIDFild.setBounds(210, 180, 133, 20);
-
-        userIDLab.setText("UserID");
-        getContentPane().add(userIDLab);
-        userIDLab.setBounds(120, 180, 90, 14);
 
         Backbtn.setText("Back");
         Backbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +107,7 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Backbtn);
-        Backbtn.setBounds(260, 260, 70, 23);
+        Backbtn.setBounds(270, 210, 70, 23);
 
         changeLang.setText("Change Languch");
         changeLang.addActionListener(new java.awt.event.ActionListener() {
@@ -139,16 +126,68 @@ public class SignUp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SignUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpBtnActionPerformed
-        int realUserId;  
-        String userName=this.userNameField.getText();   
-        String password=this.jPasswordField1.getText();
-            
-            try{
-                 realUserId=Integer.parseInt(this.UserIDFild.getText());
-            }catch (Throwable e) {
-               JOptionPane.showMessageDialog(this, "invalid UserId input");
-               return;
+        int realUserId;
+        String userName = this.userNameField.getText();
+        String password = this.jPasswordField1.getText();
+        int maxid = 0;
+
+        try {
+
+            Class.forName(DbUtilitis.dbDriver); //load the rigt server
+            Connection connection
+                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
+                            DbUtilitis.jdbcUser,
+                            DbUtilitis.jdbcPassword);
+
+            Statement statement = connection.createStatement();
+            String queryCheck = "SELECT username FROM tblusers where userName='" + userName + "';";
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(queryCheck); // execute the query, and get a java resultset
+            // if this ID already exists, we quit
+            if (rs.absolute(1)) {
+                JOptionPane.showMessageDialog(this, "User Name alerdy exisit");
+                rs.close();
+                connection.close();		// close resultSet
+                statement.close();	
+                return;
             }
+            rs.close();
+            connection.close();		// close resultSet
+            statement.close();
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            System.out.println("Vendor Error: " + sqle.getErrorCode());
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            //return quesNum;
+        }
+
+        try {
+
+            Class.forName(DbUtilitis.dbDriver); //load the rigt server
+            Connection connection
+                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
+                            DbUtilitis.jdbcUser,
+                            DbUtilitis.jdbcPassword);
+
+            Statement statement = connection.createStatement();
+
+            String allCustomersQuery = "SELECT MAX(UserId) as maxId FROM tblusers;";
+            ResultSet resultSet = statement.executeQuery(allCustomersQuery);
+            while (resultSet.next()) {
+                maxid =resultSet.getInt("maxId");
+            }
+	
+
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            System.out.println("Vendor Error: " + sqle.getErrorCode());
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
         try {
             Class.forName(DbUtilitis.dbDriver); //load the rigt server
             Connection connection
@@ -156,44 +195,42 @@ public class SignUp extends javax.swing.JFrame {
                             DbUtilitis.jdbcUser,
                             DbUtilitis.jdbcPassword);
             PreparedStatement ps = connection.prepareStatement("insert into tblusers (userId, userName, password) values (?, ?, ?)");
-            ps.setInt(1, realUserId);
+            ps.setInt(1, maxid + 1);
             ps.setString(2, userName);
             ps.setString(3, password);
-            
-                int res=ps.executeUpdate();
-               if(res>0){
-                   
-                 JOptionPane.showMessageDialog(this, "User added succssefuly!\nPlease log in");
-                  ps = connection.prepareStatement("insert into tblrecords (userId, Score, Date) values (?, ?, ?)");
-                   ps.setInt(1, realUserId);
-                   ps.setInt(2, defultPoint);
-                   ps.setDate(3,date);
-                   int res2=ps.executeUpdate();
-                   if(res<0){
-                       JOptionPane.showMessageDialog(this, "Ther was problem to add to record tbale");
-                       return;
-                   }
-                 this.dispose();
-                 LogIn logIn=new LogIn();
-                 logIn.setVisible(true);
-                 
-                 
-           }
-           else{
+
+            int res = ps.executeUpdate();
+            if (res > 0) {
+
+                JOptionPane.showMessageDialog(this, "User added succssefuly!\nPlease log in");
+                ps = connection.prepareStatement("insert into tblrecords (userId, Score, Date) values (?, ?, ?)");
+                ps.setInt(1, maxid + 1);
+                ps.setInt(2, defultPoint);
+                ps.setDate(3, date);
+                int res2 = ps.executeUpdate();
+                if (res < 0) {
+                    JOptionPane.showMessageDialog(this, "Ther was problem to add to record tbale");
+                    return;
+                }
+                this.dispose();
+                LogIn logIn = new LogIn();
+                logIn.setVisible(true);
+
+            } else {
                 JOptionPane.showMessageDialog(this, "User alerdy exisit or invaild input");
-           }
-                ps.close();
-            
+            }
+            ps.close();
+
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             System.out.println("Vendor Error: " + sqle.getErrorCode());
-            JOptionPane.showMessageDialog(this, "User alerdy exisit or invalid password input");
+            JOptionPane.showMessageDialog(this, "invalid password input ");
             return;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             return;
         }
-        
+
     }//GEN-LAST:event_SignUpBtnActionPerformed
 
     private void BackbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackbtnActionPerformed
@@ -202,81 +239,35 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_BackbtnActionPerformed
 
     private void changeLangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeLangActionPerformed
-String []buttonsName={"English","Hebrew"};
-             String selectedLanguage;
-            int res=JOptionPane.showOptionDialog(this,
-                    (LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")),
-                    (LocalizationUtil.localizedResourceBundle.getString("TitleChangeLang")),
-                    JOptionPane.WARNING_MESSAGE,0,null,buttonsName,buttonsName[0]);
-            if(res==0)
-             selectedLanguage="en";
-            else if(res==1)
-             selectedLanguage="iw";
-            else
-                return;
-            LocalizationUtil.localizedResourceBundle = ResourceBundle.getBundle("resources.uimessages", new Locale(selectedLanguage));
-            updateCaptions();
-      // TODO add your handling code here:
+        String[] buttonsName = {"English", "Hebrew"};
+        String selectedLanguage;
+        int res = JOptionPane.showOptionDialog(this,
+                (LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")),
+                (LocalizationUtil.localizedResourceBundle.getString("TitleChangeLang")),
+                JOptionPane.WARNING_MESSAGE, 0, null, buttonsName, buttonsName[0]);
+        if (res == 0) {
+            selectedLanguage = "en";
+        } else if (res == 1) {
+            selectedLanguage = "iw";
+        } else {
+            return;
+        }
+        LocalizationUtil.localizedResourceBundle = ResourceBundle.getBundle("resources.uimessages", new Locale(selectedLanguage));
+        updateCaptions();
+        // TODO add your handling code here:
     }//GEN-LAST:event_changeLangActionPerformed
 
-    private void UserIDFildKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UserIDFildKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            String userName=this.userNameField.getText();
-            String password=this.jPasswordField1.getText();
-            int realUserId=Integer.parseInt(this.UserIDFild.getText());
-            try {
-                Class.forName(DbUtilitis.dbDriver); //load the rigt server
-                Connection connection
-                = DriverManager.getConnection(DbUtilitis.jdbcUrl,
-                    DbUtilitis.jdbcUser,
-                    DbUtilitis.jdbcPassword);
-                PreparedStatement ps = connection.prepareStatement("insert into tblusers (userId, userName, password) values (?, ?, ?)");
-                ps.setInt(1, realUserId);
-                ps.setString(2, userName);
-                ps.setString(3, password);
-
-                int res=ps.executeUpdate();
-                if(res>0){
-                    JOptionPane.showMessageDialog(this, "User added succssefuly!\nPlease log in");
-                    ps = connection.prepareStatement("insert into tblrecords (userId, Score, Date) values (?, ?, ?)");
-                    ps.setInt(1, realUserId);
-                    ps.setInt(2, defultPoint);
-                    ps.setDate(3,date);
-                    int res2=ps.executeUpdate();
-                    if(res<0)
-                    JOptionPane.showMessageDialog(this, "Ther was proble to add to record tbale");
-                    LogIn logIn=new LogIn();
-                    logIn.setVisible(true);
-                    this.dispose();
-
-                }
-                else{
-                    JOptionPane.showMessageDialog(this, "User alerdy exisit or invaild input");
-                }
-                ps.close();
-
-            } catch (SQLException sqle) {
-                System.out.println("SQLException: " + sqle.getMessage());
-                System.out.println("Vendor Error: " + sqle.getErrorCode());
-                JOptionPane.showMessageDialog(this, "User alerdy exisit");
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UserIDFildKeyPressed
-
-    public void updateCaptions(){
+    public void updateCaptions() {
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("signUpMainTitle"));
         signUpTitle.setText(LocalizationUtil.localizedResourceBundle.getString("signUpTitle"));
-        userIDLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserIdKey"));
+        //  userIDLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserIdKey"));
         PasswordLab.setText(LocalizationUtil.localizedResourceBundle.getString("PasswordKEY"));
         userNameLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
         SignUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
         Backbtn.setText((LocalizationUtil.localizedResourceBundle.getString("BackbKey")));
         changeLang.setText((LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")));
     }
+
     /**
      * @param args the command line arguments
      */
@@ -317,12 +308,10 @@ String []buttonsName={"English","Hebrew"};
     private javax.swing.JButton Backbtn;
     private javax.swing.JLabel PasswordLab;
     private javax.swing.JButton SignUpBtn;
-    private javax.swing.JTextField UserIDFild;
     private javax.swing.JLabel background;
     private javax.swing.JButton changeLang;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel signUpTitle;
-    private javax.swing.JLabel userIDLab;
     private javax.swing.JTextField userNameField;
     private javax.swing.JLabel userNameLab;
     // End of variables declaration//GEN-END:variables
