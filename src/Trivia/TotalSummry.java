@@ -17,28 +17,21 @@ public class TotalSummry extends javax.swing.JFrame {
     /**
      * Creates new form TotalSummry
      */
-    static User currentPlayer;
-    public TotalSummry(User current) {
+    private static User currentPlayer;
+    private static String highScorOrNotCheeker;
+    public TotalSummry(User current,String highScorOrNot) {
         initComponents();
+        this.highScorOrNotCheeker=highScorOrNot;
         this.currentPlayer=current;
         updateLang();
         this.setSize(530,360);
         setBackGround();
         this.setLocationRelativeTo(null);
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("Summry"));
-        this.NewHighScore.setText(LocalizationUtil.localizedResourceBundle.getString("YouCanBetrr"));
+        this.NewHighScore.setText(LocalizationUtil.localizedResourceBundle.getString(highScorOrNot));
         NewHighScore.setHorizontalAlignment(SwingConstants.CENTER);
         
-    }
-    public TotalSummry (User current,int newHighScore){ //if user get highr score the he was in DB  
-         initComponents();
-         this.currentPlayer=current;
-         updateLang();
-         this.NewHighScore.setText(LocalizationUtil.localizedResourceBundle.getString("NewHigScor"));
-         NewHighScore.setHorizontalAlignment(SwingConstants.CENTER);
-        
-    }
-    
+    }    
         public void setBackGround(){
        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/SummeryImage.png"))); 
        getContentPane().add(background);
@@ -227,7 +220,7 @@ public class TotalSummry extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TotalSummry(currentPlayer).setVisible(true);
+                new TotalSummry(currentPlayer,highScorOrNotCheeker).setVisible(true);
             }
         });
     }

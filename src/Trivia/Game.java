@@ -69,12 +69,11 @@ public class Game {
             FormClass.currentLevel=0;   //set the static varibale to zero 
             
             if (updateFinalScore(current)) {//cheek if the point of current player get new high score and update in DB  
-                System.out.println("New High Score!");
-                finisGame = new TotalSummry(current, current.getPoints()); //open summery screen
+                finisGame = new TotalSummry(current,"NewHigScor"); //open summery screen
                 finisGame.setVisible(true);
             } else {
                 System.out.println("Update score Faild mybe your have highr score ...");
-                finisGame = new TotalSummry(current);//in the end show summry point
+                finisGame = new TotalSummry(current,"YouCanBetrr");//in the end show summry point
                 finisGame.setVisible(true);
             }
         }

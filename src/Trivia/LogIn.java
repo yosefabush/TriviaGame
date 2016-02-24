@@ -144,7 +144,7 @@ public class LogIn extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpBtnActionPerformed
-        
+        this.dispose();
         SignUp newUser=new SignUp();
         newUser.setVisible(true);
         

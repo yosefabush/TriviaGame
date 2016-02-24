@@ -32,10 +32,7 @@ public class SignUp extends javax.swing.JFrame {
     int defultPoint=0;
     java.util.Date newDate=Calendar.getInstance().getTime();
      private Date date=new Date(newDate.getTime());
-    
-       
-       
-//      
+   
       
     public SignUp() {
   
@@ -114,7 +111,7 @@ public class SignUp extends javax.swing.JFrame {
 
         userIDLab.setText("UserID");
         getContentPane().add(userIDLab);
-        userIDLab.setBounds(120, 180, 70, 14);
+        userIDLab.setBounds(120, 180, 90, 14);
 
         Backbtn.setText("Back");
         Backbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +129,7 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
         getContentPane().add(changeLang);
-        changeLang.setBounds(10, 10, 130, 23);
+        changeLang.setBounds(10, 10, 140, 23);
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/SignUp background.png"))); // NOI18N
         getContentPane().add(background);
@@ -142,9 +139,16 @@ public class SignUp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SignUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpBtnActionPerformed
-          String userName=this.userNameField.getText();
-            String password=this.jPasswordField1.getText();
-            int realUserId=Integer.parseInt(this.UserIDFild.getText());
+        int realUserId;  
+        String userName=this.userNameField.getText();   
+        String password=this.jPasswordField1.getText();
+            
+            try{
+                 realUserId=Integer.parseInt(this.UserIDFild.getText());
+            }catch (Throwable e) {
+               JOptionPane.showMessageDialog(this, "invalid UserId input");
+               return;
+            }
         try {
             Class.forName(DbUtilitis.dbDriver); //load the rigt server
             Connection connection
@@ -158,17 +162,21 @@ public class SignUp extends javax.swing.JFrame {
             
                 int res=ps.executeUpdate();
                if(res>0){
+                   
                  JOptionPane.showMessageDialog(this, "User added succssefuly!\nPlease log in");
                   ps = connection.prepareStatement("insert into tblrecords (userId, Score, Date) values (?, ?, ?)");
                    ps.setInt(1, realUserId);
                    ps.setInt(2, defultPoint);
                    ps.setDate(3,date);
                    int res2=ps.executeUpdate();
-                   if(res<0)
-                       JOptionPane.showMessageDialog(this, "Ther was proble to add to record tbale");
+                   if(res<0){
+                       JOptionPane.showMessageDialog(this, "Ther was problem to add to record tbale");
+                       return;
+                   }
+                 this.dispose();
                  LogIn logIn=new LogIn();
                  logIn.setVisible(true);
-                 this.dispose();
+                 
                  
            }
            else{
@@ -179,9 +187,11 @@ public class SignUp extends javax.swing.JFrame {
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             System.out.println("Vendor Error: " + sqle.getErrorCode());
-            JOptionPane.showMessageDialog(this, "User alerdy exisit");
+            JOptionPane.showMessageDialog(this, "User alerdy exisit or invalid password input");
+            return;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            return;
         }
         
     }//GEN-LAST:event_SignUpBtnActionPerformed

@@ -64,11 +64,12 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
             ShowKnightIcon();
        }
        setBackGround();
-        setLocationRelativeTo(null);
+       setLocationRelativeTo(null);
       OpenTitelWitName.setText(LocalizationUtil.localizedResourceBundle.getString("WelcomGame")+" "+current.getUserName());
       OpenTitelWitName.setHorizontalAlignment(SwingConstants.CENTER);
       currebtPlayerHighScore.setText((LocalizationUtil.localizedResourceBundle.getString("BestScore"))+" "+current.getHighstScore(current));
       currebtPlayerHighScore.setHorizontalAlignment(SwingConstants.CENTER);
+      //JOptionPane.showMessageDialog(this,LocalizationUtil.localizedResourceBundle.getString("ChoseWnatedLevel"));
     }
     
     public void buildMenu() {
@@ -180,6 +181,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
        /*about promp acorrding curent languche*/
         JOptionPane.showMessageDialog(this, (LocalizationUtil.localizedResourceBundle.getString("AllReservd")));
     }
+   
     public void comboInit(){
         cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { (LocalizationUtil.localizedResourceBundle.getString("Rand")), "1", "2", "3" }));
         cmbLevel.addActionListener(new java.awt.event.ActionListener() {
@@ -207,8 +209,8 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         OpenTitelWitName = new javax.swing.JLabel();
         currebtPlayerHighScore = new javax.swing.JLabel();
         LogOutBtn = new javax.swing.JButton();
-        CrownImg = new javax.swing.JLabel();
         cmbLevel = new javax.swing.JComboBox();
+        CrownImg = new javax.swing.JLabel();
         jLabelLevel = new javax.swing.JLabel();
         BackgroudTrivia = new javax.swing.JLabel();
 
@@ -227,10 +229,10 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         getContentPane().add(btnStartGame);
         btnStartGame.setBounds(250, 220, 150, 30);
 
-        PleaseChoseCntQues.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
+        PleaseChoseCntQues.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         PleaseChoseCntQues.setText("Please chose how much ques you want");
         getContentPane().add(PleaseChoseCntQues);
-        PleaseChoseCntQues.setBounds(150, 110, 350, 40);
+        PleaseChoseCntQues.setBounds(150, 110, 410, 40);
 
         cmbCountOfQUes.setModel(cmbCountOfQUes.getModel());
         cmbCountOfQUes.setToolTipText("");
@@ -255,7 +257,8 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         getContentPane().add(OpenTitelWitName);
         OpenTitelWitName.setBounds(140, 20, 360, 40);
 
-        currebtPlayerHighScore.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        currebtPlayerHighScore.setFont(new java.awt.Font("Tahoma", 3, 15)); // NOI18N
+        currebtPlayerHighScore.setForeground(new java.awt.Color(102, 255, 102));
         getContentPane().add(currebtPlayerHighScore);
         currebtPlayerHighScore.setBounds(130, 70, 360, 30);
 
@@ -267,8 +270,6 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         });
         getContentPane().add(LogOutBtn);
         LogOutBtn.setBounds(531, 10, 100, 30);
-        getContentPane().add(CrownImg);
-        CrownImg.setBounds(20, 10, 0, 90);
 
         cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
         cmbLevel.addActionListener(new java.awt.event.ActionListener() {
@@ -277,11 +278,13 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(cmbLevel);
-        cmbLevel.setBounds(520, 280, 90, 20);
+        cmbLevel.setBounds(530, 280, 90, 20);
+        getContentPane().add(CrownImg);
+        CrownImg.setBounds(20, 10, 0, 90);
 
         jLabelLevel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         getContentPane().add(jLabelLevel);
-        jLabelLevel.setBounds(520, 240, 110, 30);
+        jLabelLevel.setBounds(520, 230, 110, 30);
         getContentPane().add(BackgroudTrivia);
         BackgroudTrivia.setBounds(0, 0, 650, 320);
 

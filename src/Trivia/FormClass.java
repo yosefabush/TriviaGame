@@ -327,7 +327,7 @@ public class FormClass extends JFrame implements ActionListener {
                 point += question.getPoint(); //sum the value of point of this question 
                 correct = false; //return the static var to false
             } else {
-                
+                //point -= question.getPoint();  //if player wrong sub point
                 current.setWrongAnsCnt(1);//sum the incorrect answer
             }
             //in any case correct or not open the game with less quse (n-1) with the same current
