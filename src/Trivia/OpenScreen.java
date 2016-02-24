@@ -5,8 +5,17 @@
  */
 package Trivia;
 
+import static Trivia.FormClass.current;
+import static Trivia.FormClass.currentLevel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import resources.LocalizationUtil;
@@ -15,22 +24,29 @@ import resources.LocalizationUtil;
  *
  * @author Yosef
  */
-public class OpenScreen extends javax.swing.JFrame {
+public class OpenScreen extends javax.swing.JFrame implements ActionListener {
     static User current;
     static String userName;
+    private JMenuBar myMenuBar = new JMenuBar();
+    private JMenu fileMenu = new JMenu();
+    private JMenu helpMenu = new JMenu();
+    private JMenuItem changeLang = new JMenuItem();
+    private JMenuItem newMenuItem = new JMenuItem();
+    private JMenuItem exitMenuItem = new JMenuItem();
+    private JMenuItem aboutMenuItem = new JMenuItem();
     
     /**
      * Creates new form OpenScreen
      */
     public OpenScreen(User currentUser) {
         initComponents();
+        buildMenu();
+        addListeners();
         comboInit();
-        this.setSize(650,350);
+        this.setSize(661,375);
         this.current=currentUser;
        
        this.setTitle(LocalizationUtil.localizedResourceBundle.getString("WelcomGame"));
-//       cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { LocalizationUtil.localizedResourceBundle.getString("Rand"), "1", "2", "3" }));
-//       cmbLevel.addActionListener(new java.awt.event.ActionListener());
        jLabelLevel.setText(LocalizationUtil.localizedResourceBundle.getString("ChoseLevel"));
        LogOutBtn.setText(LocalizationUtil.localizedResourceBundle.getString("LogOutKey"));
        PleaseChoseCntQues.setText(LocalizationUtil.localizedResourceBundle.getString("PleaseChoseCntQues"));
@@ -55,6 +71,115 @@ public class OpenScreen extends javax.swing.JFrame {
       currebtPlayerHighScore.setHorizontalAlignment(SwingConstants.CENTER);
     }
     
+    public void buildMenu() {
+       /*build the menu acording the curent languche*/
+        fileMenu = new JMenu(LocalizationUtil.localizedResourceBundle.getString("FileKey"));
+        helpMenu = new JMenu(LocalizationUtil.localizedResourceBundle.getString("HelpKey"));
+        changeLang = new JMenuItem(LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey"));
+        newMenuItem = new JMenuItem(LocalizationUtil.localizedResourceBundle.getString("NewGameKey"));
+        exitMenuItem = new JMenuItem(LocalizationUtil.localizedResourceBundle.getString("ExitKey"));
+        aboutMenuItem = new JMenuItem(LocalizationUtil.localizedResourceBundle.getString("AboutKey"));
+        fileMenu.add(newMenuItem);
+        fileMenu.add(exitMenuItem);
+        myMenuBar.add(fileMenu);
+        helpMenu.add(aboutMenuItem);
+        helpMenu.add(changeLang);
+        myMenuBar.add(helpMenu);
+
+        this.setJMenuBar(myMenuBar);
+    }
+    
+    public void addListeners() {
+       /*add action listener to all button */
+       
+        newMenuItem.addActionListener(this);
+        aboutMenuItem.addActionListener(this);
+        changeLang.addActionListener(this);
+        exitMenuItem.addActionListener(this);
+
+    } 
+    
+    @Override
+   /*action whan any button was pressed*/
+   public void actionPerformed(ActionEvent ae){
+       if (ae.getSource() == changeLang) { //if change languche button pressed
+            String []buttonsName={"English","Hebrew"};
+             String selectedLanguage;
+            int res=JOptionPane.showOptionDialog(this,
+                    (LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")),
+                    (LocalizationUtil.localizedResourceBundle.getString("TitleChangeLang")),
+                    JOptionPane.WARNING_MESSAGE,0,null,buttonsName,buttonsName[0]);
+            if(res==0)
+             selectedLanguage="en";
+            else if(res==1)
+             selectedLanguage="iw";
+            else
+                return;
+            LocalizationUtil.localizedResourceBundle = ResourceBundle.getBundle("resources.uimessages", new Locale(selectedLanguage));
+            updateCaptions();
+        } else if (ae.getSource() == exitMenuItem) { //if exit button pressed
+           showExitDialog();
+        }else if (ae.getSource() == newMenuItem) {  //if new game button pressed
+            newGameDialog();
+        } else if (ae.getSource() == aboutMenuItem) {   //if about button pressed
+            aboutDialog();
+        }
+       
+   }
+   
+   public void updateCaptions() { //method that refresh all the label+button languche
+       
+        this.setTitle((LocalizationUtil.localizedResourceBundle.getString("GameTitle")));
+        fileMenu.setText(LocalizationUtil.localizedResourceBundle.getString("FileKey"));
+        newMenuItem.setText(LocalizationUtil.localizedResourceBundle.getString("NewGameKey"));
+        exitMenuItem.setText(LocalizationUtil.localizedResourceBundle.getString("ExitKey"));
+        aboutMenuItem.setText(LocalizationUtil.localizedResourceBundle.getString("AboutKey"));
+        helpMenu.setText(LocalizationUtil.localizedResourceBundle.getString("HelpKey"));
+        changeLang.setText(LocalizationUtil.localizedResourceBundle.getString("languageKey"));
+        jLabelLevel.setText(LocalizationUtil.localizedResourceBundle.getString("ChoseLevel"));
+        LogOutBtn.setText(LocalizationUtil.localizedResourceBundle.getString("LogOutKey"));
+        PleaseChoseCntQues.setText(LocalizationUtil.localizedResourceBundle.getString("PleaseChoseCntQues"));
+        PleaseChoseCntQues.setHorizontalAlignment(SwingConstants.CENTER);
+        btnStartGame.setText(LocalizationUtil.localizedResourceBundle.getString("StartGameKey"));
+        btnShowHighScoreTble.setText(LocalizationUtil.localizedResourceBundle.getString("HighScoreTble"));
+        OpenTitelWitName.setText(LocalizationUtil.localizedResourceBundle.getString("WelcomGame")+" "+current.getUserName());
+        OpenTitelWitName.setHorizontalAlignment(SwingConstants.CENTER);
+        currebtPlayerHighScore.setText((LocalizationUtil.localizedResourceBundle.getString("BestScore"))+" "+current.getHighstScore(current));
+        currebtPlayerHighScore.setHorizontalAlignment(SwingConstants.CENTER);
+        comboInit();
+    }
+  
+   public void showExitDialog() {
+       /*"you shure exit?" promp acorrding curent languche*/
+        int result = JOptionPane.showConfirmDialog(this, // parent component
+                (LocalizationUtil.localizedResourceBundle.getString("areYouSureKey")), // message
+                (LocalizationUtil.localizedResourceBundle.getString("titlrExitDialog")), // title of the dialog box
+                JOptionPane.YES_NO_OPTION,// indicates buttons ot display
+                JOptionPane.QUESTION_MESSAGE);
+
+        if (result == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+
+    }
+
+   public void newGameDialog() {
+       /*"you shure new game?" promp acorrding curent languche*/
+        int result = JOptionPane.showConfirmDialog(this, (LocalizationUtil.localizedResourceBundle.getString("AreYouSureYouStartNewGame")),
+                (LocalizationUtil.localizedResourceBundle.getString("NewGameDialog")),
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            this.setVisible(false);
+            OpenScreen newGame = new OpenScreen(current);
+            newGame.setVisible(true);
+        }
+    }
+   
+   public void aboutDialog() {
+       /*about promp acorrding curent languche*/
+        JOptionPane.showMessageDialog(this, (LocalizationUtil.localizedResourceBundle.getString("AllReservd")));
+    }
     public void comboInit(){
         cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { (LocalizationUtil.localizedResourceBundle.getString("Rand")), "1", "2", "3" }));
         cmbLevel.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +312,7 @@ public class OpenScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnStartGameActionPerformed
 
- public void setBackGround(){
+    public void setBackGround(){
        BackgroudTrivia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon.jpg"))); 
        getContentPane().add(BackgroudTrivia);
        BackgroudTrivia.setBounds(0, 0, 650, 320);

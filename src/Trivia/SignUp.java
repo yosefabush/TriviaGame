@@ -31,7 +31,8 @@ public class SignUp extends javax.swing.JFrame {
      */
     int defultPoint=0;
     java.util.Date newDate=Calendar.getInstance().getTime();
-     private Date date=new Date(newDate.getTime()); 
+     private Date date=new Date(newDate.getTime());
+    
        
        
 //      
@@ -209,50 +210,50 @@ String []buttonsName={"English","Hebrew"};
     }//GEN-LAST:event_changeLangActionPerformed
 
     private void UserIDFildKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UserIDFildKeyPressed
-      if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-           String userName=this.userNameField.getText();
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            String userName=this.userNameField.getText();
             String password=this.jPasswordField1.getText();
             int realUserId=Integer.parseInt(this.UserIDFild.getText());
-        try {
-            Class.forName(DbUtilitis.dbDriver); //load the rigt server
-            Connection connection
-                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
-                            DbUtilitis.jdbcUser,
-                            DbUtilitis.jdbcPassword);
-            PreparedStatement ps = connection.prepareStatement("insert into tblusers (userId, userName, password) values (?, ?, ?)");
-            ps.setInt(1, realUserId);
-            ps.setString(2, userName);
-            ps.setString(3, password);
-            
+            try {
+                Class.forName(DbUtilitis.dbDriver); //load the rigt server
+                Connection connection
+                = DriverManager.getConnection(DbUtilitis.jdbcUrl,
+                    DbUtilitis.jdbcUser,
+                    DbUtilitis.jdbcPassword);
+                PreparedStatement ps = connection.prepareStatement("insert into tblusers (userId, userName, password) values (?, ?, ?)");
+                ps.setInt(1, realUserId);
+                ps.setString(2, userName);
+                ps.setString(3, password);
+
                 int res=ps.executeUpdate();
-               if(res>0){
-                 JOptionPane.showMessageDialog(this, "User added succssefuly!\nPlease log in");
-                  ps = connection.prepareStatement("insert into tblrecords (userId, Score, Date) values (?, ?, ?)");
-                   ps.setInt(1, realUserId);
-                   ps.setInt(2, defultPoint);
-                   ps.setDate(3,date);
-                   int res2=ps.executeUpdate();
-                   if(res<0)
-                       JOptionPane.showMessageDialog(this, "Ther was proble to add to record tbale");
-                 LogIn logIn=new LogIn();
-                 logIn.setVisible(true);
-                 this.dispose();
-                 
-           }
-           else{
-                JOptionPane.showMessageDialog(this, "User alerdy exisit or invaild input");
-           }
+                if(res>0){
+                    JOptionPane.showMessageDialog(this, "User added succssefuly!\nPlease log in");
+                    ps = connection.prepareStatement("insert into tblrecords (userId, Score, Date) values (?, ?, ?)");
+                    ps.setInt(1, realUserId);
+                    ps.setInt(2, defultPoint);
+                    ps.setDate(3,date);
+                    int res2=ps.executeUpdate();
+                    if(res<0)
+                    JOptionPane.showMessageDialog(this, "Ther was proble to add to record tbale");
+                    LogIn logIn=new LogIn();
+                    logIn.setVisible(true);
+                    this.dispose();
+
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "User alerdy exisit or invaild input");
+                }
                 ps.close();
-            
-        } catch (SQLException sqle) {
-            System.out.println("SQLException: " + sqle.getMessage());
-            System.out.println("Vendor Error: " + sqle.getErrorCode());
-            JOptionPane.showMessageDialog(this, "User alerdy exisit");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+
+            } catch (SQLException sqle) {
+                System.out.println("SQLException: " + sqle.getMessage());
+                System.out.println("Vendor Error: " + sqle.getErrorCode());
+                JOptionPane.showMessageDialog(this, "User alerdy exisit");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
-      }
-      
+
         // TODO add your handling code here:
     }//GEN-LAST:event_UserIDFildKeyPressed
 
