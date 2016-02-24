@@ -5,7 +5,6 @@
  */
 package Trivia;
 
-import com.sun.glass.events.KeyEvent;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -13,12 +12,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.ResourceBundle;
-//import java.util.Date;
 import javax.swing.JOptionPane;
 import resources.LocalizationUtil;
 
@@ -43,13 +39,11 @@ public class SignUp extends javax.swing.JFrame {
         userNameField.requestFocusInWindow();
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("signUpMainTitle"));
         signUpTitle.setText(LocalizationUtil.localizedResourceBundle.getString("signUpTitle"));
-        //   userIDLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserIdKey"));
         PasswordLab.setText(LocalizationUtil.localizedResourceBundle.getString("PasswordKEY"));
         userNameLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
         SignUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
         Backbtn.setText((LocalizationUtil.localizedResourceBundle.getString("BackbKey")));
         changeLang.setText((LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")));
-        JOptionPane.showMessageDialog(this, LocalizationUtil.localizedResourceBundle.getString("ValidInput"));
     }
 
     /**
@@ -126,7 +120,6 @@ public class SignUp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SignUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpBtnActionPerformed
-        int realUserId;
         String userName = this.userNameField.getText();
         String password = this.jPasswordField1.getText();
         int maxid = 0;
@@ -143,7 +136,7 @@ public class SignUp extends javax.swing.JFrame {
             String queryCheck = "SELECT username FROM tblusers where userName='" + userName + "';";
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(queryCheck); // execute the query, and get a java resultset
-            // if this ID already exists, we quit
+            // if this name already exists, we quit
             if (rs.absolute(1)) {
                 JOptionPane.showMessageDialog(this, "User Name alerdy exisit");
                 rs.close();
@@ -160,7 +153,6 @@ public class SignUp extends javax.swing.JFrame {
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            //return quesNum;
         }
 
         try {
@@ -224,7 +216,7 @@ public class SignUp extends javax.swing.JFrame {
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             System.out.println("Vendor Error: " + sqle.getErrorCode());
-            JOptionPane.showMessageDialog(this, "invalid password input ");
+            JOptionPane.showMessageDialog(this, "invalid password input pleas insert int ");
             return;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -260,7 +252,6 @@ public class SignUp extends javax.swing.JFrame {
     public void updateCaptions() {
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("signUpMainTitle"));
         signUpTitle.setText(LocalizationUtil.localizedResourceBundle.getString("signUpTitle"));
-        //  userIDLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserIdKey"));
         PasswordLab.setText(LocalizationUtil.localizedResourceBundle.getString("PasswordKEY"));
         userNameLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
         SignUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
