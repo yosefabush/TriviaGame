@@ -27,6 +27,7 @@ public class SignUp extends javax.swing.JFrame {
     /**
      * Creates new form SignIn
      */
+    boolean pres=false;
     int defultPoint = 0;
     java.util.Date newDate = Calendar.getInstance().getTime();
     private Date date = new Date(newDate.getTime());
@@ -123,6 +124,14 @@ public class SignUp extends javax.swing.JFrame {
         String userName = this.userNameField.getText();
         String password = this.jPasswordField1.getText();
         int maxid = 0;
+        if(userName.equals("")||password.equals("")){
+            JOptionPane.showMessageDialog(this, "cannot insert empty field");
+            return;
+        }
+        if(((Object)Integer.parseInt(userName)) instanceof Integer ){
+            JOptionPane.showMessageDialog(this, "user Name cant be number");
+            return;
+        }
 
         try {
 
@@ -227,22 +236,20 @@ public class SignUp extends javax.swing.JFrame {
 
     private void BackbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackbtnActionPerformed
         this.dispose();
+        LogIn logIn = new LogIn();
+        logIn.setVisible(true);
 
     }//GEN-LAST:event_BackbtnActionPerformed
 
     private void changeLangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeLangActionPerformed
-        String[] buttonsName = {"English", "Hebrew"};
-        String selectedLanguage;
-        int res = JOptionPane.showOptionDialog(this,
-                (LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")),
-                (LocalizationUtil.localizedResourceBundle.getString("TitleChangeLang")),
-                JOptionPane.WARNING_MESSAGE, 0, null, buttonsName, buttonsName[0]);
-        if (res == 0) {
-            selectedLanguage = "en";
-        } else if (res == 1) {
-            selectedLanguage = "iw";
-        } else {
-            return;
+        String selectedLanguage="iw";
+        if(!pres){
+           pres=true;
+            selectedLanguage="iw";
+        }
+        else if(pres){
+            pres=false;
+          selectedLanguage="en";
         }
         LocalizationUtil.localizedResourceBundle = ResourceBundle.getBundle("resources.uimessages", new Locale(selectedLanguage));
         updateCaptions();

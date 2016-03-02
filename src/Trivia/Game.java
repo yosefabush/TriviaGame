@@ -36,14 +36,12 @@ public class Game {
             random = rand.nextInt(allQuesFromDB.size());
             if(level!=0){
                 if (allQuesFromDB.get(random).getCheekIfQuesWasAsked() == false&&allQuesFromDB.get(random).getLevel()==level) {
-                    System.out.println("Level "+allQuesFromDB.get(random).getLevel());
                     allQuesFromDB.get(random).setCheekIfQuesWasAsked(true); 
                     break;
                 }
             }
             else{
                 if (allQuesFromDB.get(random).getCheekIfQuesWasAsked() == false) {
-                    System.out.println("Rand Level "+allQuesFromDB.get(random).getLevel());
                     allQuesFromDB.get(random).setCheekIfQuesWasAsked(true); 
                     break;
                 }
@@ -62,7 +60,7 @@ public class Game {
                 finisGame = new TotalSummry(current,"NewHigScor"); //open summery screen
                 finisGame.setVisible(true);
             } else {
-                System.out.println("Update score Faild mybe your have highr score ...");
+                System.out.println("Update score Faild mybe your have highr score in DB...");
                 finisGame = new TotalSummry(current,"YouCanBetrr");//in the end show summry point
                 finisGame.setVisible(true);
             }

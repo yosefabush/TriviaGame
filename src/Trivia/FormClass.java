@@ -2,11 +2,9 @@ package Trivia;
 
 import static Trivia.PlaySounds.correctSound;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -90,14 +88,11 @@ public class FormClass extends JFrame implements ActionListener {
     }
    
    public void initComponents() {
-        //this.setComponentZOrder(this.backgroundImage,10);
         okButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("okKey"));
         exitButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("ExitKey"));
-        //languageButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("languageKey"));
         okButton.setSize(12,12);
         okExitPanel.add(okButton, BorderLayout.CENTER);
         okExitPanel.add(exitButton, BorderLayout.CENTER);
-        //okExitPanel.add(languageButton, BorderLayout.NORTH);
         fullScreenPanel.add(okExitPanel, BorderLayout.SOUTH);
         
         if(currentLevel!=0){
@@ -182,20 +177,17 @@ public class FormClass extends JFrame implements ActionListener {
     }
    
    public void addListeners() {
-       /*add action listener to all button */
         okButton.addActionListener(this);
         exitButton.addActionListener(this);
         newMenuItem.addActionListener(this);
         aboutMenuItem.addActionListener(this);
         changeLang.addActionListener(this);
-       // languageButton.addActionListener(this);
         this.addWindowListener(new MyWindowListener());
         exitMenuItem.addActionListener(this);
 
     } 
 
    public void buildMenu() {
-       /*build the menu acording the curent languche*/
         fileMenu = new JMenu(LocalizationUtil.localizedResourceBundle.getString("FileKey"));
         helpMenu = new JMenu(LocalizationUtil.localizedResourceBundle.getString("HelpKey"));
         changeLang = new JMenuItem(LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey"));
@@ -323,7 +315,7 @@ public class FormClass extends JFrame implements ActionListener {
             if (correct) //if the answer correct
             {
                 PlaySounds h = new PlaySounds(correctSound);//play corect sound
-                System.out.println("this ques point " + question.getPoint());
+                System.out.println("question value point " + question.getPoint());
                 current.setCorrectAnsCnt(1); //count the time of the right ansewr
                 point += question.getPoint(); //sum the value of point of this question 
                 correct = false; //return the static var to false

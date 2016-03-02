@@ -25,6 +25,7 @@ public class LogIn extends javax.swing.JFrame {
     /**
      * Creates new form LogIn
      */
+    boolean pres=false;
     static User currentPlayer;
     public LogIn() {
         initComponents();
@@ -201,18 +202,17 @@ public class LogIn extends javax.swing.JFrame {
 
     private void ChangeLangBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeLangBtnActionPerformed
 // TODO add your handling code here:
-        String []buttonsName={"English","Hebrew"};
-             String selectedLanguage;
-            int res=JOptionPane.showOptionDialog(this,
-                    (LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")),
-                    (LocalizationUtil.localizedResourceBundle.getString("TitleChangeLang")),
-                    JOptionPane.WARNING_MESSAGE,0,null,buttonsName,buttonsName[0]);
-            if(res==0)
-             selectedLanguage="en";
-            else if(res==1)
-             selectedLanguage="iw";
-            else
-                return;
+
+        String selectedLanguage="iw";
+        if(!pres){
+           pres=true;
+            selectedLanguage="iw";
+        }
+        else if(pres){
+            pres=false;
+          selectedLanguage="en";
+        }
+
             LocalizationUtil.localizedResourceBundle = ResourceBundle.getBundle("resources.uimessages", new Locale(selectedLanguage));
             updateCaptions();
         

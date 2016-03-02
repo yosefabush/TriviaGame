@@ -228,7 +228,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         PleaseChoseCntQues.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         PleaseChoseCntQues.setText("Please chose how much ques you want");
         getContentPane().add(PleaseChoseCntQues);
-        PleaseChoseCntQues.setBounds(150, 110, 410, 40);
+        PleaseChoseCntQues.setBounds(120, 110, 430, 40);
 
         cmbCountOfQUes.setModel(cmbCountOfQUes.getModel());
         cmbCountOfQUes.setToolTipText("");
@@ -254,7 +254,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         OpenTitelWitName.setBounds(140, 20, 360, 40);
 
         currebtPlayerHighScore.setFont(new java.awt.Font("Tahoma", 3, 15)); // NOI18N
-        currebtPlayerHighScore.setForeground(new java.awt.Color(102, 255, 102));
+        currebtPlayerHighScore.setForeground(new java.awt.Color(51, 51, 255));
         getContentPane().add(currebtPlayerHighScore);
         currebtPlayerHighScore.setBounds(130, 70, 360, 30);
 
@@ -278,7 +278,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         getContentPane().add(CrownImg);
         CrownImg.setBounds(20, 10, 0, 90);
 
-        jLabelLevel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelLevel.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         getContentPane().add(jLabelLevel);
         jLabelLevel.setBounds(520, 230, 110, 30);
         getContentPane().add(BackgroudTrivia);

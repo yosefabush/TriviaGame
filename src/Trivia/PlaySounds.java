@@ -7,6 +7,8 @@ package Trivia;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -33,12 +35,15 @@ public class PlaySounds extends Thread{
  private static AudioFormat audioFormat;
  private static SourceDataLine sourceLine;
  private String file;
- public static String correctSound="C:\\Users\\יוסף\\Documents\\NetBeansProjects\\Irit\\Question\\src\\Trivia\\Sounds\\CorrectSound.wav";
+ private static Path  p = Paths.get("C:\\TriviaGame\\src\\Trivia\\Sounds\\CorrectSound.wav");
+ static String correctSound=p.getFileName().toString();
  
-// /**
+
+// /*
 //  * Plays the sound of the sent file name
 //  * @param file Audio File's path
 //  */
+ 
  public PlaySounds(String file)
  {
      super("PlaySounds");
