@@ -315,7 +315,7 @@ public class FormClass extends JFrame implements ActionListener {
             if (correct) //if the answer correct
             {
                 PlaySounds h = new PlaySounds(correctSound);//play corect sound
-                System.out.println("question value point " + question.getPoint());
+                System.out.println("Corect! question value point " + question.getPoint());
                 current.setCorrectAnsCnt(1); //count the time of the right ansewr
                 point += question.getPoint(); //sum the value of point of this question 
                 correct = false; //return the static var to false
