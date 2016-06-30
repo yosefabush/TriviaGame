@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Trivia;
 
 import java.io.File;
@@ -43,6 +39,11 @@ public class PlaySounds extends Thread{
 //  * Plays the sound of the sent file name
 //  * @param file Audio File's path
 //  */
+
+    /**
+     *
+     * @param file
+     */
  
  public PlaySounds(String file)
  {

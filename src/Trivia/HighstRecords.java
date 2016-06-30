@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Trivia;
 
 import java.sql.*;
@@ -27,6 +23,10 @@ public class HighstRecords extends javax.swing.JFrame {
      */
     private int[] highScore5 = new int[5];
     int i=0;
+
+    /**
+     *
+     */
     public HighstRecords() {
         
         initComponents();
@@ -66,6 +66,10 @@ public class HighstRecords extends javax.swing.JFrame {
         }  
         
     }
+
+    /**
+     *
+     */
     public void setBackGround(){
        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/woodBackground.png"))); 
        getContentPane().add(Background);
@@ -195,18 +199,32 @@ public class HighstRecords extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnBackToMainScreenActionPerformed
 
+    /**
+     *
+     * @param a
+     */
     public void setCrown(JLabel a){
         
         a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/SmallCrown.png"))); 
         getContentPane().add(a);
         
     } 
+
+    /**
+     *
+     * @param a
+     */
     public void setDragon (JLabel a){
         
         a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/SmallDragon.png"))); 
         getContentPane().add(a);
         
     } 
+
+    /**
+     *
+     * @param a
+     */
     public void setKnight (JLabel a){
         
         a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/SmallKnight.png"))); 
@@ -214,8 +232,10 @@ public class HighstRecords extends javax.swing.JFrame {
         
     } 
     
-    
-     public void updatePictureLevel(){
+    /**
+     *
+     */
+    public void updatePictureLevel(){
          
         if(highScore5[0]>40)
             setCrown(picLev1);
@@ -292,6 +312,12 @@ public class HighstRecords extends javax.swing.JFrame {
             }
         });
     }
+
+    /**
+     *
+     * @param myTable
+     * @param sql
+     */
     public static void FillTable(JTable myTable,String sql){
     
         DefaultTableModel dtm = new DefaultTableModel();

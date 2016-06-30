@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Trivia;
 
 import java.awt.event.ActionEvent;
@@ -33,6 +29,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
     
     /**
      * Creates new form OpenScreen
+     * @param currentUser
      */
     public OpenScreen(User currentUser) {
         initComponents();
@@ -68,6 +65,9 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
       //JOptionPane.showMessageDialog(this,LocalizationUtil.localizedResourceBundle.getString("ChoseWnatedLevel"));
     }
     
+    /**
+     *
+     */
     public void buildMenu() {
        /*build the menu acording the curent languche*/
         fileMenu = new JMenu(LocalizationUtil.localizedResourceBundle.getString("FileKey"));
@@ -86,6 +86,9 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         this.setJMenuBar(myMenuBar);
     }
     
+    /**
+     *
+     */
     public void addListeners() {
        /*add action listener to all button */
        
@@ -124,7 +127,10 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
        
    }
    
-   public void updateCaptions() { //method that refresh all the label+button languche
+    /**
+     *
+     */
+    public void updateCaptions() { //method that refresh all the label+button languche
        
         this.setTitle((LocalizationUtil.localizedResourceBundle.getString("GameTitle")));
         fileMenu.setText(LocalizationUtil.localizedResourceBundle.getString("FileKey"));
@@ -146,7 +152,10 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         comboInit();
     }
   
-   public void showExitDialog() {
+    /**
+     *
+     */
+    public void showExitDialog() {
        /*"you shure exit?" promp acorrding curent languche*/
         int result = JOptionPane.showConfirmDialog(this, // parent component
                 (LocalizationUtil.localizedResourceBundle.getString("areYouSureKey")), // message
@@ -160,7 +169,10 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
 
     }
 
-   public void newGameDialog() {
+    /**
+     *
+     */
+    public void newGameDialog() {
        /*"you shure new game?" promp acorrding curent languche*/
         int result = JOptionPane.showConfirmDialog(this, (LocalizationUtil.localizedResourceBundle.getString("AreYouSureYouStartNewGame")),
                 (LocalizationUtil.localizedResourceBundle.getString("NewGameDialog")),
@@ -173,11 +185,17 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         }
     }
    
-   public void aboutDialog() {
+    /**
+     *
+     */
+    public void aboutDialog() {
        /*about promp acorrding curent languche*/
         JOptionPane.showMessageDialog(this, (LocalizationUtil.localizedResourceBundle.getString("AllReservd")));
     }
    
+    /**
+     *
+     */
     public void comboInit(){
         cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { (LocalizationUtil.localizedResourceBundle.getString("Rand")), "1", "2", "3" }));
         cmbLevel.addActionListener(new java.awt.event.ActionListener() {
@@ -311,23 +329,38 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
 
     }//GEN-LAST:event_btnStartGameActionPerformed
 
+    /**
+     *
+     */
     public void setBackGround(){
        BackgroudTrivia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon.jpg"))); 
        getContentPane().add(BackgroudTrivia);
        BackgroudTrivia.setBounds(0, 0, 650, 320);
  }
+
+    /**
+     *
+     */
     public void  ShowCrownIcon(){
 
         CrownImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Crown.png")));
         getContentPane().add(CrownImg);
         CrownImg.setBounds(20, 10, 90, 90);       
       }
+
+    /**
+     *
+     */
     public void  ShowDragonIcon(){
 
         CrownImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Dragon.png")));
         getContentPane().add(CrownImg);
         CrownImg.setBounds(20, 10, 90, 90);       
       }
+
+    /**
+     *
+     */
     public void  ShowKnightIcon(){
 
         CrownImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Knight.png")));

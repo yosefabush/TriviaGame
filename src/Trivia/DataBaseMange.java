@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Trivia;
 
 import java.sql.Connection;
@@ -22,10 +18,17 @@ public class DataBaseMange {
     private static Question question;
     ArrayList<Question> allQuesFromDB = new <Question>ArrayList();
 
+    /**
+     *
+     */
     public DataBaseMange() {
 
     }
     
+    /**
+     *
+     * @return
+     */
     public ArrayList getQuestion() {
 
         try {
@@ -95,6 +98,10 @@ public class DataBaseMange {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public int countQues() {
         int quesNum = 0;
         try {
@@ -131,6 +138,11 @@ public class DataBaseMange {
 
     }
     
+    /**
+     *
+     * @param level
+     * @return
+     */
     public int countQues(int level) {
         int quesNum = 0;
         try {
@@ -167,7 +179,10 @@ public class DataBaseMange {
 
     }
 
-
+    /**
+     *
+     * @return
+     */
     public static DataBaseMange getInstance() {
 
         if (instance == null) {

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Trivia;
 
 import javax.swing.SwingConstants;
@@ -18,6 +14,12 @@ public class TotalSummry extends javax.swing.JFrame {
      */
     private static User currentPlayer;
     private static String highScorOrNotCheeker;
+
+    /**
+     *
+     * @param current
+     * @param highScorOrNot
+     */
     public TotalSummry(User current,String highScorOrNot) {
         initComponents();
         this.highScorOrNotCheeker=highScorOrNot;
@@ -31,11 +33,19 @@ public class TotalSummry extends javax.swing.JFrame {
         NewHighScore.setHorizontalAlignment(SwingConstants.CENTER);
         
     }    
-        public void setBackGround(){
+
+    /**
+     *
+     */
+    public void setBackGround(){
        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/SummeryImage.png"))); 
        getContentPane().add(background);
        background.setBounds(0, 0, 530,360);
  }
+
+    /**
+     *
+     */
     public void updateLang() {
         
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("Summry"));

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Trivia;
 
 import java.sql.Connection;
@@ -32,6 +28,9 @@ public class SignUp extends javax.swing.JFrame {
     java.util.Date newDate = Calendar.getInstance().getTime();
     private Date date = new Date(newDate.getTime());
 
+    /**
+     *
+     */
     public SignUp() {
 
         initComponents();
@@ -256,6 +255,9 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_changeLangActionPerformed
 
+    /**
+     *
+     */
     public void updateCaptions() {
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("signUpMainTitle"));
         signUpTitle.setText(LocalizationUtil.localizedResourceBundle.getString("signUpTitle"));

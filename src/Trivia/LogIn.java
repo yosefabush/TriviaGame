@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Trivia;
 
-import com.sun.glass.events.KeyEvent;
+
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -27,6 +24,10 @@ public class LogIn extends javax.swing.JFrame {
      */
     boolean pres=false;
     static User currentPlayer;
+
+    /**
+     *
+     */
     public LogIn() {
         initComponents();
         userNameField.requestFocusInWindow();
@@ -265,6 +266,9 @@ public class LogIn extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1KeyPressed
 
+    /**
+     *
+     */
     public void updateCaptions(){
         
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("GameTitle"));

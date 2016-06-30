@@ -7,13 +7,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ *
+ * @author Yosef
+ */
 public class Game {
 
     private static User current;
     private static ArrayList<Question> allQuesFromDB = new <Question>ArrayList();
     private static int level;
    
-
+    /**
+     *
+     * @param wantedQuestion
+     * @param current
+     * @param newGame
+     * @param level
+     * @throws Exception
+     */
     public Game(int wantedQuestion, User current, boolean newGame,int level) throws Exception {
 
         if (newGame == true) { //if is new game need to clear thee arreyList and full it from DB
@@ -26,6 +37,12 @@ public class Game {
         Play(wantedQuestion);
 
     }
+
+    /**
+     *
+     * @param remainingQues
+     * @throws Exception
+     */
     public void Play(int remainingQues) throws Exception {
 
         Random rand = new Random();
@@ -66,6 +83,12 @@ public class Game {
             }
         }
     }
+
+    /**
+     *
+     * @param player
+     * @return
+     */
     public boolean updateFinalScore(User player) {
 
         try {

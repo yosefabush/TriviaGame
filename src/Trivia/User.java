@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Trivia;
 
 import java.sql.Connection;
@@ -24,56 +20,119 @@ public class User {
     private int level;
     private int correctAnsCnt=0;
     
+    /**
+     *
+     * @param username
+     * @param password
+     * @param userID
+     */
     public User(String username,String password,int userID){
      setUserName(username);
      setPassword(password);
      setUserID(userID);
     }
     
+    /**
+     *
+     * @return
+     */
     public int getPoints() {
         return points;
     }
 
+    /**
+     *
+     * @param points
+     */
     public void setPoints(int points) {
         this.points= points;
     }
+
+    /**
+     *
+     * @param zero
+     */
     public void setZeroPoints(int zero) {
         this.points= zero;
     }
     
-     public int getCorrectAnsCnt() {
+    /**
+     *
+     * @return
+     */
+    public int getCorrectAnsCnt() {
         return correctAnsCnt;
     }
 
+    /**
+     *
+     * @param correctAnsCnt
+     */
     public void setCorrectAnsCnt(int correctAnsCnt) {
         this.correctAnsCnt += correctAnsCnt;
     }
-     public void setZeroCorrectAnsCnt(int zero) {
+
+    /**
+     *
+     * @param zero
+     */
+    public void setZeroCorrectAnsCnt(int zero) {
         this.correctAnsCnt = zero;
     }
   
+    /**
+     *
+     * @return
+     */
     public int getWrongAnsCnt() {
         return wrongAnsCnt;
     }
 
+    /**
+     *
+     * @param wrongAnsCnt
+     */
     public void setWrongAnsCnt(int wrongAnsCnt) {
         this.wrongAnsCnt+= wrongAnsCnt;
     }
+
+    /**
+     *
+     * @param zero
+     */
     public void setZeroWrongAnsCnt(int zero) {
         this.wrongAnsCnt= zero;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getLevel() {
         return level;
     }
 
+    /**
+     *
+     * @param level
+     */
     public void setLevel(int level) {
         this.level+= level;
     }
+
+    /**
+     *
+     * @param zero
+     */
     public void setZeroLevel(int zero) {
         this.level= level;
     }
     
+    /**
+     *
+     * @param cuurent
+     * @return
+     */
     public String getHighstScore(User cuurent){
         String userScore=null;
         String sql="select Score from tblrecords where UserId='"+cuurent.userID+"'";
@@ -104,26 +163,50 @@ public class User {
         return userScore;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     *
+     * @param userName
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getUserID() {
         return userID;
     }
 
+    /**
+     *
+     * @param userID
+     */
     public void setUserID(int userID) {
         this.userID = userID;
     }

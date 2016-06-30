@@ -26,6 +26,10 @@ import javax.swing.JTextField;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import resources.LocalizationUtil;
 
+/**
+ *
+ * @author Yosef
+ */
 public class FormClass extends JFrame implements ActionListener {
 
     private JButton okButton;
@@ -58,7 +62,13 @@ public class FormClass extends JFrame implements ActionListener {
     static int point = 0;
     static int currentLevel;
     
-
+    /**
+     *
+     * @param question
+     * @param remainedQuestios
+     * @param currentPlayer
+     * @param chosenLevel
+     */
     public FormClass(Question question, int remainedQuestios, User currentPlayer,int chosenLevel) {
         this.setTitle((LocalizationUtil.localizedResourceBundle.getString("GameTitle")));
         this.currentLevel=chosenLevel;
@@ -79,7 +89,10 @@ public class FormClass extends JFrame implements ActionListener {
 
     }
     
-   public void setBackruond(){
+    /**
+     *
+     */
+    public void setBackruond(){
         
         backgroundImage.setIcon(new ImageIcon(getClass().getResource("/Trivia/Images/GameBackGround.jpg"))); 
         add(backgroundImage);
@@ -87,7 +100,10 @@ public class FormClass extends JFrame implements ActionListener {
     
     }
    
-   public void initComponents() {
+    /**
+     *
+     */
+    public void initComponents() {
         okButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("okKey"));
         exitButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("ExitKey"));
         okButton.setSize(12,12);
@@ -176,7 +192,10 @@ public class FormClass extends JFrame implements ActionListener {
 
     }
    
-   public void addListeners() {
+    /**
+     *
+     */
+    public void addListeners() {
         okButton.addActionListener(this);
         exitButton.addActionListener(this);
         newMenuItem.addActionListener(this);
@@ -187,7 +206,10 @@ public class FormClass extends JFrame implements ActionListener {
 
     } 
 
-   public void buildMenu() {
+    /**
+     *
+     */
+    public void buildMenu() {
         fileMenu = new JMenu(LocalizationUtil.localizedResourceBundle.getString("FileKey"));
         helpMenu = new JMenu(LocalizationUtil.localizedResourceBundle.getString("HelpKey"));
         changeLang = new JMenuItem(LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey"));
@@ -213,13 +235,19 @@ public class FormClass extends JFrame implements ActionListener {
         }
     }
 
-   public void showNonSelctedDialog() {
+    /**
+     *
+     */
+    public void showNonSelctedDialog() {
        /*Non Selcted Dialog acording the current languche*/
         JOptionPane.showConfirmDialog(FormClass.this, (LocalizationUtil.localizedResourceBundle.getString("didntChoseAnswer")), (LocalizationUtil.localizedResourceBundle.getString("titleWorning")), JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
 
     }
 
-   public void showExitDialog() {
+    /**
+     *
+     */
+    public void showExitDialog() {
        /*"you shure exit?" promp acorrding curent languche*/
         int result = JOptionPane.showConfirmDialog(FormClass.this, // parent component
                 (LocalizationUtil.localizedResourceBundle.getString("areYouSureKey")), // message
@@ -233,7 +261,10 @@ public class FormClass extends JFrame implements ActionListener {
 
     }
 
-   public void newGameDialog() {
+    /**
+     *
+     */
+    public void newGameDialog() {
        /*"you shure new game?" promp acorrding curent languche*/
         int result = JOptionPane.showConfirmDialog(this, (LocalizationUtil.localizedResourceBundle.getString("AreYouSureYouStartNewGame")),
                 (LocalizationUtil.localizedResourceBundle.getString("NewGameDialog")),
@@ -246,7 +277,10 @@ public class FormClass extends JFrame implements ActionListener {
         }
     }
    
-   public void aboutDialog() {
+    /**
+     *
+     */
+    public void aboutDialog() {
        /*about promp acorrding curent languche*/
         JOptionPane.showMessageDialog(this, (LocalizationUtil.localizedResourceBundle.getString("AllReservd")));
     }
@@ -357,7 +391,10 @@ public class FormClass extends JFrame implements ActionListener {
         }
     }
 
-   public void updateCaptions() { //method that refresh all the label+button languche
+    /**
+     *
+     */
+    public void updateCaptions() { //method that refresh all the label+button languche
         okButton.setText(LocalizationUtil.localizedResourceBundle.getString("okKey"));
         exitButton.setText(LocalizationUtil.localizedResourceBundle.getString("ExitKey"));
         

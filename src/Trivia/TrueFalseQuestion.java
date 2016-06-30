@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Trivia;
 
 /**
@@ -14,6 +10,14 @@ public class TrueFalseQuestion extends Question{
     private String []answer;
     private int rightAns;
     
+    /**
+     *
+     * @param ans
+     * @param rightAns
+     * @param Ques
+     * @param Point
+     * @param level
+     */
     public TrueFalseQuestion(String []ans,int rightAns,String Ques,int Point,int level){
      super(Ques,Point,level);    
      setAnswer(ans);
@@ -26,6 +30,10 @@ public class TrueFalseQuestion extends Question{
         return answer;
     }
 
+    /**
+     *
+     * @param trueFalseAns
+     */
     public void setAnswer(String[] trueFalseAns) {
         
         this.answer = trueFalseAns;
@@ -36,6 +44,10 @@ public class TrueFalseQuestion extends Question{
         return rightAns;
     }
 
+    /**
+     *
+     * @param rightAns
+     */
     public void setRightAns(int rightAns) {
         this.rightAns = rightAns;
     }
