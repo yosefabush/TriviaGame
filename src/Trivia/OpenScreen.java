@@ -225,6 +225,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         cmbLevel = new javax.swing.JComboBox();
         CrownImg = new javax.swing.JLabel();
         jLabelLevel = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         BackgroudTrivia = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -298,35 +299,20 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         jLabelLevel.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         getContentPane().add(jLabelLevel);
         jLabelLevel.setBounds(520, 230, 110, 30);
+
+        jButton1.setText("1 vs 1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(120, 223, 80, 30);
         getContentPane().add(BackgroudTrivia);
         BackgroudTrivia.setBounds(0, 0, 650, 320);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnStartGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartGameActionPerformed
-        if(cmbCountOfQUes.getSelectedItem()==null){
-            JOptionPane.showMessageDialog(this,LocalizationUtil.localizedResourceBundle.getString("LeveDidntChoose"));
-            return;
-        }
-        int numQues=1;  //choose the real number of wanted ques
-        int level=0;
-        numQues+=cmbCountOfQUes.getSelectedIndex();
-        current.setLevel(0);
-        current.setPoints(0);
-        current.setWrongAnsCnt(0);
-       if(cmbLevel.getSelectedItem()=="Rand")
-            level=0;
-       else
-           level=cmbLevel.getSelectedIndex();
-        try {
-            Game newGame=new Game(numQues,current,true,level); 
-        } catch (Exception ex) {
-            ex.printStackTrace(); //print all the hisory
-        }
-       this.dispose(); //close the window       
-
-    }//GEN-LAST:event_btnStartGameActionPerformed
 
     /**
      *
@@ -401,6 +387,34 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
 
     }//GEN-LAST:event_cmbLevelActionPerformed
 
+    private void btnStartGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartGameActionPerformed
+        if(cmbCountOfQUes.getSelectedItem()==null){
+            JOptionPane.showMessageDialog(this,LocalizationUtil.localizedResourceBundle.getString("LeveDidntChoose"));
+            return;
+        }
+        int numQues=1;  //choose the real number of wanted ques
+        int level=0;
+        numQues+=cmbCountOfQUes.getSelectedIndex();
+        current.setLevel(0);
+        current.setPoints(0);
+        current.setWrongAnsCnt(0);
+        if(cmbLevel.getSelectedItem()=="Rand")
+        level=0;
+        else
+        level=cmbLevel.getSelectedIndex();
+        try {
+            Game newGame=new Game(numQues,current,true,level);
+        } catch (Exception ex) {
+            ex.printStackTrace(); //print all the hisory
+        }
+        this.dispose(); //close the window
+    }//GEN-LAST:event_btnStartGameActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -449,6 +463,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
     public static javax.swing.JComboBox cmbCountOfQUes;
     private javax.swing.JComboBox cmbLevel;
     private javax.swing.JLabel currebtPlayerHighScore;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabelLevel;
     // End of variables declaration//GEN-END:variables
 }

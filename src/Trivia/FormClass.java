@@ -63,7 +63,8 @@ public class FormClass extends JFrame implements ActionListener {
     static int currentLevel;
     
     /**
-     *
+     * constructor of the the class define how 
+     * the open screen look
      * @param question
      * @param remainedQuestios
      * @param currentPlayer
@@ -226,7 +227,7 @@ public class FormClass extends JFrame implements ActionListener {
         this.setJMenuBar(myMenuBar);
     }
 
-   class MyWindowListener extends WindowAdapter {
+    class MyWindowListener extends WindowAdapter {
        /*add are "you shure exit?" promp */
         @Override
         public void windowClosing(WindowEvent we
