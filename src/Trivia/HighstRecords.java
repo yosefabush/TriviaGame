@@ -79,13 +79,13 @@ public class HighstRecords extends javax.swing.JFrame {
      private void getAllTop5Score(){
          try {
 
-            Class.forName(DbUtilitis.dbDriver); //load the rigt server
-            Connection connection
-                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
-                            DbUtilitis.jdbcUser,
-                            DbUtilitis.jdbcPassword);
-
-            Statement statement = connection.createStatement();
+//            Class.forName(DbUtilitis.dbDriver); //load the rigt server
+//            Connection connection
+//                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
+//                            DbUtilitis.jdbcUser,
+//                            DbUtilitis.jdbcPassword);
+            
+            Statement statement = Connect_db.getConnection().createStatement();
 
             String allCustomersQuery = "select UserName,Score,date from tblusers as a,tblrecords as b where a.`UserId`=b.`UserID` order by Score desc  LIMIT 5";
             ResultSet resultSet = statement.executeQuery(allCustomersQuery);
@@ -96,14 +96,11 @@ public class HighstRecords extends javax.swing.JFrame {
                        }
             resultSet.close();		// close resultSet
             statement.close();		// close statement and resultSet
-            connection.close();
+            //Connect_db.getConnection().close();
                  // close connection, statement and resultSet 	
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             System.out.println("Vendor Error: " + sqle.getErrorCode());
-           
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
            
         }
 

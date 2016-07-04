@@ -2,16 +2,18 @@
 package Trivia;
 
 /**
- *
+ * This class define the pattern of American question 
+ * 
  * @author Yosef
  */
 public class AmricanQuestion extends Question{
-  
+    
     private String [] answer;
     private int rightAns;
    
     /**
-     *
+     * This is the constructor of the class
+     * 
      * @param ans
      * @param rightAns
      * @param Ques
@@ -25,8 +27,9 @@ public class AmricanQuestion extends Question{
      }
      
     /**
-     *
-     * @return
+     * This method return the right answer
+     * 
+     * @return String array of the possible answer
      */
     @Override
     public String[] getAnswer() {
@@ -34,7 +37,8 @@ public class AmricanQuestion extends Question{
     }
 
     /**
-     *
+     * This method set possible answer
+     * 
      * @param answer
      */
     public void setAnswer(String[] answer) {
@@ -42,7 +46,8 @@ public class AmricanQuestion extends Question{
     }
     
     /**
-     *
+     * This method return the right answer
+     * 
      * @return
      */
     public int getRightAns() {
@@ -50,7 +55,8 @@ public class AmricanQuestion extends Question{
     }
 
     /**
-     *
+     * This method set the right answer
+     * 
      * @param rightAns
      */
     public void setRightAns(int rightAns) {

@@ -161,12 +161,12 @@ public class LogIn extends javax.swing.JFrame {
         PreparedStatement statement;
         String sql="select UserName,Password,UserId from tblusers as a where a.`UserName`='"+userName+"'and a.`Password`='"+password+"'";
         try {
-            Class.forName(DbUtilitis.dbDriver); //load the rigt server
-            Connection connection
-                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
-                            DbUtilitis.jdbcUser,
-                            DbUtilitis.jdbcPassword);
-            PreparedStatement pstatment=connection.prepareStatement(sql);
+//            Class.forName(DbUtilitis.dbDriver); //load the rigt server
+//            Connection connection
+//                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
+//                            DbUtilitis.jdbcUser,
+//                            DbUtilitis.jdbcPassword);
+            PreparedStatement pstatment=Connect_db.getConnection().prepareStatement(sql);
             ResultSet resultSet = pstatment.executeQuery();
             
              resultSet = pstatment.executeQuery();
@@ -183,12 +183,10 @@ public class LogIn extends javax.swing.JFrame {
               
             resultSet.close();		// close resultSet
             pstatment.close();		// close statement and resultSet
-            connection.close();		// close connection, statement and resultSet 	
+            Connect_db.getConnection().close();		// close connection, statement and resultSet 	
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             System.out.println("Vendor Error: " + sqle.getErrorCode());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
         
     }//GEN-LAST:event_btnLogInActionPerformed
@@ -235,12 +233,12 @@ public class LogIn extends javax.swing.JFrame {
         PreparedStatement statement;
         String sql="select UserName,Password,UserId from tblusers as a where a.`UserName`='"+userName+"'and a.`Password`='"+password+"'";
         try {
-            Class.forName(DbUtilitis.dbDriver); //load the rigt server
-            Connection connection
-                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
-                            DbUtilitis.jdbcUser,
-                            DbUtilitis.jdbcPassword);
-            PreparedStatement pstatment=connection.prepareStatement(sql);
+//            Class.forName(DbUtilitis.dbDriver); //load the rigt server
+//            Connection connection
+//                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
+//                            DbUtilitis.jdbcUser,
+//                            DbUtilitis.jdbcPassword);
+            PreparedStatement pstatment=Connect_db.getConnection().prepareStatement(sql);
             ResultSet resultSet = pstatment.executeQuery();
              resultSet = pstatment.executeQuery();
              while(resultSet.next()){
@@ -254,12 +252,10 @@ public class LogIn extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this, "User name or password inncorrect please try agian");
             resultSet.close();		// close resultSet
             pstatment.close();		// close statement and resultSet
-            connection.close();		// close connection, statement and resultSet 	
+            //Connect_db.getConnection().close();		// close connection, statement and resultSet 	
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             System.out.println("Vendor Error: " + sqle.getErrorCode());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }  
             
         }

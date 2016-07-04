@@ -153,6 +153,7 @@ public class User {
             pstatment.close();		// close statement and resultSet
             connection.close();		// close connection, statement and resultSet 	
         } catch (SQLException sqle) {
+             System.out.println("fall in User.getHighsScore");
             System.out.println("SQLException: " + sqle.getMessage());
             System.out.println("Vendor Error: " + sqle.getErrorCode());
              return userScore;

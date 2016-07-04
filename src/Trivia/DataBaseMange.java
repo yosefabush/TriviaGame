@@ -32,14 +32,7 @@ public class DataBaseMange {
     public ArrayList getQuestion() {
 
         try {
-
-            Class.forName(DbUtilitis.dbDriver); //load the rigt server
-            Connection connection
-                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
-                            DbUtilitis.jdbcUser,
-                            DbUtilitis.jdbcPassword);
-
-            Statement statement = connection.createStatement();
+            Statement statement = Connect_db.getConnection().createStatement();
 
             String allCustomersQuery = "SELECT tblquestion.Question,tblquestion.Point,tblquestion.QuesStatusAskOrNot,tblquestion.Level,tblanswer.`PosibleAns`,tblanswer.Answer1,tblanswer.Answer2,tblanswer.Answer3,tblanswer.Answer4,tblanswer.RightAnswer FROM tblanswer INNER JOIN tblquestion ON tblquestion.QuestionID=tblanswer.AnswerID;";
             ResultSet resultSet = statement.executeQuery(allCustomersQuery);
@@ -85,14 +78,11 @@ public class DataBaseMange {
             }  
             resultSet.close();		// close resultSet
             statement.close();		// close statement and resultSet
-            connection.close();
+            Connect_db.getConnection().close();
             return allQuesFromDB;       // close connection, statement and resultSet 	
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             System.out.println("Vendor Error: " + sqle.getErrorCode());
-            return null;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
             return null;
         }
 
@@ -106,13 +96,7 @@ public class DataBaseMange {
         int quesNum = 0;
         try {
 
-            Class.forName(DbUtilitis.dbDriver); //load the rigt server
-            Connection connection
-                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
-                            DbUtilitis.jdbcUser,
-                            DbUtilitis.jdbcPassword);
-
-            Statement statement = connection.createStatement();
+            Statement statement = Connect_db.getConnection().createStatement();
 
             String allCustomersQuery = "SELECT * FROM tblquestion;";
             ResultSet resultSet = statement.executeQuery(allCustomersQuery);
@@ -123,16 +107,13 @@ public class DataBaseMange {
 
             resultSet.close();		// close resultSet
             statement.close();		// close statement and resultSet
-            connection.close();		// close connection, statement and resultSet 	
+           // Connect_db.getConnection().close();		// close connection, statement and resultSet 	
             return quesNum;
 
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             System.out.println("Vendor Error: " + sqle.getErrorCode());
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            //return quesNum;
         }
         return 0;
 
@@ -147,13 +128,7 @@ public class DataBaseMange {
         int quesNum = 0;
         try {
 
-            Class.forName(DbUtilitis.dbDriver); //load the rigt server
-            Connection connection
-                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
-                            DbUtilitis.jdbcUser,
-                            DbUtilitis.jdbcPassword);
-
-            Statement statement = connection.createStatement();
+            Statement statement = Connect_db.getConnection().createStatement();
 
             String allCustomersQuery = "SELECT * FROM tblquestion where level='"+level+"';";
             ResultSet resultSet = statement.executeQuery(allCustomersQuery);
@@ -164,16 +139,14 @@ public class DataBaseMange {
 
             resultSet.close();		// close resultSet
             statement.close();		// close statement and resultSet
-            connection.close();		// close connection, statement and resultSet 	
+            //Connect_db.getConnection().close();		// close connection, statement and resultSet 	
             return quesNum;
 
         } catch (SQLException sqle) {
+            System.out.println("heree");
             System.out.println("SQLException: " + sqle.getMessage());
             System.out.println("Vendor Error: " + sqle.getErrorCode());
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            //return quesNum;
         }
         return 0;
 

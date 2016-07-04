@@ -127,10 +127,11 @@ public class SignUp extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "cannot insert empty field");
             return;
         }
-        if(((Object)Integer.parseInt(userName)) instanceof Integer ){
+        /* chek if numer insert to user name field*/
+        /*if(((Object)Integer.parseInt(userName)) instanceof Integer ){
             JOptionPane.showMessageDialog(this, "user Name cant be number");
             return;
-        }
+        }*/
 
         try {
 
