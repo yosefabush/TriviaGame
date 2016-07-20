@@ -87,96 +87,103 @@ public class TotalSummry extends javax.swing.JFrame {
         CorrectCnt = new javax.swing.JLabel();
         correctCnt = new javax.swing.JLabel();
         timesJl2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        scoreFiled.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        scoreFiled.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         scoreFiled.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(scoreFiled);
-        scoreFiled.setBounds(320, 200, 76, 24);
+        scoreFiled.setBounds(250, 200, 76, 24);
 
         ExitBtn.setForeground(new java.awt.Color(51, 51, 51));
         ExitBtn.setText("Exit");
+        ExitBtn.setContentAreaFilled(false);
         ExitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitBtn(evt);
             }
         });
         getContentPane().add(ExitBtn);
-        ExitBtn.setBounds(310, 260, 90, 23);
+        ExitBtn.setBounds(0, 10, 90, 25);
 
         NewGameBtn.setForeground(new java.awt.Color(51, 51, 51));
-        NewGameBtn.setText("New Game");
+        NewGameBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/new-game-button-states-hovered.png"))); // NOI18N
+        NewGameBtn.setContentAreaFilled(false);
         NewGameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newGameBtn(evt);
             }
         });
         getContentPane().add(NewGameBtn);
-        NewGameBtn.setBounds(140, 260, 100, 23);
+        NewGameBtn.setBounds(140, 250, 220, 80);
 
-        GameOverTitle.setBackground(new java.awt.Color(153, 255, 153));
+        GameOverTitle.setBackground(new java.awt.Color(255, 255, 255));
         GameOverTitle.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        GameOverTitle.setForeground(new java.awt.Color(255, 255, 255));
-        GameOverTitle.setText("     Game Over!");
+        GameOverTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/game-over.png"))); // NOI18N
         GameOverTitle.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(GameOverTitle);
-        GameOverTitle.setBounds(190, 30, 161, 50);
+        GameOverTitle.setBounds(130, 20, 250, 80);
 
         TotalScoreJl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        TotalScoreJl.setForeground(new java.awt.Color(255, 255, 255));
-        TotalScoreJl.setText("Your Total Score is :");
+        TotalScoreJl.setText("Your Total Score is");
         getContentPane().add(TotalScoreJl);
         TotalScoreJl.setBounds(90, 200, 230, 22);
 
+        wrongCnt.setBackground(new java.awt.Color(255, 255, 255));
         wrongCnt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        wrongCnt.setForeground(new java.awt.Color(255, 255, 255));
-        wrongCnt.setText("You anser wrong  :");
+        wrongCnt.setText("You anser wrong ");
+        wrongCnt.setAutoscrolls(true);
+        wrongCnt.setDoubleBuffered(true);
         getContentPane().add(wrongCnt);
-        wrongCnt.setBounds(90, 130, 210, 22);
+        wrongCnt.setBounds(90, 120, 210, 22);
 
-        WrongFiled1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        WrongFiled1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         WrongFiled1.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(WrongFiled1);
-        WrongFiled1.setBounds(320, 130, 76, 22);
+        WrongFiled1.setBounds(240, 120, 76, 22);
 
-        timesJl.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        timesJl.setForeground(new java.awt.Color(255, 255, 255));
+        timesJl.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         timesJl.setText("Times");
         getContentPane().add(timesJl);
-        timesJl.setBounds(380, 140, 60, 16);
+        timesJl.setBounds(340, 130, 60, 16);
 
-        jlPoint.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jlPoint.setForeground(new java.awt.Color(255, 255, 255));
+        jlPoint.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jlPoint.setText("Points");
         getContentPane().add(jlPoint);
-        jlPoint.setBounds(380, 200, 60, 16);
+        jlPoint.setBounds(340, 210, 60, 16);
 
         NewHighScore.setFont(new java.awt.Font("Times New Roman", 2, 19)); // NOI18N
         NewHighScore.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(NewHighScore);
-        NewHighScore.setBounds(150, 90, 234, 24);
+        NewHighScore.setBounds(90, 90, 234, 24);
 
         CorrectCnt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        CorrectCnt.setForeground(new java.awt.Color(255, 255, 255));
-        CorrectCnt.setText("You answer correct:");
+        CorrectCnt.setText("You answer correct");
         getContentPane().add(CorrectCnt);
         CorrectCnt.setBounds(90, 160, 220, 22);
 
-        correctCnt.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        correctCnt.setForeground(new java.awt.Color(255, 255, 255));
+        correctCnt.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(correctCnt);
-        correctCnt.setBounds(320, 160, 76, 24);
+        correctCnt.setBounds(250, 160, 76, 24);
 
-        timesJl2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        timesJl2.setForeground(new java.awt.Color(255, 255, 255));
+        timesJl2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         timesJl2.setText("Times");
         getContentPane().add(timesJl2);
-        timesJl2.setBounds(380, 170, 60, 16);
+        timesJl2.setBounds(340, 170, 60, 16);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/homer.png"))); // NOI18N
+        jButton1.setText("jButton1");
+        jButton1.setContentAreaFilled(false);
+        getContentPane().add(jButton1);
+        jButton1.setBounds(410, 160, 140, 240);
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/175.jpg"))); // NOI18N
+        background.setAutoscrolls(true);
         getContentPane().add(background);
-        background.setBounds(0, 0, 530, 360);
+        background.setBounds(0, -10, 540, 370);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -244,6 +251,7 @@ public class TotalSummry extends javax.swing.JFrame {
     private javax.swing.JLabel WrongFiled1;
     private javax.swing.JLabel background;
     private javax.swing.JLabel correctCnt;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jlPoint;
     private javax.swing.JLabel scoreFiled;
     private javax.swing.JLabel timesJl;

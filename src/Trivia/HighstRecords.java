@@ -130,19 +130,20 @@ public class HighstRecords extends javax.swing.JFrame {
         setTitle("Summry");
         getContentPane().setLayout(null);
 
-        TitleTop5.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
+        TitleTop5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         TitleTop5.setText("     Top 5 Score :");
         getContentPane().add(TitleTop5);
-        TitleTop5.setBounds(113, 25, 255, 29);
+        TitleTop5.setBounds(180, 30, 255, 29);
 
-        btnBackToMainScreen.setText("Back");
+        btnBackToMainScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/arrow-back-1.png"))); // NOI18N
+        btnBackToMainScreen.setContentAreaFilled(false);
         btnBackToMainScreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackToMainScreenActionPerformed(evt);
             }
         });
         getContentPane().add(btnBackToMainScreen);
-        btnBackToMainScreen.setBounds(210, 420, 94, 35);
+        btnBackToMainScreen.setBounds(200, 400, 94, 35);
 
         jTableGridViewHighScore.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -166,6 +167,7 @@ public class HighstRecords extends javax.swing.JFrame {
         });
         jTableGridViewHighScore.setPreferredSize(new java.awt.Dimension(225, 275));
         jTableGridViewHighScore.setRowHeight(55);
+        jTableGridViewHighScore.setShowHorizontalLines(false);
         jScrollPane1.setViewportView(jTableGridViewHighScore);
         if (jTableGridViewHighScore.getColumnModel().getColumnCount() > 0) {
             jTableGridViewHighScore.getColumnModel().getColumn(0).setHeaderValue("User Name");
@@ -186,6 +188,8 @@ public class HighstRecords extends javax.swing.JFrame {
         picLev4.setBounds(50, 260, 50, 50);
         getContentPane().add(picLev1);
         picLev1.setBounds(50, 100, 50, 50);
+
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon22.jpg"))); // NOI18N
         getContentPane().add(Background);
         Background.setBounds(0, 0, 520, 460);
 

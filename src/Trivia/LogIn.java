@@ -65,15 +65,18 @@ public class LogIn extends javax.swing.JFrame {
         setIconImages(null);
         getContentPane().setLayout(null);
 
+        userNamejl.setBackground(new java.awt.Color(0, 0, 0));
+        userNamejl.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         userNamejl.setForeground(new java.awt.Color(255, 255, 255));
         userNamejl.setText("User Name");
         getContentPane().add(userNamejl);
-        userNamejl.setBounds(60, 100, 80, 14);
+        userNamejl.setBounds(60, 100, 80, 16);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Password");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(60, 160, 80, 14);
+        jLabel2.setBounds(60, 140, 80, 16);
 
         userNameField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -86,18 +89,22 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
         getContentPane().add(userNameField);
-        userNameField.setBounds(142, 100, 112, 20);
+        userNameField.setBounds(140, 100, 130, 22);
 
-        signUpBtn.setText("SignUp");
+        signUpBtn.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        signUpBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/signup-now.png"))); // NOI18N
+        signUpBtn.setContentAreaFilled(false);
         signUpBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signUpBtnActionPerformed(evt);
             }
         });
         getContentPane().add(signUpBtn);
-        signUpBtn.setBounds(30, 240, 90, 23);
+        signUpBtn.setBounds(110, 250, 180, 50);
 
-        btnLogIn.setText("LogIn");
+        btnLogIn.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnLogIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Login22.png"))); // NOI18N
+        btnLogIn.setContentAreaFilled(false);
         btnLogIn.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 btnLogInFocusGained(evt);
@@ -112,7 +119,7 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLogIn);
-        btnLogIn.setBounds(150, 220, 100, 23);
+        btnLogIn.setBounds(120, 190, 170, 70);
 
         jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -120,11 +127,11 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(142, 159, 112, 20);
+        jPasswordField1.setBounds(140, 140, 130, 22);
 
         ChangeLangBtn.setBackground(new java.awt.Color(102, 153, 255));
-        ChangeLangBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/languch.jpg"))); // NOI18N
-        ChangeLangBtn.setText("Change Languch");
+        ChangeLangBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/languch1.jpg"))); // NOI18N
+        ChangeLangBtn.setContentAreaFilled(false);
         ChangeLangBtn.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         ChangeLangBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,13 +139,15 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ChangeLangBtn);
-        ChangeLangBtn.setBounds(290, 230, 55, 40);
+        ChangeLangBtn.setBounds(-10, -10, 50, 50);
 
-        TriviaLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/logo.jpg"))); // NOI18N
+        TriviaLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/logo1.jpg"))); // NOI18N
+        TriviaLogo.setLabelFor(TriviaLogo);
         getContentPane().add(TriviaLogo);
-        TriviaLogo.setBounds(120, 40, 160, 40);
+        TriviaLogo.setBounds(110, 10, 180, 70);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Login.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/GameBackGround.jpg"))); // NOI18N
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(jLabel4);
         jLabel4.setBounds(0, 0, 420, 340);
 

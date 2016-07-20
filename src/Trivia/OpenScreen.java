@@ -240,19 +240,20 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         setIconImages(null);
         getContentPane().setLayout(null);
 
-        btnStartGame.setText("Ok");
+        btnStartGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/start_now_button.png"))); // NOI18N
+        btnStartGame.setContentAreaFilled(false);
         btnStartGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStartGameActionPerformed(evt);
             }
         });
         getContentPane().add(btnStartGame);
-        btnStartGame.setBounds(250, 220, 150, 30);
+        btnStartGame.setBounds(230, 210, 170, 70);
 
         PleaseChoseCntQues.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         PleaseChoseCntQues.setText("Please chose how much ques you want");
         getContentPane().add(PleaseChoseCntQues);
-        PleaseChoseCntQues.setBounds(120, 110, 430, 40);
+        PleaseChoseCntQues.setBounds(140, 90, 370, 40);
 
         cmbCountOfQUes.setModel(cmbCountOfQUes.getModel());
         cmbCountOfQUes.setToolTipText("");
@@ -262,7 +263,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(cmbCountOfQUes);
-        cmbCountOfQUes.setBounds(300, 170, 45, 20);
+        cmbCountOfQUes.setBounds(300, 170, 45, 22);
 
         btnShowHighScoreTble.setText("Table of records");
         btnShowHighScoreTble.addActionListener(new java.awt.event.ActionListener() {
@@ -271,7 +272,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(btnShowHighScoreTble);
-        btnShowHighScoreTble.setBounds(260, 270, 130, 30);
+        btnShowHighScoreTble.setBounds(500, 20, 140, 30);
 
         OpenTitelWitName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         getContentPane().add(OpenTitelWitName);
@@ -282,14 +283,16 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         getContentPane().add(currebtPlayerHighScore);
         currebtPlayerHighScore.setBounds(130, 70, 360, 30);
 
-        LogOutBtn.setText("Log Out");
+        LogOutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/logout.png"))); // NOI18N
+        LogOutBtn.setActionCommand("");
+        LogOutBtn.setContentAreaFilled(false);
         LogOutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LogOutBtnActionPerformed(evt);
             }
         });
         getContentPane().add(LogOutBtn);
-        LogOutBtn.setBounds(531, 10, 100, 30);
+        LogOutBtn.setBounds(560, 240, 80, 70);
 
         cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
         cmbLevel.addActionListener(new java.awt.event.ActionListener() {
@@ -298,7 +301,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(cmbLevel);
-        cmbLevel.setBounds(530, 280, 90, 20);
+        cmbLevel.setBounds(280, 140, 90, 22);
         getContentPane().add(CrownImg);
         CrownImg.setBounds(20, 10, 0, 90);
 
@@ -306,14 +309,19 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         getContentPane().add(jLabelLevel);
         jLabelLevel.setBounds(520, 230, 110, 30);
 
-        jButton1.setText("1 vs 1");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/1vs1n.png"))); // NOI18N
+        jButton1.setToolTipText("");
+        jButton1.setActionCommand("");
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(120, 223, 80, 30);
+        jButton1.setBounds(80, 140, 120, 70);
+
+        BackgroudTrivia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon11.jpg"))); // NOI18N
         getContentPane().add(BackgroudTrivia);
         BackgroudTrivia.setBounds(0, 0, 650, 320);
 
@@ -324,7 +332,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
      *
      */
     public void setBackGround(){
-       BackgroudTrivia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon.jpg"))); 
+       BackgroudTrivia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon11.jpg"))); 
        getContentPane().add(BackgroudTrivia);
        BackgroudTrivia.setBounds(0, 0, 650, 320);
  }
