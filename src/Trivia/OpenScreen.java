@@ -2,8 +2,14 @@
 package Trivia;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -409,9 +415,37 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         }
         this.dispose(); //close the window
     }//GEN-LAST:event_btnStartGameActionPerformed
-
+    private void StartGameActionPerformed() {                                             
+       
+        int numQues=10;  //set conts 10 qyestion
+        int level=0;
+        current.setLevel(0);
+        current.setPoints(0);
+        current.setWrongAnsCnt(0);
+        try {
+            Game newGame=new Game(numQues,current,true,level);
+        } catch (Exception ex) {
+            ex.printStackTrace(); //print all the hisory
+        }
+        this.dispose(); //close the window
+    }    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+  
+         try (Socket clientSocket = new Socket ("localhost", 2222)) {
+			
+			DataInputStream input = new DataInputStream(clientSocket.getInputStream()); 
+			PrintStream output = new PrintStream (clientSocket.getOutputStream());
+			Scanner userInput = new Scanner(System.in);	
+			output.println();
+	
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+         
+         //if(Server.class.twoPlayerConnected())
+           // StartGameActionPerformed();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

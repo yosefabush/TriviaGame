@@ -1,5 +1,6 @@
 package Trivia;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,7 +12,7 @@ import java.util.Random;
  *
  * @author Yosef
  */
-public class Game {
+public class Game implements Serializable{
 
     private static User current;
     private static ArrayList<Question> allQuesFromDB = new <Question>ArrayList();

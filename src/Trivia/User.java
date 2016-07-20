@@ -1,6 +1,7 @@
 
 package Trivia;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,7 +12,7 @@ import java.sql.SQLException;
  *
  * @author Yosef
  */
-public class User {
+public class User implements Serializable{
     private String userName;
     private String password;
     private int userID;
