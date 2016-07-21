@@ -34,6 +34,7 @@ public class PlaySounds extends Thread{
  private static Path  p = Paths.get("C:\\TriviaGame\\src\\Trivia\\Sounds\\CorrectSound.wav");
  static String correctSound=p.getFileName().toString();
  
+ 
 
 // /*
 //  * Plays the sound of the sent file name
@@ -101,7 +102,7 @@ public class PlaySounds extends Thread{
      }
      sourceLine.drain();
      sourceLine.close();
-     this.stop();
+    // this.stop();
  }
 
 }

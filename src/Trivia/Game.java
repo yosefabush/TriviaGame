@@ -1,12 +1,20 @@
 package Trivia;
 
+import TriviaGameServer.ConnectionThread;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.io.Serializable;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -38,7 +46,23 @@ public class Game implements Serializable{
         Play(wantedQuestion);
 
     }
-
+    public Game(ConnectionThread connection,boolean newGame,User current){
+        connection.getName();
+        
+         if (newGame == true) { //if is new game need to clear thee arreyList and full it from DB
+            this.level=1;
+            this.allQuesFromDB.clear();
+            this.allQuesFromDB = DataBaseMange.getInstance().getQuestion();
+        }
+       
+        this.current = current;
+        try {
+            Play(10);
+        } catch (Exception ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     /**
      *
      * @param remainingQues
@@ -75,12 +99,18 @@ public class Game implements Serializable{
             FormClass.currentLevel=0;   //set the static varibale to zero 
             
             if (updateFinalScore(current)) {//cheek if the point of current player get new high score and update in DB  
+  
                 finisGame = new TotalSummry(current,"NewHigScor"); //open summery screen
                 finisGame.setVisible(true);
+                 //here wee need to send the result of the player to server and set how is the winner
+                sendToServerTotalScore(current);
             } else {
+               
                 System.out.println("Update score Faild mybe your have highr score in DB...");
                 finisGame = new TotalSummry(current,"YouCanBetrr");//in the end show summry point
                 finisGame.setVisible(true);
+                 //here wee need to send the result of the player to server and set how is the winner
+                sendToServerTotalScore(current);
             }
         }
     }
@@ -118,5 +148,22 @@ public class Game implements Serializable{
             return false;
         }
 
+    }
+    public void sendToServerTotalScore(User player){
+        DataInputStream input = null;
+        Socket clientSocket = null;
+        try {
+                    clientSocket = new Socket("localhost", 2222);
+                    input = new DataInputStream(clientSocket.getInputStream());
+                    PrintStream output = new PrintStream(clientSocket.getOutputStream());
+                    //Scanner userInput = new Scanner(System.in);	
+                    output.println(player.getPoints());
+
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+        
     }
 }

@@ -2,7 +2,7 @@
 package Trivia;
 
 /**
- *
+ *this class define the details of dataBase 
  * @author Yosef
  */
 public class DbUtilitis {

@@ -1,5 +1,6 @@
 
 package Trivia;
+import static Trivia.LogIn.currentPlayer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
@@ -31,6 +32,8 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
     private JMenuItem newMenuItem = new JMenuItem();
     private JMenuItem exitMenuItem = new JMenuItem();
     private JMenuItem aboutMenuItem = new JMenuItem();
+    int biuldComboBox=0;
+     PlaySounds bacgroundSound;
     
     /**
      * Creates new form OpenScreen
@@ -68,6 +71,9 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
       currebtPlayerHighScore.setText((LocalizationUtil.localizedResourceBundle.getString("BestScore"))+" "+current.getHighstScore(current));
       currebtPlayerHighScore.setHorizontalAlignment(SwingConstants.CENTER);
       //JOptionPane.showMessageDialog(this,LocalizationUtil.localizedResourceBundle.getString("ChoseWnatedLevel"));
+      biuldComboBox=DataBaseMange.getInstance().countQues();
+            for(int i=0;i<biuldComboBox;i++)
+                this.cmbCountOfQUes.addItem(i+1);
     }
     
     /**
@@ -126,6 +132,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
            showExitDialog();
         }else if (ae.getSource() == newMenuItem) {  //if new game button pressed
             newGameDialog();
+            
         } else if (ae.getSource() == aboutMenuItem) {   //if about button pressed
             aboutDialog();
         }
@@ -184,7 +191,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
-            this.setVisible(false);
+            this.dispose();
             OpenScreen newGame = new OpenScreen(current);
             newGame.setVisible(true);
         }
@@ -231,7 +238,6 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         cmbLevel = new javax.swing.JComboBox();
         CrownImg = new javax.swing.JLabel();
         jLabelLevel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         BackgroudTrivia = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -263,7 +269,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(cmbCountOfQUes);
-        cmbCountOfQUes.setBounds(300, 170, 45, 22);
+        cmbCountOfQUes.setBounds(300, 170, 45, 20);
 
         btnShowHighScoreTble.setText("Table of records");
         btnShowHighScoreTble.addActionListener(new java.awt.event.ActionListener() {
@@ -284,7 +290,6 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         currebtPlayerHighScore.setBounds(130, 70, 360, 30);
 
         LogOutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/logout.png"))); // NOI18N
-        LogOutBtn.setActionCommand("");
         LogOutBtn.setContentAreaFilled(false);
         LogOutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,7 +297,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(LogOutBtn);
-        LogOutBtn.setBounds(560, 240, 80, 70);
+        LogOutBtn.setBounds(570, 160, 80, 70);
 
         cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
         cmbLevel.addActionListener(new java.awt.event.ActionListener() {
@@ -301,25 +306,13 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(cmbLevel);
-        cmbLevel.setBounds(280, 140, 90, 22);
+        cmbLevel.setBounds(280, 140, 90, 20);
         getContentPane().add(CrownImg);
         CrownImg.setBounds(20, 10, 0, 90);
 
         jLabelLevel.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         getContentPane().add(jLabelLevel);
         jLabelLevel.setBounds(520, 230, 110, 30);
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/1vs1n.png"))); // NOI18N
-        jButton1.setToolTipText("");
-        jButton1.setActionCommand("");
-        jButton1.setContentAreaFilled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(80, 140, 120, 70);
 
         BackgroudTrivia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon11.jpg"))); // NOI18N
         getContentPane().add(BackgroudTrivia);
@@ -377,8 +370,10 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
 
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
         this.dispose();
-        LogIn loGin=new LogIn();
-        loGin.setVisible(true);
+        SelectGame1 selectGame=new SelectGame1(currentPlayer);
+        selectGame.setVisible(true);
+        //LogIn loGin=new LogIn();
+        //loGin.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_LogOutBtnActionPerformed
 
@@ -437,26 +432,6 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         }
         this.dispose(); //close the window
     }    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  
-         try (Socket clientSocket = new Socket ("localhost", 2222)) {
-			
-			DataInputStream input = new DataInputStream(clientSocket.getInputStream()); 
-			PrintStream output = new PrintStream (clientSocket.getOutputStream());
-			Scanner userInput = new Scanner(System.in);	
-			output.println();
-	
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-         
-         //if(Server.class.twoPlayerConnected())
-           // StartGameActionPerformed();
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -505,7 +480,6 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
     public static javax.swing.JComboBox cmbCountOfQUes;
     private javax.swing.JComboBox cmbLevel;
     private javax.swing.JLabel currebtPlayerHighScore;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabelLevel;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,8 +5,11 @@
  */
 package TriviaGameServer;
 
+import Trivia.User;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -26,6 +29,14 @@ public class Server
     public final static int PORT = 2222;
     private int maxPlayer =0;
     static ArrayList<ConnectionThread> clients;
+     ArrayList<Socket> clientSocket=new ArrayList<Socket>();
+    static User []player1;
+    static int i=0;
+    ArrayList<PrintStream> output=new ArrayList();
+    DataInputStream input;
+    int payerScore;
+    boolean finish=false;
+    
     
     public static void main(String[] args) {
         System.out.println("Start Conection!");
@@ -48,6 +59,7 @@ public class Server
        System.out.println("Listening on port " + PORT);
        isConnected = true;
        
+       
     }
     
     // this method currently handles a single client
@@ -59,31 +71,56 @@ public class Server
         {
             try
             {      
-                Socket clientSocket = serverSocket.accept();
-                DataInputStream input = new DataInputStream(clientSocket.getInputStream()); 
-		PrintStream output = new PrintStream (clientSocket.getOutputStream());
-                output.println("Conection sucseesful!");
-                ConnectionThread singleConnection = new ConnectionThread(clientSocket);
+                 clientSocket.add(serverSocket.accept());
+                 input = new DataInputStream(clientSocket.get(i).getInputStream()); 
+		 output.add(new PrintStream (clientSocket.get(i).getOutputStream()));
+                output.get(i).println("Conection sucseesful!");
+                ConnectionThread singleConnection = new ConnectionThread(clientSocket.get(i));
                 singleConnection.setName(""+ ++maxPlayer);
+                i++;
                 clients.add(singleConnection);
-                singleConnection.start();
+               // singleConnection.start();
+                //User player =input.;
                 
             } catch (Exception ex) {
                 Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
-          twoPlayerConnected();  
+   
+        
+          if(twoPlayerConnected()){
+                 for(PrintStream p:output)
+                    p.println("Statrt playe");
+                 finish=true;
+          }  
+          
+          clientSocket=null;
+         while(finish)
+        {
+          try
+            {      
+                 clientSocket.add(serverSocket.accept());
+                 input = new DataInputStream(clientSocket.get(i).getInputStream()); 
+		 output.add(new PrintStream (clientSocket.get(i).getOutputStream()));
+                 output.get(i).println("Conection sucseesful!");
+                 if(!clientSocket.isEmpty()){
+                    try {
+                        payerScore=input.readInt();
+                        System.out.println(payerScore);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                 }
+            } catch (Exception ex) {
+                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
     }
     public boolean twoPlayerConnected(){
         if(clients.size()==2){
-               
-                System.out.println("two Connection estblish SATRT PLAY!");
-                
-                //clients.get(1).startGame(clients.get(0));
-                //clients.get(1).startGame(clients.get(1));
-                //Game newGame=new Game(numQues,current,true,level);
-                
+             System.out.println("two Connection estblish SATRT PLAY!");                
                    return true; 
             }
         return false;

@@ -5,6 +5,7 @@
 package TriviaGameServer;
 
 
+import Trivia.Game;
 import TriviaGameServer.ConnectionData;
 import java.io.*;
 import java.net.Socket;
@@ -72,8 +73,8 @@ public class ConnectionThread extends Thread
         }
     }
     
-    public boolean startGame(ConnectionThread conection){
-        
-        return true;
+    public void startGame(ConnectionThread conection){
+      //  conection.ois;
+       // Game game=new Game(conection,true,Server.player1[0]);
     }
 }

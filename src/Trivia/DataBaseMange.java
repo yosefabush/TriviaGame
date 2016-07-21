@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- *
+ *this class use for get data from data base 
  * @author Yosef
  */
 public class DataBaseMange {
@@ -19,15 +19,15 @@ public class DataBaseMange {
     ArrayList<Question> allQuesFromDB = new <Question>ArrayList();
 
     /**
-     *
+     *empty constractor
      */
     public DataBaseMange() {
 
     }
     
     /**
-     *
-     * @return
+     *this method return all question that in DB
+     * @return ArrayList
      */
     public ArrayList getQuestion() {
 
@@ -89,8 +89,8 @@ public class DataBaseMange {
     }
 
     /**
-     *
-     * @return
+     *this method return the count of all question in data base
+     * @return @paramint
      */
     public int countQues() {
         int quesNum = 0;
@@ -120,7 +120,7 @@ public class DataBaseMange {
     }
     
     /**
-     *
+     *this method return the count of all question in current level from data base
      * @param level
      * @return
      */
@@ -153,8 +153,8 @@ public class DataBaseMange {
     }
 
     /**
-     *
-     * @return
+     *this is static method that return singleton connection to database
+     * @return DataBaseMange
      */
     public static DataBaseMange getInstance() {
 

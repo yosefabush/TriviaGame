@@ -38,9 +38,9 @@ public class TotalSummry extends javax.swing.JFrame {
      *
      */
     public void setBackGround(){
-       background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/SummeryImage.png"))); 
+       background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/gameOverBackground.jpg"))); 
        getContentPane().add(background);
-       background.setBounds(0, 0, 530,360);
+      // background.setBounds(0, 0, 530,320);
  }
 
     /**
@@ -94,7 +94,6 @@ public class TotalSummry extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         scoreFiled.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        scoreFiled.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(scoreFiled);
         scoreFiled.setBounds(250, 200, 76, 24);
 
@@ -107,7 +106,7 @@ public class TotalSummry extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ExitBtn);
-        ExitBtn.setBounds(0, 10, 90, 25);
+        ExitBtn.setBounds(0, 10, 90, 23);
 
         NewGameBtn.setForeground(new java.awt.Color(51, 51, 51));
         NewGameBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/new-game-button-states-hovered.png"))); // NOI18N
@@ -141,7 +140,6 @@ public class TotalSummry extends javax.swing.JFrame {
         wrongCnt.setBounds(90, 120, 210, 22);
 
         WrongFiled1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        WrongFiled1.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(WrongFiled1);
         WrongFiled1.setBounds(240, 120, 76, 22);
 
@@ -180,10 +178,10 @@ public class TotalSummry extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(410, 160, 140, 240);
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/175.jpg"))); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/gameOverBackground.jpg"))); // NOI18N
         background.setAutoscrolls(true);
         getContentPane().add(background);
-        background.setBounds(0, -10, 540, 370);
+        background.setBounds(0, -10, 590, 390);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

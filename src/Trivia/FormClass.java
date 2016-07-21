@@ -360,6 +360,7 @@ public class FormClass extends JFrame implements ActionListener {
             }
             //in any case correct or not open the game with less quse (n-1) with the same current
             try {
+                System.out.println("open next ques "+remainedQuestios);
                 Game game = new Game(--remainedQuestios, current, false,currentLevel);//false mining the is not new game keep use the same ArrayList
                 this.dispose();
             } catch (Exception ex) {

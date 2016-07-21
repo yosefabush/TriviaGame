@@ -89,7 +89,7 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
         getContentPane().add(userNameField);
-        userNameField.setBounds(140, 100, 130, 22);
+        userNameField.setBounds(140, 100, 130, 20);
 
         signUpBtn.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         signUpBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/signup-now.png"))); // NOI18N
@@ -105,17 +105,17 @@ public class LogIn extends javax.swing.JFrame {
         btnLogIn.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnLogIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Login22.png"))); // NOI18N
         btnLogIn.setContentAreaFilled(false);
+        btnLogIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogInActionPerformed(evt);
+            }
+        });
         btnLogIn.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 btnLogInFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 btnLogInFocusLost(evt);
-            }
-        });
-        btnLogIn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogInActionPerformed(evt);
             }
         });
         getContentPane().add(btnLogIn);
@@ -127,7 +127,7 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(140, 140, 130, 22);
+        jPasswordField1.setBounds(140, 140, 130, 20);
 
         ChangeLangBtn.setBackground(new java.awt.Color(102, 153, 255));
         ChangeLangBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/languch1.jpg"))); // NOI18N
@@ -183,8 +183,8 @@ public class LogIn extends javax.swing.JFrame {
              while(resultSet.next()){
                  this.currentPlayer=new User(resultSet.getString("UserName"),resultSet.getString("Password"),resultSet.getInt("UserID"));
                  this.dispose();
-                 OpenScreen newGame=new OpenScreen(currentPlayer);
-                 newGame.setVisible(true);
+                 SelectGame1 selectGame=new SelectGame1(currentPlayer);
+                 selectGame.setVisible(true);
                  this.dispose();
                  return;
              }
@@ -253,8 +253,8 @@ public class LogIn extends javax.swing.JFrame {
              while(resultSet.next()){
                  this.currentPlayer=new User(resultSet.getString("UserName"),resultSet.getString("Password"),resultSet.getInt("UserID"));
                  this.dispose();
-                 OpenScreen newGame=new OpenScreen(currentPlayer);
-                 newGame.setVisible(true);
+                 SelectGame1 selectGame=new SelectGame1(currentPlayer);
+                 selectGame.setVisible(true);
                  this.dispose();
                  return;
              }
