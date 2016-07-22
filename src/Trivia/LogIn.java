@@ -239,14 +239,9 @@ public class LogIn extends javax.swing.JFrame {
             String userName=userNameField.getText();
             String password=jPasswordField1.getText();
         
-        PreparedStatement statement;
+       // PreparedStatement statement;
         String sql="select UserName,Password,UserId from tblusers as a where a.`UserName`='"+userName+"'and a.`Password`='"+password+"'";
         try {
-//            Class.forName(DbUtilitis.dbDriver); //load the rigt server
-//            Connection connection
-//                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
-//                            DbUtilitis.jdbcUser,
-//                            DbUtilitis.jdbcPassword);
             PreparedStatement pstatment=Connect_db.getConnection().prepareStatement(sql);
             ResultSet resultSet = pstatment.executeQuery();
              resultSet = pstatment.executeQuery();

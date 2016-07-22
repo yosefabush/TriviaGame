@@ -5,7 +5,9 @@
  */
 package Trivia;
 
+import java.awt.Toolkit;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -13,7 +15,10 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import resources.LocalizationUtil;
 
 /**
@@ -26,6 +31,15 @@ public class SelectGame1 extends javax.swing.JFrame {
     static User current;
     DataInputStream input = null;
     Socket clientSocket = null;
+    MusicClass Mp3ClassPlayer = new MusicClass();
+    public static int count=1;
+    int xMouse;
+    int yMouse;
+    static boolean firstTime=false;
+    static boolean soundPlaying=false;
+    
+    int width = (Toolkit.getDefaultToolkit().getScreenSize().width / 2) - 185;
+    int height = Toolkit.getDefaultToolkit().getScreenSize().height - 180;
 
     /**
      * Creates new form SelectGame1
@@ -33,7 +47,13 @@ public class SelectGame1 extends javax.swing.JFrame {
     public SelectGame1(User curentPlayer) {
         initComponents();
         this.current = curentPlayer;
+        this.setSize(660, 345);
         setLocationRelativeTo(null);
+        if(!firstTime){
+            loadDefultSound();
+            firstTime=true;
+            soundPlaying=true;
+        }
         title.setText(current.getUserName());
         //bacgroundSound = new PlaySounds("C:\\Users\\Yosef\\Documents\\NetBeansProjects\\Java\\TriviaGame1\\src\\Trivia\\Sounds\\ChillingMusic.wav");
 
@@ -54,10 +74,15 @@ public class SelectGame1 extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         title = new javax.swing.JLabel();
+        chooseFile = new javax.swing.JLabel();
+        pause = new javax.swing.JLabel();
+        play = new javax.swing.JLabel();
+        stop = new javax.swing.JLabel();
+        loopPlay = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(650, 320));
         getContentPane().setLayout(null);
 
         LogOutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/logout.png"))); // NOI18N
@@ -103,6 +128,60 @@ public class SelectGame1 extends javax.swing.JFrame {
         getContentPane().add(title);
         title.setBounds(210, 10, 260, 30);
 
+        chooseFile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                chooseFileMouseReleased(evt);
+            }
+        });
+        getContentPane().add(chooseFile);
+        chooseFile.setBounds(620, 14, 20, 50);
+
+        pause.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                pauseMouseReleased(evt);
+            }
+        });
+        getContentPane().add(pause);
+        pause.setBounds(580, 14, 30, 50);
+
+        play.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                playMouseReleased(evt);
+            }
+        });
+        getContentPane().add(play);
+        play.setBounds(540, 14, 30, 60);
+
+        stop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                stopMouseReleased(evt);
+            }
+        });
+        getContentPane().add(stop);
+        stop.setBounds(500, 10, 30, 60);
+
+        loopPlay.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                loopPlayMouseReleased(evt);
+            }
+        });
+        getContentPane().add(loopPlay);
+        loopPlay.setBounds(470, 10, 20, 60);
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/BackgroundPlayer.png"))); // NOI18N
+        background.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                backgroundMousePressed(evt);
+            }
+        });
+        background.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                backgroundMouseDragged(evt);
+            }
+        });
+        getContentPane().add(background);
+        background.setBounds(470, 0, 190, 60);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon22.jpg"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 650, 320);
@@ -110,6 +189,11 @@ public class SelectGame1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void loadDefultSound(){
+        Mp3ClassPlayer.Stop();
+        Mp3ClassPlayer.Play("C:\\Users\\Yosef\\Documents\\NetBeansProjects\\Java\\TriviaGame1\\src\\Trivia\\Sounds\\ChillingMusic.mp3"+"");
+    }
+    
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
         this.dispose();
         LogIn loGin = new LogIn();
@@ -118,6 +202,8 @@ public class SelectGame1 extends javax.swing.JFrame {
     }//GEN-LAST:event_LogOutBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Mp3ClassPlayer.Stop();
+        firstTime=false;
         Thread t = new Thread() {
             public void run() {
                 try {
@@ -162,11 +248,78 @@ public class SelectGame1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        Mp3ClassPlayer.Stop();
+        firstTime=false;
         OpenScreen newGame = new OpenScreen(current);
         newGame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void backgroundMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        
+        this.setLocation(x - xMouse, y - yMouse);
+    }//GEN-LAST:event_backgroundMouseDragged
+
+    private void backgroundMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundMousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_backgroundMousePressed
+
+    private void stopMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stopMouseReleased
+        soundPlaying=false;  
+        Mp3ClassPlayer.Stop();    }//GEN-LAST:event_stopMouseReleased
+
+    private void playMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playMouseReleased
+       if(!soundPlaying){
+        Mp3ClassPlayer.Resume();
+        soundPlaying=true;
+       }
+       
+    }//GEN-LAST:event_playMouseReleased
+
+    private void pauseMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pauseMouseReleased
+       try {
+            // TODO add your handling code here:
+            Mp3ClassPlayer.Pause();
+             soundPlaying=false;  
+        } catch (IOException ex) {
+            Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_pauseMouseReleased
+
+    private void chooseFileMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseFileMouseReleased
+        FileFilter filter = new FileNameExtensionFilter("MP3 Files", "mp3", "mpeg3");
+        
+        JFileChooser chooser = new JFileChooser("C:\\Music");
+        chooser.addChoosableFileFilter(filter);
+        
+        int returnVal = chooser.showOpenDialog(null);
+        
+        if(returnVal == JFileChooser.APPROVE_OPTION){
+            Mp3ClassPlayer.Stop();
+            File myFile = chooser.getSelectedFile();
+            String song = myFile + "";
+          
+            Mp3ClassPlayer.Play(song);
+            
+            
+        }
+    }//GEN-LAST:event_chooseFileMouseReleased
+
+    private void loopPlayMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loopPlayMouseReleased
+         switch(count){
+            case 0:
+                count = 1;
+                break;
+                
+            case 1:
+                count = 0;
+                break;
+            
+        }
+    }//GEN-LAST:event_loopPlayMouseReleased
 
     /**
      * @param args the command line arguments
@@ -213,10 +366,16 @@ public class SelectGame1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LogOutBtn;
+    private javax.swing.JLabel background;
+    private javax.swing.JLabel chooseFile;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel loopPlay;
+    private javax.swing.JLabel pause;
+    private javax.swing.JLabel play;
+    private javax.swing.JLabel stop;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }
