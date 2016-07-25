@@ -38,12 +38,12 @@ public class SignUp extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         userNameField.requestFocusInWindow();
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("signUpMainTitle"));
-        signUpTitle.setText(LocalizationUtil.localizedResourceBundle.getString("signUpTitle"));
         PasswordLab.setText(LocalizationUtil.localizedResourceBundle.getString("PasswordKEY"));
         userNameLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
-        SignUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
-        Backbtn.setText((LocalizationUtil.localizedResourceBundle.getString("BackbKey")));
-        changeLang.setText((LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")));
+      //  SignUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
+       // signUpTitle.setText(LocalizationUtil.localizedResourceBundle.getString("signUpTitle"));
+      //  Backbtn.setText((LocalizationUtil.localizedResourceBundle.getString("BackbKey")));
+      //  changeLang.setText((LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")));
     }
 
     /**
@@ -261,12 +261,13 @@ public class SignUp extends javax.swing.JFrame {
      */
     public void updateCaptions() {
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("signUpMainTitle"));
-        signUpTitle.setText(LocalizationUtil.localizedResourceBundle.getString("signUpTitle"));
         PasswordLab.setText(LocalizationUtil.localizedResourceBundle.getString("PasswordKEY"));
         userNameLab.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
-        SignUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
-        Backbtn.setText((LocalizationUtil.localizedResourceBundle.getString("BackbKey")));
-        changeLang.setText((LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")));
+        // signUpTitle.setText(LocalizationUtil.localizedResourceBundle.getString("signUpTitle"));
+       // SignUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
+      //  Backbtn.setText((LocalizationUtil.localizedResourceBundle.getString("BackbKey")));
+      // changeLang.setText((LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")));
+        
     }
 
     /**

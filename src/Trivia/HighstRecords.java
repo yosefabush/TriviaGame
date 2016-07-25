@@ -136,6 +136,7 @@ public class HighstRecords extends javax.swing.JFrame {
         TitleTop5.setBounds(180, 30, 255, 29);
 
         btnBackToMainScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/arrow-back-1.png"))); // NOI18N
+        btnBackToMainScreen.setBorder(null);
         btnBackToMainScreen.setContentAreaFilled(false);
         btnBackToMainScreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

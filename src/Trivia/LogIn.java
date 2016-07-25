@@ -32,11 +32,11 @@ public class LogIn extends javax.swing.JFrame {
         initComponents();
         userNameField.requestFocusInWindow();
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("GameTitle"));
-        signUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
-        btnLogIn.setText(LocalizationUtil.localizedResourceBundle.getString("LogInKey"));
         userNamejl.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
         jLabel2.setText(LocalizationUtil.localizedResourceBundle.getString("PasswordKEY"));
-        ChangeLangBtn.setText(LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey"));
+      //  signUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
+      //  btnLogIn.setText(LocalizationUtil.localizedResourceBundle.getString("LogInKey"));
+        //ChangeLangBtn.setText(LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey"));
         this.setSize(416,360);
         setLocationRelativeTo(null);
     }
@@ -50,11 +50,11 @@ public class LogIn extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnLogIn = new javax.swing.JButton();
+        signUpBtn = new javax.swing.JButton();
         userNamejl = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         userNameField = new javax.swing.JTextField();
-        signUpBtn = new javax.swing.JButton();
-        btnLogIn = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
         ChangeLangBtn = new javax.swing.JButton();
         TriviaLogo = new javax.swing.JLabel();
@@ -64,6 +64,39 @@ public class LogIn extends javax.swing.JFrame {
         setTitle("Log In");
         setIconImages(null);
         getContentPane().setLayout(null);
+
+        btnLogIn.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnLogIn.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Login22.png"))); // NOI18N
+        btnLogIn.setBorder(null);
+        btnLogIn.setContentAreaFilled(false);
+        btnLogIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogInActionPerformed(evt);
+            }
+        });
+        btnLogIn.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnLogInFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                btnLogInFocusLost(evt);
+            }
+        });
+        getContentPane().add(btnLogIn);
+        btnLogIn.setBounds(120, 180, 160, 60);
+
+        signUpBtn.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        signUpBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/signup-now.png"))); // NOI18N
+        signUpBtn.setBorder(null);
+        signUpBtn.setContentAreaFilled(false);
+        signUpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signUpBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(signUpBtn);
+        signUpBtn.setBounds(110, 240, 180, 60);
 
         userNamejl.setBackground(new java.awt.Color(0, 0, 0));
         userNamejl.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -91,36 +124,6 @@ public class LogIn extends javax.swing.JFrame {
         getContentPane().add(userNameField);
         userNameField.setBounds(140, 100, 130, 20);
 
-        signUpBtn.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        signUpBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/signup-now.png"))); // NOI18N
-        signUpBtn.setContentAreaFilled(false);
-        signUpBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signUpBtnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(signUpBtn);
-        signUpBtn.setBounds(110, 250, 180, 50);
-
-        btnLogIn.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        btnLogIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Login22.png"))); // NOI18N
-        btnLogIn.setContentAreaFilled(false);
-        btnLogIn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogInActionPerformed(evt);
-            }
-        });
-        btnLogIn.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                btnLogInFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                btnLogInFocusLost(evt);
-            }
-        });
-        getContentPane().add(btnLogIn);
-        btnLogIn.setBounds(120, 190, 170, 70);
-
         jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jPasswordField1KeyPressed(evt);
@@ -131,6 +134,7 @@ public class LogIn extends javax.swing.JFrame {
 
         ChangeLangBtn.setBackground(new java.awt.Color(102, 153, 255));
         ChangeLangBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/languch1.jpg"))); // NOI18N
+        ChangeLangBtn.setBorder(null);
         ChangeLangBtn.setContentAreaFilled(false);
         ChangeLangBtn.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         ChangeLangBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +143,7 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ChangeLangBtn);
-        ChangeLangBtn.setBounds(-10, -10, 50, 50);
+        ChangeLangBtn.setBounds(0, 0, 60, 60);
 
         TriviaLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/logo1.jpg"))); // NOI18N
         TriviaLogo.setLabelFor(TriviaLogo);
@@ -167,14 +171,9 @@ public class LogIn extends javax.swing.JFrame {
         String userName=userNameField.getText();
         String password=jPasswordField1.getText();
         
-        PreparedStatement statement;
+      
         String sql="select UserName,Password,UserId from tblusers as a where a.`UserName`='"+userName+"'and a.`Password`='"+password+"'";
         try {
-//            Class.forName(DbUtilitis.dbDriver); //load the rigt server
-//            Connection connection
-//                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
-//                            DbUtilitis.jdbcUser,
-//                            DbUtilitis.jdbcPassword);
             PreparedStatement pstatment=Connect_db.getConnection().prepareStatement(sql);
             ResultSet resultSet = pstatment.executeQuery();
             
@@ -272,11 +271,12 @@ public class LogIn extends javax.swing.JFrame {
     public void updateCaptions(){
         
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("GameTitle"));
-        signUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
-        btnLogIn.setText(LocalizationUtil.localizedResourceBundle.getString("LogInKey"));
         userNamejl.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
-        ChangeLangBtn.setText(LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey"));
         jLabel2.setText(LocalizationUtil.localizedResourceBundle.getString("PasswordKEY"));
+        //signUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
+       // btnLogIn.setText(LocalizationUtil.localizedResourceBundle.getString("LogInKey"));
+        //ChangeLangBtn.setText(LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey"));
+        
     }
     
     

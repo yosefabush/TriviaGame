@@ -31,12 +31,14 @@ public class SelectGame1 extends javax.swing.JFrame {
     static User current;
     DataInputStream input = null;
     Socket clientSocket = null;
+     static PrintStream output=null;
     MusicClass Mp3ClassPlayer = new MusicClass();
     public static int count=1;
     int xMouse;
     int yMouse;
     static boolean firstTime=false;
     static boolean soundPlaying=false;
+     static boolean oneVsOneSelcted=true;
     
     int width = (Toolkit.getDefaultToolkit().getScreenSize().width / 2) - 185;
     int height = Toolkit.getDefaultToolkit().getScreenSize().height - 180;
@@ -86,6 +88,7 @@ public class SelectGame1 extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         LogOutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/logout.png"))); // NOI18N
+        LogOutBtn.setBorder(null);
         LogOutBtn.setContentAreaFilled(false);
         LogOutBtn.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         LogOutBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +100,7 @@ public class SelectGame1 extends javax.swing.JFrame {
         LogOutBtn.setBounds(570, 240, 70, 70);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/1vs1n.png"))); // NOI18N
+        jButton1.setBorder(null);
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -108,6 +112,7 @@ public class SelectGame1 extends javax.swing.JFrame {
         jButton1.setBounds(270, 110, 200, 70);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Singleplayer_Button.png"))); // NOI18N
+        jButton2.setBorder(null);
         jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,12 +209,15 @@ public class SelectGame1 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Mp3ClassPlayer.Stop();
         firstTime=false;
+        
+        if(oneVsOneSelcted){
+            oneVsOneSelcted=false;
         Thread t = new Thread() {
             public void run() {
                 try {
                     clientSocket = new Socket("localhost", 2222);
                     input = new DataInputStream(clientSocket.getInputStream());
-                    PrintStream output = new PrintStream(clientSocket.getOutputStream());
+                     output = new PrintStream(clientSocket.getOutputStream());
                     //Scanner userInput = new Scanner(System.in);	
                     //output.println();
 
@@ -243,6 +251,8 @@ public class SelectGame1 extends javax.swing.JFrame {
             }
         };
         t.start();
+        }else
+            System.out.println("Yoy alredy clicked!\n wating for another plyer");
 
 
     }//GEN-LAST:event_jButton1ActionPerformed

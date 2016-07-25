@@ -1,9 +1,12 @@
 
 package Trivia;
 import static Trivia.LogIn.currentPlayer;
+import static Trivia.SelectGame1.firstTime;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -11,11 +14,16 @@ import java.net.UnknownHostException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import resources.LocalizationUtil;
 
 /**
@@ -33,7 +41,18 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
     private JMenuItem exitMenuItem = new JMenuItem();
     private JMenuItem aboutMenuItem = new JMenuItem();
     int biuldComboBox=0;
+    static boolean playerChoseLevel=false;
      PlaySounds bacgroundSound;
+      MusicClass Mp3ClassPlayer = new MusicClass();
+    public static int count=1;
+    int xMouse;
+    int yMouse;
+    static boolean firstTime=false;
+    static boolean soundPlaying=false;
+    
+    int width = (Toolkit.getDefaultToolkit().getScreenSize().width / 2) - 185;
+    int height = Toolkit.getDefaultToolkit().getScreenSize().height - 180;
+
     
     /**
      * Creates new form OpenScreen
@@ -41,7 +60,10 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
      */
     public OpenScreen(User currentUser) {
         initComponents();
+      //  cmbLevel.setLocation(300, 200);
         buildMenu();
+        
+     
         addListeners();
         comboInit();
         this.setSize(661,375);
@@ -49,12 +71,16 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
        
        this.setTitle(LocalizationUtil.localizedResourceBundle.getString("WelcomGame"));
        jLabelLevel.setText(LocalizationUtil.localizedResourceBundle.getString("ChoseLevel"));
-       LogOutBtn.setText(LocalizationUtil.localizedResourceBundle.getString("LogOutKey"));
+     //  LogOutBtn.setText(LocalizationUtil.localizedResourceBundle.getString("LogOutKey"));
        PleaseChoseCntQues.setText(LocalizationUtil.localizedResourceBundle.getString("PleaseChoseCntQues"));
        PleaseChoseCntQues.setHorizontalAlignment(SwingConstants.CENTER);
-       btnStartGame.setText(LocalizationUtil.localizedResourceBundle.getString("StartGameKey"));
+       //btnStartGame.setText(LocalizationUtil.localizedResourceBundle.getString("StartGameKey"));
        btnShowHighScoreTble.setText(LocalizationUtil.localizedResourceBundle.getString("HighScoreTble"));
-      
+       if(!playerChoseLevel){
+          PleaseChoseCntQues.hide();
+          cmbCountOfQUes.hide();
+        playerChoseLevel=true;
+      }
        if(Integer.parseInt(current.getHighstScore(current))> 40){
            ShowCrownIcon();
        }
@@ -71,6 +97,11 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
       currebtPlayerHighScore.setText((LocalizationUtil.localizedResourceBundle.getString("BestScore"))+" "+current.getHighstScore(current));
       currebtPlayerHighScore.setHorizontalAlignment(SwingConstants.CENTER);
       //JOptionPane.showMessageDialog(this,LocalizationUtil.localizedResourceBundle.getString("ChoseWnatedLevel"));
+      if(!firstTime){
+            loadDefultSound();
+            firstTime=true;
+            soundPlaying=true;
+        }
       biuldComboBox=DataBaseMange.getInstance().countQues();
             for(int i=0;i<biuldComboBox;i++)
                 this.cmbCountOfQUes.addItem(i+1);
@@ -95,6 +126,14 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         myMenuBar.add(helpMenu);
 
         this.setJMenuBar(myMenuBar);
+    }
+    
+    /**
+     *
+     */
+       public void loadDefultSound(){
+        Mp3ClassPlayer.Stop();
+        Mp3ClassPlayer.Play("C:\\Users\\Yosef\\Documents\\NetBeansProjects\\Java\\TriviaGame1\\src\\Trivia\\Sounds\\ChillingMusic.mp3"+"");
     }
     
     /**
@@ -152,10 +191,10 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         helpMenu.setText(LocalizationUtil.localizedResourceBundle.getString("HelpKey"));
         changeLang.setText(LocalizationUtil.localizedResourceBundle.getString("languageKey"));
         jLabelLevel.setText(LocalizationUtil.localizedResourceBundle.getString("ChoseLevel"));
-        LogOutBtn.setText(LocalizationUtil.localizedResourceBundle.getString("LogOutKey"));
+       // LogOutBtn.setText(LocalizationUtil.localizedResourceBundle.getString("LogOutKey"));
         PleaseChoseCntQues.setText(LocalizationUtil.localizedResourceBundle.getString("PleaseChoseCntQues"));
         PleaseChoseCntQues.setHorizontalAlignment(SwingConstants.CENTER);
-        btnStartGame.setText(LocalizationUtil.localizedResourceBundle.getString("StartGameKey"));
+       // btnStartGame.setText(LocalizationUtil.localizedResourceBundle.getString("StartGameKey"));
         btnShowHighScoreTble.setText(LocalizationUtil.localizedResourceBundle.getString("HighScoreTble"));
         OpenTitelWitName.setText(LocalizationUtil.localizedResourceBundle.getString("WelcomGame")+" "+current.getUserName());
         OpenTitelWitName.setHorizontalAlignment(SwingConstants.CENTER);
@@ -216,7 +255,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(cmbLevel);
-        cmbLevel.setBounds(520, 280, 90, 20);
+        cmbLevel.setBounds(270, 70, 90, 20);
     }
 
     /**
@@ -238,6 +277,12 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         cmbLevel = new javax.swing.JComboBox();
         CrownImg = new javax.swing.JLabel();
         jLabelLevel = new javax.swing.JLabel();
+        loopPlay = new javax.swing.JLabel();
+        stop = new javax.swing.JLabel();
+        play = new javax.swing.JLabel();
+        pause = new javax.swing.JLabel();
+        chooseFile = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
         BackgroudTrivia = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -247,6 +292,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         getContentPane().setLayout(null);
 
         btnStartGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/start_now_button.png"))); // NOI18N
+        btnStartGame.setBorder(null);
         btnStartGame.setContentAreaFilled(false);
         btnStartGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,12 +300,12 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(btnStartGame);
-        btnStartGame.setBounds(230, 210, 170, 70);
+        btnStartGame.setBounds(240, 190, 170, 60);
 
         PleaseChoseCntQues.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         PleaseChoseCntQues.setText("Please chose how much ques you want");
         getContentPane().add(PleaseChoseCntQues);
-        PleaseChoseCntQues.setBounds(140, 90, 370, 40);
+        PleaseChoseCntQues.setBounds(140, 90, 390, 40);
 
         cmbCountOfQUes.setModel(cmbCountOfQUes.getModel());
         cmbCountOfQUes.setToolTipText("");
@@ -269,7 +315,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(cmbCountOfQUes);
-        cmbCountOfQUes.setBounds(300, 170, 45, 20);
+        cmbCountOfQUes.setBounds(300, 160, 45, 20);
 
         btnShowHighScoreTble.setText("Table of records");
         btnShowHighScoreTble.addActionListener(new java.awt.event.ActionListener() {
@@ -278,18 +324,19 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(btnShowHighScoreTble);
-        btnShowHighScoreTble.setBounds(500, 20, 140, 30);
+        btnShowHighScoreTble.setBounds(260, 270, 140, 30);
 
         OpenTitelWitName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         getContentPane().add(OpenTitelWitName);
-        OpenTitelWitName.setBounds(140, 20, 360, 40);
+        OpenTitelWitName.setBounds(0, 170, 200, 80);
 
         currebtPlayerHighScore.setFont(new java.awt.Font("Tahoma", 3, 15)); // NOI18N
-        currebtPlayerHighScore.setForeground(new java.awt.Color(51, 51, 255));
+        currebtPlayerHighScore.setForeground(new java.awt.Color(0, 204, 204));
         getContentPane().add(currebtPlayerHighScore);
-        currebtPlayerHighScore.setBounds(130, 70, 360, 30);
+        currebtPlayerHighScore.setBounds(0, 250, 220, 30);
 
         LogOutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/logout.png"))); // NOI18N
+        LogOutBtn.setBorder(null);
         LogOutBtn.setContentAreaFilled(false);
         LogOutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,7 +344,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(LogOutBtn);
-        LogOutBtn.setBounds(570, 160, 80, 70);
+        LogOutBtn.setBounds(570, 250, 80, 70);
 
         cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
         cmbLevel.addActionListener(new java.awt.event.ActionListener() {
@@ -306,13 +353,67 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(cmbLevel);
-        cmbLevel.setBounds(280, 140, 90, 20);
+        cmbLevel.setBounds(280, 130, 90, 20);
         getContentPane().add(CrownImg);
         CrownImg.setBounds(20, 10, 0, 90);
 
         jLabelLevel.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         getContentPane().add(jLabelLevel);
-        jLabelLevel.setBounds(520, 230, 110, 30);
+        jLabelLevel.setBounds(260, 40, 110, 30);
+
+        loopPlay.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                loopPlayMouseReleased(evt);
+            }
+        });
+        getContentPane().add(loopPlay);
+        loopPlay.setBounds(470, 10, 20, 60);
+
+        stop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                stopMouseReleased(evt);
+            }
+        });
+        getContentPane().add(stop);
+        stop.setBounds(500, 10, 30, 60);
+
+        play.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                playMouseReleased(evt);
+            }
+        });
+        getContentPane().add(play);
+        play.setBounds(540, 10, 30, 60);
+
+        pause.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                pauseMouseReleased(evt);
+            }
+        });
+        getContentPane().add(pause);
+        pause.setBounds(580, 10, 30, 50);
+
+        chooseFile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                chooseFileMouseReleased(evt);
+            }
+        });
+        getContentPane().add(chooseFile);
+        chooseFile.setBounds(620, 10, 20, 50);
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/BackgroundPlayer.png"))); // NOI18N
+        background.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                backgroundMousePressed(evt);
+            }
+        });
+        background.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                backgroundMouseDragged(evt);
+            }
+        });
+        getContentPane().add(background);
+        background.setBounds(470, 0, 190, 60);
 
         BackgroudTrivia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon11.jpg"))); // NOI18N
         getContentPane().add(BackgroudTrivia);
@@ -369,12 +470,11 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_btnShowHighScoreTbleActionPerformed
 
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
+         Mp3ClassPlayer.Stop(); 
         this.dispose();
         SelectGame1 selectGame=new SelectGame1(currentPlayer);
         selectGame.setVisible(true);
-        //LogIn loGin=new LogIn();
-        //loGin.setVisible(true);
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_LogOutBtnActionPerformed
 
     private void cmbCountOfQUesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCountOfQUesActionPerformed
@@ -383,6 +483,8 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
 
     private void cmbLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLevelActionPerformed
         cmbCountOfQUes.removeAllItems();
+        PleaseChoseCntQues.show();
+          cmbCountOfQUes.show();
         int biuldComboBox;
                                                                         
          if(cmbLevel.getSelectedItem().equals(LocalizationUtil.localizedResourceBundle.getString("Rand")))
@@ -418,6 +520,71 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         }
         this.dispose(); //close the window
     }//GEN-LAST:event_btnStartGameActionPerformed
+
+    private void backgroundMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundMousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_backgroundMousePressed
+
+    private void backgroundMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+
+        this.setLocation(x - xMouse, y - yMouse);
+    }//GEN-LAST:event_backgroundMouseDragged
+
+    private void loopPlayMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loopPlayMouseReleased
+        switch(count){
+            case 0:
+            count = 1;
+            break;
+
+            case 1:
+            count = 0;
+            break;
+
+        }
+    }//GEN-LAST:event_loopPlayMouseReleased
+
+    private void stopMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stopMouseReleased
+        soundPlaying=false;
+    }//GEN-LAST:event_stopMouseReleased
+
+    private void playMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playMouseReleased
+        if(!soundPlaying){
+            Mp3ClassPlayer.Resume();
+            soundPlaying=true;
+        }
+
+    }//GEN-LAST:event_playMouseReleased
+
+    private void pauseMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pauseMouseReleased
+        try {
+            // TODO add your handling code here:
+            Mp3ClassPlayer.Pause();
+            soundPlaying=false;
+        } catch (IOException ex) {
+            Logger.getLogger(OpenScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_pauseMouseReleased
+
+    private void chooseFileMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseFileMouseReleased
+        FileFilter filter = new FileNameExtensionFilter("MP3 Files", "mp3", "mpeg3");
+
+        JFileChooser chooser = new JFileChooser("C:\\Music");
+        chooser.addChoosableFileFilter(filter);
+
+        int returnVal = chooser.showOpenDialog(null);
+
+        if(returnVal == JFileChooser.APPROVE_OPTION){
+            Mp3ClassPlayer.Stop();
+            File myFile = chooser.getSelectedFile();
+            String song = myFile + "";
+
+            Mp3ClassPlayer.Play(song);
+
+        }
+    }//GEN-LAST:event_chooseFileMouseReleased
     private void StartGameActionPerformed() {                                             
        
         int numQues=10;  //set conts 10 qyestion
@@ -475,11 +642,17 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton LogOutBtn;
     public javax.swing.JLabel OpenTitelWitName;
     private javax.swing.JLabel PleaseChoseCntQues;
+    private javax.swing.JLabel background;
     private javax.swing.JButton btnShowHighScoreTble;
     private javax.swing.JButton btnStartGame;
+    private javax.swing.JLabel chooseFile;
     public static javax.swing.JComboBox cmbCountOfQUes;
     private javax.swing.JComboBox cmbLevel;
     private javax.swing.JLabel currebtPlayerHighScore;
     private javax.swing.JLabel jLabelLevel;
+    private javax.swing.JLabel loopPlay;
+    private javax.swing.JLabel pause;
+    private javax.swing.JLabel play;
+    private javax.swing.JLabel stop;
     // End of variables declaration//GEN-END:variables
 }

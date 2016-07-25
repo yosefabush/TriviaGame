@@ -35,7 +35,6 @@ public class Game implements Serializable{
      * @throws Exception
      */
     public Game(int wantedQuestion, User current, boolean newGame,int level) throws Exception {
-
         if (newGame == true) { //if is new game need to clear thee arreyList and full it from DB
             this.level=level;
             this.allQuesFromDB.clear();
@@ -45,23 +44,6 @@ public class Game implements Serializable{
         this.current = current;
         Play(wantedQuestion);
 
-    }
-    public Game(ConnectionThread connection,boolean newGame,User current){
-        connection.getName();
-        
-         if (newGame == true) { //if is new game need to clear thee arreyList and full it from DB
-            this.level=1;
-            this.allQuesFromDB.clear();
-            this.allQuesFromDB = DataBaseMange.getInstance().getQuestion();
-        }
-       
-        this.current = current;
-        try {
-            Play(10);
-        } catch (Exception ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
     }
     /**
      *
@@ -114,7 +96,6 @@ public class Game implements Serializable{
             }
         }
     }
-
     /**
      *
      * @param player
@@ -149,10 +130,20 @@ public class Game implements Serializable{
         }
 
     }
+     /**
+     *this method send the total score to server 
+     * and the server tell us how is the winner between the players
+     * @param player
+     * 
+     */
     public void sendToServerTotalScore(User player){
         DataInputStream input = null;
         Socket clientSocket = null;
-        try {
+        SelectGame1.output.println(true);
+        SelectGame1.output.println(current.getUserName());
+        SelectGame1.output.println(player.getPoints());
+
+      /*  try {
                     clientSocket = new Socket("localhost", 2222);
                     input = new DataInputStream(clientSocket.getInputStream());
                     PrintStream output = new PrintStream(clientSocket.getOutputStream());
@@ -163,7 +154,7 @@ public class Game implements Serializable{
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                }*/
         
     }
 }

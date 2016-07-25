@@ -36,7 +36,11 @@ public class Server
     DataInputStream input;
     int payerScore;
     boolean finish=false;
-    
+     static int finishGameCnt=0;
+     int player1Score=0;
+     int player2Score=0;
+     String player1Name;
+     String player2Name;
     
     public static void main(String[] args) {
         System.out.println("Start Conection!");
@@ -92,30 +96,43 @@ public class Server
           if(twoPlayerConnected()){
                  for(PrintStream p:output)
                     p.println("Statrt playe");
-                 finish=true;
-          }  
-          
-          clientSocket=null;
-         while(finish)
-        {
-          try
-            {      
-                 clientSocket.add(serverSocket.accept());
-                 input = new DataInputStream(clientSocket.get(i).getInputStream()); 
-		 output.add(new PrintStream (clientSocket.get(i).getOutputStream()));
-                 output.get(i).println("Conection sucseesful!");
-                 if(!clientSocket.isEmpty()){
-                    try {
-                        payerScore=input.readInt();
-                        System.out.println(payerScore);
-                    } catch (IOException ex) {
-                        Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+                 //finish=true;
+          } 
+        try {
+            while(input.readBoolean()){
+                finishGameCnt++;
+                try {
+                    if(finishGameCnt==1){
+                    player1Score=input.read();
+                    player1Name=input.readLine();
+                    System.out.println(player1Name+" is connected whit "+input.read()+" Score");
                     }
-                 }
-            } catch (Exception ex) {
-                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+                    else{
+                    player2Score=input.read();
+                     player2Name=input.readLine();
+                     System.out.println(player2Name+" is connected whit "+input.read()+" Score");
+                    }
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if(finishGameCnt==2)
+                    break;
             }
+        } catch (IOException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
+          
+          
+         if(finishGameCnt==2){
+            if(player1Score>player2Score)
+                 System.out.println("player 1 "+player1Name+" Won! and is score is: "+player1Score);
+            else if(player1Score<player2Score)
+                System.out.println("player 2 "+player2Name+" Won! and is score is: "+player2Score);
+            else
+                System.out.println("Equal socre!");
+         }
+
         
     }
     public boolean twoPlayerConnected(){

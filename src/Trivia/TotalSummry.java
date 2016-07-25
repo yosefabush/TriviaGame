@@ -25,7 +25,7 @@ public class TotalSummry extends javax.swing.JFrame {
         this.highScorOrNotCheeker=highScorOrNot;
         this.currentPlayer=current;
         updateLang();
-        this.setSize(530,360);
+        this.setSize(600,390);
         setBackGround();
         this.setLocationRelativeTo(null);
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("Summry"));
@@ -99,6 +99,7 @@ public class TotalSummry extends javax.swing.JFrame {
 
         ExitBtn.setForeground(new java.awt.Color(51, 51, 51));
         ExitBtn.setText("Exit");
+        ExitBtn.setBorder(null);
         ExitBtn.setContentAreaFilled(false);
         ExitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,10 +107,11 @@ public class TotalSummry extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ExitBtn);
-        ExitBtn.setBounds(0, 10, 90, 23);
+        ExitBtn.setBounds(0, 10, 90, 15);
 
         NewGameBtn.setForeground(new java.awt.Color(51, 51, 51));
         NewGameBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/new-game-button-states-hovered.png"))); // NOI18N
+        NewGameBtn.setBorder(null);
         NewGameBtn.setContentAreaFilled(false);
         NewGameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,7 +143,7 @@ public class TotalSummry extends javax.swing.JFrame {
 
         WrongFiled1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(WrongFiled1);
-        WrongFiled1.setBounds(240, 120, 76, 22);
+        WrongFiled1.setBounds(250, 120, 76, 22);
 
         timesJl.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         timesJl.setText("Times");
@@ -174,6 +176,7 @@ public class TotalSummry extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/homer.png"))); // NOI18N
         jButton1.setText("jButton1");
+        jButton1.setBorder(null);
         jButton1.setContentAreaFilled(false);
         getContentPane().add(jButton1);
         jButton1.setBounds(410, 160, 140, 240);
