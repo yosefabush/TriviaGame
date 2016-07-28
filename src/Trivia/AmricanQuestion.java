@@ -7,8 +7,13 @@ package Trivia;
  * @author Yosef
  */
 public class AmricanQuestion extends Question{
-    
+    /**
+     * 
+     */
     private String [] answer;
+    /**
+     * 
+     */
     private int rightAns;
    
     /**

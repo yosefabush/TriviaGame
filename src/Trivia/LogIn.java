@@ -157,7 +157,9 @@ public class LogIn extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     *
+     */
     private void signUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpBtnActionPerformed
         this.dispose();
         SignUp newUser=new SignUp();
@@ -166,7 +168,9 @@ public class LogIn extends javax.swing.JFrame {
         
 
     }//GEN-LAST:event_signUpBtnActionPerformed
-
+    /**
+     *
+     */
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
         String userName=userNameField.getText();
         String password=jPasswordField1.getText();
@@ -198,15 +202,21 @@ public class LogIn extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnLogInActionPerformed
-
+    /**
+     *
+     */
     private void userNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_userNameFieldActionPerformed
-
+    /**
+     *
+     */
     private void userNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userNameFieldFocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_userNameFieldFocusGained
-
+    /**
+     *
+     */
     private void ChangeLangBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeLangBtnActionPerformed
 // TODO add your handling code here:
 
@@ -224,15 +234,21 @@ public class LogIn extends javax.swing.JFrame {
             updateCaptions();
         
     }//GEN-LAST:event_ChangeLangBtnActionPerformed
-
+    /**
+     *
+     */
     private void btnLogInFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnLogInFocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLogInFocusGained
-
+    /**
+     *
+     */
     private void btnLogInFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnLogInFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLogInFocusLost
-
+    /**
+     *
+     */
     private void jPasswordField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             String userName=userNameField.getText();

@@ -8,7 +8,10 @@ import java.sql.*;
  * 
  * @author Yosef
  */
-public class Connect_db {        
+public class Connect_db {  
+    /**
+     * 
+     */
     static Connection con=null;
 
     /**

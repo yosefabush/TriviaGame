@@ -13,9 +13,17 @@ import java.util.ArrayList;
  * @author Yosef
  */
 public class DataBaseMange {
-
+    /**
+     * 
+     */
     private static DataBaseMange instance = null;
+    /**
+     * 
+     */
     private static Question question;
+    /**
+     * 
+     */
     ArrayList<Question> allQuesFromDB = new <Question>ArrayList();
 
     /**

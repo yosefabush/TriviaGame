@@ -227,6 +227,10 @@ public class FormClass extends JFrame implements ActionListener {
         this.setJMenuBar(myMenuBar);
     }
 
+    /**
+     * inner class for Window Listener action
+     * create pop up dialog
+     */
     class MyWindowListener extends WindowAdapter {
        /*add are "you shure exit?" promp */
         @Override
@@ -237,7 +241,7 @@ public class FormClass extends JFrame implements ActionListener {
     }
 
     /**
-     *
+     *this method show Non Selcted Dialog
      */
     public void showNonSelctedDialog() {
        /*Non Selcted Dialog acording the current languche*/
@@ -246,7 +250,7 @@ public class FormClass extends JFrame implements ActionListener {
     }
 
     /**
-     *
+     *this method show Exit Dialog
      */
     public void showExitDialog() {
        /*"you shure exit?" promp acorrding curent languche*/
@@ -263,7 +267,7 @@ public class FormClass extends JFrame implements ActionListener {
     }
 
     /**
-     *
+     *this method show New Game Dialog
      */
     public void newGameDialog() {
        /*"you shure new game?" promp acorrding curent languche*/
@@ -279,7 +283,7 @@ public class FormClass extends JFrame implements ActionListener {
     }
    
     /**
-     *
+     *this method show about Dialog
      */
     public void aboutDialog() {
        /*about promp acorrding curent languche*/
@@ -288,6 +292,9 @@ public class FormClass extends JFrame implements ActionListener {
 
    @Override
    /*action whan any button was pressed*/
+   /**
+    * this method mange action event
+    */
    public void actionPerformed(ActionEvent ae) {
         boolean correct = false;
         String sound;
@@ -394,7 +401,7 @@ public class FormClass extends JFrame implements ActionListener {
     }
 
     /**
-     *
+     *this method responsible update language
      */
     public void updateCaptions() { //method that refresh all the label+button languche
         okButton.setText(LocalizationUtil.localizedResourceBundle.getString("okKey"));

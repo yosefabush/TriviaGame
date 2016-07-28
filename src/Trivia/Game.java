@@ -21,9 +21,17 @@ import java.util.logging.Logger;
  * @author Yosef
  */
 public class Game implements Serializable{
-
+    /**
+     * 
+     */
     private static User current;
+     /**
+     * 
+     */
     private static ArrayList<Question> allQuesFromDB = new <Question>ArrayList();
+     /**
+     * 
+     */
     private static int level;
    
     /**
@@ -140,7 +148,7 @@ public class Game implements Serializable{
         DataInputStream input = null;
         Socket clientSocket = null;
         SelectGame1.output.println(true);
-        SelectGame1.output.println(current.getUserName());
+        SelectGame1.output.println(player.getUserName());
         SelectGame1.output.println(player.getPoints());
 
       /*  try {

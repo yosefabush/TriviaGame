@@ -6,7 +6,7 @@ package Trivia;
  * @author Yosef
  */
 public class OpenQuestion extends Question{
- 
+     
      private String answer;
      private String []answer2=new String[2];
      

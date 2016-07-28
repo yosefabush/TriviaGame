@@ -22,6 +22,9 @@ public class HighstRecords extends javax.swing.JFrame {
      * Creates new form HighstRecords
      */
     private int[] highScore5 = new int[5];
+     /**
+     * index for highScore array
+     */
     int i=0;
 
     /**
@@ -41,6 +44,9 @@ public class HighstRecords extends javax.swing.JFrame {
         btnBackToMainScreen.setText(LocalizationUtil.localizedResourceBundle.getString("BackKey"));
         setLocationRelativeTo(null);
     }
+    /**
+     *
+     */
     private void updateTableScore(){
        PreparedStatement statement;
         String sql="select UserName,Score,date from tblusers as a,tblrecords as b where a.`UserId`=b.`UserID` order by Score desc  LIMIT 5";
@@ -75,7 +81,9 @@ public class HighstRecords extends javax.swing.JFrame {
        getContentPane().add(Background);
        Background.setBounds(0, 0, 520, 500);
  }
-    
+    /**
+     *this method 
+     */
      private void getAllTop5Score(){
          try {
 

@@ -8,6 +8,7 @@ package Trivia;
 import java.awt.Toolkit;
 import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -15,8 +16,18 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.Line;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.BoundedRangeModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JSlider;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import resources.LocalizationUtil;
@@ -58,7 +69,32 @@ public class SelectGame1 extends javax.swing.JFrame {
         }
         title.setText(current.getUserName());
         //bacgroundSound = new PlaySounds("C:\\Users\\Yosef\\Documents\\NetBeansProjects\\Java\\TriviaGame1\\src\\Trivia\\Sounds\\ChillingMusic.wav");
-
+        /*AudioInputStream audioInputStream=null;
+        try {
+            audioInputStream = AudioSystem.getAudioInputStream(
+                    new File("C:\\\\Users\\\\Yosef\\\\Documents\\\\NetBeansProjects\\\\Java\\\\TriviaGame1\\\\src\\\\Trivia\\\\Sounds\\\\ChillingMusic.wav"));
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Clip clip=null;
+        try {
+            clip = AudioSystem.getClip();
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            clip.open(audioInputStream);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FloatControl gainControl = 
+        (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(-10.0f); // Reduce volume by 10 decibels.
+        clip.start();*/
     }
 
     /**
@@ -82,6 +118,7 @@ public class SelectGame1 extends javax.swing.JFrame {
         stop = new javax.swing.JLabel();
         loopPlay = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
+        VolumControl = new javax.swing.JSlider();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -187,6 +224,14 @@ public class SelectGame1 extends javax.swing.JFrame {
         getContentPane().add(background);
         background.setBounds(470, 0, 190, 60);
 
+        VolumControl.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                VolumControlStateChanged(evt);
+            }
+        });
+        getContentPane().add(VolumControl);
+        VolumControl.setBounds(450, 70, 200, 26);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon22.jpg"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 650, 320);
@@ -195,8 +240,8 @@ public class SelectGame1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void loadDefultSound(){
-        Mp3ClassPlayer.Stop();
-        Mp3ClassPlayer.Play("C:\\Users\\Yosef\\Documents\\NetBeansProjects\\Java\\TriviaGame1\\src\\Trivia\\Sounds\\ChillingMusic.mp3"+"");
+       Mp3ClassPlayer.Stop();
+       Mp3ClassPlayer.Play("C:\\Users\\Yosef\\Documents\\NetBeansProjects\\Java\\TriviaGame1\\src\\Trivia\\Sounds\\ChillingMusic.mp3"+"");
     }
     
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
@@ -208,52 +253,52 @@ public class SelectGame1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Mp3ClassPlayer.Stop();
-        firstTime=false;
-        
-        if(oneVsOneSelcted){
-            oneVsOneSelcted=false;
-        Thread t = new Thread() {
-            public void run() {
-                try {
-                    clientSocket = new Socket("localhost", 2222);
-                    input = new DataInputStream(clientSocket.getInputStream());
-                     output = new PrintStream(clientSocket.getOutputStream());
-                    //Scanner userInput = new Scanner(System.in);	
-                    //output.println();
-
-                } catch (UnknownHostException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                while (true) {
-                    try {
-                        if (input.readLine().equals("Statrt playe")) {
-                            Thread t2 = new Thread(){
-                                      public void run() {
-                            try {
-                                Game game = new Game(2, current, true, 1);
-                               
-                            } catch (Exception ex) {
-                                Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                            };
-                            t2.start();
-                             break;
-                    }//else
-                       // JOptionPane.showMessageDialog(SelectGame1.this, "Watting for another player");
-
-                    } catch (IOException ex) {
-                        Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        };
-        t.start();
-        }else
-            System.out.println("Yoy alredy clicked!\n wating for another plyer");
-
+//        firstTime=false;
+//        
+//        if(oneVsOneSelcted){
+//            oneVsOneSelcted=false;
+//        Thread t = new Thread() {
+//            public void run() {
+//                try {
+//                    clientSocket = new Socket("localhost", 2222);
+//                    input = new DataInputStream(clientSocket.getInputStream());
+//                     output = new PrintStream(clientSocket.getOutputStream());
+//                    //Scanner userInput = new Scanner(System.in);	
+//                    //output.println();
+//
+//                } catch (UnknownHostException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                while (true) {
+//                    try {
+//                        if (input.readLine().equals("Statrt playe")) {
+//                            Thread t2 = new Thread(){
+//                                      public void run() {
+//                            try {
+//                                Game game = new Game(2, current, true, 1);
+//                               
+//                            } catch (Exception ex) {
+//                                Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
+//                            }
+//                        }
+//                            };
+//                            t2.start();
+//                             break;
+//                    }//else
+//                       // JOptionPane.showMessageDialog(SelectGame1.this, "Watting for another player");
+//
+//                    } catch (IOException ex) {
+//                        Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                }
+//            }
+//        };
+//        t.start();
+//        }else
+//            System.out.println("Yoy alredy clicked!\n wating for another plyer");
+    
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -331,6 +376,20 @@ public class SelectGame1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loopPlayMouseReleased
 
+    private void VolumControlStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_VolumControlStateChanged
+        
+        JSlider source;
+        source = (JSlider)(evt.getSource());
+       int gain;
+    if (source.getValueIsAdjusting()){
+        gain=(int)source.getValue();
+        System.out.println(gain);
+    }
+ 
+    
+    }//GEN-LAST:event_VolumControlStateChanged
+
+
     /**
      * @param args the command line arguments
      */
@@ -376,6 +435,7 @@ public class SelectGame1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LogOutBtn;
+    private javax.swing.JSlider VolumControl;
     private javax.swing.JLabel background;
     private javax.swing.JLabel chooseFile;
     private javax.swing.JButton jButton1;

@@ -10,7 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
-
+/**
+ *this class activate the sound in the game
+ * @author Yosef
+ */
 public class MusicClass 
 {
     
@@ -21,7 +24,10 @@ public class MusicClass
     public long pauseLocation;
     public long songTotalLength;
     public String fileLocation;
-    
+    /**
+    *
+    * Stop
+    */
     public void Stop(){
         if(player != null){
             player.close();
@@ -32,7 +38,10 @@ public class MusicClass
            //  MP3PlayerGUI.Display.setText("");
         }
     }
-    
+    /**
+    *
+    * Pause
+    */
     public void Pause() throws IOException{
         if(player != null){
             try{
@@ -46,7 +55,10 @@ public class MusicClass
            
         }
     }
-    
+    /**
+    *
+    * Play
+    */
     public void Play(String path){
         
         try {
@@ -79,7 +91,10 @@ public class MusicClass
         }.start();
         
     }
-    
+    /**
+    *
+    * Resume
+    */
     public void Resume(){
         
         try {
@@ -106,6 +121,10 @@ public class MusicClass
             }
         }.start();
         
+    }
+    
+   public void setVouloum(int vol){
+    
     }
     
 }
