@@ -5,40 +5,70 @@
  */
 package TriviaGameServer;
 
-
-import Trivia.User;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintStream;
-import java.net.ServerSocket;
-import java.net.Socket;
-
+import java.io.*;
+import java.net.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Student
  */
-public class Server extends Thread
+public class Server
 {
+    static int  requestNumber = 1;
+    static int  port = 55555;
+    static ArrayList<ThreadHandler> threadArray=new ArrayList<ThreadHandler>();
+
+	public static void main(String[] args) {
+
+		
+		
+	 	System.out.println();
+ 		System.out.println("*************************************");
+	 	System.out.println("Server side console");
+	 	System.out.println("*************************************");
+	 
+        try {
+        	
+            ServerSocket serverSocket = new ServerSocket(port);
+            
+            while (true) {
+            	
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("Conection number "+requestNumber);
+                System.out.println("Creating thread for client connected from");
+                ThreadHandler newThread = new ThreadHandler(clientSocket, requestNumber);
+               // newThread.start();
+                threadArray.add(newThread);
+                 
+                if((requestNumber%2)==0){  
+                    threadArray.get(0).start();
+                    threadArray.get(1).start();
+                    System.out.println("2 Connection estblish ! strart play!");
+                    //requestNumber=0;
+                    //threadArray=null;
+                    
+                }
+                requestNumber++;
+            }            
+        }        
+        catch (IOException ioe) {
+        	
+        	ioe.printStackTrace();
+        }
+	}	
+
 //    ServerSocket serverSocket;
 //    boolean isConnected = false;
 //    public final static int PORT = 2222;
 //    private int maxPlayer =0;
 //    static ArrayList<ConnectionThread> clients;
-//     ArrayList<Socket> clientSocket=new ArrayList<Socket>();
+//     ArrayList<Socket> clientSockets=new ArrayList<Socket>();
 //    static User []player1;
 //    static int i=0;
-//    ArrayList<PrintStream> output=new ArrayList();
-//    DataInputStream input;
+//    ArrayList<PrintStream> thisClientOutputsArray=new ArrayList();
+//    DataInputStream thisClientInputStream;
+//    PrintStream thisClientOutputStream;
 //    int payerScore;
 //    boolean finish=false;
 //     static int finishGameCnt=0;
@@ -81,15 +111,16 @@ public class Server extends Thread
 //    public void handleRequests()
 //    {
 //        
-//        while(isConnected&&maxPlayer!=2)
+//        while(isConnected&&(maxPlayer!=2))
 //        {
 //            try
-//            {      
-//                 clientSocket.add(serverSocket.accept());
-//                 input = new DataInputStream(clientSocket.get(i).getInputStream()); 
-//		 output.add(new PrintStream (clientSocket.get(i).getOutputStream()));
-//                output.get(i).println("Conection sucseesful!");
-//                ConnectionThread singleConnection = new ConnectionThread(clientSocket.get(i));
+//            {   Socket thisClient = serverSocket.accept();
+//                clientSockets.add(thisClient);
+//                thisClientInputStream = new DataInputStream(thisClient.getInputStream()); 
+//		thisClientOutputStream = new PrintStream (thisClient.getOutputStream());
+//                //thisClientOutputsArray.add(thisClientOutputStream);
+//                thisClientOutputStream.println("Conection sucseesful!");
+//                ConnectionThread singleConnection = new ConnectionThread(clientSockets.get(i));
 //                singleConnection.setName(""+ ++maxPlayer);
 //                i++;
 //                clients.add(singleConnection);
@@ -104,22 +135,22 @@ public class Server extends Thread
 //   
 //        
 //          if(twoPlayerConnected()){
-//                 for(PrintStream p:output)
+//                 for(PrintStream p:thisClientOutputsArray)
 //                    p.println("Statrt playe");
 //                 //finish=true;
 //          } 
 //        try {
-//            while(input.readBoolean()){
+//            while(thisClientInputStream.readBoolean()){
 //                finishGameCnt++;
 //                try {
 //                    if(finishGameCnt==1){
-//                    player1Score=input.read();
-//                    player1Name=input.readLine();
+//                    player1Score=thisClientInputStream.read();
+//                    player1Name=thisClientInputStream.readLine();
 //                    System.out.println(player1Name+" is connected whit "+player1Score+" Score");
 //                    }
 //                    else{
-//                    player2Score=input.read();
-//                     player2Name=input.readLine();
+//                    player2Score=thisClientInputStream.read();
+//                     player2Name=thisClientInputStream.readLine();
 //                     System.out.println(player2Name+" is connected whit "+player2Score+" Score");
 //                    }
 //                    
@@ -176,7 +207,11 @@ public class Server extends Thread
 //    }
 //    
 
-    
+  
+
+
+
+
 }
    
    

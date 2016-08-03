@@ -1,4 +1,4 @@
-/*Autor: Yuceli Polanco*/
+/*Autor: Yosef*/
 
 package Trivia;
 
@@ -8,8 +8,19 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine.Info;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Port;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+import javazoom.jl.player.JavaSoundAudioDevice;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Port;
 /**
  *this class activate the sound in the game
  * @author Yosef
@@ -24,6 +35,7 @@ public class MusicClass
     public long pauseLocation;
     public long songTotalLength;
     public String fileLocation;
+    
     /**
     *
     * Stop
@@ -122,9 +134,17 @@ public class MusicClass
         }.start();
         
     }
-    
-   public void setVouloum(int vol){
-    
+     /**
+    *
+    * set volume 
+    */
+    public void setVouloum(int vol){
+       //Info source = Port.Info.SPEAKER;
+     if(player!=null){
+        // player.volume(vol);
+       // player.
+        
+     }
     }
     
 }

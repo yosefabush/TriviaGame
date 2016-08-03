@@ -1,6 +1,6 @@
 package Trivia;
 
-import TriviaGameServer.ConnectionThread;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -145,11 +145,13 @@ public class Game implements Serializable{
      * 
      */
     public void sendToServerTotalScore(User player){
-        DataInputStream input = null;
-        Socket clientSocket = null;
+        //player say to the uther player finish to play
         SelectGame1.output.println(true);
-        SelectGame1.output.println(player.getUserName());
-        SelectGame1.output.println(player.getPoints());
+        
+        //Socket clientSocket = null;
+       // SelectGame1.output.println(true);
+        //SelectGame1.output.println(player.getUserName());
+        //SelectGame1.output.println(player.getPoints());
 
       /*  try {
                     clientSocket = new Socket("localhost", 2222);

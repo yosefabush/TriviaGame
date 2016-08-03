@@ -112,7 +112,7 @@ public class SignUp extends javax.swing.JFrame {
         getContentPane().add(changeLang);
         changeLang.setBounds(10, 10, 140, 23);
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/SignUp background.png"))); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/GameBackGround.jpg"))); // NOI18N
         getContentPane().add(background);
         background.setBounds(0, 0, 450, 330);
 

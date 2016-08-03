@@ -10,6 +10,8 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -40,17 +42,17 @@ public class SelectGame1 extends javax.swing.JFrame {
 
     PlaySounds bacgroundSound;
     static User current;
-    DataInputStream input = null;
+    static DataInputStream input = null;
     Socket clientSocket = null;
-     static PrintStream output=null;
+    static PrintStream output = null;
     MusicClass Mp3ClassPlayer = new MusicClass();
-    public static int count=1;
+    public static int count = 1;
     int xMouse;
     int yMouse;
-    static boolean firstTime=false;
-    static boolean soundPlaying=false;
-     static boolean oneVsOneSelcted=true;
-    
+    static boolean firstTime = false;
+    static boolean soundPlaying = false;
+    static boolean oneVsOneSelcted = true;
+
     int width = (Toolkit.getDefaultToolkit().getScreenSize().width / 2) - 185;
     int height = Toolkit.getDefaultToolkit().getScreenSize().height - 180;
 
@@ -62,10 +64,10 @@ public class SelectGame1 extends javax.swing.JFrame {
         this.current = curentPlayer;
         this.setSize(660, 345);
         setLocationRelativeTo(null);
-        if(!firstTime){
+        if (!firstTime) {
             loadDefultSound();
-            firstTime=true;
-            soundPlaying=true;
+            firstTime = true;
+            soundPlaying = true;
         }
         title.setText(current.getUserName());
         //bacgroundSound = new PlaySounds("C:\\Users\\Yosef\\Documents\\NetBeansProjects\\Java\\TriviaGame1\\src\\Trivia\\Sounds\\ChillingMusic.wav");
@@ -119,6 +121,7 @@ public class SelectGame1 extends javax.swing.JFrame {
         loopPlay = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
         VolumControl = new javax.swing.JSlider();
+        soundVolume = new javax.swing.JLabel();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -230,21 +233,24 @@ public class SelectGame1 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(VolumControl);
-        VolumControl.setBounds(450, 70, 200, 26);
+        VolumControl.setBounds(460, 70, 200, 26);
+        getContentPane().add(soundVolume);
+        soundVolume.setBounds(540, 100, 40, 20);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon22.jpg"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 650, 320);
+        jLabel1.setBounds(0, 0, 660, 320);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void loadDefultSound(){
-       Mp3ClassPlayer.Stop();
-       Mp3ClassPlayer.Play("C:\\Users\\Yosef\\Documents\\NetBeansProjects\\Java\\TriviaGame1\\src\\Trivia\\Sounds\\ChillingMusic.mp3"+"");
+    public void loadDefultSound() {
+        Mp3ClassPlayer.Stop();
+        Mp3ClassPlayer.Play("C:\\Users\\Yosef\\Documents\\NetBeansProjects\\Java\\TriviaGame1\\src\\Trivia\\Sounds\\ChillingMusic.mp3" + "");
     }
-    
+
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
+        Mp3ClassPlayer.Stop();
         this.dispose();
         LogIn loGin = new LogIn();
         loGin.setVisible(true);
@@ -253,58 +259,71 @@ public class SelectGame1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Mp3ClassPlayer.Stop();
-//        firstTime=false;
-//        
-//        if(oneVsOneSelcted){
-//            oneVsOneSelcted=false;
-//        Thread t = new Thread() {
-//            public void run() {
-//                try {
-//                    clientSocket = new Socket("localhost", 2222);
-//                    input = new DataInputStream(clientSocket.getInputStream());
-//                     output = new PrintStream(clientSocket.getOutputStream());
-//                    //Scanner userInput = new Scanner(System.in);	
-//                    //output.println();
-//
-//                } catch (UnknownHostException e) {
-//                    e.printStackTrace();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                while (true) {
-//                    try {
-//                        if (input.readLine().equals("Statrt playe")) {
-//                            Thread t2 = new Thread(){
-//                                      public void run() {
-//                            try {
-//                                Game game = new Game(2, current, true, 1);
-//                               
-//                            } catch (Exception ex) {
-//                                Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
-//                            }
-//                        }
-//                            };
-//                            t2.start();
-//                             break;
-//                    }//else
-//                       // JOptionPane.showMessageDialog(SelectGame1.this, "Watting for another player");
-//
-//                    } catch (IOException ex) {
-//                        Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//                }
-//            }
-//        };
-//        t.start();
-//        }else
-//            System.out.println("Yoy alredy clicked!\n wating for another plyer");
-    
 
+        System.out.println();
+        System.out.println("*************************************");
+        System.out.println("Client side");
+        System.out.println("*************************************");
+
+        try {
+            // create a connection to the server socket
+            Socket clientSocket = new Socket("localhost", 55555);
+
+            System.out.println("Connected to Server!");
+            System.out.println();
+            System.out.println("Waiting for server to find a chat partner...");
+            System.out.println();
+
+            // getting the input stream from which the client can read from
+            // the output of the chat partner will become the input of the current client
+            input = new DataInputStream(clientSocket.getInputStream());
+
+            // getting the output stream to which the client can write to
+            // the output of the current client will become the input of the chat partner
+            output = new PrintStream(clientSocket.getOutputStream());
+            
+             //ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
+
+            // ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());
+
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (!Thread.interrupted()) {
+                        try {
+                            if (input.readLine().equals("Start")) {
+                                try {
+                                    Game game = new Game(2, current, true, 1);
+                                    
+                                } catch (Exception ex) {
+                                    Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                        } catch (IOException ex) {
+                            Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+            });
+            thread.start();
+            System.out.println("Finish the game send result to server");
+           // oos.writeObject(current);
+            //cheek if one of the player finish or disconected
+//            if (input.readBoolean()) {
+//
+//            // pass the data to the partner
+//                output.println(true);
+//            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Mp3ClassPlayer.Stop();
-        firstTime=false;
+        firstTime = false;
         OpenScreen newGame = new OpenScreen(current);
         newGame.setVisible(true);
         this.dispose();
@@ -313,7 +332,7 @@ public class SelectGame1 extends javax.swing.JFrame {
     private void backgroundMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
-        
+
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_backgroundMouseDragged
 
@@ -323,22 +342,22 @@ public class SelectGame1 extends javax.swing.JFrame {
     }//GEN-LAST:event_backgroundMousePressed
 
     private void stopMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stopMouseReleased
-        soundPlaying=false;  
+        soundPlaying = false;
         Mp3ClassPlayer.Stop();    }//GEN-LAST:event_stopMouseReleased
 
     private void playMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playMouseReleased
-       if(!soundPlaying){
-        Mp3ClassPlayer.Resume();
-        soundPlaying=true;
-       }
-       
+        if (!soundPlaying) {
+            Mp3ClassPlayer.Resume();
+            soundPlaying = true;
+        }
+
     }//GEN-LAST:event_playMouseReleased
 
     private void pauseMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pauseMouseReleased
-       try {
+        try {
             // TODO add your handling code here:
             Mp3ClassPlayer.Pause();
-             soundPlaying=false;  
+            soundPlaying = false;
         } catch (IOException ex) {
             Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -346,49 +365,48 @@ public class SelectGame1 extends javax.swing.JFrame {
 
     private void chooseFileMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseFileMouseReleased
         FileFilter filter = new FileNameExtensionFilter("MP3 Files", "mp3", "mpeg3");
-        
+
         JFileChooser chooser = new JFileChooser("C:\\Music");
         chooser.addChoosableFileFilter(filter);
-        
+
         int returnVal = chooser.showOpenDialog(null);
-        
-        if(returnVal == JFileChooser.APPROVE_OPTION){
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             Mp3ClassPlayer.Stop();
             File myFile = chooser.getSelectedFile();
             String song = myFile + "";
-          
+
             Mp3ClassPlayer.Play(song);
-            
-            
+
         }
     }//GEN-LAST:event_chooseFileMouseReleased
 
     private void loopPlayMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loopPlayMouseReleased
-         switch(count){
+        switch (count) {
             case 0:
                 count = 1;
                 break;
-                
+
             case 1:
                 count = 0;
                 break;
-            
+
         }
     }//GEN-LAST:event_loopPlayMouseReleased
 
     private void VolumControlStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_VolumControlStateChanged
-        
-        JSlider source;
-        source = (JSlider)(evt.getSource());
-       int gain;
-    if (source.getValueIsAdjusting()){
-        gain=(int)source.getValue();
-        System.out.println(gain);
-    }
- 
-    
-    }//GEN-LAST:event_VolumControlStateChanged
 
+        JSlider source;
+        source = (JSlider) (evt.getSource());
+        int gain;
+        if (source.getValueIsAdjusting()) {
+            gain = (int) source.getValue();
+            soundVolume.setText(gain + "%");
+            Mp3ClassPlayer.setVouloum(gain);
+        }
+
+
+    }//GEN-LAST:event_VolumControlStateChanged
 
     /**
      * @param args the command line arguments
@@ -445,6 +463,7 @@ public class SelectGame1 extends javax.swing.JFrame {
     private javax.swing.JLabel loopPlay;
     private javax.swing.JLabel pause;
     private javax.swing.JLabel play;
+    private javax.swing.JLabel soundVolume;
     private javax.swing.JLabel stop;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
