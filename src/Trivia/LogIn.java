@@ -186,7 +186,7 @@ public class LogIn extends javax.swing.JFrame {
              while(resultSet.next()){
                  this.currentPlayer=new User(resultSet.getString("UserName"),resultSet.getString("Password"),resultSet.getInt("UserID"));
                  this.dispose();
-                 SelectGame1 selectGame=new SelectGame1(currentPlayer);
+                 SelectGame selectGame=new SelectGame(currentPlayer);
                  selectGame.setVisible(true);
                  this.dispose();
                  return;
@@ -263,7 +263,7 @@ public class LogIn extends javax.swing.JFrame {
              while(resultSet.next()){
                  this.currentPlayer=new User(resultSet.getString("UserName"),resultSet.getString("Password"),resultSet.getInt("UserID"));
                  this.dispose();
-                 SelectGame1 selectGame=new SelectGame1(currentPlayer);
+                 SelectGame selectGame=new SelectGame(currentPlayer);
                  selectGame.setVisible(true);
                  this.dispose();
                  return;

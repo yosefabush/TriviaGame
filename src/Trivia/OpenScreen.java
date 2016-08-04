@@ -1,7 +1,7 @@
 
 package Trivia;
 import static Trivia.LogIn.currentPlayer;
-import static Trivia.SelectGame1.firstTime;
+import static Trivia.SelectGame.firstTime;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -472,7 +472,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
          Mp3ClassPlayer.Stop(); 
         this.dispose();
-        SelectGame1 selectGame=new SelectGame1(currentPlayer);
+        SelectGame selectGame=new SelectGame(currentPlayer);
         selectGame.setVisible(true);
 
     }//GEN-LAST:event_LogOutBtnActionPerformed

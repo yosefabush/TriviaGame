@@ -130,9 +130,9 @@ public class User implements Serializable{
     }
     
     /**
-     *
-     * @param cuurent
-     * @return
+     * this method return the Highest Score of The Current User
+     * @param User cuurent
+     * @return String
      */
     public String getHighstScore(User cuurent){
         String userScore=null;
@@ -167,7 +167,7 @@ public class User implements Serializable{
     
     /**
      *
-     * @return
+     * @return 
      */
     public String getUserName() {
         return userName;

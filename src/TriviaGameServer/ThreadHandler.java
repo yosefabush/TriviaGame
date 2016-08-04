@@ -9,6 +9,7 @@ import Trivia.User;
 import static TriviaGameServer.Server.threadArray;
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,68 +20,66 @@ import java.util.logging.Logger;
  */
 public class ThreadHandler extends Thread {
 
-    // socket number
-    Socket clientSocket;
-    // thread id
-    int threadNumber;
-    DataInputStream input ;
-    PrintStream output;
+    Socket client1Socket;
+    Socket client2Socket;
+    int threadID;
+    static boolean gameOver = false;
 
-    public ThreadHandler(Socket socket, int thread) {
-
-        // initialize upon creation
-        clientSocket = socket;
-        threadNumber = thread;
+    public ThreadHandler(Socket socket1, Socket socket2, int thread) {
+        // initialize sockets of 2 clients upon creation of the thread
+        client1Socket = socket1;
+        client2Socket = socket2;
+        threadID = thread;
     }
 
     public void run() {
+        try {
+
+            ObjectOutputStream out = new ObjectOutputStream(client1Socket.getOutputStream());
+            ObjectInputStream in = new ObjectInputStream(client1Socket.getInputStream());
+
+            out.writeObject("Start");
+            //output2.println("Start");
+            System.out.println("befor while");
+            User u1 = (User) in.readObject();
+            System.out.println("user " + u1.getUserName() + " Add!");
+
+            Server.userArr.add(u1);
+            while (Server.userArr.size() != 2) {
+
+            }
+            System.out.println("all trheads get out from the loop ");
+            System.out.println("Befor cheek score");
+            if (Server.userArr.get(0).getPoints() > Server.userArr.get(1).getPoints()) {
+                System.out.println(" " + Server.userArr.get(0).getUserName() + " won!");
+                out.writeObject("You Win");
+            } else if (Server.userArr.get(0).getPoints() < Server.userArr.get(1).getPoints()) {
+                System.out.println(" " + Server.userArr.get(1).getUserName() + " won!");
+                out.writeObject("You Lose");
+            } else {
+                out.writeObject("EQUL!! The bothe Score indentical!");
+            }
+            gameOver = true;
+        } catch (IOException ex) {
+            Logger.getLogger(ThreadHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ThreadHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         try {
-            // getting the input stream from which the server can read from
-            // the output of the client will become the input of the server 
-             input = new DataInputStream(clientSocket.getInputStream());
-           
-            // getting the output stream to which the server can write to
-            // the output of the server will become the input of the client
-             output = new PrintStream(clientSocket.getOutputStream());
-             ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
-
-             ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());
-             
-            boolean moreDataAvailable = true;
-
-           while (moreDataAvailable) {
-               //if((threadNumber%2)==0){
-                   System.out.println("Send reuest to client");
-                   output.println("Start");
-                  
-               
-                User inputNextLine=null;
-                 try {
-                     inputNextLine = (User) ois.readObject();
-                 } catch (ClassNotFoundException ex) {
-                     Logger.getLogger(ThreadHandler.class.getName()).log(Level.SEVERE, null, ex);
-                      moreDataAvailable = false;
-                 }
-
-               // if (inputNextLine == null) {
-              //      moreDataAvailable = false;
-              //  } else {
-                  //  output.println("Start");
-
-                    // trim() removes whitespace in order to catch "Exit ", " Exit", etc.
-                    //if (inputNextLine.equals("FinishGame")) {
-                        System.out.println("User "+inputNextLine.getUserName()+" Score: "+inputNextLine.getPoints());
-                       
-                        moreDataAvailable = false;
-                    
-              //  }
-            }
-            clientSocket.close();
-        } catch (IOException ioe) {
-
-            ioe.printStackTrace();
+            client1Socket.close();
+            client2Socket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ThreadHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    public static boolean sendToClientGameOver() {
+        if (gameOver) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

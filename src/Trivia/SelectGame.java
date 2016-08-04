@@ -5,40 +5,29 @@
  */
 package Trivia;
 
+import TriviaGameServer.Server;
+import TriviaGameServer.ThreadHandler;
 import java.awt.Toolkit;
 import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.Line;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.SourceDataLine;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.BoundedRangeModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JSlider;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import resources.LocalizationUtil;
 
 /**
  *
  * @author lidor
  */
-public class SelectGame1 extends javax.swing.JFrame {
+public class SelectGame extends javax.swing.JFrame {
 
     PlaySounds bacgroundSound;
     static User current;
@@ -52,14 +41,17 @@ public class SelectGame1 extends javax.swing.JFrame {
     static boolean firstTime = false;
     static boolean soundPlaying = false;
     static boolean oneVsOneSelcted = true;
-
+    static ObjectInputStream ois;
+    static ObjectOutputStream oos;
     int width = (Toolkit.getDefaultToolkit().getScreenSize().width / 2) - 185;
     int height = Toolkit.getDefaultToolkit().getScreenSize().height - 180;
+    boolean moreDataAvailable = true;
+    boolean dataFromServer = true;
 
     /**
      * Creates new form SelectGame1
      */
-    public SelectGame1(User curentPlayer) {
+    public SelectGame(User curentPlayer) {
         initComponents();
         this.current = curentPlayer;
         this.setSize(660, 345);
@@ -260,65 +252,67 @@ public class SelectGame1 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Mp3ClassPlayer.Stop();
 
+//        if(TriviaGameServer.Server.serverIsActivate){
+//             JOptionPane.showMessageDialog(this, "Please Run Server first");
+//            return;
+//        }
         System.out.println();
         System.out.println("*************************************");
         System.out.println("Client side");
         System.out.println("*************************************");
 
         try {
+            moreDataAvailable = false;
             // create a connection to the server socket
-            Socket clientSocket = new Socket("localhost", 55555);
+            Socket clientSocket = new Socket("localhost", Server.port);
 
             System.out.println("Connected to Server!");
             System.out.println();
             System.out.println("Waiting for server to find a chat partner...");
             System.out.println();
+            ois = new ObjectInputStream(clientSocket.getInputStream());
 
-            // getting the input stream from which the client can read from
-            // the output of the chat partner will become the input of the current client
-            input = new DataInputStream(clientSocket.getInputStream());
-
-            // getting the output stream to which the client can write to
-            // the output of the current client will become the input of the chat partner
-            output = new PrintStream(clientSocket.getOutputStream());
-            
-             //ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
-
-            // ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());
+            oos = new ObjectOutputStream(clientSocket.getOutputStream());
 
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
                     while (!Thread.interrupted()) {
                         try {
-                            if (input.readLine().equals("Start")) {
+                            if (ois.readObject().toString().equals("Start")) {
                                 try {
                                     Game game = new Game(2, current, true, 1);
-                                    
+                                    break;
                                 } catch (Exception ex) {
-                                    Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
+                                    Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
                         } catch (IOException ex) {
-                            Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 }
             });
             thread.start();
-            System.out.println("Finish the game send result to server");
-           // oos.writeObject(current);
-            //cheek if one of the player finish or disconected
-//            if (input.readBoolean()) {
-//
-//            // pass the data to the partner
-//                output.println(true);
-//            }
+            try {
+                System.out.println("Start cheek if Finish Game");
+                while (TriviaGameServer.ThreadHandler.sendToClientGameOver()) {
+                        System.out.println("Finish Game");
+                        System.out.println(ois.readObject().toString());
+                        break;
+                   // }
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -359,7 +353,7 @@ public class SelectGame1 extends javax.swing.JFrame {
             Mp3ClassPlayer.Pause();
             soundPlaying = false;
         } catch (IOException ex) {
-            Logger.getLogger(SelectGame1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_pauseMouseReleased
 
@@ -426,27 +420,28 @@ public class SelectGame1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SelectGame1.class
+            java.util.logging.Logger.getLogger(SelectGame.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SelectGame1.class
+            java.util.logging.Logger.getLogger(SelectGame.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SelectGame1.class
+            java.util.logging.Logger.getLogger(SelectGame.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SelectGame1.class
+            java.util.logging.Logger.getLogger(SelectGame.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SelectGame1(current).setVisible(true);
+                new SelectGame(current).setVisible(true);
             }
         });
     }

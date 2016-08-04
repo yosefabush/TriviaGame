@@ -24,7 +24,9 @@ public class TrueFalseQuestion extends Question{
      setRightAns(rightAns);
     
     }
-    
+    /**
+     * 
+     */
     @Override
     public String[] getAnswer() {
         return answer;
@@ -39,7 +41,9 @@ public class TrueFalseQuestion extends Question{
         this.answer = trueFalseAns;
         
     }
-
+     /**
+     * 
+     */
     public int getRightAns() {
         return rightAns;
     }

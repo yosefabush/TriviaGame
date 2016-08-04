@@ -93,7 +93,7 @@ public class MusicClass
                 try {
                     player.play();
                     
-                    if(player.isComplete() && SelectGame1.count == 1){
+                    if(player.isComplete() && SelectGame.count == 1){
                         Play(fileLocation);
                     }
                 } catch (JavaLayerException ex) {
