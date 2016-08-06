@@ -9,7 +9,6 @@ import Trivia.User;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  * this class is server side wait each time for 2 client connections then create
@@ -51,10 +50,10 @@ public class Server {
                 // create threads
                 // send client sockets to new threads, each time with a different socket as the source one
                 Thread client1Thread = new ThreadHandler(client1Socket, client2Socket, threadNumber++);
-                 Thread client2Thread = new ThreadHandler(client2Socket, client1Socket, threadNumber++);
+                Thread client2Thread = new ThreadHandler(client2Socket, client1Socket, threadNumber++);
                 // start the threads
                 client1Thread.start();
-                 client2Thread.start();
+                client2Thread.start();
 
                 System.out.println("Clients Connected!");
                 System.out.println();
@@ -69,7 +68,5 @@ public class Server {
         }
 
     }
-
-
 
 }

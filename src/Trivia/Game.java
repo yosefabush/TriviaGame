@@ -1,5 +1,6 @@
 package Trivia;
 
+import TriviaGameServer.ThreadHandler;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -48,10 +49,10 @@ public class Game implements Serializable {
             this.allQuesFromDB.clear();
             this.allQuesFromDB = DataBaseMange.getInstance().getQuestion();
         }
-        
+
         this.current = current;
         Play(wantedQuestion);
-        
+
     }
 
     /**
@@ -60,7 +61,7 @@ public class Game implements Serializable {
      * @throws Exception
      */
     public void Play(int remainingQues) throws Exception {
-        
+
         Random rand = new Random();
 
         // validation no duplcate ques
@@ -69,11 +70,11 @@ public class Game implements Serializable {
             random = rand.nextInt(allQuesFromDB.size());
             if (level != 0) {
                 if (allQuesFromDB.get(random).getCheekIfQuesWasAsked() == false && allQuesFromDB.get(random).getLevel() == level) {
-                    allQuesFromDB.get(random).setCheekIfQuesWasAsked(true);                    
+                    allQuesFromDB.get(random).setCheekIfQuesWasAsked(true);
                     break;
                 }
             } else if (allQuesFromDB.get(random).getCheekIfQuesWasAsked() == false) {
-                allQuesFromDB.get(random).setCheekIfQuesWasAsked(true);                
+                allQuesFromDB.get(random).setCheekIfQuesWasAsked(true);
                 break;
             }
         }
@@ -86,15 +87,15 @@ public class Game implements Serializable {
             current.setPoints(FormClass.point);  //set the point to the current player just when game over
             FormClass.point = 0; //set the static varibale to zero 
             FormClass.currentLevel = 0;   //set the static varibale to zero 
-            
+
             if (updateFinalScore(current)) {//cheek if the point of current player get new high score and update in DB  
-                
+
                 finisGame = new TotalSummry(current, "NewHigScor"); //open summery screen
                 finisGame.setVisible(true);
                 //here wee need to send the result of the player to server and set how is the winner
                 sendToServerTotalScore(current, score);
             } else {
-                
+
                 System.out.println("Update score Faild mybe your have highr score in DB...");
                 finisGame = new TotalSummry(current, "YouCanBetrr");//in the end show summry point
                 finisGame.setVisible(true);
@@ -110,7 +111,7 @@ public class Game implements Serializable {
      * @return
      */
     public boolean updateFinalScore(User player) {
-        
+
         try {
             Class.forName(DbUtilitis.dbDriver); //load the rigt server
             Connection connection
@@ -119,7 +120,7 @@ public class Game implements Serializable {
                             DbUtilitis.jdbcPassword);
             PreparedStatement ps = connection.prepareStatement("update tblrecords set Score='" + player.getPoints() + "'where tblrecords.UserID='" + player.getUserID() + "'and tblrecords.`Score`<'" + player.getPoints() + "'");
             int res = ps.executeUpdate();
-            
+
             if (res > 0) {
                 ps.close();
                 return true;
@@ -127,7 +128,7 @@ public class Game implements Serializable {
                 ps.close();
                 return false;
             }
-            
+
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             System.out.println("Vendor Error: " + sqle.getErrorCode());
@@ -136,7 +137,7 @@ public class Game implements Serializable {
             e.printStackTrace();
             return false;
         }
-        
+
     }
 
     /**
@@ -148,15 +149,21 @@ public class Game implements Serializable {
      *
      */
     public void sendToServerTotalScore(User player, int score) {
-        
+
         try {
-            //        SelectGame.output.println(player.getUserName()+"\r\n");
-//        SelectGame.output.println(player.getPassword()+"\r\n");
-//        SelectGame.output.print(player.getUserID());
             SelectGame.oos.writeObject(player);
         } catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
+        try {
+            System.out.println(SelectGame.ois.readObject());
+        } catch (IOException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            System.out.println("one Player still play");
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
 }

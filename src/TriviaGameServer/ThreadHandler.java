@@ -6,11 +6,8 @@
 package TriviaGameServer;
 
 import Trivia.User;
-import static TriviaGameServer.Server.threadArray;
 import java.io.*;
 import java.net.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,7 +20,7 @@ public class ThreadHandler extends Thread {
     Socket client1Socket;
     Socket client2Socket;
     int threadID;
-    static boolean gameOver = false;
+    public static boolean gameOver = false;
 
     public ThreadHandler(Socket socket1, Socket socket2, int thread) {
         // initialize sockets of 2 clients upon creation of the thread

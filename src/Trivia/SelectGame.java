@@ -268,51 +268,91 @@ public class SelectGame extends javax.swing.JFrame {
 
             System.out.println("Connected to Server!");
             System.out.println();
-            System.out.println("Waiting for server to find a chat partner...");
+            System.out.println("Waiting for server to find one more player");
             System.out.println();
             ois = new ObjectInputStream(clientSocket.getInputStream());
 
             oos = new ObjectOutputStream(clientSocket.getOutputStream());
 
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while (!Thread.interrupted()) {
-                        try {
-                            if (ois.readObject().toString().equals("Start")) {
-                                try {
-                                    Game game = new Game(2, current, true, 1);
-                                    break;
-                                } catch (Exception ex) {
-                                    Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-                            }
-                        } catch (IOException ex) {
-                            Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (ClassNotFoundException ex) {
-                            Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                }
-            });
-            thread.start();
+//            Thread thread = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    while (!Thread.interrupted()) {
+//                        try {
+//                            if (ois.readObject().toString().equals("Start")) {
+//                                try {
+//                                    Game game = new Game(2, current, true, 1);
+//                                    break;
+//                                } catch (Exception ex) {
+//                                    Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
+//                                }
+//                            }
+//                        } catch (IOException ex) {
+//                            Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
+//                        } catch (ClassNotFoundException ex) {
+//                            Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
+//                    }
+//                }
+//            });
+//            thread.start();
             try {
-                System.out.println("Start cheek if Finish Game");
-                while (TriviaGameServer.ThreadHandler.sendToClientGameOver()) {
-                        System.out.println("Finish Game");
-                        System.out.println(ois.readObject().toString());
-                        break;
-                   // }
+                if (ois.readObject().toString().equals("Start")) {
+                    try {
+                        Game game = new Game(2, current, true, 1);
+                    } catch (Exception ex) {
+                        Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             } catch (IOException ex) {
                 Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+//            do {
+//                System.out.println("cheek if this or other player finish play");
+//                if (ThreadHandler.twoPlayerFinishCnt != 0) {
+//                    try {
+//                        JOptionPane.showMessageDialog(this, ois.readObject());
+//                       // System.out.println(ois.readObject());
+//                         break;
+//                    } catch (IOException ex) {
+//                        Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
+//                    } catch (ClassNotFoundException ex) {
+//                        Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                    System.out.println("Game Over!");
+//                } else {
+//                    System.out.println("Still not Game over");
+//                }
+//            } while (ThreadHandler.twoPlayerFinishCnt != 2);
+
+//            Thread thread = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    do {
+//                        System.out.println("cheek if Game is Over");
+//                        if (ThreadHandler.twoPlayerFinishCnt != 0) {
+//                            try {
+//                                //JOptionPane.showMessageDialog(this, ois.readObject());
+//                                System.out.println(ois.readObject());
+//                            } catch (IOException ex) {
+//                                Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
+//                            } catch (ClassNotFoundException ex) {
+//                                Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
+//                            }
+//                            System.out.println("Game Over!");
+//                        } else {
+//                            System.out.println("Still not Game over");
+//                        }
+//                    } while (ThreadHandler.twoPlayerFinishCnt != 2);
+//                }
+//        });
+//        thread.start();
         } catch (IOException ex) {
             Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -389,16 +429,25 @@ public class SelectGame extends javax.swing.JFrame {
     }//GEN-LAST:event_loopPlayMouseReleased
 
     private void VolumControlStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_VolumControlStateChanged
-
+//Primary Sound Driver
+   //     Speakers(High Defintion Audio Fevice)
+      //  Port Speakers (High Definition Audio
         JSlider source;
         source = (JSlider) (evt.getSource());
-        int gain;
+        float gain;
         if (source.getValueIsAdjusting()) {
-            gain = (int) source.getValue();
+            gain = (float) source.getValue();
             soundVolume.setText(gain + "%");
-            Mp3ClassPlayer.setVouloum(gain);
+            
+            ///VolumeControl.setVolume(gain);
+           Mp3ClassPlayer.setVouloum(gain);
         }
 
+//        if (audio instanceof JavaSoundAudioDevice)
+//        {
+//            JavaSoundAudioDevice jsAudio = (JavaSoundAudioDevice) audio;
+//            jsAudio.setLineGain(yourGainGoesHere);
+//        }
 
     }//GEN-LAST:event_VolumControlStateChanged
 
