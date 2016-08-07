@@ -16,14 +16,17 @@ public class loading extends javax.swing.JFrame {
      */
     public loading() {
         initComponents();
-        setLocationRelativeTo(null);
+        
         this.setSize(600,470);
+        setLocationRelativeTo(null);
     }
       public loading(String serverResponde) {
           
         initComponents();
-        setLocationRelativeTo(null);
+       
+         this.setSize(600,470);
         jLabel1.setText(serverResponde);
+         setLocationRelativeTo(null);
     }
 
 
