@@ -63,7 +63,7 @@ public class ThreadHandler extends Thread {
                     // out2.writeObject("You Win");
                 } else {
                     out.writeObject("EQUL!! The bothe Score indentical!");
-                    //  out2.writeObject("EQUL!! The bothe Score indentical!");
+                    // out2.writeObject("EQUL!! The bothe Score indentical!");
                 }
                 gameOver = true;
             } catch (IOException ex) {   

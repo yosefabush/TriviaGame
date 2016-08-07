@@ -20,12 +20,12 @@ public class loading extends javax.swing.JFrame {
         this.setSize(600,470);
         setLocationRelativeTo(null);
     }
-      public loading(String serverResponde) {
+      public loading(User player,String serverResponde) {
           
         initComponents();
        
          this.setSize(600,470);
-        jLabel1.setText(serverResponde);
+        jLabel1.setText(player.getUserName()+" "+serverResponde+"!!");
          setLocationRelativeTo(null);
     }
 
@@ -50,13 +50,13 @@ public class loading extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel1.setText("Waiting for the other player...");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(172, 30, 290, 46);
+        jLabel1.setBounds(190, 30, 290, 46);
 
-        jLabel2.setBackground(new java.awt.Color(51, 51, 255));
+        jLabel2.setBackground(new java.awt.Color(204, 204, 255));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/spinner.gif"))); // NOI18N
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(-130, 30, 750, 220);
+        jLabel2.setBounds(-120, 80, 750, 180);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/thinking.jpg"))); // NOI18N
         getContentPane().add(jLabel3);

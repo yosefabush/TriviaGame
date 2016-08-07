@@ -47,7 +47,7 @@ public class SelectGame extends javax.swing.JFrame {
     int height = Toolkit.getDefaultToolkit().getScreenSize().height - 180;
     boolean moreDataAvailable = true;
     boolean dataFromServer = true;
-    public static boolean  multiPlayerGame=false;
+    public static boolean multiPlayerGame = false;
 
     /**
      * Creates new form SelectGame1
@@ -261,7 +261,7 @@ public class SelectGame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Mp3ClassPlayer.Stop();
-        multiPlayerGame=true;
+        multiPlayerGame = true;
 //        if(TriviaGameServer.Server.serverIsActivate){
 //             JOptionPane.showMessageDialog(this, "Please Run Server first");
 //            return;
@@ -319,50 +319,10 @@ public class SelectGame extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-//            do {
-//                System.out.println("cheek if this or other player finish play");
-//                if (ThreadHandler.twoPlayerFinishCnt != 0) {
-//                    try {
-//                        JOptionPane.showMessageDialog(this, ois.readObject());
-//                       // System.out.println(ois.readObject());
-//                         break;
-//                    } catch (IOException ex) {
-//                        Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
-//                    } catch (ClassNotFoundException ex) {
-//                        Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//                    System.out.println("Game Over!");
-//                } else {
-//                    System.out.println("Still not Game over");
-//                }
-//            } while (ThreadHandler.twoPlayerFinishCnt != 2);
-
-//            Thread thread = new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    do {
-//                        System.out.println("cheek if Game is Over");
-//                        if (ThreadHandler.twoPlayerFinishCnt != 0) {
-//                            try {
-//                                //JOptionPane.showMessageDialog(this, ois.readObject());
-//                                System.out.println(ois.readObject());
-//                            } catch (IOException ex) {
-//                                Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
-//                            } catch (ClassNotFoundException ex) {
-//                                Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
-//                            }
-//                            System.out.println("Game Over!");
-//                        } else {
-//                            System.out.println("Still not Game over");
-//                        }
-//                    } while (ThreadHandler.twoPlayerFinishCnt != 2);
-//                }
-//        });
-//        thread.start();
         } catch (IOException ex) {
             Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -440,17 +400,17 @@ public class SelectGame extends javax.swing.JFrame {
 
     private void VolumControlStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_VolumControlStateChanged
 //Primary Sound Driver
-   //     Speakers(High Defintion Audio Fevice)
-      //  Port Speakers (High Definition Audio
+        //     Speakers(High Defintion Audio Fevice)
+        //  Port Speakers (High Definition Audio
         JSlider source;
         source = (JSlider) (evt.getSource());
         float gain;
         if (source.getValueIsAdjusting()) {
             gain = (float) source.getValue();
             soundVolume.setText(gain + "%");
-            
+
             ///VolumeControl.setVolume(gain);
-           Mp3ClassPlayer.setVouloum(gain);
+            Mp3ClassPlayer.setVouloum(gain);
         }
 
 //        if (audio instanceof JavaSoundAudioDevice)

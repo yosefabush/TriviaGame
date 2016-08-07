@@ -99,38 +99,26 @@ public class Game implements Serializable {
                     finisGame.setVisible(true);
 
                 }
-            }else {
+            } else {
                 System.out.println("Finish multi player game");
-                //cheek if the point of current player get new high score and update in DB  
-                    if (updateFinalScore(current)) {
-
-                       // finisGame = new TotalSummry(current, "NewHigScor"); //open summery screen
-                       // finisGame.setVisible(true);
-                       //here wee need to send the result of the player to server and set how is the winner
-                       //loading load=new loading();
-                       //load.setVisible(true);
-                       sendToServerTotalScore(current, score);
-                   } else {
-
-                       System.out.println("Update score Faild mybe your have highr score in DB...");
-                       // finisGame = new TotalSummry(current, "YouCanBetrr");//in the end show summry point
-                       //finisGame.setVisible(true);
-                       //here wee need to send the result of the player to server and set how is the winner
-                      // loading load=new loading();
-                      // load.setVisible(true);
-                       sendToServerTotalScore(current, score);
-                   }
-                        try {
-                            loading load=new loading(SelectGame.ois.readObject().toString());
-                            load.setVisible(true);
-                            //System.out.println(SelectGame.ois.readObject());
-                            System.out.println("i finish play");
-                        } catch (IOException ex) {
-                            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (ClassNotFoundException ex) {
-                            System.out.println("one Player still play");
-                            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                      sendToServerTotalScore(current, score);
+                     Thread thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                loading load = new loading(current, SelectGame.ois.readObject().toString());
+                                load.setVisible(true);
+                            } catch (IOException ex) {
+                                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
+                    });
+                    thread.start();
+                   
+                    //System.out.println(SelectGame.ois.r eadObject());
+                   // System.out.println("i finish play");
                 }
         }
     }
