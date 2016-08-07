@@ -17,7 +17,15 @@ public class loading extends javax.swing.JFrame {
     public loading() {
         initComponents();
         setLocationRelativeTo(null);
+        this.setSize(600,470);
     }
+      public loading(String serverResponde) {
+          
+        initComponents();
+        setLocationRelativeTo(null);
+        jLabel1.setText(serverResponde);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,7 +35,6 @@ public class loading extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -42,26 +49,19 @@ public class loading extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(172, 30, 290, 46);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/loading.gif"))); // NOI18N
-        jLabel2.setMaximumSize(new java.awt.Dimension(550, 380));
-        jLabel2.setMinimumSize(new java.awt.Dimension(550, 380));
-        jLabel2.setPreferredSize(new java.awt.Dimension(550, 380));
+        jLabel2.setBackground(new java.awt.Color(51, 51, 255));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/spinner.gif"))); // NOI18N
+        jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(24, 82, 412, 166);
+        jLabel2.setBounds(-130, 30, 750, 220);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/thinking.jpg"))); // NOI18N
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jLabel3, org.jdesktop.beansbinding.ObjectProperty.create(), jLabel3, org.jdesktop.beansbinding.BeanProperty.create("background"));
-        bindingGroup.addBinding(binding);
-
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 254, 565, 141);
+        jLabel3.setBounds(0, 280, 570, 130);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon22.jpg"))); // NOI18N
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, -10, 560, 490);
-
-        bindingGroup.bind();
+        jLabel4.setBounds(0, 0, 580, 460);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -106,6 +106,5 @@ public class loading extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

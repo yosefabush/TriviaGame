@@ -107,6 +107,8 @@ public class Game implements Serializable {
                        // finisGame = new TotalSummry(current, "NewHigScor"); //open summery screen
                        // finisGame.setVisible(true);
                        //here wee need to send the result of the player to server and set how is the winner
+                       //loading load=new loading();
+                       //load.setVisible(true);
                        sendToServerTotalScore(current, score);
                    } else {
 
@@ -114,10 +116,14 @@ public class Game implements Serializable {
                        // finisGame = new TotalSummry(current, "YouCanBetrr");//in the end show summry point
                        //finisGame.setVisible(true);
                        //here wee need to send the result of the player to server and set how is the winner
+                      // loading load=new loading();
+                      // load.setVisible(true);
                        sendToServerTotalScore(current, score);
                    }
                         try {
-                            System.out.println(SelectGame.ois.readObject());
+                            loading load=new loading(SelectGame.ois.readObject().toString());
+                            load.setVisible(true);
+                            //System.out.println(SelectGame.ois.readObject());
                             System.out.println("i finish play");
                         } catch (IOException ex) {
                             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
