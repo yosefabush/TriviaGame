@@ -261,11 +261,12 @@ public class SelectGame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Mp3ClassPlayer.Stop();
+        if(Server.isServerIsActivate()){
+            JOptionPane.showMessageDialog(this, "Please Run Server first");
+            return;
+        }
         multiPlayerGame = true;
-//        if(TriviaGameServer.Server.serverIsActivate){
-//             JOptionPane.showMessageDialog(this, "Please Run Server first");
-//            return;
-//        }
+
         System.out.println();
         System.out.println("*************************************");
         System.out.println("Client side");

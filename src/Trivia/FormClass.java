@@ -73,7 +73,7 @@ public class FormClass extends JFrame implements ActionListener {
      * @param chosenLevel Parameter of selecting a level playing
      */
     public FormClass(Question question, int remainedQuestios, User currentPlayer,int chosenLevel) {
-        this.setTitle((LocalizationUtil.localizedResourceBundle.getString("GameTitle")));
+        this.setTitle((LocalizationUtil.localizedResourceBundle.getString("GameTitle"))+" "+currentPlayer.getUserName());
         this.currentLevel=chosenLevel;
         this.current = currentPlayer;
         this.question = question;

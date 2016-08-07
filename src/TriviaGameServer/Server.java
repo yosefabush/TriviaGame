@@ -22,7 +22,9 @@ public class Server {
     static ArrayList<User> userArr = new ArrayList<User>();
     static int requestNumber = 1;
     public static int port = 55555;
-    public static boolean serverIsActivate = false;
+    static boolean serverIsActivate = false;
+
+
     static ArrayList<ThreadHandler> threadArray = new ArrayList<ThreadHandler>();
 
     public static void main(String[] args) {
@@ -68,5 +70,9 @@ public class Server {
         }
 
     }
-
+    
+    
+        public static boolean isServerIsActivate() {
+        return serverIsActivate;
+    }
 }

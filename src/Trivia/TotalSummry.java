@@ -25,14 +25,36 @@ public class TotalSummry extends javax.swing.JFrame {
         this.highScorOrNotCheeker=highScorOrNot;
         this.currentPlayer=current;
         updateLang();
-        this.setSize(600,390);
+        this.setSize(545,390);
         setBackGround();
         this.setLocationRelativeTo(null);
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("Summry"));
         this.NewHighScore.setText(LocalizationUtil.localizedResourceBundle.getString(highScorOrNot));
         NewHighScore.setHorizontalAlignment(SwingConstants.CENTER);
         
-    }    
+    }
+     public TotalSummry(User current,String result,Boolean multiGame) {
+        initComponents();
+        //this.highScorOrNotCheeker=highScorOrNot;
+        this.currentPlayer=current;
+        updateLang();
+       this.setSize(545,390);
+        setBackGround();
+        this.setLocationRelativeTo(null);
+        this.setTitle(current.getUserName()+" "+LocalizationUtil.localizedResourceBundle.getString("Summry"));
+        this.NewHighScore.setText(result);
+        NewHighScore.setHorizontalAlignment(SwingConstants.CENTER);
+        
+    } 
+     //for screen size debugin
+     public TotalSummry(){
+         initComponents();
+         //updateLang();
+          this.setSize(545,390);
+          this.setLocationRelativeTo(null);
+     }
+    
+    
 
     /**
      *
@@ -126,7 +148,7 @@ public class TotalSummry extends javax.swing.JFrame {
         GameOverTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/game-over.png"))); // NOI18N
         GameOverTitle.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(GameOverTitle);
-        GameOverTitle.setBounds(130, 20, 250, 80);
+        GameOverTitle.setBounds(130, 0, 250, 80);
 
         TotalScoreJl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         TotalScoreJl.setText("Your Total Score is");
@@ -156,9 +178,8 @@ public class TotalSummry extends javax.swing.JFrame {
         jlPoint.setBounds(340, 210, 60, 16);
 
         NewHighScore.setFont(new java.awt.Font("Times New Roman", 2, 19)); // NOI18N
-        NewHighScore.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(NewHighScore);
-        NewHighScore.setBounds(90, 90, 234, 24);
+        NewHighScore.setBounds(90, 74, 330, 40);
 
         CorrectCnt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         CorrectCnt.setText("You answer correct");
@@ -184,7 +205,7 @@ public class TotalSummry extends javax.swing.JFrame {
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/gameOverBackground.jpg"))); // NOI18N
         background.setAutoscrolls(true);
         getContentPane().add(background);
-        background.setBounds(0, -10, 590, 390);
+        background.setBounds(0, -10, 530, 390);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

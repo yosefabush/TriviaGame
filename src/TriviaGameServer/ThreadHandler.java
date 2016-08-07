@@ -6,7 +6,10 @@
 package TriviaGameServer;
 
 import Trivia.FormClass;
+import Trivia.SelectGame;
+import Trivia.TotalSummry;
 import Trivia.User;
+import Trivia.loading;
 import java.io.*;
 import java.net.*;
 import java.util.logging.Level;
@@ -22,6 +25,7 @@ public class ThreadHandler extends Thread {
     Socket client2Socket;
     int threadID;
     public static boolean gameOver = false;
+    static loading load3 = new loading();
 
     public ThreadHandler(Socket socket1, Socket socket2, int thread) {
         // initialize sockets of 2 clients upon creation of the thread
@@ -47,6 +51,10 @@ public class ThreadHandler extends Thread {
                 System.out.println("user " + u1.getUserName() + " Add!");
 
                 Server.userArr.add(u1);
+                if(Server.userArr.size()==1){
+                    
+                    load3.setVisible(true);
+                }
                 //this loop wating for 2 player to finish play
                 while (Server.userArr.size() != 2) {
 
@@ -55,13 +63,22 @@ public class ThreadHandler extends Thread {
                 System.out.println("Befor cheek score");
                 if (Server.userArr.get(0).getPoints() > Server.userArr.get(1).getPoints()) {
                     // System.out.println(" " + Server.userArr.get(0).getUserName() + " won!");
-                    out.writeObject("You Win");
-                    // out2.writeObject("You Lose");
+                    load3.dispose();
+                    out.writeObject("you Lose");
+                    TotalSummry total = new TotalSummry(Server.userArr.get(0),"You Win",true);
+                    total.setVisible(true);
+                    
+//                   out.writeObject("you Win");
                 } else if (Server.userArr.get(0).getPoints() < Server.userArr.get(1).getPoints()) {
                     //System.out.println(" " + Server.userArr.get(1).getUserName() + " won!");
-                    out.writeObject("You Lose");
-                    // out2.writeObject("You Win");
+                    load3.dispose();
+                    out.writeObject("You Win");
+                    TotalSummry total = new TotalSummry(Server.userArr.get(0),"You Lose",true);
+                    total.setVisible(true);
+                  
+//                    out.writeObject("You Lose");
                 } else {
+                    
                     out.writeObject("EQUL!! The bothe Score indentical!");
                     // out2.writeObject("EQUL!! The bothe Score indentical!");
                 }

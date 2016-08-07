@@ -106,8 +106,8 @@ public class Game implements Serializable {
                         @Override
                         public void run() {
                             try {
-                                loading load = new loading(current, SelectGame.ois.readObject().toString());
-                                load.setVisible(true);
+                                TotalSummry total = new TotalSummry(current, SelectGame.ois.readObject().toString(),true);
+                                total.setVisible(true);
                             } catch (IOException ex) {
                                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
                             } catch (ClassNotFoundException ex) {
@@ -116,9 +116,9 @@ public class Game implements Serializable {
                         }
                     });
                     thread.start();
-                   
-                    //System.out.println(SelectGame.ois.r eadObject());
-                   // System.out.println("i finish play");
+//                   
+//                    //System.out.println(SelectGame.ois.r eadObject());
+//                   // System.out.println("i finish play");
                 }
         }
     }
