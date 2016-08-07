@@ -18,12 +18,12 @@ public class AmricanQuestion extends Question{
    
     /**
      * This is the constructor of the class
-     * 
-     * @param ans
-     * @param rightAns
-     * @param Ques
-     * @param Point
-     * @param level
+     * Construction of Multiple Choice Question
+     * @param ans User's reply
+     * @param rightAns The correct answer database
+     * @param Ques The question database
+     * @param Point The number of points of the question
+     * @param level Level game
      */
     public AmricanQuestion(String []ans,int rightAns,String Ques,int Point,int level){
         super(Ques,Point,level);

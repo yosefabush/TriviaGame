@@ -1,6 +1,4 @@
-
 package Trivia;
-
 
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -16,6 +14,9 @@ import resources.LocalizationUtil;
 /**
  *
  * @author Yosef
+ * The following method is used to rate Login  {@LogIn Login to the game}
+ * Ordering screens and buttons
+ * 
  */
 public class LogIn extends javax.swing.JFrame {
 
@@ -169,8 +170,10 @@ public class LogIn extends javax.swing.JFrame {
 
     }//GEN-LAST:event_signUpBtnActionPerformed
     /**
-     *
-     */
+     * Clicking on after we placed in the entry details
+     * After we wrote a user name and password The system checks and compares the information in front of the database
+    *@throws SQLException Login incorrect database
+    */   
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
         String userName=userNameField.getText();
         String password=jPasswordField1.getText();
@@ -215,7 +218,7 @@ public class LogIn extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_userNameFieldFocusGained
     /**
-     *
+     *A method replaces the English/Hebrew language Depending on the operating system
      */
     private void ChangeLangBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeLangBtnActionPerformed
 // TODO add your handling code here:
@@ -247,8 +250,11 @@ public class LogIn extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLogInFocusLost
     /**
-     *
+     * Logon depends on proper feeding Password
+     * This methhod pulls Password database and compares it with slogans user entered accordingly gives the user permission
+     * @throws SQLException Login incorrect database If there is a problem of access to the database will be exceeded
      */
+    
     private void jPasswordField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             String userName=userNameField.getText();
@@ -282,7 +288,7 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1KeyPressed
 
     /**
-     *
+     * Every time that triggers this method is to choose a language and updates all the strings
      */
     public void updateCaptions(){
         

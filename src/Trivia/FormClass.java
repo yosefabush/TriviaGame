@@ -29,6 +29,8 @@ import resources.LocalizationUtil;
 /**
  *
  * @author Yosef
+ * Creating a screen and buttons of the game, the game screen
+ * 
  */
 public class FormClass extends JFrame implements ActionListener {
 
@@ -65,10 +67,10 @@ public class FormClass extends JFrame implements ActionListener {
     /**
      * constructor of the the class define how 
      * the open screen look
-     * @param question
-     * @param remainedQuestios
-     * @param currentPlayer
-     * @param chosenLevel
+     * @param question The question which should appear
+     * @param remainedQuestios Several questions remained
+     * @param currentPlayer Our current player
+     * @param chosenLevel Parameter of selecting a level playing
      */
     public FormClass(Question question, int remainedQuestios, User currentPlayer,int chosenLevel) {
         this.setTitle((LocalizationUtil.localizedResourceBundle.getString("GameTitle")));
@@ -91,7 +93,7 @@ public class FormClass extends JFrame implements ActionListener {
     }
     
     /**
-     *
+     *The following method sets the background
      */
     public void setBackruond(){
         
@@ -102,7 +104,7 @@ public class FormClass extends JFrame implements ActionListener {
     }
    
     /**
-     *
+     * Loading and restart all variables in the screen
      */
     public void initComponents() {
         okButton = new JButton(LocalizationUtil.localizedResourceBundle.getString("okKey"));
@@ -194,7 +196,7 @@ public class FormClass extends JFrame implements ActionListener {
     }
    
     /**
-     *
+     * Listeners buttons
      */
     public void addListeners() {
         okButton.addActionListener(this);
@@ -208,7 +210,7 @@ public class FormClass extends JFrame implements ActionListener {
     } 
 
     /**
-     *
+     *Building and Design Menu
      */
     public void buildMenu() {
         fileMenu = new JMenu(LocalizationUtil.localizedResourceBundle.getString("FileKey"));

@@ -115,6 +115,8 @@ public class SelectGame extends javax.swing.JFrame {
         VolumControl = new javax.swing.JSlider();
         soundVolume = new javax.swing.JLabel();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -232,6 +234,13 @@ public class SelectGame extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon22.jpg"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 660, 320);
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(140, 0, 100, 100);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/LoadingWait.gif"))); // NOI18N
+        jLabel4.setText("jLabel4");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(510, 180, 280, 170);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -504,6 +513,8 @@ public class SelectGame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel loopPlay;
     private javax.swing.JLabel pause;
     private javax.swing.JLabel play;
