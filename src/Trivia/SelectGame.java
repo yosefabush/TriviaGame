@@ -47,6 +47,7 @@ public class SelectGame extends javax.swing.JFrame {
     int height = Toolkit.getDefaultToolkit().getScreenSize().height - 180;
     boolean moreDataAvailable = true;
     boolean dataFromServer = true;
+    public static boolean  multiPlayerGame=false;
 
     /**
      * Creates new form SelectGame1
@@ -260,7 +261,7 @@ public class SelectGame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Mp3ClassPlayer.Stop();
-
+        multiPlayerGame=true;
 //        if(TriviaGameServer.Server.serverIsActivate){
 //             JOptionPane.showMessageDialog(this, "Please Run Server first");
 //            return;

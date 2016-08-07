@@ -87,21 +87,45 @@ public class Game implements Serializable {
             current.setPoints(FormClass.point);  //set the point to the current player just when game over
             FormClass.point = 0; //set the static varibale to zero 
             FormClass.currentLevel = 0;   //set the static varibale to zero 
+            if (SelectGame.multiPlayerGame == false) {
+                System.out.println("Finish single player game");
+                if (updateFinalScore(current)) {//cheek if the point of current player get new high score and update in DB  
+                    finisGame = new TotalSummry(current, "NewHigScor"); //open summery screen
+                    finisGame.setVisible(true);
 
-            if (updateFinalScore(current)) {//cheek if the point of current player get new high score and update in DB  
+                } else {
+                    System.out.println("Update score Faild mybe your have highr score in DB...");
+                    finisGame = new TotalSummry(current, "YouCanBetrr");//in the end show summry point
+                    finisGame.setVisible(true);
 
-                finisGame = new TotalSummry(current, "NewHigScor"); //open summery screen
-                finisGame.setVisible(true);
-                //here wee need to send the result of the player to server and set how is the winner
-                sendToServerTotalScore(current, score);
-            } else {
+                }
+            }else {
+                System.out.println("Finish multi player game");
+                //cheek if the point of current player get new high score and update in DB  
+                    if (updateFinalScore(current)) {
 
-                System.out.println("Update score Faild mybe your have highr score in DB...");
-                finisGame = new TotalSummry(current, "YouCanBetrr");//in the end show summry point
-                finisGame.setVisible(true);
-                //here wee need to send the result of the player to server and set how is the winner
-                sendToServerTotalScore(current, score);
-            }
+                       // finisGame = new TotalSummry(current, "NewHigScor"); //open summery screen
+                       // finisGame.setVisible(true);
+                       //here wee need to send the result of the player to server and set how is the winner
+                       sendToServerTotalScore(current, score);
+                   } else {
+
+                       System.out.println("Update score Faild mybe your have highr score in DB...");
+                       // finisGame = new TotalSummry(current, "YouCanBetrr");//in the end show summry point
+                       //finisGame.setVisible(true);
+                       //here wee need to send the result of the player to server and set how is the winner
+                       sendToServerTotalScore(current, score);
+                   }
+                        try {
+                            System.out.println(SelectGame.ois.readObject());
+                            System.out.println("i finish play");
+                        } catch (IOException ex) {
+                            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ClassNotFoundException ex) {
+                            System.out.println("one Player still play");
+                            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                }
         }
     }
 
@@ -153,15 +177,6 @@ public class Game implements Serializable {
         try {
             SelectGame.oos.writeObject(player);
         } catch (IOException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            System.out.println(SelectGame.ois.readObject());
-        } catch (IOException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            System.out.println("one Player still play");
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

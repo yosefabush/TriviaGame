@@ -7,23 +7,10 @@ package Trivia;
 
 import com.sun.awt.AWTUtilities;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
-import java.net.URL;
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JScrollPane;
 import javax.swing.JWindow;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -58,31 +45,15 @@ public class WaitingForUser extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(550, 380));
         setMinimumSize(new java.awt.Dimension(550, 380));
         setPreferredSize(new java.awt.Dimension(550, 380));
+        getContentPane().setLayout(null);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/loading.gif"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(30, 100, 410, 220);
 
         jLabel3.setText("wait You have finished the first Waiting for the other player");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(107, 11, 367, 55);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -93,7 +64,7 @@ public class WaitingForUser extends javax.swing.JFrame {
 public static void main(String[] args) throws MalformedURLException {
 
         
-    ImageIcon icon = new ImageIcon("C:\\Users\\lidor\\TriviaGame\\src\\Trivia\\Images\\LoadingWait.gif");
+    ImageIcon icon = new ImageIcon("C:\\Users\\Yosef\\Documents\\NetBeansProjects\\Java\\TriviaGame1\\src\\Trivia\\Images\\LoadingWait.gif");
     JLabel label=new JLabel(icon);
     JWindow myJFrame=new JWindow();
     myJFrame.setLayout(new BorderLayout());
