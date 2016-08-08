@@ -13,7 +13,7 @@ import net.proteanit.sql.DbUtils;
 import resources.LocalizationUtil;
 
 /**
- *
+ * this class is Highs Records Screen
  * @author Yosef
  */
 public class HighstRecords extends javax.swing.JFrame {
@@ -28,13 +28,13 @@ public class HighstRecords extends javax.swing.JFrame {
     int i=0;
 
     /**
-     *
+     *build the screen
      */
     public HighstRecords() {
         
         initComponents();
-        updateTableScore();
-        getAllTop5Score();
+       updateTableScore();
+        getTop5Score();
         updatePictureLevel();
         setBackGround();
         this.setSize(520, 500);
@@ -45,10 +45,10 @@ public class HighstRecords extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
     /**
-     *
+     *set into the grid the result of 5 highest score
      */
     private void updateTableScore(){
-       PreparedStatement statement;
+     
         String sql="select UserName,Score,date from tblusers as a,tblrecords as b where a.`UserId`=b.`UserID` order by Score desc  LIMIT 5";
         try {
             Class.forName(DbUtilitis.dbDriver); //load the rigt server
@@ -74,7 +74,7 @@ public class HighstRecords extends javax.swing.JFrame {
     }
 
     /**
-     *
+     *set BackGround image
      */
     public void setBackGround(){
        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/woodBackground.png"))); 
@@ -82,17 +82,10 @@ public class HighstRecords extends javax.swing.JFrame {
        Background.setBounds(0, 0, 520, 500);
  }
     /**
-     *this method 
+     *this method get the 5 highest score from DB
      */
-     private void getAllTop5Score(){
+     private void getTop5Score(){
          try {
-
-//            Class.forName(DbUtilitis.dbDriver); //load the rigt server
-//            Connection connection
-//                    = DriverManager.getConnection(DbUtilitis.jdbcUrl,
-//                            DbUtilitis.jdbcUser,
-//                            DbUtilitis.jdbcPassword);
-            
             Statement statement = Connect_db.getConnection().createStatement();
 
             String allCustomersQuery = "select UserName,Score,date from tblusers as a,tblrecords as b where a.`UserId`=b.`UserID` order by Score desc  LIMIT 5";
@@ -243,7 +236,7 @@ public class HighstRecords extends javax.swing.JFrame {
     } 
     
     /**
-     *
+     *this method create level picture according to points
      */
     public void updatePictureLevel(){
          

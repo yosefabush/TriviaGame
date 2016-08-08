@@ -1,19 +1,13 @@
 
 package Trivia;
 import static Trivia.LogIn.currentPlayer;
-import static Trivia.SelectGame.firstTime;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;

@@ -9,7 +9,7 @@ import Trivia.FormClass;
 import Trivia.SelectGame;
 import Trivia.TotalSummry;
 import Trivia.User;
-import Trivia.loading;
+import Trivia.Loading;
 import java.io.*;
 import java.net.*;
 import java.util.logging.Level;
@@ -25,7 +25,7 @@ public class ThreadHandler extends Thread {
     Socket client2Socket;
     int threadID;
     public static boolean gameOver = false;
-    static loading load3 = new loading();
+    static Loading load3 = new Loading();
 
     public ThreadHandler(Socket socket1, Socket socket2, int thread) {
         // initialize sockets of 2 clients upon creation of the thread

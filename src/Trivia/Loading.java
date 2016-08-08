@@ -6,21 +6,21 @@
 package Trivia;
 
 /**
- *
+ * this screen is loading screen 
  * @author lidor
  */
-public class loading extends javax.swing.JFrame {
+public class Loading extends javax.swing.JFrame {
 
     /**
      * Creates new form loading
      */
-    public loading() {
+    public Loading() {
         initComponents();
         
         this.setSize(600,470);
         setLocationRelativeTo(null);
     }
-      public loading(User player,String serverResponde) {
+      public Loading(User player,String serverResponde) {
           
         initComponents();
        
@@ -86,20 +86,21 @@ public class loading extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(loading.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Loading.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(loading.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Loading.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(loading.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Loading.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(loading.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Loading.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new loading().setVisible(true);
+                new Loading().setVisible(true);
             }
         });
     }

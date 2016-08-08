@@ -1,12 +1,7 @@
 package Trivia;
 
-import TriviaGameServer.ThreadHandler;
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.io.Serializable;
-import java.net.Socket;
-import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * This class contain all the logic in the game
  *
  * @author Yosef
  */
@@ -36,6 +32,7 @@ public class Game implements Serializable {
     private static int level;
 
     /**
+     * Game constructor
      *
      * @param wantedQuestion
      * @param current
@@ -51,12 +48,16 @@ public class Game implements Serializable {
         }
 
         this.current = current;
-        Play(wantedQuestion);
+        try {
+            Play(wantedQuestion);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
     /**
-     *
+     * Start game method
      * @param remainingQues
      * @throws Exception
      */
@@ -101,32 +102,33 @@ public class Game implements Serializable {
                 }
             } else {
                 System.out.println("Finish multi player game");
-                      sendToServerTotalScore(current, score);
-                     Thread thread = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                TotalSummry total = new TotalSummry(current, SelectGame.ois.readObject().toString(),true);
-                                total.setVisible(true);
-                            } catch (IOException ex) {
-                                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (ClassNotFoundException ex) {
-                                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+                sendToServerTotalScore(current, score);
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            TotalSummry total = new TotalSummry(current, SelectGame.ois.readObject().toString(), true);
+                            total.setVisible(true);
+                        } catch (IOException ex) {
+                            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    });
-                    thread.start();
+                    }
+                });
+                thread.start();
 //                   
 //                    //System.out.println(SelectGame.ois.r eadObject());
 //                   // System.out.println("i finish play");
-                }
+            }
         }
     }
 
     /**
-     *
+     *this method try to update the score of the player in DB if the score
+     * the player get higher from what he has in DB
      * @param player
-     * @return
+     * @return boolean true or false
      */
     public boolean updateFinalScore(User player) {
 

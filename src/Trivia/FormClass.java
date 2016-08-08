@@ -27,7 +27,7 @@ import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import resources.LocalizationUtil;
 
 /**
- *
+ * This class is the game screen 
  * @author Yosef
  * Creating a screen and buttons of the game, the game screen
  * 
@@ -66,7 +66,7 @@ public class FormClass extends JFrame implements ActionListener {
     
     /**
      * constructor of the the class define how 
-     * the open screen look
+     * the open screen look like
      * @param question The question which should appear
      * @param remainedQuestios Several questions remained
      * @param currentPlayer Our current player

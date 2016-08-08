@@ -34,7 +34,7 @@ public class DataBaseMange {
     }
     
     /**
-     *this method return all question that in DB
+     *this method return all question FROM DB
      * @return ArrayList
      */
     public ArrayList getQuestion() {

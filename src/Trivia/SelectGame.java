@@ -6,7 +6,6 @@
 package Trivia;
 
 import TriviaGameServer.Server;
-import TriviaGameServer.ThreadHandler;
 import java.awt.Toolkit;
 import java.io.DataInputStream;
 import java.io.File;
