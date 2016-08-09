@@ -22,7 +22,7 @@ public class Server {
     static ArrayList<User> userArr = new ArrayList<User>();
     static int requestNumber = 1;
     public static int port = 55555;
-    static boolean serverIsActivate = false;
+    public static boolean serverIsActivate = false;
 
 
     static ArrayList<ThreadHandler> threadArray = new ArrayList<ThreadHandler>();

@@ -7,6 +7,9 @@ package Trivia;
 
 import TriviaGameServer.Server;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +17,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -21,6 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSlider;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import resources.LocalizationUtil;
 
 /**
  *
@@ -53,6 +59,7 @@ public class SelectGame extends javax.swing.JFrame {
      */
     public SelectGame(User curentPlayer) {
         initComponents();
+         this.addWindowListener(new SelectGame.MyWindowListener());
         this.current = curentPlayer;
         this.setSize(660, 345);
         setLocationRelativeTo(null);
@@ -251,16 +258,28 @@ public class SelectGame extends javax.swing.JFrame {
     }
 
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
-        Mp3ClassPlayer.Stop();
-        this.dispose();
-        LogIn loGin = new LogIn();
-        loGin.setVisible(true);
-        // TODO add your handling code here:
+        try {
+            Mp3ClassPlayer.Stop();
+            PreparedStatement ps = Connect_db.getConnection().prepareStatement("UPDATE tblusers SET LogInStatus = ? WHERE UserId = ?");
+            ps.setInt(1,0);
+            ps.setInt(2, current.getUserID());
+              int res = ps.executeUpdate();
+                if (res > 0) {
+                 this.dispose();
+                 LogIn loGin = new LogIn();
+                 loGin.setVisible(true);
+                }else
+                    JOptionPane.showMessageDialog(this, "Some Eror!");
+           
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_LogOutBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Mp3ClassPlayer.Stop();
-        if(Server.isServerIsActivate()){
+        if(Server.serverIsActivate==false){
             JOptionPane.showMessageDialog(this, "Please Run Server first");
             return;
         }
@@ -420,6 +439,46 @@ public class SelectGame extends javax.swing.JFrame {
 //        }
 
     }//GEN-LAST:event_VolumControlStateChanged
+
+    
+    /**
+     *this method show Exit Dialog
+     */
+    public void showExitDialog() {
+       /*"you shure exit?" promp acorrding curent languche*/
+        int result = JOptionPane.showConfirmDialog(SelectGame.this, // parent component
+                (LocalizationUtil.localizedResourceBundle.getString("areYouSureKey")), // message
+                (LocalizationUtil.localizedResourceBundle.getString("titlrExitDialog")), // title of the dialog box
+                JOptionPane.YES_NO_OPTION,// indicates buttons ot display
+                JOptionPane.QUESTION_MESSAGE);
+
+        if (result == JOptionPane.YES_OPTION) {
+            try {
+                PreparedStatement ps = Connect_db.getConnection().prepareStatement("UPDATE tblusers SET LogInStatus = ? WHERE UserId = ?");
+                ps.setInt(1,0);
+                ps.setInt(2, current.getUserID());
+                int res = ps.executeUpdate();
+                if (res > 0) {
+                 System.exit(0);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(FormClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+        /**
+     * inner class for Window Listener action
+     * create pop up dialog
+     */
+    class MyWindowListener extends WindowAdapter {
+       /*add are "you shure exit?" promp */
+        @Override
+        public void windowClosing(WindowEvent we
+        ) {
+            showExitDialog();
+        }
+    }
 
     /**
      * @param args the command line arguments

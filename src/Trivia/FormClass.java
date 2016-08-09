@@ -1,5 +1,6 @@
 package Trivia;
 
+import static Trivia.LogIn.currentPlayer;
 import static Trivia.PlaySounds.correctSound;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -9,8 +10,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -263,7 +268,17 @@ public class FormClass extends JFrame implements ActionListener {
                 JOptionPane.QUESTION_MESSAGE);
 
         if (result == JOptionPane.YES_OPTION) {
-            System.exit(0);
+            try {
+                PreparedStatement ps = Connect_db.getConnection().prepareStatement("UPDATE tblusers SET LogInStatus = ? WHERE UserId = ?");
+                ps.setInt(1,0);
+                ps.setInt(2, current.getUserID());
+                int res = ps.executeUpdate();
+                if (res > 0) {
+                 System.exit(0);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(FormClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }

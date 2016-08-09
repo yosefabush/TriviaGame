@@ -6,23 +6,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import resources.LocalizationUtil;
 
 /**
  *
- * @author Yosef
- * The following method is used to rate Login  {@LogIn Login to the game}
- * Ordering screens and buttons
- * 
+ * @author Yosef The following method is used to rate Login  {
+ * @LogIn Login to the game} Ordering screens and buttons
+ *
  */
 public class LogIn extends javax.swing.JFrame {
 
     /**
      * Creates new form LogIn
      */
-    boolean pres=false;
+    boolean pres = false;
     static User currentPlayer;
+    public static int loginStatus;
 
     /**
      *
@@ -33,10 +35,10 @@ public class LogIn extends javax.swing.JFrame {
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("GameTitle"));
         userNamejl.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
         jLabel2.setText(LocalizationUtil.localizedResourceBundle.getString("PasswordKEY"));
-      //  signUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
-      //  btnLogIn.setText(LocalizationUtil.localizedResourceBundle.getString("LogInKey"));
+        //  signUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
+        //  btnLogIn.setText(LocalizationUtil.localizedResourceBundle.getString("LogInKey"));
         //ChangeLangBtn.setText(LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey"));
-        this.setSize(416,360);
+        this.setSize(416, 360);
         setLocationRelativeTo(null);
     }
 
@@ -161,51 +163,75 @@ public class LogIn extends javax.swing.JFrame {
      */
     private void signUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpBtnActionPerformed
         this.dispose();
-        SignUp newUser=new SignUp();
+        SignUp newUser = new SignUp();
         newUser.setVisible(true);
-        
-        
+
 
     }//GEN-LAST:event_signUpBtnActionPerformed
     /**
-     * Clicking on after we placed in the entry details
-     * After we wrote a user name and password The system checks and compares the information in front of the database
-    *@throws SQLException Login incorrect database
-    */   
+     * Clicking on after we placed in the entry details After we wrote a user
+     * name and password The system checks and compares the information in front
+     * of the database
+     *
+     * @throws SQLException Login incorrect database
+     */
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
-        String userName=userNameField.getText();
-        String password=jPasswordField1.getText();
-        
-      
-        String sql="select UserName,Password,UserId from tblusers as a where a.`UserName`='"+userName+"'and a.`Password`='"+password+"'";
+        String userName = userNameField.getText();
+        String password = jPasswordField1.getText();
+
+        loginStatus = getLoginStatus(userName, password);
+        String sql = "select UserName,Password,UserId,LogInStatus from tblusers as a where a.`UserName`='" + userName + "'and a.`Password`='" + password + "'and a.`LogInStatus`='" + 0 + "'";
         try {
-            PreparedStatement pstatment=Connect_db.getConnection().prepareStatement(sql);
+            PreparedStatement pstatment = Connect_db.getConnection().prepareStatement(sql);
             ResultSet resultSet = pstatment.executeQuery();
-            
-             resultSet = pstatment.executeQuery();
-                
-             while(resultSet.next()){
-                 this.currentPlayer=new User(resultSet.getString("UserName"),resultSet.getString("Password"),resultSet.getInt("UserID"));
-                 this.dispose();
-                 SelectGame selectGame=new SelectGame(currentPlayer);
-                 selectGame.setVisible(true);
-                 this.dispose();
-                 return;
-             }
-           JOptionPane.showMessageDialog(this, "User name or password inncorrect please try agian");
-              
+
+            resultSet = pstatment.executeQuery();
+            PreparedStatement ps = Connect_db.getConnection().prepareStatement("UPDATE tblusers SET LogInStatus = ? WHERE UserId = ?");
+            while (resultSet.next()) {
+                this.currentPlayer = new User(resultSet.getString("UserName"), resultSet.getString("Password"), resultSet.getInt("UserID"));
+                this.dispose();
+                ps.setInt(1, 1);
+                ps.setInt(2, currentPlayer.getUserID());
+                int res = ps.executeUpdate();
+                if (res > 0) {
+                    SelectGame selectGame = new SelectGame(currentPlayer);
+                    selectGame.setVisible(true);
+                    this.dispose();
+                    return;
+                }
+            }
+            if (loginStatus == 1) {
+                JOptionPane.showMessageDialog(this, userName + " already connected!");
+            } else {
+                JOptionPane.showMessageDialog(this, "name or password inncorrect please try agian");
+            }
+
             resultSet.close();		// close resultSet
             pstatment.close();		// close statement and resultSet
-            Connect_db.getConnection().close();		// close connection, statement and resultSet 	
+            ps.close();
+            // Connect_db.getConnection().close();		// close connection, statement and resultSet 	
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             System.out.println("Vendor Error: " + sqle.getErrorCode());
         }
-        
+
     }//GEN-LAST:event_btnLogInActionPerformed
-    /**
-     *
-     */
+
+    public int getLoginStatus(String userName, String password) {
+        String sql = "select UserName,Password,LogInStatus from tblusers as a where a.`UserName`='" + userName + "'and a.`Password`='" + password + "'";
+        try {
+            PreparedStatement pstatment = Connect_db.getConnection().prepareStatement(sql);
+            ResultSet resultSet = pstatment.executeQuery();
+            while (resultSet.next()) {
+
+                return (resultSet.getInt("LogInStatus"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
     private void userNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_userNameFieldActionPerformed
@@ -216,24 +242,24 @@ public class LogIn extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_userNameFieldFocusGained
     /**
-     *A method replaces the English/Hebrew language Depending on the operating system
+     * A method replaces the English/Hebrew language Depending on the operating
+     * system
      */
     private void ChangeLangBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeLangBtnActionPerformed
 // TODO add your handling code here:
 
-        String selectedLanguage="iw";
-        if(!pres){
-           pres=true;
-            selectedLanguage="iw";
-        }
-        else if(pres){
-            pres=false;
-          selectedLanguage="en";
+        String selectedLanguage = "iw";
+        if (!pres) {
+            pres = true;
+            selectedLanguage = "iw";
+        } else if (pres) {
+            pres = false;
+            selectedLanguage = "en";
         }
 
-            LocalizationUtil.localizedResourceBundle = ResourceBundle.getBundle("resources.uimessages", new Locale(selectedLanguage));
-            updateCaptions();
-        
+        LocalizationUtil.localizedResourceBundle = ResourceBundle.getBundle("resources.uimessages", new Locale(selectedLanguage));
+        updateCaptions();
+
     }//GEN-LAST:event_ChangeLangBtnActionPerformed
     /**
      *
@@ -248,58 +274,61 @@ public class LogIn extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLogInFocusLost
     /**
-     * Logon depends on proper feeding Password
-     * This methhod pulls Password database and compares it with slogans user entered accordingly gives the user permission
-     * @throws SQLException Login incorrect database If there is a problem of access to the database will be exceeded
+     * Logon depends on proper feeding Password This methhod pulls Password
+     * database and compares it with slogans user entered accordingly gives the
+     * user permission
+     *
+     * @throws SQLException Login incorrect database If there is a problem of
+     * access to the database will be exceeded
      */
-    
+
     private void jPasswordField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            String userName=userNameField.getText();
-            String password=jPasswordField1.getText();
-        
-       // PreparedStatement statement;
-        String sql="select UserName,Password,UserId from tblusers as a where a.`UserName`='"+userName+"'and a.`Password`='"+password+"'";
-        try {
-            PreparedStatement pstatment=Connect_db.getConnection().prepareStatement(sql);
-            ResultSet resultSet = pstatment.executeQuery();
-             resultSet = pstatment.executeQuery();
-             while(resultSet.next()){
-                 this.currentPlayer=new User(resultSet.getString("UserName"),resultSet.getString("Password"),resultSet.getInt("UserID"));
-                 this.dispose();
-                 SelectGame selectGame=new SelectGame(currentPlayer);
-                 selectGame.setVisible(true);
-                 this.dispose();
-                 return;
-             }
-           JOptionPane.showMessageDialog(this, "User name or password inncorrect please try agian");
-            resultSet.close();		// close resultSet
-            pstatment.close();		// close statement and resultSet
-            //Connect_db.getConnection().close();		// close connection, statement and resultSet 	
-        } catch (SQLException sqle) {
-            System.out.println("SQLException: " + sqle.getMessage());
-            System.out.println("Vendor Error: " + sqle.getErrorCode());
-        }  
-            
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String userName = userNameField.getText();
+            String password = jPasswordField1.getText();
+
+            // PreparedStatement statement;
+            String sql = "select UserName,Password,UserId from tblusers as a where a.`UserName`='" + userName + "'and a.`Password`='" + password + "'";
+            try {
+                PreparedStatement pstatment = Connect_db.getConnection().prepareStatement(sql);
+                ResultSet resultSet = pstatment.executeQuery();
+                resultSet = pstatment.executeQuery();
+                while (resultSet.next()) {
+                    this.currentPlayer = new User(resultSet.getString("UserName"), resultSet.getString("Password"), resultSet.getInt("UserID"));
+                    this.dispose();
+                    SelectGame selectGame = new SelectGame(currentPlayer);
+                    selectGame.setVisible(true);
+                    this.dispose();
+                    return;
+                }
+                JOptionPane.showMessageDialog(this, "User name or password inncorrect please try agian");
+                resultSet.close();		// close resultSet
+                pstatment.close();		// close statement and resultSet
+                //Connect_db.getConnection().close();		// close connection, statement and resultSet 	
+            } catch (SQLException sqle) {
+                System.out.println("SQLException: " + sqle.getMessage());
+                System.out.println("Vendor Error: " + sqle.getErrorCode());
+            }
+
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1KeyPressed
 
     /**
-     * Every time that triggers this method is to choose a language and updates all the strings
+     * Every time that triggers this method is to choose a language and updates
+     * all the strings
      */
-    public void updateCaptions(){
-        
+    public void updateCaptions() {
+
         this.setTitle(LocalizationUtil.localizedResourceBundle.getString("GameTitle"));
         userNamejl.setText(LocalizationUtil.localizedResourceBundle.getString("UserNameKey"));
         jLabel2.setText(LocalizationUtil.localizedResourceBundle.getString("PasswordKEY"));
         //signUpBtn.setText(LocalizationUtil.localizedResourceBundle.getString("SignUpKey"));
-       // btnLogIn.setText(LocalizationUtil.localizedResourceBundle.getString("LogInKey"));
+        // btnLogIn.setText(LocalizationUtil.localizedResourceBundle.getString("LogInKey"));
         //ChangeLangBtn.setText(LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey"));
-        
+
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -331,7 +360,7 @@ public class LogIn extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LogIn().setVisible(true);
-                
+
             }
         });
     }

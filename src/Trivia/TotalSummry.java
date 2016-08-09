@@ -1,13 +1,23 @@
 
 package Trivia;
 
+import static Trivia.OpenScreen.current;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import resources.LocalizationUtil;
 /**
  *
  * @author Yosef
  */
-public class TotalSummry extends javax.swing.JFrame {
+public class TotalSummry extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Creates new form TotalSummry
@@ -22,6 +32,7 @@ public class TotalSummry extends javax.swing.JFrame {
      */
     public TotalSummry(User current,String highScorOrNot) {
         initComponents();
+           this.addWindowListener(new TotalSummry.MyWindowListener());
         this.highScorOrNotCheeker=highScorOrNot;
         this.currentPlayer=current;
         updateLang();
@@ -35,6 +46,7 @@ public class TotalSummry extends javax.swing.JFrame {
     }
      public TotalSummry(User current,String result,Boolean multiGame) {
         initComponents();
+        this.addWindowListener(new TotalSummry.MyWindowListener());
         //this.highScorOrNotCheeker=highScorOrNot;
         this.currentPlayer=current;
         updateLang();
@@ -49,6 +61,7 @@ public class TotalSummry extends javax.swing.JFrame {
      //for screen size debugin
      public TotalSummry(){
          initComponents();
+         this.addWindowListener(new TotalSummry.MyWindowListener());
          //updateLang();
           this.setSize(545,390);
           this.setLocationRelativeTo(null);
@@ -222,12 +235,47 @@ public class TotalSummry extends javax.swing.JFrame {
       
 
     }//GEN-LAST:event_newGameBtn
+    
+    public void showExitDialog() {
+       /*"you shure exit?" promp acorrding curent languche*/
+        int result = JOptionPane.showConfirmDialog(this, // parent component
+                (LocalizationUtil.localizedResourceBundle.getString("areYouSureKey")), // message
+                (LocalizationUtil.localizedResourceBundle.getString("titlrExitDialog")), // title of the dialog box
+                JOptionPane.YES_NO_OPTION,// indicates buttons ot display
+                JOptionPane.QUESTION_MESSAGE);
 
+        if (result == JOptionPane.YES_OPTION) {
+            try {
+                PreparedStatement ps = Connect_db.getConnection().prepareStatement("UPDATE tblusers SET LogInStatus = ? WHERE UserId = ?");
+                ps.setInt(1,0);
+                ps.setInt(2, current.getUserID());
+                int res = ps.executeUpdate();
+                if (res > 0) {
+                 System.exit(0);
+                } 
+            } catch (SQLException ex) {
+                Logger.getLogger(FormClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
     private void exitBtn(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtn
-
-         System.exit(0);
+        showExitDialog();
     }//GEN-LAST:event_exitBtn
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    class MyWindowListener extends WindowAdapter {
+       /*add are "you shure exit?" promp */
+        @Override
+        public void windowClosing(WindowEvent we
+        ) {
+            showExitDialog();
+        }
+    }
     /**
      * @param args the command line arguments
      */

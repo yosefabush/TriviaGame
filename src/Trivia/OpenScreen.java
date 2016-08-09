@@ -1,11 +1,16 @@
-
 package Trivia;
+
 import static Trivia.LogIn.currentPlayer;
+import static Trivia.SelectGame.current;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -25,6 +30,7 @@ import resources.LocalizationUtil;
  * @author Yosef
  */
 public class OpenScreen extends javax.swing.JFrame implements ActionListener {
+
     static User current;
     static String userName;
     private JMenuBar myMenuBar = new JMenuBar();
@@ -34,78 +40,78 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
     private JMenuItem newMenuItem = new JMenuItem();
     private JMenuItem exitMenuItem = new JMenuItem();
     private JMenuItem aboutMenuItem = new JMenuItem();
-    int biuldComboBox=0;
-    static boolean playerChoseLevel=false;
-     PlaySounds bacgroundSound;
-      MusicClass Mp3ClassPlayer = new MusicClass();
-    public static int count=1;
+    int biuldComboBox = 0;
+    static boolean playerChoseLevel = false;
+    PlaySounds bacgroundSound;
+    MusicClass Mp3ClassPlayer = new MusicClass();
+    public static int count = 1;
     int xMouse;
     int yMouse;
-    static boolean firstTime=false;
-    static boolean soundPlaying=false;
-    
+    static boolean firstTime = false;
+    static boolean soundPlaying = false;
+
     int width = (Toolkit.getDefaultToolkit().getScreenSize().width / 2) - 185;
     int height = Toolkit.getDefaultToolkit().getScreenSize().height - 180;
 
-    
     /**
      * Creates new form OpenScreen
+     *
      * @param currentUser
      */
     public OpenScreen(User currentUser) {
         initComponents();
-      //  cmbLevel.setLocation(300, 200);
+        this.addWindowListener(new OpenScreen.MyWindowListener());
+
+        //  cmbLevel.setLocation(300, 200);
         buildMenu();
-        
-     
+
         addListeners();
         comboInit();
-        this.setSize(661,375);
-        this.current=currentUser;
-       
-       this.setTitle(LocalizationUtil.localizedResourceBundle.getString("WelcomGame"));
-       jLabelLevel.setText(LocalizationUtil.localizedResourceBundle.getString("ChoseLevel"));
-     //  LogOutBtn.setText(LocalizationUtil.localizedResourceBundle.getString("LogOutKey"));
-       PleaseChoseCntQues.setText(LocalizationUtil.localizedResourceBundle.getString("PleaseChoseCntQues"));
-       PleaseChoseCntQues.setHorizontalAlignment(SwingConstants.CENTER);
-       //btnStartGame.setText(LocalizationUtil.localizedResourceBundle.getString("StartGameKey"));
-       btnShowHighScoreTble.setText(LocalizationUtil.localizedResourceBundle.getString("HighScoreTble"));
-       if(!playerChoseLevel){
-          PleaseChoseCntQues.hide();
-          cmbCountOfQUes.hide();
-        playerChoseLevel=true;
-      }
-       if(Integer.parseInt(current.getHighstScore(current))> 40){
-           ShowCrownIcon();
-       }
-       else if(Integer.parseInt(current.getHighstScore(current))> 30){
-            ShowDragonIcon();
-       }
-       else if(Integer.parseInt(current.getHighstScore(current))> 20){
-            ShowKnightIcon();
-       }
-       setBackGround();
-       setLocationRelativeTo(null);
-      OpenTitelWitName.setText(LocalizationUtil.localizedResourceBundle.getString("WelcomGame")+" "+current.getUserName());
-      OpenTitelWitName.setHorizontalAlignment(SwingConstants.CENTER);
-      currebtPlayerHighScore.setText((LocalizationUtil.localizedResourceBundle.getString("BestScore"))+" "+current.getHighstScore(current));
-      currebtPlayerHighScore.setHorizontalAlignment(SwingConstants.CENTER);
-      //JOptionPane.showMessageDialog(this,LocalizationUtil.localizedResourceBundle.getString("ChoseWnatedLevel"));
-      if(!firstTime){
-            loadDefultSound();
-            firstTime=true;
-            soundPlaying=true;
+        this.setSize(661, 375);
+        this.current = currentUser;
+
+        this.setTitle(LocalizationUtil.localizedResourceBundle.getString("WelcomGame"));
+        jLabelLevel.setText(LocalizationUtil.localizedResourceBundle.getString("ChoseLevel"));
+        //  LogOutBtn.setText(LocalizationUtil.localizedResourceBundle.getString("LogOutKey"));
+        PleaseChoseCntQues.setText(LocalizationUtil.localizedResourceBundle.getString("PleaseChoseCntQues"));
+        PleaseChoseCntQues.setHorizontalAlignment(SwingConstants.CENTER);
+        //btnStartGame.setText(LocalizationUtil.localizedResourceBundle.getString("StartGameKey"));
+        btnShowHighScoreTble.setText(LocalizationUtil.localizedResourceBundle.getString("HighScoreTble"));
+        if (!playerChoseLevel) {
+            PleaseChoseCntQues.hide();
+            cmbCountOfQUes.hide();
+            playerChoseLevel = true;
         }
-      biuldComboBox=DataBaseMange.getInstance().countQues();
-            for(int i=0;i<biuldComboBox;i++)
-                this.cmbCountOfQUes.addItem(i+1);
+        if (Integer.parseInt(current.getHighstScore(current)) > 40) {
+            ShowCrownIcon();
+        } else if (Integer.parseInt(current.getHighstScore(current)) > 30) {
+            ShowDragonIcon();
+        } else if (Integer.parseInt(current.getHighstScore(current)) > 20) {
+            ShowKnightIcon();
+        }
+        setBackGround();
+        setLocationRelativeTo(null);
+        OpenTitelWitName.setText(LocalizationUtil.localizedResourceBundle.getString("WelcomGame") + " " + current.getUserName());
+        OpenTitelWitName.setHorizontalAlignment(SwingConstants.CENTER);
+        currebtPlayerHighScore.setText((LocalizationUtil.localizedResourceBundle.getString("BestScore")) + " " + current.getHighstScore(current));
+        currebtPlayerHighScore.setHorizontalAlignment(SwingConstants.CENTER);
+        //JOptionPane.showMessageDialog(this,LocalizationUtil.localizedResourceBundle.getString("ChoseWnatedLevel"));
+        if (!firstTime) {
+            loadDefultSound();
+            firstTime = true;
+            soundPlaying = true;
+        }
+        biuldComboBox = DataBaseMange.getInstance().countQues();
+        for (int i = 0; i < biuldComboBox; i++) {
+            this.cmbCountOfQUes.addItem(i + 1);
+        }
     }
-    
+
     /**
      *
      */
     public void buildMenu() {
-       /*build the menu acording the curent languche*/
+        /*build the menu acording the curent languche*/
         fileMenu = new JMenu(LocalizationUtil.localizedResourceBundle.getString("FileKey"));
         helpMenu = new JMenu(LocalizationUtil.localizedResourceBundle.getString("HelpKey"));
         changeLang = new JMenuItem(LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey"));
@@ -121,62 +127,63 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
 
         this.setJMenuBar(myMenuBar);
     }
-    
+
     /**
      *
      */
-       public void loadDefultSound(){
+    public void loadDefultSound() {
         Mp3ClassPlayer.Stop();
-        Mp3ClassPlayer.Play("C:\\Users\\Yosef\\Documents\\NetBeansProjects\\Java\\TriviaGame1\\src\\Trivia\\Sounds\\ChillingMusic.mp3"+"");
+        Mp3ClassPlayer.Play("C:\\Users\\Yosef\\Documents\\NetBeansProjects\\Java\\TriviaGame1\\src\\Trivia\\Sounds\\ChillingMusic.mp3" + "");
     }
-    
+
     /**
      *
      */
     public void addListeners() {
-       /*add action listener to all button */
-       
+        /*add action listener to all button */
+
         newMenuItem.addActionListener(this);
         aboutMenuItem.addActionListener(this);
         changeLang.addActionListener(this);
         exitMenuItem.addActionListener(this);
 
-    } 
-    
+    }
+
     @Override
-   /*action whan any button was pressed*/
-   public void actionPerformed(ActionEvent ae){
-       if (ae.getSource() == changeLang) { //if change languche button pressed
-            String []buttonsName={"English","Hebrew"};
-             String selectedLanguage;
-            int res=JOptionPane.showOptionDialog(this,
+    /*action whan any button was pressed*/
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == changeLang) { //if change languche button pressed
+            String[] buttonsName = {"English", "Hebrew"};
+            String selectedLanguage;
+            int res = JOptionPane.showOptionDialog(this,
                     (LocalizationUtil.localizedResourceBundle.getString("ChangeLanguechKey")),
                     (LocalizationUtil.localizedResourceBundle.getString("TitleChangeLang")),
-                    JOptionPane.WARNING_MESSAGE,0,null,buttonsName,buttonsName[0]);
-            if(res==0)
-             selectedLanguage="en";
-            else if(res==1)
-             selectedLanguage="iw";
-            else
+                    JOptionPane.WARNING_MESSAGE, 0, null, buttonsName, buttonsName[0]);
+            if (res == 0) {
+                selectedLanguage = "en";
+            } else if (res == 1) {
+                selectedLanguage = "iw";
+            } else {
                 return;
+            }
             LocalizationUtil.localizedResourceBundle = ResourceBundle.getBundle("resources.uimessages", new Locale(selectedLanguage));
             updateCaptions();
         } else if (ae.getSource() == exitMenuItem) { //if exit button pressed
-           showExitDialog();
-        }else if (ae.getSource() == newMenuItem) {  //if new game button pressed
+            showExitDialog();
+        } else if (ae.getSource() == newMenuItem) {  //if new game button pressed
             newGameDialog();
-            
+
         } else if (ae.getSource() == aboutMenuItem) {   //if about button pressed
             aboutDialog();
         }
-       
-   }
-   
+
+    }
+
     /**
      *
      */
     public void updateCaptions() { //method that refresh all the label+button languche
-       
+
         this.setTitle((LocalizationUtil.localizedResourceBundle.getString("GameTitle")));
         fileMenu.setText(LocalizationUtil.localizedResourceBundle.getString("FileKey"));
         newMenuItem.setText(LocalizationUtil.localizedResourceBundle.getString("NewGameKey"));
@@ -185,23 +192,23 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         helpMenu.setText(LocalizationUtil.localizedResourceBundle.getString("HelpKey"));
         changeLang.setText(LocalizationUtil.localizedResourceBundle.getString("languageKey"));
         jLabelLevel.setText(LocalizationUtil.localizedResourceBundle.getString("ChoseLevel"));
-       // LogOutBtn.setText(LocalizationUtil.localizedResourceBundle.getString("LogOutKey"));
+        // LogOutBtn.setText(LocalizationUtil.localizedResourceBundle.getString("LogOutKey"));
         PleaseChoseCntQues.setText(LocalizationUtil.localizedResourceBundle.getString("PleaseChoseCntQues"));
         PleaseChoseCntQues.setHorizontalAlignment(SwingConstants.CENTER);
-       // btnStartGame.setText(LocalizationUtil.localizedResourceBundle.getString("StartGameKey"));
+        // btnStartGame.setText(LocalizationUtil.localizedResourceBundle.getString("StartGameKey"));
         btnShowHighScoreTble.setText(LocalizationUtil.localizedResourceBundle.getString("HighScoreTble"));
-        OpenTitelWitName.setText(LocalizationUtil.localizedResourceBundle.getString("WelcomGame")+" "+current.getUserName());
+        OpenTitelWitName.setText(LocalizationUtil.localizedResourceBundle.getString("WelcomGame") + " " + current.getUserName());
         OpenTitelWitName.setHorizontalAlignment(SwingConstants.CENTER);
-        currebtPlayerHighScore.setText((LocalizationUtil.localizedResourceBundle.getString("BestScore"))+" "+current.getHighstScore(current));
+        currebtPlayerHighScore.setText((LocalizationUtil.localizedResourceBundle.getString("BestScore")) + " " + current.getHighstScore(current));
         currebtPlayerHighScore.setHorizontalAlignment(SwingConstants.CENTER);
         comboInit();
     }
-  
+
     /**
      *
      */
     public void showExitDialog() {
-       /*"you shure exit?" promp acorrding curent languche*/
+        /*"you shure exit?" promp acorrding curent languche*/
         int result = JOptionPane.showConfirmDialog(this, // parent component
                 (LocalizationUtil.localizedResourceBundle.getString("areYouSureKey")), // message
                 (LocalizationUtil.localizedResourceBundle.getString("titlrExitDialog")), // title of the dialog box
@@ -209,7 +216,17 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
                 JOptionPane.QUESTION_MESSAGE);
 
         if (result == JOptionPane.YES_OPTION) {
-            System.exit(0);
+            try {
+                PreparedStatement ps = Connect_db.getConnection().prepareStatement("UPDATE tblusers SET LogInStatus = ? WHERE UserId = ?");
+                ps.setInt(1, 0);
+                ps.setInt(2, current.getUserID());
+                int res = ps.executeUpdate();
+                if (res > 0) {
+                 System.exit(0);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(FormClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
@@ -218,7 +235,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
      *
      */
     public void newGameDialog() {
-       /*"you shure new game?" promp acorrding curent languche*/
+        /*"you shure new game?" promp acorrding curent languche*/
         int result = JOptionPane.showConfirmDialog(this, (LocalizationUtil.localizedResourceBundle.getString("AreYouSureYouStartNewGame")),
                 (LocalizationUtil.localizedResourceBundle.getString("NewGameDialog")),
                 JOptionPane.YES_NO_OPTION,
@@ -229,20 +246,20 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
             newGame.setVisible(true);
         }
     }
-   
+
     /**
      *
      */
     public void aboutDialog() {
-       /*about promp acorrding curent languche*/
+        /*about promp acorrding curent languche*/
         JOptionPane.showMessageDialog(this, (LocalizationUtil.localizedResourceBundle.getString("AllReservd")));
     }
-   
+
     /**
      *
      */
-    public void comboInit(){
-        cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { (LocalizationUtil.localizedResourceBundle.getString("Rand")), "1", "2", "3" }));
+    public void comboInit() {
+        cmbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[]{(LocalizationUtil.localizedResourceBundle.getString("Rand")), "1", "2", "3"}));
         cmbLevel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbLevelActionPerformed(evt);
@@ -419,55 +436,66 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
     /**
      *
      */
-    public void setBackGround(){
-       BackgroudTrivia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon11.jpg"))); 
-       getContentPane().add(BackgroudTrivia);
-       BackgroudTrivia.setBounds(0, 0, 650, 320);
- }
+    public void setBackGround() {
+        BackgroudTrivia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon11.jpg")));
+        getContentPane().add(BackgroudTrivia);
+        BackgroudTrivia.setBounds(0, 0, 650, 320);
+    }
 
     /**
      *
      */
-    public void  ShowCrownIcon(){
+    public void ShowCrownIcon() {
 
         CrownImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Crown.png")));
         getContentPane().add(CrownImg);
-        CrownImg.setBounds(20, 10, 90, 90);       
-      }
+        CrownImg.setBounds(20, 10, 90, 90);
+    }
 
     /**
      *
      */
-    public void  ShowDragonIcon(){
+    public void ShowDragonIcon() {
 
         CrownImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Dragon.png")));
         getContentPane().add(CrownImg);
-        CrownImg.setBounds(20, 10, 90, 90);       
-      }
+        CrownImg.setBounds(20, 10, 90, 90);
+    }
 
     /**
      *
      */
-    public void  ShowKnightIcon(){
+    public void ShowKnightIcon() {
 
         CrownImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/Knight.png")));
         getContentPane().add(CrownImg);
-        CrownImg.setBounds(20, 10, 90, 90);       
-      }
-    
+        CrownImg.setBounds(20, 10, 90, 90);
+    }
+
     private void btnShowHighScoreTbleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowHighScoreTbleActionPerformed
-       
-        HighstRecords highScore=new HighstRecords();
-        
-        highScore.setVisible(true);        
-        
+
+        HighstRecords highScore = new HighstRecords();
+
+        highScore.setVisible(true);
+
     }//GEN-LAST:event_btnShowHighScoreTbleActionPerformed
 
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
-         Mp3ClassPlayer.Stop(); 
-        this.dispose();
-        SelectGame selectGame=new SelectGame(currentPlayer);
-        selectGame.setVisible(true);
+        try {
+            Mp3ClassPlayer.Stop();
+            PreparedStatement ps = Connect_db.getConnection().prepareStatement("UPDATE tblusers SET LogInStatus = ? WHERE UserId = ?");
+            ps.setInt(1, 0);
+            ps.setInt(2, current.getUserID());
+            int res = ps.executeUpdate();
+            if (res > 0) {
+                this.dispose();
+                SelectGame selectGame = new SelectGame(currentPlayer);
+                selectGame.setVisible(true);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(OpenScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_LogOutBtnActionPerformed
 
@@ -478,37 +506,38 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
     private void cmbLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLevelActionPerformed
         cmbCountOfQUes.removeAllItems();
         PleaseChoseCntQues.show();
-          cmbCountOfQUes.show();
+        cmbCountOfQUes.show();
         int biuldComboBox;
-                                                                        
-         if(cmbLevel.getSelectedItem().equals(LocalizationUtil.localizedResourceBundle.getString("Rand")))
-         biuldComboBox=DataBaseMange.getInstance().countQues();
-         else
-         biuldComboBox=DataBaseMange.getInstance().countQues(Integer.parseInt(cmbLevel.getSelectedItem().toString()));
-       
-        
-        for(int i=0;i<biuldComboBox;i++)
-         this.cmbCountOfQUes.addItem(i+1);//for loop to set the real number of question from db
 
+        if (cmbLevel.getSelectedItem().equals(LocalizationUtil.localizedResourceBundle.getString("Rand"))) {
+            biuldComboBox = DataBaseMange.getInstance().countQues();
+        } else {
+            biuldComboBox = DataBaseMange.getInstance().countQues(Integer.parseInt(cmbLevel.getSelectedItem().toString()));
+        }
+
+        for (int i = 0; i < biuldComboBox; i++) {
+            this.cmbCountOfQUes.addItem(i + 1);//for loop to set the real number of question from db
+        }
     }//GEN-LAST:event_cmbLevelActionPerformed
 
     private void btnStartGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartGameActionPerformed
-        if(cmbCountOfQUes.getSelectedItem()==null){
-            JOptionPane.showMessageDialog(this,LocalizationUtil.localizedResourceBundle.getString("LeveDidntChoose"));
+        if (cmbCountOfQUes.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, LocalizationUtil.localizedResourceBundle.getString("LeveDidntChoose"));
             return;
         }
-        int numQues=1;  //choose the real number of wanted ques
-        int level=0;
-        numQues+=cmbCountOfQUes.getSelectedIndex();
+        int numQues = 1;  //choose the real number of wanted ques
+        int level = 0;
+        numQues += cmbCountOfQUes.getSelectedIndex();
         current.setLevel(0);
         current.setPoints(0);
         current.setWrongAnsCnt(0);
-        if(cmbLevel.getSelectedItem()=="Rand")
-        level=0;
-        else
-        level=cmbLevel.getSelectedIndex();
+        if (cmbLevel.getSelectedItem() == "Rand") {
+            level = 0;
+        } else {
+            level = cmbLevel.getSelectedIndex();
+        }
         try {
-            Game newGame=new Game(numQues,current,true,level);
+            Game newGame = new Game(numQues, current, true, level);
         } catch (Exception ex) {
             ex.printStackTrace(); //print all the hisory
         }
@@ -528,26 +557,26 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_backgroundMouseDragged
 
     private void loopPlayMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loopPlayMouseReleased
-        switch(count){
+        switch (count) {
             case 0:
-            count = 1;
-            break;
+                count = 1;
+                break;
 
             case 1:
-            count = 0;
-            break;
+                count = 0;
+                break;
 
         }
     }//GEN-LAST:event_loopPlayMouseReleased
 
     private void stopMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stopMouseReleased
-        soundPlaying=false;
+        soundPlaying = false;
     }//GEN-LAST:event_stopMouseReleased
 
     private void playMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playMouseReleased
-        if(!soundPlaying){
+        if (!soundPlaying) {
             Mp3ClassPlayer.Resume();
-            soundPlaying=true;
+            soundPlaying = true;
         }
 
     }//GEN-LAST:event_playMouseReleased
@@ -556,7 +585,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         try {
             // TODO add your handling code here:
             Mp3ClassPlayer.Pause();
-            soundPlaying=false;
+            soundPlaying = false;
         } catch (IOException ex) {
             Logger.getLogger(OpenScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -570,7 +599,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
 
         int returnVal = chooser.showOpenDialog(null);
 
-        if(returnVal == JFileChooser.APPROVE_OPTION){
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             Mp3ClassPlayer.Stop();
             File myFile = chooser.getSelectedFile();
             String song = myFile + "";
@@ -579,20 +608,31 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
 
         }
     }//GEN-LAST:event_chooseFileMouseReleased
-    private void StartGameActionPerformed() {                                             
-       
-        int numQues=10;  //set conts 10 qyestion
-        int level=0;
+    private void StartGameActionPerformed() {
+
+        int numQues = 10;  //set conts 10 qyestion
+        int level = 0;
         current.setLevel(0);
         current.setPoints(0);
         current.setWrongAnsCnt(0);
         try {
-            Game newGame=new Game(numQues,current,true,level);
+            Game newGame = new Game(numQues, current, true, level);
         } catch (Exception ex) {
             ex.printStackTrace(); //print all the hisory
         }
         this.dispose(); //close the window
-    }    
+    }
+
+    class MyWindowListener extends WindowAdapter {
+
+        /*add are "you shure exit?" promp */
+        @Override
+        public void windowClosing(WindowEvent we
+        ) {
+            showExitDialog();
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -602,7 +642,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-         
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -629,7 +669,7 @@ public class OpenScreen extends javax.swing.JFrame implements ActionListener {
         });
     }
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BackgroudTrivia;
     private javax.swing.JLabel CrownImg;

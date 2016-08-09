@@ -12,18 +12,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This class contain all the logic in the game
+ * This class contain all the logic of the game
  *
  * @author Yosef
  */
-public class Game implements Serializable {
+public class Game {
 
     /**
      *
      */
     private static User current;
     /**
-     *
+     *This collection variable will hold all the question from the DataBase
      */
     private static ArrayList<Question> allQuesFromDB = new <Question>ArrayList();
     /**
@@ -117,17 +117,15 @@ public class Game implements Serializable {
                     }
                 });
                 thread.start();
-//                   
-//                    //System.out.println(SelectGame.ois.r eadObject());
-//                   // System.out.println("i finish play");
+
             }
         }
     }
 
     /**
      *this method try to update the score of the player in DB if the score
-     * the player get higher from what he has in DB
-     * @param player
+     * that player get higher from what he has in DB
+     * @param player Object
      * @return boolean true or false
      */
     public boolean updateFinalScore(User player) {

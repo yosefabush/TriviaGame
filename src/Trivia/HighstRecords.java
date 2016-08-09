@@ -1,12 +1,17 @@
 
 package Trivia;
 
+import static Trivia.OpenScreen.current;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
@@ -33,6 +38,7 @@ public class HighstRecords extends javax.swing.JFrame {
     public HighstRecords() {
         
         initComponents();
+         this.addWindowListener(new HighstRecords.MyWindowListener());
        updateTableScore();
         getTop5Score();
         updatePictureLevel();
@@ -281,9 +287,42 @@ public class HighstRecords extends javax.swing.JFrame {
         picLev5.setBounds(50, 320, 50, 50);
        
             }
+    
+    public void showExitDialog() {
+        /*"you shure exit?" promp acorrding curent languche*/
+        int result = JOptionPane.showConfirmDialog(this, // parent component
+                (LocalizationUtil.localizedResourceBundle.getString("areYouSureKey")), // message
+                (LocalizationUtil.localizedResourceBundle.getString("titlrExitDialog")), // title of the dialog box
+                JOptionPane.YES_NO_OPTION,// indicates buttons ot display
+                JOptionPane.QUESTION_MESSAGE);
+
+        if (result == JOptionPane.YES_OPTION) {
+            try {
+                PreparedStatement ps = Connect_db.getConnection().prepareStatement("UPDATE tblusers SET LogInStatus = ? WHERE UserId = ?");
+                ps.setInt(1, 0);
+                ps.setInt(2, current.getUserID());
+                int res = ps.executeUpdate();
+                if (res > 0) {
+                 System.exit(0);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(FormClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
     /**
      * @param args the command line arguments
      */
+    class MyWindowListener extends WindowAdapter {
+       /*add are "you shure exit?" promp */
+        @Override
+        public void windowClosing(WindowEvent we) {
+           showExitDialog();
+        }
+       }
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
