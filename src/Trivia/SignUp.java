@@ -68,17 +68,19 @@ public class SignUp extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        userNameLab.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         userNameLab.setText("User Name");
         getContentPane().add(userNameLab);
-        userNameLab.setBounds(120, 100, 70, 14);
+        userNameLab.setBounds(120, 100, 70, 16);
 
+        PasswordLab.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         PasswordLab.setText("Password");
         getContentPane().add(PasswordLab);
         PasswordLab.setBounds(120, 140, 70, 17);
         getContentPane().add(userNameField);
-        userNameField.setBounds(210, 100, 133, 20);
+        userNameField.setBounds(210, 100, 133, 22);
         getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(210, 140, 133, 20);
+        jPasswordField1.setBounds(210, 140, 133, 22);
 
         SignUpBtn.setText("SignUp");
         SignUpBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +89,7 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
         getContentPane().add(SignUpBtn);
-        SignUpBtn.setBounds(170, 210, 80, 23);
+        SignUpBtn.setBounds(170, 210, 80, 25);
 
         signUpTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         signUpTitle.setForeground(new java.awt.Color(204, 255, 255));
@@ -101,7 +103,7 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Backbtn);
-        Backbtn.setBounds(270, 210, 70, 23);
+        Backbtn.setBounds(270, 210, 70, 25);
 
         changeLang.setText("Change Languch");
         changeLang.addActionListener(new java.awt.event.ActionListener() {
@@ -110,11 +112,11 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
         getContentPane().add(changeLang);
-        changeLang.setBounds(10, 10, 140, 23);
+        changeLang.setBounds(10, 10, 140, 25);
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/GameBackGround.jpg"))); // NOI18N
         getContentPane().add(background);
-        background.setBounds(0, 0, 450, 330);
+        background.setBounds(0, 0, 450, 340);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
