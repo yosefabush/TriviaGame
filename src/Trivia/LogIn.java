@@ -180,39 +180,39 @@ public class LogIn extends javax.swing.JFrame {
         String password = jPasswordField1.getText();
 
         loginStatus = getLoginStatus(userName, password);
-        String sql = "select UserName,Password,UserId,LogInStatus from tblusers as a where a.`UserName`='" + userName + "'and a.`Password`='" + password + "'and a.`LogInStatus`='" + 0 + "'";
-        try {
-            PreparedStatement pstatment = Connect_db.getConnection().prepareStatement(sql);
-            ResultSet resultSet = pstatment.executeQuery();
+        if (loginStatus == 1) {
+            JOptionPane.showMessageDialog(this, userName + " already connected!");
+            return;
+        } else {
+            String sql = "select UserName,Password,UserId,LogInStatus from tblusers as a where a.`UserName`='" + userName + "'and a.`Password`='" + password + "'and a.`LogInStatus`='" + 0 + "'";
+            try {
+                PreparedStatement pstatment = Connect_db.getConnection().prepareStatement(sql);
+                ResultSet resultSet = pstatment.executeQuery();
 
-            resultSet = pstatment.executeQuery();
-            PreparedStatement ps = Connect_db.getConnection().prepareStatement("UPDATE tblusers SET LogInStatus = ? WHERE UserId = ?");
-            while (resultSet.next()) {
-                this.currentPlayer = new User(resultSet.getString("UserName"), resultSet.getString("Password"), resultSet.getInt("UserID"));
-                this.dispose();
-                ps.setInt(1, 1);
-                ps.setInt(2, currentPlayer.getUserID());
-                int res = ps.executeUpdate();
-                if (res > 0) {
-                    SelectGame selectGame = new SelectGame(currentPlayer);
-                    selectGame.setVisible(true);
+                resultSet = pstatment.executeQuery();
+                PreparedStatement ps = Connect_db.getConnection().prepareStatement("UPDATE tblusers SET LogInStatus = ? WHERE UserId = ?");
+                while (resultSet.next()) {
+                    this.currentPlayer = new User(resultSet.getString("UserName"), resultSet.getString("Password"), resultSet.getInt("UserID"));
                     this.dispose();
-                    return;
+                    ps.setInt(1, 1);
+                    ps.setInt(2, currentPlayer.getUserID());
+                    int res = ps.executeUpdate();
+                    if (res > 0) {
+                        SelectGame selectGame = new SelectGame(currentPlayer);
+                        selectGame.setVisible(true);
+                        this.dispose();
+                        return;
+                    }
                 }
-            }
-            if (loginStatus == 1) {
-                JOptionPane.showMessageDialog(this, userName + " already connected!");
-            } else {
                 JOptionPane.showMessageDialog(this, "name or password inncorrect please try agian");
+                resultSet.close();		// close resultSet
+                pstatment.close();		// close statement and resultSet
+                ps.close();
+                // Connect_db.getConnection().close();		// close connection, statement and resultSet 	
+            } catch (SQLException sqle) {
+                System.out.println("SQLException: " + sqle.getMessage());
+                System.out.println("Vendor Error: " + sqle.getErrorCode());
             }
-
-            resultSet.close();		// close resultSet
-            pstatment.close();		// close statement and resultSet
-            ps.close();
-            // Connect_db.getConnection().close();		// close connection, statement and resultSet 	
-        } catch (SQLException sqle) {
-            System.out.println("SQLException: " + sqle.getMessage());
-            System.out.println("Vendor Error: " + sqle.getErrorCode());
         }
 
     }//GEN-LAST:event_btnLogInActionPerformed
@@ -288,39 +288,39 @@ public class LogIn extends javax.swing.JFrame {
             String password = jPasswordField1.getText();
 
             loginStatus = getLoginStatus(userName, password);
-            String sql = "select UserName,Password,UserId,LogInStatus from tblusers as a where a.`UserName`='" + userName + "'and a.`Password`='" + password + "'and a.`LogInStatus`='" + 0 + "'";
-            try {
-                PreparedStatement pstatment = Connect_db.getConnection().prepareStatement(sql);
-                ResultSet resultSet = pstatment.executeQuery();
+            if (loginStatus == 1) {
+                JOptionPane.showMessageDialog(this, userName + " already connected!");
+                return;
+            } else {
+                String sql = "select UserName,Password,UserId,LogInStatus from tblusers as a where a.`UserName`='" + userName + "'and a.`Password`='" + password + "'and a.`LogInStatus`='" + 0 + "'";
+                try {
+                    PreparedStatement pstatment = Connect_db.getConnection().prepareStatement(sql);
+                    ResultSet resultSet = pstatment.executeQuery();
 
-                resultSet = pstatment.executeQuery();
-                PreparedStatement ps = Connect_db.getConnection().prepareStatement("UPDATE tblusers SET LogInStatus = ? WHERE UserId = ?");
-                while (resultSet.next()) {
-                    this.currentPlayer = new User(resultSet.getString("UserName"), resultSet.getString("Password"), resultSet.getInt("UserID"));
-                    this.dispose();
-                    ps.setInt(1, 1);
-                    ps.setInt(2, currentPlayer.getUserID());
-                    int res = ps.executeUpdate();
-                    if (res > 0) {
-                        SelectGame selectGame = new SelectGame(currentPlayer);
-                        selectGame.setVisible(true);
+                    resultSet = pstatment.executeQuery();
+                    PreparedStatement ps = Connect_db.getConnection().prepareStatement("UPDATE tblusers SET LogInStatus = ? WHERE UserId = ?");
+                    while (resultSet.next()) {
+                        this.currentPlayer = new User(resultSet.getString("UserName"), resultSet.getString("Password"), resultSet.getInt("UserID"));
                         this.dispose();
-                        return;
+                        ps.setInt(1, 1);
+                        ps.setInt(2, currentPlayer.getUserID());
+                        int res = ps.executeUpdate();
+                        if (res > 0) {
+                            SelectGame selectGame = new SelectGame(currentPlayer);
+                            selectGame.setVisible(true);
+                            this.dispose();
+                            return;
+                        }
                     }
-                }
-                if (loginStatus == 1) {
-                    JOptionPane.showMessageDialog(this, userName + " already connected!");
-                } else {
                     JOptionPane.showMessageDialog(this, "name or password inncorrect please try agian");
+                    resultSet.close();		// close resultSet
+                    pstatment.close();		// close statement and resultSet
+                    ps.close();
+                    // Connect_db.getConnection().close();		// close connection, statement and resultSet 	
+                } catch (SQLException sqle) {
+                    System.out.println("SQLException: " + sqle.getMessage());
+                    System.out.println("Vendor Error: " + sqle.getErrorCode());
                 }
-
-                resultSet.close();		// close resultSet
-                pstatment.close();		// close statement and resultSet
-                ps.close();
-                // Connect_db.getConnection().close();		// close connection, statement and resultSet 	
-            } catch (SQLException sqle) {
-                System.out.println("SQLException: " + sqle.getMessage());
-                System.out.println("Vendor Error: " + sqle.getErrorCode());
             }
         }
         /*
