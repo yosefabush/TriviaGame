@@ -5,19 +5,56 @@
  */
 package Trivia;
 
+import static Trivia.LogIn.currentPlayer;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lidor
  */
 public class UpdateProfile extends javax.swing.JFrame {
-
+    static private User player;
     /**
      * Creates new form UpdateProfile
      */
-    public UpdateProfile() {
+    public UpdateProfile(User player) {
         initComponents();
+        this.setSize(400, 300);
+        this.player=player;
+        initField();
+        this.setLocationRelativeTo(null);
     }
-
+    /**
+     * this method put the user info in the text field 
+     */
+    private void initField(){
+        String sql = "select * from tblusers as a where a.`UserId`='" + player.getUserID() + "'";
+            try {
+                PreparedStatement pstatment = Connect_db.getConnection().prepareStatement(sql);
+                ResultSet resultSet = pstatment.executeQuery();
+                resultSet = pstatment.executeQuery();
+                while (resultSet.next()) {
+                    this.userNameText.setText(resultSet.getString("UserName")); 
+                    this.passTExt.setText(resultSet.getString("Password"));
+                    this.rePassword.setText(passTExt.getText());
+                    return;
+                }
+                JOptionPane.showMessageDialog(this, "User name or password inncorrect please try agian");
+                resultSet.close();		// close resultSet
+                pstatment.close();		// close statement and resultSet
+                Connect_db.getConnection().close();		// close connection, statement and resultSet 	
+            } catch (SQLException sqle) {
+                System.out.println("SQLException: " + sqle.getMessage());
+                System.out.println("Vendor Error: " + sqle.getErrorCode());
+            }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,11 +67,11 @@ public class UpdateProfile extends javax.swing.JFrame {
         userNameLab = new javax.swing.JLabel();
         PasswordLab = new javax.swing.JLabel();
         PasswordLab1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        userNameText = new javax.swing.JTextField();
+        passTExt = new javax.swing.JTextField();
+        rePassword = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Update = new javax.swing.JButton();
         Backbtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -56,27 +93,31 @@ public class UpdateProfile extends javax.swing.JFrame {
         getContentPane().add(PasswordLab1);
         PasswordLab1.setBounds(100, 140, 70, 17);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        userNameText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                userNameTextActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(180, 100, 100, 20);
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(180, 140, 100, 22);
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(180, 180, 100, 22);
+        getContentPane().add(userNameText);
+        userNameText.setBounds(180, 100, 100, 20);
+        getContentPane().add(passTExt);
+        passTExt.setBounds(180, 140, 100, 20);
+        getContentPane().add(rePassword);
+        rePassword.setBounds(180, 180, 100, 20);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Update your details");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(120, 40, 180, 30);
 
-        jButton1.setText("Update");
-        jButton1.setActionCommand("Update");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(190, 230, 79, 25);
+        Update.setText("Update");
+        Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Update);
+        Update.setBounds(190, 230, 79, 23);
 
         Backbtn.setText("Back");
         Backbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +126,7 @@ public class UpdateProfile extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Backbtn);
-        Backbtn.setBounds(20, 20, 70, 25);
+        Backbtn.setBounds(20, 20, 70, 23);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/GameBackGround.jpg"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -94,15 +135,44 @@ public class UpdateProfile extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void userNameTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_userNameTextActionPerformed
 
     private void BackbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackbtnActionPerformed
         this.dispose();
-        LogIn logIn = new LogIn();
-        logIn.setVisible(true);
+        SelectGame select=new SelectGame(player);
+        select.setVisible(true);
     }//GEN-LAST:event_BackbtnActionPerformed
+
+    private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
+      
+        try {
+            String newUserName= this.userNameText.getText();
+            String password= this.passTExt.getText();
+            String rePassword= this.rePassword.getText();
+            if(newUserName.equals("")||password.equals("")||rePassword.equals("")){
+                JOptionPane.showMessageDialog(this, "cannot insert empty field");
+                return;
+            }else if(password.equals(rePassword.toString())==false){
+                JOptionPane.showMessageDialog(this, "Password not match!");
+                return;
+            }
+            PreparedStatement ps = Connect_db.getConnection().prepareStatement("UPDATE tblusers SET UserName = ?,Password = ? WHERE UserId = ?");
+            ps.setString(1,newUserName);
+            ps.setString(2, password);
+            ps.setInt(3, player.getUserID());
+            int res = ps.executeUpdate();
+            if (res > 0) {
+                JOptionPane.showMessageDialog(this, "Upadte Sucssefule Return to home Screen");
+                this.dispose();
+                SelectGame select=new SelectGame(player);
+                select.setVisible(true);
+            }    
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_UpdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,7 +204,7 @@ public class UpdateProfile extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UpdateProfile().setVisible(true);
+                new UpdateProfile(player).setVisible(true);
             }
         });
     }
@@ -143,12 +213,12 @@ public class UpdateProfile extends javax.swing.JFrame {
     private javax.swing.JButton Backbtn;
     private javax.swing.JLabel PasswordLab;
     private javax.swing.JLabel PasswordLab1;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Update;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField passTExt;
+    private javax.swing.JTextField rePassword;
     private javax.swing.JLabel userNameLab;
+    private javax.swing.JTextField userNameText;
     // End of variables declaration//GEN-END:variables
 }

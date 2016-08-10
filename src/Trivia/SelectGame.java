@@ -7,7 +7,6 @@ package Trivia;
 
 import TriviaGameServer.Server;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.DataInputStream;
@@ -111,19 +110,17 @@ public class SelectGame extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         title = new javax.swing.JLabel();
         chooseFile = new javax.swing.JLabel();
         pause = new javax.swing.JLabel();
         play = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         stop = new javax.swing.JLabel();
         loopPlay = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
-        VolumControl = new javax.swing.JSlider();
         soundVolume = new javax.swing.JLabel();
+        editProfile = new javax.swing.JButton();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -167,10 +164,6 @@ public class SelectGame extends javax.swing.JFrame {
         jLabel2.setText("Select game");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(300, 50, 150, 50);
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/headgears1.gif"))); // NOI18N
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(-10, 0, 370, 400);
         getContentPane().add(title);
         title.setBounds(210, 10, 260, 30);
 
@@ -197,6 +190,10 @@ public class SelectGame extends javax.swing.JFrame {
         });
         getContentPane().add(play);
         play.setBounds(540, 14, 30, 60);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/headgears1.gif"))); // NOI18N
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(-10, 0, 370, 400);
 
         stop.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -227,27 +224,21 @@ public class SelectGame extends javax.swing.JFrame {
         });
         getContentPane().add(background);
         background.setBounds(470, 0, 190, 60);
-
-        VolumControl.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                VolumControlStateChanged(evt);
-            }
-        });
-        getContentPane().add(VolumControl);
-        VolumControl.setBounds(460, 70, 200, 26);
         getContentPane().add(soundVolume);
         soundVolume.setBounds(540, 100, 40, 20);
+
+        editProfile.setText("Update Profile");
+        editProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProfileActionPerformed(evt);
+            }
+        });
+        getContentPane().add(editProfile);
+        editProfile.setBounds(300, 270, 140, 23);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/OpenScreenIcon22.jpg"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 660, 320);
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(140, 0, 100, 100);
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Trivia/Images/LoadingWait.gif"))); // NOI18N
-        jLabel4.setText("jLabel4");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(510, 180, 280, 170);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -417,28 +408,11 @@ public class SelectGame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loopPlayMouseReleased
 
-    private void VolumControlStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_VolumControlStateChanged
-//Primary Sound Driver
-        //     Speakers(High Defintion Audio Fevice)
-        //  Port Speakers (High Definition Audio
-        JSlider source;
-        source = (JSlider) (evt.getSource());
-        float gain;
-        if (source.getValueIsAdjusting()) {
-            gain = (float) source.getValue();
-            soundVolume.setText(gain + "%");
-
-            ///VolumeControl.setVolume(gain);
-            Mp3ClassPlayer.setVouloum(gain);
-        }
-
-//        if (audio instanceof JavaSoundAudioDevice)
-//        {
-//            JavaSoundAudioDevice jsAudio = (JavaSoundAudioDevice) audio;
-//            jsAudio.setLineGain(yourGainGoesHere);
-//        }
-
-    }//GEN-LAST:event_VolumControlStateChanged
+    private void editProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProfileActionPerformed
+        this.dispose();
+        UpdateProfile update=new UpdateProfile(current);
+        update.setVisible(true);
+    }//GEN-LAST:event_editProfileActionPerformed
 
     
     /**
@@ -526,15 +500,13 @@ public class SelectGame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LogOutBtn;
-    private javax.swing.JSlider VolumControl;
     private javax.swing.JLabel background;
     private javax.swing.JLabel chooseFile;
+    private javax.swing.JButton editProfile;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel loopPlay;
     private javax.swing.JLabel pause;
     private javax.swing.JLabel play;
