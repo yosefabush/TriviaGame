@@ -28,7 +28,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import resources.LocalizationUtil;
 
 /**
- *
+ *this class give to user option to chose single player or 1vs1
  * @author lidor
  */
 public class SelectGame extends javax.swing.JFrame {
@@ -270,10 +270,10 @@ public class SelectGame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Mp3ClassPlayer.Stop();
-        if(Server.serverIsActivate==false){
-            JOptionPane.showMessageDialog(this, "Please Run Server first");
-            return;
-        }
+//        if(Server.serverIsActivate==false){
+//            JOptionPane.showMessageDialog(this, "Please Run Server first");
+//            return;
+//        }
         multiPlayerGame = true;
 
         System.out.println();
